@@ -1,0 +1,38 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": ["airbnb", "plugin:prettier/recommended"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": ["react"],
+    "rules": {
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
+      "import/prefer-default-export": "off",
+      "react/jsx-props-no-spreading": "off"
+    },
+    "overrides": [
+      {
+        "files": ["stories.js"],
+        "rules": {
+          "react/prop-types": "off"
+        }
+      }
+    ]
+  }
+  
