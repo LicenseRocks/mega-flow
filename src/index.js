@@ -15,7 +15,7 @@ const ReactJSONWizard = ({ schema }) => {
     <Wrapper {...wrapperProps}>
       <Title title={title} titleProps={titleProps} />
 
-      <Stepper stepCount={4} />
+      <Stepper stepCount={15} />
     </Wrapper>
   );
 };

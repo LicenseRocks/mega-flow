@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
 
+import { PrimaryButton } from "..";
 import "./styles.css";
 
 const StyledContent = styled.div`
@@ -12,9 +13,22 @@ const StyledContent = styled.div`
   padding: 24px 24px 24px 40px;
 `;
 
+const ActionWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+`;
+
 const duration = 3000;
 
-const StepContent = ({ children, ...props }) => {
+const StepContent = ({
+  children,
+  content,
+  handleNext,
+  isLastStep,
+  ...props
+}) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
@@ -24,13 +38,30 @@ const StepContent = ({ children, ...props }) => {
   }, []);
   return (
     <CSSTransition in={mounted} timeout={duration} classNames="stepContent">
-      <StyledContent {...props}>{children}</StyledContent>
+      <StyledContent {...props}>
+        {children || content}
+        <ActionWrapper>
+          <PrimaryButton
+            content={isLastStep ? "Finish" : "Next"}
+            onClick={() => handleNext(isLastStep)}
+            // disabled
+          />
+        </ActionWrapper>
+      </StyledContent>
     </CSSTransition>
   );
 };
 
 StepContent.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
+  content: PropTypes.node,
+  handleNext: PropTypes.func.isRequired,
+  isLastStep: PropTypes.bool.isRequired,
+};
+
+StepContent.defaultProps = {
+  children: null,
+  content: null,
 };
 
 export default StepContent;

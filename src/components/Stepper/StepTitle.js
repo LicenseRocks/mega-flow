@@ -9,13 +9,20 @@ import {
 } from "./helper";
 
 const StyledTitle = styled.div`
-  display: inline-flex;
+  display: flex;
   align-items: center;
 
   ${({ isPassed }) =>
     isPassed &&
     css`
       cursor: pointer;
+    `}
+
+  ${({ isHorizontal }) =>
+    isHorizontal &&
+    css`
+      flex-direction: column;
+      align-items: flex-start;
     `}
 `;
 
@@ -32,6 +39,8 @@ const Flag = styled.div`
   font-size: 14px;
   line-height: 120%;
   z-index: 1;
+  transition: all ${({ transitionDuration }) => `${transitionDuration}ms`}
+    ease-in-out;
 `;
 
 const Label = styled.span`
@@ -40,15 +49,45 @@ const Label = styled.span`
   line-height: 120%;
   color: ${(props) => stepBorderAndTitleColor(props)};
   padding-left: 8px;
+  transition: all ${({ transitionDuration }) => `${transitionDuration}ms`}
+    ease-in-out;
+  ${({ isHorizontal }) =>
+    isHorizontal &&
+    css`
+      font-size: 12px;
+      padding-top: 4px;
+      padding-left: 0;
+    `}
 `;
 
-const StepTitle = ({ isActive, isPassed, label, flag, onClick }) => {
+const StepTitle = ({
+  isActive,
+  isHorizontal,
+  isPassed,
+  label,
+  flag,
+  onClick,
+  transitionDuration,
+}) => {
   return (
-    <StyledTitle onClick={onClick} isPassed={isPassed}>
-      <Flag isActive={isActive} isPassed={isPassed}>
+    <StyledTitle
+      onClick={onClick}
+      isHorizontal={isHorizontal}
+      isPassed={isPassed}
+    >
+      <Flag
+        isActive={isActive}
+        isPassed={isPassed}
+        transitionDuration={transitionDuration}
+      >
         {flag}
       </Flag>
-      <Label isActive={isActive} isPassed={isPassed}>
+      <Label
+        isActive={isActive}
+        isHorizontal={isHorizontal}
+        isPassed={isPassed}
+        transitionDuration={transitionDuration}
+      >
         {label}
       </Label>
     </StyledTitle>
@@ -57,10 +96,12 @@ const StepTitle = ({ isActive, isPassed, label, flag, onClick }) => {
 
 StepTitle.propTypes = {
   isActive: PropTypes.bool.isRequired,
+  isHorizontal: PropTypes.bool.isRequired,
   isPassed: PropTypes.bool.isRequired,
   label: PropTypes.node.isRequired,
   flag: PropTypes.node.isRequired,
   onClick: PropTypes.func,
+  transitionDuration: PropTypes.number.isRequired,
 };
 
 StepTitle.defaultProps = {

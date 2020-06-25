@@ -1,18 +1,62 @@
-import React, { useState } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import StepTitle from "./StepTitle";
 import StepContent from "./StepContent";
 import { stepBorderAndTitleColor } from "./helper";
-import { PrimaryButton } from "..";
 
-const Wrapper = styled.div``;
+const CONTENT = `
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a arcu ac ligula ornare imperdiet. Suspendisse rutrum leo quis massa
+efficitur commodo. Maecenas tristique luctus metus, a imperdiet
+orci aliquam ac. Mauris finibus tellus ac odio scelerisque, id
+congue turpis lacinia. Sed porttitor, lacus eget posuere euismod,
+lectus metus malesuada eros, eget convallis neque elit a sapien.
+Phasellus nec justo eu arcu blandit tempus at ut elit. Proin eu
+massa a leo vestibulum egestas nec eget ante. Aliquam volutpat
+convallis ex. In hac habitasse platea dictumst. Nulla quis metus
+eros. Proin varius iaculis molestie. Fusce quam arcu, lacinia eu
+urna sit amet, sodales egestas nunc. Maecenas eu ex sed urna
+suscipit venenatis sed eu lectus. Nulla mauris lacus, egestas
+ullamcorper condimentum sed, ultrices at dolor.`;
+
+const Wrapper = styled.div`
+  max-width: 680px;
+  margin: auto;
+`;
+
+const Steps = styled.div`
+  ${({ isHorizontal }) =>
+    isHorizontal &&
+    css`
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      white-space: nowrap;
+      overflow-y: hidden;
+      overflow-x: scroll;
+      user-select: none;
+      -ms-overflow-style: none;
+      -webkit-box-shadow: inset 0px 0px 30px 33px rgba(255, 255, 255, 0.7);
+      -moz-box-shadow: inset 0px 0px 30px 33px rgba(255, 255, 255, 0.7);
+      box-shadow: inset 0px 0px 30px 33px rgba(255, 255, 255, 0.7);
+      &&::-webkit-scrollbar {
+        display: none;
+      }
+      &.active {
+        cursor: grabbing;
+        cursor: -webkit-grabbing;
+      }
+    `}
+`;
 
 const StepConnector = styled.div`
+  border-width: 0;
+  border-style: dashed;
+  border-color: ${(props) => stepBorderAndTitleColor(props)};
   border-left-width: 2px;
-  border-left-style: dashed;
-  border-left-color: ${(props) => stepBorderAndTitleColor(props)};
+  transition: all ${({ transitionDuration }) => `${transitionDuration}ms`}
+    ease-in-out;
   position: absolute;
   top: 0;
   left: 15px;
@@ -23,6 +67,22 @@ const StepConnector = styled.div`
     height: 100%;
     display: inline-block;
   }
+
+  ${({ isHorizontal }) =>
+    isHorizontal &&
+    css`
+      width: 100%;
+      border-left-width: 0;
+      border-top-width: 2px;
+      top: 15px;
+      left: 8px;
+      ::before {
+        content: "";
+        width: 100%;
+        height: 2px;
+        display: inline-block;
+      }
+    `}
 `;
 
 const Step = styled.div`
@@ -32,20 +92,64 @@ const Step = styled.div`
 
   :last-child {
     ${StepConnector} {
-      ${({ isActive }) => !isActive && "border: none"};
+      ${({ isActive, isHorizontal }) =>
+        (!isActive || isHorizontal) && "border: none"};
     }
   }
+
+  ${({ isHorizontal }) =>
+    isHorizontal &&
+    css`
+      width: 100px;
+      min-width: 100px;
+    `}
 `;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 0;
-`;
+const handleScroll = (el) => {
+  const slider = el;
+  let isDown = false;
+  let startX;
+  let sl;
 
-const Stepper = ({ onFinish, stepCount }) => {
+  slider.addEventListener("mousedown", (e) => {
+    isDown = true;
+    startX = e.pageX - slider.offsetLeft;
+    sl = slider.scrollLeft;
+  });
+  slider.addEventListener("mouseleave", () => {
+    isDown = false;
+    slider.classList.remove("active");
+  });
+  slider.addEventListener("mouseup", () => {
+    isDown = false;
+    slider.classList.remove("active");
+  });
+  slider.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    slider.classList.add("active");
+    const x = e.pageX - slider.offsetLeft;
+    const walk = x - startX;
+    slider.scrollLeft = sl - walk;
+  });
+};
+
+const Stepper = ({ onFinish, orientation, stepCount, transitionDuration }) => {
   const [currentStep, setCurrentStep] = useState(0);
+  const stepRef = useRef(null);
+  const isHorizontal = orientation === "horizontal";
+  const wrapperRef = createRef();
+
+  useEffect(() => {
+    if (isHorizontal) {
+      handleScroll(wrapperRef.current);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isHorizontal && stepRef.current)
+      stepRef.current.scrollIntoView({ block: "end", behavior: "smooth" });
+  }, [currentStep]);
 
   const handleNext = (isLastStep) => {
     if (isLastStep) {
@@ -61,64 +165,67 @@ const Stepper = ({ onFinish, stepCount }) => {
     }
   };
 
+  const content = (
+    <StepContent
+      content={CONTENT}
+      isLastStep={currentStep === stepCount - 1}
+      handleNext={handleNext}
+      transitionDuration={transitionDuration}
+    />
+  );
+
   return (
     <Wrapper>
-      {Array(stepCount)
-        .fill(0)
-        .map((step, idx) => {
-          const isActive = idx === currentStep;
-          const isPassed = idx < currentStep;
-          const isLastStep = idx === stepCount - 1;
+      <Steps isHorizontal={isHorizontal} ref={wrapperRef}>
+        {Array(stepCount)
+          .fill(0)
+          .map((step, idx) => {
+            const isActive = idx === currentStep;
+            const isPassed = idx < currentStep;
 
-          return (
-            <Step isActive={isActive} isPassed={isPassed}>
-              <StepTitle
-                label={`Step ${idx}`}
-                flag={idx}
+            return (
+              <Step
                 isActive={isActive}
+                isHorizontal={isHorizontal}
                 isPassed={isPassed}
-                onClick={() => handleStepClick(isPassed, idx)}
-              />
-              {isActive && (
-                <StepContent>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                  a arcu ac ligula ornare imperdiet. Suspendisse rutrum leo quis
-                  massa efficitur commodo. Maecenas tristique luctus metus, a
-                  imperdiet orci aliquam ac. Mauris finibus tellus ac odio
-                  scelerisque, id congue turpis lacinia. Sed porttitor, lacus
-                  eget posuere euismod, lectus metus malesuada eros, eget
-                  convallis neque elit a sapien. Phasellus nec justo eu arcu
-                  blandit tempus at ut elit. Proin eu massa a leo vestibulum
-                  egestas nec eget ante. Aliquam volutpat convallis ex. In hac
-                  habitasse platea dictumst. Nulla quis metus eros. Proin varius
-                  iaculis molestie. Fusce quam arcu, lacinia eu urna sit amet,
-                  sodales egestas nunc. Maecenas eu ex sed urna suscipit
-                  venenatis sed eu lectus. Nulla mauris lacus, egestas
-                  ullamcorper condimentum sed, ultrices at dolor.
-                  <ButtonWrapper>
-                    <PrimaryButton
-                      content={isLastStep ? "Finish" : "Next"}
-                      onClick={() => handleNext(isLastStep)}
-                      // disabled
-                    />
-                  </ButtonWrapper>
-                </StepContent>
-              )}
-              <StepConnector isActive={isActive} isPassed={isPassed} />
-            </Step>
-          );
-        })}
+                ref={isActive ? stepRef : null}
+              >
+                <StepTitle
+                  label={`Step ${idx}`}
+                  flag={idx}
+                  isActive={isActive}
+                  isHorizontal={isHorizontal}
+                  isPassed={isPassed}
+                  onClick={() => handleStepClick(isPassed, idx)}
+                  transitionDuration={transitionDuration}
+                />
+                {!isHorizontal && content}
+                <StepConnector
+                  isActive={isActive}
+                  isHorizontal={isHorizontal}
+                  isPassed={isPassed}
+                  transitionDuration={transitionDuration}
+                />
+              </Step>
+            );
+          })}
+      </Steps>
+      {isHorizontal && content}
     </Wrapper>
   );
 };
 
 Stepper.propTypes = {
   onFinish: PropTypes.func,
+  orientation: PropTypes.string,
   stepCount: PropTypes.number.isRequired,
+  transitionDuration: PropTypes.number,
 };
 
 Stepper.defaultProps = {
   onFinish: () => {},
+  orientation: "horizontal",
+  transitionDuration: 250,
 };
 
 export default Stepper;
