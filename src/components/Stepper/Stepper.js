@@ -25,6 +25,46 @@ const Wrapper = styled.div`
   margin: auto;
 `;
 
+const StepsWrapper = styled.div`
+  ${({ isHorizontal }) =>
+    isHorizontal &&
+    css`
+      position: relative;
+      ::before {
+        content: "";
+        display: inline-block;
+        width: 80px;
+        height: 100%;
+        background: linear-gradient(
+          270deg,
+          #ffffff 0%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        transform: rotate(-180deg);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+      }
+
+      ::after {
+        content: "";
+        display: inline-block;
+        width: 80px;
+        height: 100%;
+        background: linear-gradient(
+          270deg,
+          #ffffff 0%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+      }
+    `}
+`;
+
 const Steps = styled.div`
   ${({ isHorizontal }) =>
     isHorizontal &&
@@ -35,11 +75,9 @@ const Steps = styled.div`
       white-space: nowrap;
       overflow-y: hidden;
       overflow-x: scroll;
+      padding: 0 64px;
       user-select: none;
       -ms-overflow-style: none;
-      -webkit-box-shadow: inset 0px 0px 30px 33px rgba(255, 255, 255, 0.7);
-      -moz-box-shadow: inset 0px 0px 30px 33px rgba(255, 255, 255, 0.7);
-      box-shadow: inset 0px 0px 30px 33px rgba(255, 255, 255, 0.7);
       &&::-webkit-scrollbar {
         display: none;
       }
@@ -176,40 +214,42 @@ const Stepper = ({ onFinish, orientation, stepCount, transitionDuration }) => {
 
   return (
     <Wrapper>
-      <Steps isHorizontal={isHorizontal} ref={wrapperRef}>
-        {Array(stepCount)
-          .fill(0)
-          .map((step, idx) => {
-            const isActive = idx === currentStep;
-            const isPassed = idx < currentStep;
+      <StepsWrapper isHorizontal={isHorizontal}>
+        <Steps isHorizontal={isHorizontal} ref={wrapperRef}>
+          {Array(stepCount)
+            .fill(0)
+            .map((step, idx) => {
+              const isActive = idx === currentStep;
+              const isPassed = idx < currentStep;
 
-            return (
-              <Step
-                isActive={isActive}
-                isHorizontal={isHorizontal}
-                isPassed={isPassed}
-                ref={isActive ? stepRef : null}
-              >
-                <StepTitle
-                  label={`Step ${idx}`}
-                  flag={idx}
+              return (
+                <Step
                   isActive={isActive}
                   isHorizontal={isHorizontal}
                   isPassed={isPassed}
-                  onClick={() => handleStepClick(isPassed, idx)}
-                  transitionDuration={transitionDuration}
-                />
-                {!isHorizontal && content}
-                <StepConnector
-                  isActive={isActive}
-                  isHorizontal={isHorizontal}
-                  isPassed={isPassed}
-                  transitionDuration={transitionDuration}
-                />
-              </Step>
-            );
-          })}
-      </Steps>
+                  ref={isActive ? stepRef : null}
+                >
+                  <StepTitle
+                    label={`Step ${idx}`}
+                    flag={idx}
+                    isActive={isActive}
+                    isHorizontal={isHorizontal}
+                    isPassed={isPassed}
+                    onClick={() => handleStepClick(isPassed, idx)}
+                    transitionDuration={transitionDuration}
+                  />
+                  {!isHorizontal && isActive && content}
+                  <StepConnector
+                    isActive={isActive}
+                    isHorizontal={isHorizontal}
+                    isPassed={isPassed}
+                    transitionDuration={transitionDuration}
+                  />
+                </Step>
+              );
+            })}
+        </Steps>
+      </StepsWrapper>
       {isHorizontal && content}
     </Wrapper>
   );
