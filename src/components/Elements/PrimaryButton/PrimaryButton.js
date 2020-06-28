@@ -29,12 +29,13 @@ const StyledButton = styled.button`
   }
 `;
 
-const PrimaryButton = ({ content, ...props }) => {
-  return <StyledButton {...props}>{content}</StyledButton>;
+const PrimaryButton = ({ content, children, ...props }) => {
+  return <StyledButton {...props}>{content || children}</StyledButton>;
 };
 
 PrimaryButton.propTypes = {
   content: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 PrimaryButton.defaultProps = {};

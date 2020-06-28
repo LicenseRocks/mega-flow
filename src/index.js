@@ -9,13 +9,13 @@ const Wrapper = styled.div``;
 
 const ReactJSONWizard = ({ schema }) => {
   const parsedSchema = JSON.parse(schema);
-  const { title, titleProps, wrapperProps } = parsedSchema;
+  const { steps, title, titleProps, wrapperProps } = parsedSchema;
 
   return (
     <Wrapper {...wrapperProps}>
       <Title title={title} titleProps={titleProps} />
 
-      <Stepper stepCount={15} />
+      <Stepper stepCount={steps.length} />
     </Wrapper>
   );
 };

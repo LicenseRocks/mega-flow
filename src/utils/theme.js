@@ -8,6 +8,7 @@ export default () => ({
       regular: "#CECDD9",
       medium: "#8685A6",
     },
+    black: "#292839",
     white: "#fff",
   },
 });

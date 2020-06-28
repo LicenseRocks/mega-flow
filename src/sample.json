@@ -1,0 +1,45 @@
+{
+    "title": "MyForm",
+    "steps": [
+      {
+        "title": "Personal information",
+        "rows": [
+          {
+            "label": "Full name",
+            "inputs": [
+              {
+                "name": "firstName",
+                "placeholder": "First name",
+                "type": "input"
+              },
+              {
+                "name": "lastName",
+                "placeholder": "Last name",
+                "type": "input"
+              }
+            ]
+          },
+          {
+            "label": "Role",
+            "inputs": [
+              {
+                "name": "role",
+                "placeholder": "Role",
+                "type": "select",
+                "options": [
+                  {
+                    "value": "buyer",
+                    "label": "Buyer"
+                  },
+                  {
+                    "value": "seller",
+                    "label": "Seller"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
