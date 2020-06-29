@@ -1,2 +1,2 @@
-// Primary Button
-export { default as PrimaryButton } from "./PrimaryButton";
+// Input
+export { default as Input } from "./Input";
