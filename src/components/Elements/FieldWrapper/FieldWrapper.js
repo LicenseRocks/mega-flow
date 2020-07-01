@@ -44,9 +44,9 @@ const StyledWrapper = styled.div`
 const FieldWrapper = ({ children, endIcon, startIcon, ...props }) => {
   return (
     <StyledWrapper {...props}>
-      <div>{startIcon}</div>
+      {startIcon}
       {children}
-      <div>{endIcon}</div>
+      {endIcon}
     </StyledWrapper>
   );
 };
