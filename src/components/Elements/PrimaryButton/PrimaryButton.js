@@ -23,7 +23,7 @@ const StyledButton = styled.button`
   }
 
   :disabled {
-    opacity: 0.7;
+    opacity: 0.3;
     cursor: not-allowed;
     pointer-events: none;
   }
@@ -34,10 +34,13 @@ const PrimaryButton = ({ content, children, ...props }) => {
 };
 
 PrimaryButton.propTypes = {
-  content: PropTypes.node.isRequired,
-  children: PropTypes.node.isRequired,
+  content: PropTypes.node,
+  children: PropTypes.node,
 };
 
-PrimaryButton.defaultProps = {};
+PrimaryButton.defaultProps = {
+  content: null,
+  children: null,
+};
 
 export default PrimaryButton;

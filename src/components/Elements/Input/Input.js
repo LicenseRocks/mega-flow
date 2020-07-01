@@ -2,24 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
+import FieldWrapper from "../FieldWrapper/FieldWrapper";
+
 const StyledInput = styled.input`
-  font-style: normal;
+  flex: 1;
+  font-weight: 600;
   font-size: 14px;
   line-height: 120%;
-  border-radius: 12px;
-  background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.gray.regular};
   padding: 8px;
   color: ${({ theme }) => theme.colors.black};
   outline: none;
-  height: 40px;
+  border: none;
+  height: 100%;
   box-sizing: border-box;
   transition: all 100ms ease-in-out;
 
-  :disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    pointer-events: none;
+  ::placeholder {
+    font-weight: normal;
   }
 
   ${({ block }) =>
@@ -29,16 +28,22 @@ const StyledInput = styled.input`
     `}
 `;
 
-const PrimaryButton = ({ block, ...props }) => {
-  return <StyledInput block={block} {...props} />;
+const Input = ({ block, disabled, ...props }) => {
+  return (
+    <FieldWrapper disabled={disabled}>
+      <StyledInput block={block} {...props} />
+    </FieldWrapper>
+  );
 };
 
-PrimaryButton.propTypes = {
+Input.propTypes = {
   block: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
-PrimaryButton.defaultProps = {
+Input.defaultProps = {
   block: true,
+  disabled: false,
 };
 
-export default PrimaryButton;
+export default Input;
