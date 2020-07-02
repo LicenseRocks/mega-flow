@@ -11,8 +11,9 @@ export default {
 
 export const main = (props = {}) => {
   const defaultProps = {
-    name: "radio",
+    checked: boolean("Checked", false),
     disabled: boolean("Disabled", false),
+    name: "radio",
     options: [
       { value: "first", label: "First" },
       { value: "second", label: "Second" },

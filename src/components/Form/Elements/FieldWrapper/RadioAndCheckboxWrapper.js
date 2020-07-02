@@ -26,9 +26,7 @@ const StyledInput = styled.input`
 
     &::before {
       content: "";
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: inline-block;
       width: 24px;
       height: 24px;
       border-radius: ${({ type }) => (type === "radio" ? "50%" : "8px")};
@@ -49,7 +47,10 @@ const StyledInput = styled.input`
   &:checked + label::before {
     background-color: ${({ theme }) => theme.colors.primary.main};
     border-color: ${({ theme }) => theme.colors.primary.main};
-    content: url(${`${Check}`});
+    background-image: url(${`${Check}`});
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   &:disabled + label {

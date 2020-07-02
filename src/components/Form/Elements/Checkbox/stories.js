@@ -11,8 +11,9 @@ export default {
 
 export const main = (props = {}) => {
   const defaultProps = {
-    name: "checkbox",
+    checked: boolean("Checked", false),
     disabled: boolean("Disabled", false),
+    name: "checkbox",
     options: [
       { value: "first", label: "First" },
       { value: "second", label: "Second" },
