@@ -1,17 +1,17 @@
 import React from "react";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 
-import Checkbox from "./Checkbox";
+import { Radio } from "./Radio";
 
 export default {
-  title: "Elements/Checkbox",
-  component: Checkbox,
+  title: "Elements/Radio",
+  component: Radio,
   decorators: [withKnobs],
 };
 
 export const main = (props = {}) => {
   const defaultProps = {
-    name: "checkbox",
+    name: "radio",
     disabled: boolean("Disabled", false),
     options: [
       { value: "first", label: "First" },
@@ -22,5 +22,5 @@ export const main = (props = {}) => {
     ...props,
   };
 
-  return <Checkbox {...defaultProps} />;
+  return <Radio {...defaultProps} />;
 };

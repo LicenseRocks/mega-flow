@@ -21,6 +21,15 @@ const StyledInput = styled.input`
     font-weight: normal;
   }
 
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      ::placeholder {
+        color: ${({ theme }) => theme.colors.alert.darkRed};
+      }
+      color: ${({ theme }) => theme.colors.alert.darkRed};
+    `}
+
   ${({ block }) =>
     block &&
     css`
@@ -28,10 +37,15 @@ const StyledInput = styled.input`
     `}
 `;
 
-const Input = ({ block, disabled, ...props }) => {
+const Input = ({ block, disabled, hasError, register, ...props }) => {
   return (
-    <FieldWrapper disabled={disabled}>
-      <StyledInput block={block} {...props} />
+    <FieldWrapper disabled={disabled} hasError={hasError}>
+      <StyledInput
+        block={block}
+        hasError={hasError}
+        ref={register}
+        {...props}
+      />
     </FieldWrapper>
   );
 };
@@ -39,11 +53,14 @@ const Input = ({ block, disabled, ...props }) => {
 Input.propTypes = {
   block: PropTypes.bool,
   disabled: PropTypes.bool,
+  hasError: PropTypes.bool,
+  register: PropTypes.func.isRequired,
 };
 
 Input.defaultProps = {
   block: true,
   disabled: false,
+  hasError: false,
 };
 
 export default Input;

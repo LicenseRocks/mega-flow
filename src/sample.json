@@ -28,6 +28,10 @@
                 "type": "select",
                 "options": [
                   {
+                    "value": "",
+                    "label": "Please choose"
+                  },
+                  {
                     "value": "buyer",
                     "label": "Buyer"
                   },

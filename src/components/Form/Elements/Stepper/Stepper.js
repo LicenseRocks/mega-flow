@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import FieldWrapper from "../FieldWrapper/FieldWrapper";
-import Minus from "../../../assets/icons/minus.svg";
-import Plus from "../../../assets/icons/plus.svg";
+import Minus from "../../../../assets/icons/minus.svg";
+import Plus from "../../../../assets/icons/plus.svg";
 
 const StyledStepper = styled(FieldWrapper)`
   button {

@@ -16,6 +16,10 @@ const StyledWrapper = styled.div`
   box-sizing: border-box;
   transition: all 100ms ease-in-out;
 
+  :not(:last-child) {
+    margin-right: 16px;
+  }
+
   &:focus-within {
     border: 1px solid ${({ theme }) => theme.colors.primary.main};
   }
@@ -37,7 +41,7 @@ const StyledWrapper = styled.div`
   ${({ block }) =>
     block &&
     css`
-      width: 100%;
+      flex: 1;
     `}
 `;
 
@@ -52,12 +56,14 @@ const FieldWrapper = ({ children, endIcon, startIcon, ...props }) => {
 };
 
 FieldWrapper.propTypes = {
+  block: PropTypes.bool,
   children: PropTypes.node.isRequired,
   endIcon: PropTypes.node,
   startIcon: PropTypes.node,
 };
 
 FieldWrapper.defaultProps = {
+  block: true,
   endIcon: null,
   startIcon: null,
 };

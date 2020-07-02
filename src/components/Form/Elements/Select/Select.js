@@ -18,6 +18,15 @@ const StyledSelect = styled.select`
   box-sizing: border-box;
   transition: all 100ms ease-in-out;
 
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      ::placeholder {
+        color: ${({ theme }) => theme.colors.alert.darkRed};
+      }
+      color: ${({ theme }) => theme.colors.alert.darkRed};
+    `}
+
   ${({ block }) =>
     block &&
     css`
@@ -32,10 +41,18 @@ const renderOptions = (options) =>
     </option>
   ));
 
-const Select = ({ block, children, disabled, options, ...props }) => {
+const Select = ({
+  block,
+  children,
+  disabled,
+  hasError,
+  options,
+  register,
+  ...props
+}) => {
   return (
-    <FieldWrapper disabled={disabled}>
-      <StyledSelect block={block} {...props}>
+    <FieldWrapper disabled={disabled} hasError={hasError}>
+      <StyledSelect block={block} hasError={hasError} ref={register} {...props}>
         {renderOptions(options) || children}
       </StyledSelect>
     </FieldWrapper>
@@ -46,18 +63,21 @@ Select.propTypes = {
   block: PropTypes.bool,
   children: PropTypes.node,
   disabled: PropTypes.bool,
+  hasError: PropTypes.bool,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string,
     })
   ).isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 Select.defaultProps = {
   block: true,
   children: null,
   disabled: false,
+  hasError: false,
 };
 
 export default Select;

@@ -15,13 +15,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hookform/resolvers": "^0.0.5",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-hook-form": "^5.7.2",
+    "react-hook-form": "^6.0.0",
     "react-select": "^3.1.0",
     "react-transition-group": "^4.4.1",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "yup": "^0.29.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

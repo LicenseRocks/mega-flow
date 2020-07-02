@@ -1,24 +1,11 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
+import React, { createRef, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import StepTitle from "./StepTitle";
 import StepContent from "./StepContent";
 import { stepBorderAndTitleColor } from "./helper";
-
-const CONTENT = `
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a arcu ac ligula ornare imperdiet. Suspendisse rutrum leo quis massa
-efficitur commodo. Maecenas tristique luctus metus, a imperdiet
-orci aliquam ac. Mauris finibus tellus ac odio scelerisque, id
-congue turpis lacinia. Sed porttitor, lacus eget posuere euismod,
-lectus metus malesuada eros, eget convallis neque elit a sapien.
-Phasellus nec justo eu arcu blandit tempus at ut elit. Proin eu
-massa a leo vestibulum egestas nec eget ante. Aliquam volutpat
-convallis ex. In hac habitasse platea dictumst. Nulla quis metus
-eros. Proin varius iaculis molestie. Fusce quam arcu, lacinia eu
-urna sit amet, sodales egestas nunc. Maecenas eu ex sed urna
-suscipit venenatis sed eu lectus. Nulla mauris lacus, egestas
-ullamcorper condimentum sed, ultrices at dolor.`;
+import { handleScroll } from "../../utils";
 
 const Wrapper = styled.div`
   max-width: 680px;
@@ -143,37 +130,15 @@ const Step = styled.div`
     `}
 `;
 
-const handleScroll = (el) => {
-  const slider = el;
-  let isDown = false;
-  let startX;
-  let sl;
-
-  slider.addEventListener("mousedown", (e) => {
-    isDown = true;
-    startX = e.pageX - slider.offsetLeft;
-    sl = slider.scrollLeft;
-  });
-  slider.addEventListener("mouseleave", () => {
-    isDown = false;
-    slider.classList.remove("active");
-  });
-  slider.addEventListener("mouseup", () => {
-    isDown = false;
-    slider.classList.remove("active");
-  });
-  slider.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    slider.classList.add("active");
-    const x = e.pageX - slider.offsetLeft;
-    const walk = x - startX;
-    slider.scrollLeft = sl - walk;
-  });
-};
-
-const Stepper = ({ onFinish, orientation, stepCount, transitionDuration }) => {
-  const [currentStep, setCurrentStep] = useState(0);
+const Stepper = ({
+  currentStepContent,
+  currentStepIndex,
+  currentStepTitle,
+  orientation,
+  setCurrentStepIndex,
+  stepCount,
+  transitionDuration,
+}) => {
   const stepRef = useRef(null);
   const isHorizontal = orientation === "horizontal";
   const wrapperRef = createRef();
@@ -187,26 +152,24 @@ const Stepper = ({ onFinish, orientation, stepCount, transitionDuration }) => {
   useEffect(() => {
     if (isHorizontal && stepRef.current)
       stepRef.current.scrollIntoView({ block: "end", behavior: "smooth" });
-  }, [currentStep]);
+  }, [currentStepIndex]);
 
   const handleNext = (isLastStep) => {
-    if (isLastStep) {
-      onFinish();
-      return;
+    if (!isLastStep) {
+      setCurrentStepIndex((prev) => prev + 1);
     }
-    setCurrentStep((prev) => prev + 1);
   };
 
   const handleStepClick = (isPassed, stepIdx) => {
     if (isPassed) {
-      setCurrentStep(stepIdx);
+      setCurrentStepIndex(stepIdx);
     }
   };
 
   const content = (
     <StepContent
-      content={CONTENT}
-      isLastStep={currentStep === stepCount - 1}
+      content={currentStepContent}
+      isLastStep={currentStepIndex === stepCount - 1}
       handleNext={handleNext}
       transitionDuration={transitionDuration}
     />
@@ -219,18 +182,20 @@ const Stepper = ({ onFinish, orientation, stepCount, transitionDuration }) => {
           {Array(stepCount)
             .fill(0)
             .map((step, idx) => {
-              const isActive = idx === currentStep;
-              const isPassed = idx < currentStep;
+              const isActive = idx === currentStepIndex;
+              const isPassed = idx < currentStepIndex;
+              const stepKey = `step-${idx}`;
 
               return (
                 <Step
                   isActive={isActive}
                   isHorizontal={isHorizontal}
                   isPassed={isPassed}
+                  key={stepKey}
                   ref={isActive ? stepRef : null}
                 >
                   <StepTitle
-                    label={`Step ${idx}`}
+                    label={currentStepTitle}
                     flag={idx}
                     isActive={isActive}
                     isHorizontal={isHorizontal}
@@ -256,14 +221,16 @@ const Stepper = ({ onFinish, orientation, stepCount, transitionDuration }) => {
 };
 
 Stepper.propTypes = {
-  onFinish: PropTypes.func,
+  currentStepContent: PropTypes.node.isRequired,
+  currentStepIndex: PropTypes.number.isRequired,
+  currentStepTitle: PropTypes.node.isRequired,
   orientation: PropTypes.string,
+  setCurrentStepIndex: PropTypes.func.isRequired,
   stepCount: PropTypes.number.isRequired,
   transitionDuration: PropTypes.number,
 };
 
 Stepper.defaultProps = {
-  onFinish: () => {},
   orientation: "horizontal",
   transitionDuration: 250,
 };

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import Check from "../../../assets/icons/check.svg";
+import Check from "../../../../assets/icons/check.svg";
 
 const StyledInput = styled.input`
   display: none;

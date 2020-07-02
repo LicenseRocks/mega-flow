@@ -3,7 +3,14 @@ import PropTypes from "prop-types";
 
 import { RadioAndCheckboxWrapper } from "../FieldWrapper";
 
-const Checkbox = ({ checked, name, onChange, options, stacked, ...props }) => {
+export const Radio = ({
+  checked,
+  name,
+  onChange,
+  options,
+  stacked,
+  ...props
+}) => {
   return options.map((opt) => (
     <RadioAndCheckboxWrapper
       key={opt.value}
@@ -13,13 +20,13 @@ const Checkbox = ({ checked, name, onChange, options, stacked, ...props }) => {
       onChange={onChange}
       stacked={stacked}
       value={opt.value}
-      type="checkbox"
+      type="radio"
       {...props}
     />
   ));
 };
 
-Checkbox.propTypes = {
+Radio.propTypes = {
   checked: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -27,8 +34,6 @@ Checkbox.propTypes = {
   stacked: PropTypes.bool,
 };
 
-Checkbox.defaultProps = {
+Radio.defaultProps = {
   stacked: true,
 };
-
-export default Checkbox;
