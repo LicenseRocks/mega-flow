@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
 
-import { PrimaryButton } from "..";
+import { Button } from "..";
 import "./styles.css";
 
 const StyledContent = styled.div`
@@ -41,7 +41,7 @@ const StepContent = ({
       <StyledContent {...props}>
         {children || content}
         <ActionWrapper>
-          <PrimaryButton
+          <Button
             content={isLastStep ? "Finish" : "Next"}
             onClick={() => handleNext(isLastStep)}
             type={isLastStep ? "submit" : "button"}

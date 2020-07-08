@@ -7,6 +7,7 @@ export default () => ({
       dark: "#4D4B63",
       regular: "#CECDD9",
       medium: "#8685A6",
+      light: "#F7F7F9",
     },
     alert: {
       darkRed: "#FE3118",

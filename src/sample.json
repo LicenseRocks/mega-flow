@@ -8,6 +8,7 @@
             "label": "Full name",
             "inputs": [
               {
+                "defaultValue": "Majid",
                 "name": "firstName",
                 "placeholder": "First name",
                 "type": "input"
@@ -15,6 +16,7 @@
               {
                 "name": "lastName",
                 "placeholder": "Last name",
+                "required": true,
                 "type": "input"
               }
             ]
@@ -40,6 +42,85 @@
                     "label": "Seller"
                   }
                 ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "More information",
+        "rows": [
+          {
+            "label": "Marriage status",
+            "inputs": [
+              {
+                "name": "status",
+                "type": "radio",
+                "options":[
+                  {
+                    "value": "single",
+                    "label": "Single"
+                  },
+                  {
+                    "value": "married",
+                    "label": "Married"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Category",
+            "inputs": [
+              {
+                "name": "category",
+                "type": "checkbox",
+                "options":[
+                  {
+                    "value": "first",
+                    "label": "First"
+                  },
+                  {
+                    "value": "second",
+                    "label": "Second"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Save?",
+            "inputs": [
+              {
+                "name": "save",
+                "type": "toggleSwitch"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Recurring information",
+        "recurring": true,
+        "name": "recurring",
+        "rows": [
+          {
+            "label": "Name",
+            "inputs": [
+              {
+                "name": "name",
+                "placeholder": "Name",
+                "type": "input"
+              }
+            ]
+          },
+          {
+            "label": "Title",
+            "inputs": [
+              {
+                "name": "title",
+                "placeholder": "Title",
+                "type": "input"
               }
             ]
           }

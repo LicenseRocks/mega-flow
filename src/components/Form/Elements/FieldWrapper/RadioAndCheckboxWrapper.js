@@ -70,6 +70,7 @@ const RadioAndCheckboxWrapper = ({
   label,
   name,
   onChange,
+  register,
   stacked,
   type,
   value,
@@ -78,15 +79,13 @@ const RadioAndCheckboxWrapper = ({
   return (
     <>
       <StyledInput
-        checked={checked}
         name={name}
-        onChange={onChange}
+        ref={register}
         stacked={stacked}
         type={type}
-        value={value}
         {...props}
       />
-      <StyledLabel for={name}>{label}</StyledLabel>
+      <StyledLabel htmlFor={name}>{label}</StyledLabel>
     </>
   );
 };
@@ -96,6 +95,7 @@ RadioAndCheckboxWrapper.propTypes = {
   label: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
   stacked: PropTypes.bool,
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,

@@ -133,15 +133,15 @@ const Step = styled.div`
 const Stepper = ({
   currentStepContent,
   currentStepIndex,
-  currentStepTitle,
   orientation,
   setCurrentStepIndex,
-  stepCount,
+  steps,
   transitionDuration,
 }) => {
   const stepRef = useRef(null);
   const isHorizontal = orientation === "horizontal";
   const wrapperRef = createRef();
+  const stepCount = steps.length;
 
   useEffect(() => {
     if (isHorizontal) {
@@ -179,40 +179,38 @@ const Stepper = ({
     <Wrapper>
       <StepsWrapper isHorizontal={isHorizontal}>
         <Steps isHorizontal={isHorizontal} ref={wrapperRef}>
-          {Array(stepCount)
-            .fill(0)
-            .map((step, idx) => {
-              const isActive = idx === currentStepIndex;
-              const isPassed = idx < currentStepIndex;
-              const stepKey = `step-${idx}`;
+          {steps.map((step, idx) => {
+            const isActive = idx === currentStepIndex;
+            const isPassed = idx < currentStepIndex;
+            const stepKey = `step-${idx}`;
 
-              return (
-                <Step
+            return (
+              <Step
+                isActive={isActive}
+                isHorizontal={isHorizontal}
+                isPassed={isPassed}
+                key={stepKey}
+                ref={isActive ? stepRef : null}
+              >
+                <StepTitle
+                  label={step}
+                  flag={idx + 1}
                   isActive={isActive}
                   isHorizontal={isHorizontal}
                   isPassed={isPassed}
-                  key={stepKey}
-                  ref={isActive ? stepRef : null}
-                >
-                  <StepTitle
-                    label={currentStepTitle}
-                    flag={idx}
-                    isActive={isActive}
-                    isHorizontal={isHorizontal}
-                    isPassed={isPassed}
-                    onClick={() => handleStepClick(isPassed, idx)}
-                    transitionDuration={transitionDuration}
-                  />
-                  {!isHorizontal && isActive && content}
-                  <StepConnector
-                    isActive={isActive}
-                    isHorizontal={isHorizontal}
-                    isPassed={isPassed}
-                    transitionDuration={transitionDuration}
-                  />
-                </Step>
-              );
-            })}
+                  onClick={() => handleStepClick(isPassed, idx)}
+                  transitionDuration={transitionDuration}
+                />
+                {!isHorizontal && isActive && content}
+                <StepConnector
+                  isActive={isActive}
+                  isHorizontal={isHorizontal}
+                  isPassed={isPassed}
+                  transitionDuration={transitionDuration}
+                />
+              </Step>
+            );
+          })}
         </Steps>
       </StepsWrapper>
       {isHorizontal && content}
@@ -223,10 +221,9 @@ const Stepper = ({
 Stepper.propTypes = {
   currentStepContent: PropTypes.node.isRequired,
   currentStepIndex: PropTypes.number.isRequired,
-  currentStepTitle: PropTypes.node.isRequired,
   orientation: PropTypes.string,
   setCurrentStepIndex: PropTypes.func.isRequired,
-  stepCount: PropTypes.number.isRequired,
+  steps: PropTypes.arrayOf(PropTypes.string).isRequired,
   transitionDuration: PropTypes.number,
 };
 

@@ -1,36 +1,45 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { RadioAndCheckboxWrapper } from "../FieldWrapper";
+import { RadioAndCheckboxWrapper, Fieldset } from "../FieldWrapper";
 
 export const Checkbox = ({
   checked,
   name,
   onChange,
   options,
+  register,
   stacked,
   ...props
 }) => {
-  return options.map((opt) => (
-    <RadioAndCheckboxWrapper
-      key={opt.value}
-      checked={checked}
-      label={opt.label}
-      name={name}
-      onChange={onChange}
-      stacked={stacked}
-      value={opt.value}
-      type="checkbox"
-      {...props}
-    />
-  ));
+  return (
+    <Fieldset>
+      {options.map((opt) => (
+        <RadioAndCheckboxWrapper
+          key={opt.value}
+          label={opt.label}
+          name={name}
+          register={register}
+          stacked={stacked}
+          type="checkbox"
+          {...props}
+        />
+      ))}
+    </Fieldset>
+  );
 };
 
 Checkbox.propTypes = {
   checked: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.node,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.string,
+    })
+  ).isRequired,
+  register: PropTypes.func.isRequired,
   stacked: PropTypes.bool,
 };
 

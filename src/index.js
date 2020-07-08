@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
-import * as yup from "yup";
 
 import { withWrapper } from "./utils";
 import { Form, Stepper, Title } from "./components";
@@ -15,19 +13,15 @@ const ReactJSONWizard = ({ schema }) => {
   const { steps, title, titleProps, wrapperProps } = parsedSchema;
   const [currentStep, setCurrentStep] = useState(0);
 
-  const validationSchema = yup.object().shape({
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
-    role: yup.string().required(),
-  });
-
   const methods = useForm({
-    resolver: yupResolver(validationSchema),
+    mode: "onBlur"
   });
 
   const onSubmit = (data) => {
     console.log("data: ", data);
   };
+
+  const stepsArray = steps.map((st) => st.title);
 
   return (
     <Wrapper {...wrapperProps}>
@@ -36,11 +30,12 @@ const ReactJSONWizard = ({ schema }) => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <Stepper
-            currentStepContent={<Form data={steps[currentStep]} stepIndex={currentStep} />}
-            currentStepTitle={steps[currentStep].title}
+            currentStepContent={
+              <Form data={steps[currentStep]} stepIndex={currentStep} />
+            }
             currentStepIndex={currentStep}
             setCurrentStepIndex={setCurrentStep}
-            stepCount={steps.length}
+            steps={stepsArray}
           />
         </form>
       </FormProvider>

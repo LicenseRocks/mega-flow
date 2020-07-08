@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledButton = styled.button`
   font-style: normal;
@@ -8,10 +8,9 @@ const StyledButton = styled.button`
   font-size: 16px;
   line-height: 120%;
   text-transform: uppercase;
-  border-radius: 12px;
-  background-color: ${({ theme }) => theme.colors.primary.main};
+  background-color: ${({ theme }) => theme.colors.white};
   padding: 8px 16px;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.primary.main};
   border: none;
   cursor: pointer;
   outline: none;
@@ -27,20 +26,26 @@ const StyledButton = styled.button`
     cursor: not-allowed;
     pointer-events: none;
   }
+
+  ${({ size }) =>
+    size === "sm" &&
+    css`
+      font-size: 10px;
+    `}
 `;
 
-const PrimaryButton = ({ content, children, ...props }) => {
+export const TextButton = ({ content, children, ...props }) => {
   return <StyledButton {...props}>{content || children}</StyledButton>;
 };
 
-PrimaryButton.propTypes = {
+TextButton.propTypes = {
   content: PropTypes.node,
   children: PropTypes.node,
+  size: PropTypes.oneOf(["sm", "md", "lg"]),
 };
 
-PrimaryButton.defaultProps = {
+TextButton.defaultProps = {
   content: null,
   children: null,
+  size: "md",
 };
-
-export default PrimaryButton;

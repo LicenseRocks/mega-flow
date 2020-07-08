@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
+import Check from "../../assets/icons/check.svg";
 import {
   stepBorderAndTitleColor,
   stepFlagBackgroundColor,
@@ -11,6 +12,9 @@ import {
 const StyledTitle = styled.div`
   display: flex;
   align-items: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: normal;
 
   ${({ isPassed }) =>
     isPassed &&
@@ -55,8 +59,7 @@ const Label = styled.span`
     isHorizontal &&
     css`
       font-size: 12px;
-      padding-top: 4px;
-      padding-left: 0;
+      padding: 4px 4px 0 0;
     `}
 `;
 
@@ -80,7 +83,7 @@ const StepTitle = ({
         isPassed={isPassed}
         transitionDuration={transitionDuration}
       >
-        {flag}
+        {isPassed ? <img src={Check} alt="passed-step" /> : flag}
       </Flag>
       <Label
         isActive={isActive}
