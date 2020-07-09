@@ -9,6 +9,7 @@
             "inputs": [
               {
                 "name": "status",
+                "required": "This is required",
                 "type": "radio",
                 "options":[
                   {
@@ -47,6 +48,7 @@
             "inputs": [
               {
                 "name": "save",
+                "required": "This is required",
                 "type": "toggleSwitch"
               }
             ]

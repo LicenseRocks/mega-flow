@@ -1,15 +1,7 @@
-/**
- * Toggle - Stories
- */
-
-// React
 import React from "react";
-
-// Storybook
-import { action } from "@storybook/addon-actions";
 import { boolean, select, withKnobs } from "@storybook/addon-knobs";
+import { useForm } from "react-hook-form";
 
-// UI
 import { ToggleSwitch } from ".";
 
 export default {
@@ -18,10 +10,18 @@ export default {
   decorators: [withKnobs],
 };
 
-export const main = () => (
-  <ToggleSwitch
-    disabled={boolean("Disabled", false)}
-    onChange={action("toggled")}
-    size={select("Size", ["sm", "md", "lg"], "md")}
-  />
-);
+export const main = () => {
+  const { control, watch } = useForm();
+
+  const defaultProps = {
+    control,
+    disabled: boolean("Disabled", false),
+    name: "toggle",
+    size: select("Size", ["sm", "md", "lg"], "md"),
+  };
+
+  const values = watch();
+  console.log("values: ", values);
+
+  return <ToggleSwitch {...defaultProps} />;
+};

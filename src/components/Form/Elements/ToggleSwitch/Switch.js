@@ -9,13 +9,14 @@ import { bool, func, oneOf } from "prop-types";
 // Style
 import styled, { css } from "styled-components";
 
-const Switch = ({ disabled, handleToggle, size, toggled }) => {
+const Switch = ({ disabled, handleToggle, size, toggled, ...props }) => {
   return (
     <StyledSwitchContainer
       disabled={disabled}
       onClick={handleToggle}
       size={size}
       toggled={toggled}
+      {...props}
     >
       <StyledSwitch size={size} toggled={toggled}>
         {toggled ? "Yes" : "No"}
@@ -41,6 +42,12 @@ const StyledSwitchContainer = styled.div`
       cursor: not-allowed;
       pointer-events: none;
     `}
+
+    ${({ hasError }) =>
+      hasError &&
+      css`
+        border: 1px solid ${({ theme }) => theme.colors.alert.darkRed};
+      `}
 
   ${({ size }) =>
     size === "sm" &&

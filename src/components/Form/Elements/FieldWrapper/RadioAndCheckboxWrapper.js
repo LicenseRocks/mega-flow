@@ -108,6 +108,7 @@ RadioAndCheckboxWrapper.propTypes = {
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.string,
   ]),
+  hasError: PropTypes.bool,
   label: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
   register: PropTypes.func.isRequired,
@@ -118,6 +119,7 @@ RadioAndCheckboxWrapper.propTypes = {
 
 RadioAndCheckboxWrapper.defaultProps = {
   defaultValue: "",
+  hasError: false,
   stacked: true,
 };
 

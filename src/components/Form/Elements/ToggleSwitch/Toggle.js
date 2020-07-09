@@ -1,25 +1,17 @@
-/**
- * Toggle - Components - Toggle
- */
-
-// React
-import React, { useState } from "react";
+import React from "react";
 import { bool, func, oneOf } from "prop-types";
-
-// Style
 import styled from "styled-components";
 
-// UI
 import Switch from "./Switch";
 
-const Toggle = ({ disabled, onChange, size, value: initial }) => {
-  const [toggled, setToggled] = useState(initial);
+const StyledToggle = styled.div`
+  display: inline-block;
+  position: relative;
+`;
 
+export const Toggle = ({ disabled, onChange, size, value, ...props }) => {
   const handleToggle = () => {
-    setToggled((prev) => {
-      if (onChange) onChange(!prev);
-      return !prev;
-    });
+    onChange(!value);
   };
 
   return (
@@ -28,16 +20,12 @@ const Toggle = ({ disabled, onChange, size, value: initial }) => {
         disabled={disabled}
         handleToggle={!disabled ? handleToggle : undefined}
         size={size}
-        toggled={toggled}
+        toggled={value}
+        {...props}
       />
     </StyledToggle>
   );
 };
-
-const StyledToggle = styled.div`
-  display: inline-block;
-  position: relative;
-`;
 
 Toggle.propTypes = {
   disabled: bool,
@@ -52,5 +40,3 @@ Toggle.defaultProps = {
   size: "md",
   value: false,
 };
-
-export default Toggle;

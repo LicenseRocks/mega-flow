@@ -12,7 +12,7 @@ export default {
 
 export const main = () => {
   const { register, watch } = useForm();
-  
+
   const defaultProps = {
     disabled: boolean("Disabled", false),
     name: "checkbox",
@@ -26,7 +26,7 @@ export const main = () => {
   };
 
   const values = watch();
-  console.log('values: ', values);
+  console.log("values: ", values);
 
   return <Checkbox {...defaultProps} />;
 };
