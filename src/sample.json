@@ -2,62 +2,6 @@
     "title": "MyForm",
     "steps": [
       {
-        "title": "Personal information",
-        "rows": [
-          {
-            "label": "Full name",
-            "inputs": [
-              {
-                "defaultValue": "Majid",
-                "name": "firstName",
-                "placeholder": "First name",
-                "type": "input"
-              },
-              {
-                "name": "lastName",
-                "placeholder": "Last name",
-                "required": "Last name is required",
-                "type": "input"
-              }
-            ]
-          },
-          {
-            "label": "Role",
-            "inputs": [
-              {
-                "name": "role",
-                "placeholder": "Role",
-                "type": "select",
-                "options": [
-                  {
-                    "value": "",
-                    "label": "Please choose"
-                  },
-                  {
-                    "value": "buyer",
-                    "label": "Buyer"
-                  },
-                  {
-                    "value": "seller",
-                    "label": "Seller"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "label": "ID",
-            "inputs": [
-              {
-                "name": "idFile",
-                "required": "You must upload your id card",
-                "type": "fileUpload"
-              }
-            ]
-          }
-        ]
-      },
-      {
         "title": "More information",
         "rows": [
           {

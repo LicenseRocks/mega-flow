@@ -3,15 +3,7 @@ import PropTypes from "prop-types";
 
 import { RadioAndCheckboxWrapper, Fieldset } from "../FieldWrapper";
 
-export const Checkbox = ({
-  checked,
-  name,
-  onChange,
-  options,
-  register,
-  stacked,
-  ...props
-}) => {
+export const Checkbox = ({ name, options, register, stacked, ...props }) => {
   return (
     <Fieldset>
       {options.map((opt) => (
@@ -31,9 +23,7 @@ export const Checkbox = ({
 };
 
 Checkbox.propTypes = {
-  checked: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,

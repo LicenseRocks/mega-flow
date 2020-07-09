@@ -6,7 +6,7 @@ import Check from "../../../../assets/icons/check.svg";
 
 const StyledInput = styled.input`
   display: none;
-  
+
   + label {
     display: inline-flex;
     align-items: center;
@@ -66,10 +66,9 @@ const StyledInput = styled.input`
 const StyledLabel = styled.label``;
 
 const RadioAndCheckboxWrapper = ({
-  checked,
+  defaultValue,
   label,
   name,
-  onChange,
   register,
   stacked,
   type,
@@ -77,10 +76,13 @@ const RadioAndCheckboxWrapper = ({
   ...props
 }) => {
   const id = `${name}-${value}`;
+  const defaultChecked =
+    type === "checkbox" ? defaultValue.includes(value) : defaultValue === value;
 
   return (
     <>
       <StyledInput
+        defaultChecked={defaultChecked}
         id={id}
         name={name}
         ref={register}
@@ -95,10 +97,12 @@ const RadioAndCheckboxWrapper = ({
 };
 
 RadioAndCheckboxWrapper.propTypes = {
-  checked: PropTypes.bool.isRequired,
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.string,
+  ]),
   label: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
   stacked: PropTypes.bool,
   type: PropTypes.string.isRequired,
@@ -106,6 +110,7 @@ RadioAndCheckboxWrapper.propTypes = {
 };
 
 RadioAndCheckboxWrapper.defaultProps = {
+  defaultValue: "",
   stacked: true,
 };
 
