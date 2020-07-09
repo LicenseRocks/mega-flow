@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useFieldArray, useFormContext } from "react-hook-form";
@@ -46,6 +46,12 @@ const Form = ({ data, stepIndex, wizardData }) => {
   const { fields, append, remove } = useFieldArray({
     name: isRecurring ? data?.name : "",
   });
+
+  useEffect(() => {
+    if (fields.length === 0) {
+      append();
+    }
+  }, []);
 
   const renderRows = (index) =>
     data.rows?.map((row, idx) => {

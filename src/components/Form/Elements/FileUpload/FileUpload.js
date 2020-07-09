@@ -31,4 +31,4 @@ FileUpload.propTypes = {
 
 FileUpload.defaultProps = {
   defaultValue: undefined,
-}
+};

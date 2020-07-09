@@ -1,83 +1,101 @@
 {
-    "title": "MyForm",
     "steps": [
       {
-        "title": "More information",
+        "title": "Upload documents",
         "rows": [
           {
-            "label": "Marriage status",
             "inputs": [
               {
-                "name": "status",
-                "required": "This is required",
-                "type": "radio",
-                "options":[
-                  {
-                    "value": "single",
-                    "label": "Single"
-                  },
-                  {
-                    "value": "married",
-                    "label": "Married"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "label": "Category",
-            "inputs": [
-              {
-                "name": "category",
-                "type": "checkbox",
-                "options":[
-                  {
-                    "value": "first",
-                    "label": "First"
-                  },
-                  {
-                    "value": "second",
-                    "label": "Second"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "label": "Save?",
-            "inputs": [
-              {
-                "name": "save",
-                "required": "This is required",
-                "type": "toggleSwitch"
+                "name": "documents",
+                "required": "You must upload at least 1 document",
+                "type": "fileUpload"
               }
             ]
           }
         ]
       },
       {
-        "title": "Recurring information",
+        "title": "Specify Software",
         "recurring": true,
-        "name": "recurring",
+        "name": "softwares",
         "rows": [
           {
-            "label": "Name",
+            "label": "Product",
             "inputs": [
               {
-                "name": "name",
-                "placeholder": "Name",
-                "required": "Name is required",
+                "name": "product",
+                "options": [
+                  { "label": "Product 1", "value": "product1" },
+                  { "label": "Product 2", "value": "product2" },
+                  { "label": "Product 3", "value": "product3" },
+                  { "label": "Product 4", "value": "product4" },
+                  { "label": "Product 5", "value": "product5" }
+                ],
+                "required": "Product is required",
+                "type": "select"
+              }
+            ]
+          },
+          {
+            "label": "Amount",
+            "inputs": [
+              {
+                "defaultValue": "1",
+                "name": "amount",
+                "placeholder": "Amount",
                 "type": "input"
               }
             ]
           },
           {
-            "label": "Title",
+            "label": "State",
             "inputs": [
               {
-                "name": "title",
-                "placeholder": "Title",
+                "name": "state",
+                "options": [
+                  { "label": "New Software", "value": "new" },
+                  { "label": "Used Software", "value": "used" }
+                ],
+                "type": "radio"
+              }
+            ]
+          },
+          {
+            "label": "Download URL",
+            "inputs": [
+              {
+                "name": "downloadUrl",
+                "placeholder": "Download URL",
                 "type": "input"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Review and finalize",
+        "rows": [
+          {
+            "inputs": [
+              {
+                "name": "terms",
+                "options": [
+                  { "label": "I have read and accept the terms of usage", "value": true }
+                ],
+                "required": "You must accept terms of usage",
+                "type": "checkbox"
+              }
+            ]
+          },
+          {
+            "inputs": [
+              {
+                "name": "owner",
+                "options": [
+                  { "label": "I am the license owner or or legal representative in charge of the owner", "value": true }
+                ],
+                "required": "You must be the owner",
+                "type": "checkbox"
               }
             ]
           }

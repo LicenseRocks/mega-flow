@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
 
-import { Button } from "..";
+import { Button, OutlineButton } from "..";
+import leftArrow from "../../assets/icons/left-arrow.svg";
 import "./styles.css";
 
 const StyledContent = styled.div`
@@ -20,13 +21,24 @@ const ActionWrapper = styled.div`
   padding: 16px 0;
 `;
 
+const StepHint = styled.span`
+  font-style: italic;
+  font-weight: normal;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.gray.medium};
+  margin-left: 8px;
+`;
+
 const duration = 3000;
 
 const StepContent = ({
   children,
   content,
-  handleNext,
+  currentStep,
+  handlePrev,
+  isFirstStep,
   isLastStep,
+  stepCount,
   ...props
 }) => {
   const [mounted, setMounted] = useState(false);
@@ -41,6 +53,12 @@ const StepContent = ({
       <StyledContent {...props}>
         {children || content}
         <ActionWrapper>
+          <div>
+            <OutlineButton disabled={isFirstStep} onClick={handlePrev}>
+              <img src={leftArrow} alt="Go back" />
+            </OutlineButton>
+            <StepHint>{`${currentStep} of ${stepCount} steps`}</StepHint>
+          </div>
           <Button
             content={isLastStep ? "Finish" : "Next"}
             type="submit"
@@ -55,8 +73,11 @@ const StepContent = ({
 StepContent.propTypes = {
   children: PropTypes.node,
   content: PropTypes.node,
-  handleNext: PropTypes.func.isRequired,
+  currentStep: PropTypes.number.isRequired,
+  handlePrev: PropTypes.func.isRequired,
+  isFirstStep: PropTypes.bool.isRequired,
   isLastStep: PropTypes.bool.isRequired,
+  stepCount: PropTypes.number.isRequired,
 };
 
 StepContent.defaultProps = {

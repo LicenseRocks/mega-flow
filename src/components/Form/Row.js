@@ -17,7 +17,7 @@ const StyledLabel = styled(Label)`
 `;
 
 const FieldsAndErrorsWrapper = styled.div`
-  flex: 70% 0;
+  flex: ${({ fullWidth }) => (fullWidth ? "100%" : "70%")} 0;
 `;
 
 const Fields = styled.div`
@@ -29,8 +29,8 @@ const Fields = styled.div`
 export const FormRow = ({ children, errors, label }) => {
   return (
     <Wrapper>
-      <StyledLabel>{label}</StyledLabel>
-      <FieldsAndErrorsWrapper>
+      {label && <StyledLabel>{label}</StyledLabel>}
+      <FieldsAndErrorsWrapper fullWidth={!label}>
         <Fields>{children}</Fields>
         {errors.map((err) => (
           <FormError key={err} message={err} />

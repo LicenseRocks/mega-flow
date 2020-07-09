@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const StyledButton = styled.button`
+  height: 40px;
+  min-width: 40px;
+  box-sizing: border-box;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -10,7 +13,7 @@ const StyledButton = styled.button`
   text-transform: uppercase;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
-  padding: 8px 16px;
+  padding: 8px;
   color: ${({ theme }) => theme.colors.gray.dark};
   border: 1px solid ${({ theme }) => theme.colors.gray.dark};
   cursor: pointer;

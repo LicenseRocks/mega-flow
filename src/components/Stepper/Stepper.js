@@ -142,6 +142,8 @@ const Stepper = ({
   const isHorizontal = orientation === "horizontal";
   const wrapperRef = createRef();
   const stepCount = steps.length;
+  const isLastStep = currentStepIndex === stepCount - 1;
+  const isFirstStep = currentStepIndex === 0;
 
   useEffect(() => {
     if (isHorizontal) {
@@ -154,9 +156,9 @@ const Stepper = ({
       stepRef.current.scrollIntoView({ block: "end", behavior: "smooth" });
   }, [currentStepIndex]);
 
-  const handleNext = (isLastStep) => {
-    if (!isLastStep) {
-      setCurrentStepIndex((prev) => prev + 1);
+  const handlePrev = () => {
+    if (!isFirstStep) {
+      setCurrentStepIndex((prev) => prev - 1);
     }
   };
 
@@ -169,9 +171,13 @@ const Stepper = ({
   const content = (
     <StepContent
       content={currentStepContent}
-      isLastStep={currentStepIndex === stepCount - 1}
-      handleNext={handleNext}
+      currentStep={currentStepIndex + 1}
+      isHorizontal={isHorizontal}
+      isLastStep={isLastStep}
+      isFirstStep={isFirstStep}
+      handlePrev={handlePrev}
       transitionDuration={transitionDuration}
+      stepCount={stepCount}
     />
   );
 

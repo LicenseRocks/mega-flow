@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 const StyledButton = styled.button`
+  height: 40px;
+  box-sizing: border-box;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
