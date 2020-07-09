@@ -16,6 +16,7 @@ export const Checkbox = ({
     <Fieldset>
       {options.map((opt) => (
         <RadioAndCheckboxWrapper
+          value={opt.value}
           key={opt.value}
           label={opt.label}
           name={name}

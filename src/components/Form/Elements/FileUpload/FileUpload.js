@@ -24,7 +24,11 @@ export const FileUpload = ({
 
 FileUpload.propTypes = {
   control: PropTypes.shape({}).isRequired,
-  defaultValue: PropTypes.arrayOf(PropTypes.instanceOf(File)).isRequired,
+  defaultValue: PropTypes.arrayOf(PropTypes.instanceOf(File)),
   isRequired: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
+
+FileUpload.defaultProps = {
+  defaultValue: undefined,
+}

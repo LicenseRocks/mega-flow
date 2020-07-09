@@ -1,5 +1,6 @@
 import React from "react";
 import { withKnobs, boolean } from "@storybook/addon-knobs";
+import { useForm } from "react-hook-form";
 
 import { Radio } from "./Radio";
 
@@ -9,9 +10,10 @@ export default {
   decorators: [withKnobs],
 };
 
-export const main = (props = {}) => {
+export const main = () => {
+  const { register, watch } = useForm();
+
   const defaultProps = {
-    checked: boolean("Checked", false),
     disabled: boolean("Disabled", false),
     name: "radio",
     options: [
@@ -19,9 +21,12 @@ export const main = (props = {}) => {
       { value: "second", label: "Second" },
       { value: "third", label: "Third" },
     ],
-    stacked: boolean("Stacked", false),
-    ...props,
+    register,
+    stacked: boolean("Stacked", false)
   };
+
+  const values = watch();
+  console.log('values: ', values);
 
   return <Radio {...defaultProps} />;
 };

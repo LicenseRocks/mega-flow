@@ -6,7 +6,7 @@ import Check from "../../../../assets/icons/check.svg";
 
 const StyledInput = styled.input`
   display: none;
-
+  
   + label {
     display: inline-flex;
     align-items: center;
@@ -76,16 +76,20 @@ const RadioAndCheckboxWrapper = ({
   value,
   ...props
 }) => {
+  const id = `${name}-${value}`;
+
   return (
     <>
       <StyledInput
+        id={id}
         name={name}
         ref={register}
         stacked={stacked}
         type={type}
+        value={value}
         {...props}
       />
-      <StyledLabel htmlFor={name}>{label}</StyledLabel>
+      <StyledLabel htmlFor={id}>{label}</StyledLabel>
     </>
   );
 };
