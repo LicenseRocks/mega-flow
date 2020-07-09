@@ -1,3 +1,6 @@
+// Scroll
+export * from "./scroll";
+
 // Theme
 export { default as theme } from "./theme";
 
