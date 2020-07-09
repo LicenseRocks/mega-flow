@@ -80,7 +80,7 @@ const Form = ({ data, stepIndex, wizardData }) => {
                   control={control}
                   defaultValue={prevValue || defaultValue}
                   hasError={!!error}
-                  isRequired={!!required}
+                  isRequired={required}
                   key={fieldKey}
                   name={fieldName}
                   register={register({

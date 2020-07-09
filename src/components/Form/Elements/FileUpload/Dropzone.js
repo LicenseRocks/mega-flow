@@ -6,6 +6,11 @@ import styled, { css } from "styled-components";
 import { DropzonePreview } from "./DropzonePreview";
 
 const StyledContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const DropzoneArea = styled.div`
   background-color: ${({ theme }) => theme.colors.gray.semiLight};
   border-color: ${({ theme }) => theme.colors.gray.regular};
   border-radius: 16px;
@@ -31,7 +36,8 @@ const StyledContainer = styled.div`
   ${({ hasError }) =>
     hasError &&
     css`
-      border-color: 1px solid ${({ theme }) => theme.colors.alert.darkRed};
+      border-color: ${({ theme }) => theme.colors.alert.darkRed};
+      background-color: ${({ theme }) => theme.colors.alert.lightRed};
     `}
 
 
@@ -100,8 +106,8 @@ export const Dropzone = ({
   };
 
   return (
-    <>
-      <StyledContainer
+    <StyledContainer>
+      <DropzoneArea
         dragActive={isDragActive}
         dragAccept={isDragAccept}
         dragReject={isDragReject}
@@ -122,9 +128,9 @@ export const Dropzone = ({
             {multiple ? <p>Accepts multiple files</p> : <p>Single file only</p>}
           </>
         )}
-      </StyledContainer>
+      </DropzoneArea>
       <DropzonePreview files={files} onRemoveClick={removeFile} />
-    </>
+    </StyledContainer>
   );
 };
 
@@ -134,7 +140,7 @@ Dropzone.propTypes = {
   disabled: PropTypes.bool,
   hasError: PropTypes.bool,
   multiple: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
 };
 
 Dropzone.defaultProps = {
@@ -143,4 +149,5 @@ Dropzone.defaultProps = {
   disabled: false,
   hasError: false,
   multiple: true,
+  onChange: () => {},
 };

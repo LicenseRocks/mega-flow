@@ -12,6 +12,7 @@ export default () => ({
     },
     alert: {
       darkRed: "#FE3118",
+      lightRed: "#FFD6D1",
       darkGreen: "#6AD19C",
       lightGreen: "#DFF8E3",
       lightYellow: "#FFF3A2",
