@@ -34,6 +34,11 @@ const StyledInput = styled.input`
       border: 1px solid ${({ theme }) => theme.colors.gray.regular};
       margin-right: 8px;
       transition: all 0.1s ease-in-out;
+      ${({ hasError }) =>
+        hasError &&
+        css`
+          border-color: ${({ theme }) => theme.colors.alert.darkRed};
+        `}
     }
 
     &:hover {
@@ -67,6 +72,7 @@ const StyledLabel = styled.label``;
 
 const RadioAndCheckboxWrapper = ({
   defaultValue,
+  hasError,
   label,
   name,
   register,
@@ -83,6 +89,7 @@ const RadioAndCheckboxWrapper = ({
     <>
       <StyledInput
         defaultChecked={defaultChecked}
+        hasError={hasError}
         id={id}
         name={name}
         ref={register}
