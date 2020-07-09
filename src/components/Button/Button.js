@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledButton = styled.button`
   font-style: normal;
@@ -27,6 +27,12 @@ const StyledButton = styled.button`
     cursor: not-allowed;
     pointer-events: none;
   }
+
+  ${({ color, theme }) =>
+    color === "danger" &&
+    css`
+      background-color: ${theme.colors.alert.lightRed};
+    `}
 `;
 
 export const Button = ({ content, children, ...props }) => {

@@ -16,7 +16,7 @@
               {
                 "name": "lastName",
                 "placeholder": "Last name",
-                "required": true,
+                "required": "Last name is required",
                 "type": "input"
               }
             ]
@@ -42,6 +42,16 @@
                     "label": "Seller"
                   }
                 ]
+              }
+            ]
+          },
+          {
+            "label": "ID",
+            "inputs": [
+              {
+                "name": "idFile",
+                "required": "You must upload your id card",
+                "type": "fileUpload"
               }
             ]
           }
@@ -110,6 +120,7 @@
               {
                 "name": "name",
                 "placeholder": "Name",
+                "required": "Name is required",
                 "type": "input"
               }
             ]

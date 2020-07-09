@@ -42,10 +42,12 @@ TextButton.propTypes = {
   content: PropTypes.node,
   children: PropTypes.node,
   size: PropTypes.oneOf(["sm", "md", "lg"]),
+  type: PropTypes.string,
 };
 
 TextButton.defaultProps = {
   content: null,
   children: null,
   size: "md",
+  type: "button",
 };

@@ -43,8 +43,7 @@ const StepContent = ({
         <ActionWrapper>
           <Button
             content={isLastStep ? "Finish" : "Next"}
-            onClick={() => handleNext(isLastStep)}
-            type={isLastStep ? "submit" : "button"}
+            type="submit"
             // disabled
           />
         </ActionWrapper>

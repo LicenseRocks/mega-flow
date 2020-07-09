@@ -12,6 +12,3 @@ export * from "./Stepper";
 
 // Text Button
 export * from "./TextButton";
-
-// Title
-export { default as Title } from "./Title";

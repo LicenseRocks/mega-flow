@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
 import { FormRow } from ".";
-import { Checkbox, Input, Radio, Select, ToggleSwitch } from "./Elements";
+import {
+  Checkbox,
+  FileUpload,
+  Input,
+  Radio,
+  Select,
+  ToggleSwitch,
+} from "./Elements";
 import { TextButton } from "..";
 
 const Wrapper = styled.div`
@@ -25,13 +32,15 @@ const mapInputTypeToComponent = (inputType) => {
       return Radio;
     case "toggleSwitch":
       return ToggleSwitch;
+    case "fileUpload":
+      return FileUpload;
     default:
       return Input;
   }
 };
 
-const Form = ({ data, stepIndex }) => {
-  const { errors, register } = useFormContext();
+const Form = ({ data, stepIndex, wizardData }) => {
+  const { control, errors, register } = useFormContext();
   const isRecurring = data.recurring;
 
   const { fields, append, remove } = useFieldArray({
@@ -45,27 +54,43 @@ const Form = ({ data, stepIndex }) => {
 
       return (
         <FormRow errors={rowErrors} key={rowKey} label={row.label}>
-          {row.inputs?.map(({ name, required, type, ...input }, inputId) => {
-            const Field = mapInputTypeToComponent(type);
-            const fieldKey = `step-${stepIndex}-row-${idx}-field-${inputId}`;
-            const fieldName = isRecurring
-              ? `${data.name}[${index}].${name}`
-              : name;
-            const error = errors[name]?.message;
-            if (error) rowErrors.push(error);
+          {row.inputs?.map(
+            ({ defaultValue, name, required, type, ...input }, inputId) => {
+              const Field = mapInputTypeToComponent(type);
+              const fieldKey = `step-${stepIndex}-row-${idx}-field-${inputId}`;
+              const fieldName = isRecurring
+                ? `${data.name}[${index}].${name}`
+                : name;
 
-            return (
-              <Field
-                hasError={!!error}
-                key={fieldKey}
-                name={fieldName}
-                register={register({
-                  required,
-                })}
-                {...input}
-              />
-            );
-          })}
+              const error =
+                isRecurring && errors[data.name] && errors[data.name][index]
+                  ? errors[data.name][index][name]?.message
+                  : errors[name]?.message;
+              if (error) rowErrors.push(error);
+
+              const prevValue =
+                isRecurring &&
+                wizardData[data.name] &&
+                wizardData[data.name][index]
+                  ? wizardData[data.name][index][name]
+                  : wizardData[name];
+
+              return (
+                <Field
+                  control={control}
+                  defaultValue={prevValue || defaultValue}
+                  hasError={!!error}
+                  isRequired={!!required}
+                  key={fieldKey}
+                  name={fieldName}
+                  register={register({
+                    required,
+                  })}
+                  {...input}
+                />
+              );
+            }
+          )}
         </FormRow>
       );
     });
@@ -93,6 +118,7 @@ Form.propTypes = {
     rows: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
   stepIndex: PropTypes.number.isRequired,
+  wizardData: PropTypes.shape({}).isRequired,
 };
 
 Form.defaultProps = {};

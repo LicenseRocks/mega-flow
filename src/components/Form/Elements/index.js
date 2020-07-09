@@ -1,6 +1,9 @@
 // Checkbox
 export * from "./Checkbox";
 
+// Field Upload
+export * from "./FileUpload";
+
 // Field Wrapper
 export * from "./FieldWrapper";
 
