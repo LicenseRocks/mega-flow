@@ -23,6 +23,7 @@ const FieldsAndErrorsWrapper = styled.div`
 const Fields = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   width: 100%;
 `;
 

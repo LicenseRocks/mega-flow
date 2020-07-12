@@ -1,7 +1,8 @@
 export default () => ({
   colors: {
     primary: {
-      main: "#ac00fc",
+      main: "#AC00fC",
+      light: "#F5E0FF",
     },
     gray: {
       dark: "#4D4B63",
@@ -18,6 +19,6 @@ export default () => ({
       lightYellow: "#FFF3A2",
     },
     black: "#292839",
-    white: "#fff",
+    white: "#FFFFFF",
   },
 });

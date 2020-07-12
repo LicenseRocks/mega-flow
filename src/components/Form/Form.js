@@ -12,7 +12,7 @@ import {
   Select,
   ToggleSwitch,
 } from "./Elements";
-import { TextButton } from "..";
+import { Message, TextButton } from "..";
 
 const Wrapper = styled.div`
   padding: 24px;
@@ -60,6 +60,14 @@ const Form = ({ data, stepIndex, wizardData }) => {
 
       return (
         <FormRow errors={rowErrors} key={rowKey} label={row.label}>
+          {row.message && (
+            <Message
+              color={row.messageColor}
+              content={row.message}
+              style={{ marginBottom: 8 }}
+            />
+          )}
+
           {row.fields?.map(
             (
               { defaultValue, inputType, name, required, type, ...field },

@@ -4,6 +4,9 @@
         "title": "Upload documents",
         "rows": [
           {
+            "message": "Welcome to MegaFlow. This is a message to help you through steps of this amazing workflow."
+          },
+          {
             "fields": [
               {
                 "name": "documents",
