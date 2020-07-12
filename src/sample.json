@@ -57,6 +57,7 @@
             "label": "State",
             "fields": [
               {
+                "expandable": true,
                 "name": "state",
                 "options": [
                   { "label": "New Software", "value": "new" },
@@ -68,6 +69,7 @@
           },
           {
             "label": "Download URL",
+            "expandable": true,
             "fields": [
               {
                 "defaultValue": "https://cdn.oracle.com",

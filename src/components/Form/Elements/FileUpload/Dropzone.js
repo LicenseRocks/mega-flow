@@ -103,6 +103,10 @@ export const Dropzone = ({
     const newFiles = [...files];
     newFiles.splice(newFiles.indexOf(file), 1);
     setFiles(newFiles);
+
+    if (onChange) {
+      onChange(newFiles);
+    }
   };
 
   return (

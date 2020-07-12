@@ -8,5 +8,10 @@ export default {
 };
 
 export const main = () => {
-  return <ReactJSONWizard schema={JSON.stringify(schema)} />;
+  return (
+    <ReactJSONWizard
+      onFinish={() => alert("Thanks for using MegaFlow.")}
+      schema={JSON.stringify(schema)}
+    />
+  );
 };

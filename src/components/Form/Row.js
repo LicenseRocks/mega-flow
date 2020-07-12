@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   align-items: center;
   min-height: 40px;
   margin-bottom: 8px;
+  ${({ show }) => !show && "display: none"};
 `;
 
 const StyledLabel = styled(Label)`
@@ -27,9 +28,9 @@ const Fields = styled.div`
   width: 100%;
 `;
 
-export const FormRow = ({ children, errors, label }) => {
+export const FormRow = ({ children, errors, label, show }) => {
   return (
-    <Wrapper>
+    <Wrapper show={show}>
       {label && <StyledLabel>{label}</StyledLabel>}
       <FieldsAndErrorsWrapper fullWidth={!label}>
         <Fields>{children}</Fields>
@@ -45,6 +46,7 @@ FormRow.propTypes = {
   children: PropTypes.node.isRequired,
   errors: PropTypes.arrayOf(PropTypes.node).isRequired,
   label: PropTypes.node,
+  show: PropTypes.bool.isRequired,
 };
 
 FormRow.defaultProps = {
