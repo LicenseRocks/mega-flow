@@ -4,7 +4,7 @@ import { withKnobs, text } from "@storybook/addon-knobs";
 import { Label } from ".";
 
 export default {
-  title: "Elements/Label",
+  title: "Components/Form/Label",
   component: Label,
   decorators: [withKnobs],
 };

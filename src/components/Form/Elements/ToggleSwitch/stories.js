@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { ToggleSwitch } from ".";
 
 export default {
-  title: "Elements/ToggleSwitch",
+  title: "Components/Form/ToggleSwitch",
   component: ToggleSwitch,
   decorators: [withKnobs],
 };

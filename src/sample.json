@@ -45,12 +45,11 @@
             "fields": [
               {
                 "defaultValue": "1",
-                "inputType": "number",
                 "min": "1",
                 "name": "amount",
                 "placeholder": "Amount",
                 "startIcon": "hashtag",
-                "type": "input"
+                "type": "number"
               }
             ]
           },

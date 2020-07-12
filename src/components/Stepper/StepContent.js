@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { Button, OutlineButton } from "..";
+import { Button } from "..";
 import "./styles.css";
 
 const StyledContent = styled.div`
@@ -54,9 +54,9 @@ const StepContent = ({
         {children || content}
         <ActionWrapper>
           <div>
-            <OutlineButton disabled={isFirstStep} onClick={handlePrev}>
+            <Button disabled={isFirstStep} onClick={handlePrev} outline>
               <FontAwesomeIcon icon="arrow-left" />
-            </OutlineButton>
+            </Button>
             <StepHint>{`${currentStep} of ${stepCount} steps`}</StepHint>
           </div>
           <Button

@@ -17,7 +17,7 @@ const StyledLabel = styled(Label)`
 `;
 
 const FieldsAndErrorsWrapper = styled.div`
-  flex: ${({ fullWidth }) => (fullWidth ? "100%" : "70%")} 0;
+  flex: ${({ fullWidth }) => (fullWidth ? "100%" : "50%")} 0;
 `;
 
 const Fields = styled.div`
@@ -44,7 +44,9 @@ export const FormRow = ({ children, errors, label }) => {
 FormRow.propTypes = {
   children: PropTypes.node.isRequired,
   errors: PropTypes.arrayOf(PropTypes.node).isRequired,
-  label: PropTypes.node.isRequired,
+  label: PropTypes.node,
 };
 
-FormRow.defaultProps = {};
+FormRow.defaultProps = {
+  label: "",
+};

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useFieldArray, useFormContext } from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { FormRow } from ".";
 import {
@@ -12,14 +13,20 @@ import {
   Select,
   ToggleSwitch,
 } from "./Elements";
-import { Message, TextButton } from "..";
+import { Button, Message } from "..";
 
 const Wrapper = styled.div`
-  padding: 24px;
+  padding: 8px 8px 8px 24px;
   background-color: ${({ theme }) => theme.colors.gray.light};
   border: 1px solid ${({ theme }) => theme.colors.gray.regular};
   border-radius: 16px;
   margin-bottom: 16px;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
 `;
 
 const mapFieldTypeToComponent = (fieldType) => {
@@ -69,10 +76,7 @@ const Form = ({ data, stepIndex, wizardData }) => {
           )}
 
           {row.fields?.map(
-            (
-              { defaultValue, inputType, name, required, type, ...field },
-              fieldId
-            ) => {
+            ({ defaultValue, name, required, type, ...field }, fieldId) => {
               const Field = mapFieldTypeToComponent(type);
               const fieldKey = `step-${stepIndex}-row-${idx}-field-${fieldId}`;
               const fieldName = isRecurring
@@ -103,7 +107,7 @@ const Form = ({ data, stepIndex, wizardData }) => {
                   register={register({
                     required,
                   })}
-                  type={inputType}
+                  type={type}
                   {...field}
                 />
               );
@@ -113,17 +117,30 @@ const Form = ({ data, stepIndex, wizardData }) => {
       );
     });
 
+  const renderRecurring = () =>
+    fields.map((item, idx) => (
+      <Wrapper key={item.id}>
+        <ButtonsWrapper>
+          <Button
+            color="danger"
+            disabled={fields.length === 1}
+            onClick={() => remove(idx)}
+            size="sm"
+          >
+            <FontAwesomeIcon icon="trash" />
+          </Button>
+        </ButtonsWrapper>
+        {renderRows(idx)}
+      </Wrapper>
+    ));
+
   return (
     <>
-      {isRecurring
-        ? fields.map((item, idx) => (
-          <Wrapper key={item.id}>{renderRows(idx)}</Wrapper>
-          ))
-        : renderRows()}
+      {isRecurring ? renderRecurring() : renderRows()}
       {isRecurring && (
-        <TextButton onClick={append} size="sm">
+        <Button onClick={append} size="sm" text>
           + Add item
-        </TextButton>
+        </Button>
       )}
     </>
   );

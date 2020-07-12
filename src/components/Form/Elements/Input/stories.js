@@ -4,7 +4,7 @@ import { boolean, text, withKnobs } from "@storybook/addon-knobs";
 import Input from "./Input";
 
 export default {
-  title: "Elements/Input",
+  title: "Components/Form/Input",
   component: Input,
   decorators: [withKnobs],
 };

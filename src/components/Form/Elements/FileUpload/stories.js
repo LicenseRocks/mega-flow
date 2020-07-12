@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { FileUpload } from ".";
 
 export default {
-  title: "Elements/FileUpload",
+  title: "Components/Form/FileUpload",
   component: FileUpload,
   decorators: [withKnobs],
 };
