@@ -22,8 +22,8 @@ const Wrapper = styled.div`
   margin-bottom: 16px;
 `;
 
-const mapInputTypeToComponent = (inputType) => {
-  switch (inputType) {
+const mapFieldTypeToComponent = (fieldType) => {
+  switch (fieldType) {
     case "select":
       return Select;
     case "checkbox":
@@ -60,10 +60,13 @@ const Form = ({ data, stepIndex, wizardData }) => {
 
       return (
         <FormRow errors={rowErrors} key={rowKey} label={row.label}>
-          {row.inputs?.map(
-            ({ defaultValue, name, required, type, ...input }, inputId) => {
-              const Field = mapInputTypeToComponent(type);
-              const fieldKey = `step-${stepIndex}-row-${idx}-field-${inputId}`;
+          {row.fields?.map(
+            (
+              { defaultValue, inputType, name, required, type, ...field },
+              fieldId
+            ) => {
+              const Field = mapFieldTypeToComponent(type);
+              const fieldKey = `step-${stepIndex}-row-${idx}-field-${fieldId}`;
               const fieldName = isRecurring
                 ? `${data.name}[${index}].${name}`
                 : name;
@@ -92,7 +95,8 @@ const Form = ({ data, stepIndex, wizardData }) => {
                   register={register({
                     required,
                   })}
-                  {...input}
+                  type={inputType}
+                  {...field}
                 />
               );
             }

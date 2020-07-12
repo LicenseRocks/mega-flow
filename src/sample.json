@@ -4,7 +4,7 @@
         "title": "Upload documents",
         "rows": [
           {
-            "inputs": [
+            "fields": [
               {
                 "name": "documents",
                 "required": "You must upload at least 1 document",
@@ -21,7 +21,7 @@
         "rows": [
           {
             "label": "Product",
-            "inputs": [
+            "fields": [
               {
                 "name": "product",
                 "options": [
@@ -39,9 +39,11 @@
           },
           {
             "label": "Amount",
-            "inputs": [
+            "fields": [
               {
                 "defaultValue": "1",
+                "inputType": "number",
+                "min": "1",
                 "name": "amount",
                 "placeholder": "Amount",
                 "startIcon": "hashtag",
@@ -51,7 +53,7 @@
           },
           {
             "label": "State",
-            "inputs": [
+            "fields": [
               {
                 "name": "state",
                 "options": [
@@ -64,7 +66,7 @@
           },
           {
             "label": "Download URL",
-            "inputs": [
+            "fields": [
               {
                 "defaultValue": "https://cdn.oracle.com",
                 "name": "downloadUrl",
@@ -81,7 +83,7 @@
         "title": "Review and finalize",
         "rows": [
           {
-            "inputs": [
+            "fields": [
               {
                 "name": "terms",
                 "options": [
@@ -93,7 +95,7 @@
             ]
           },
           {
-            "inputs": [
+            "fields": [
               {
                 "name": "owner",
                 "options": [
