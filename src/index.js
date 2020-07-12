@@ -5,12 +5,13 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { withWrapper } from "./utils";
 import { Form, Stepper } from "./components";
+import "./utils/faLibrary";
 
 const Wrapper = styled.div``;
 
-const ReactJSONWizard = ({ schema }) => {
+const ReactJSONWizard = ({ schema, onFinish }) => {
   const parsedSchema = JSON.parse(schema);
-  const { steps, wrapperProps } = parsedSchema;
+  const { steps, stepperProps, wrapperProps } = parsedSchema;
   const [currentStep, setCurrentStep] = useState(0);
   const isCurrentLastStep = currentStep === steps.length - 1;
   const [wizardData, setWizardData] = useState({});
@@ -28,28 +29,31 @@ const ReactJSONWizard = ({ schema }) => {
     }));
     if (!isCurrentLastStep) {
       setCurrentStep((prev) => prev + 1);
+    } else {
+      onFinish(wizardData);
     }
   };
 
-  console.log('wizardData: ', wizardData);
-
   const stepsArray = steps.map((st) => st.title);
+
+  const renderForm = () => (
+    <Form
+      data={steps[currentStep]}
+      stepIndex={currentStep}
+      wizardData={wizardData}
+    />
+  );
 
   return (
     <Wrapper {...wrapperProps}>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <Stepper
-            currentStepContent={(
-              <Form
-                data={steps[currentStep]}
-                stepIndex={currentStep}
-                wizardData={wizardData}
-              />
-            )}
+            currentStepContent={renderForm()}
             currentStepIndex={currentStep}
             setCurrentStepIndex={setCurrentStep}
             steps={stepsArray}
+            {...stepperProps}
           />
         </form>
       </FormProvider>
@@ -59,6 +63,11 @@ const ReactJSONWizard = ({ schema }) => {
 
 ReactJSONWizard.propTypes = {
   schema: PropTypes.string.isRequired,
+  onFinish: PropTypes.func,
+};
+
+ReactJSONWizard.defaultProps = {
+  onFinish: () => {},
 };
 
 export default withWrapper(ReactJSONWizard);

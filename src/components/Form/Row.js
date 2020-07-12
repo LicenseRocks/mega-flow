@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   align-items: center;
   min-height: 40px;
   margin-bottom: 8px;
+  ${({ show }) => !show && "display: none"};
 `;
 
 const StyledLabel = styled(Label)`
@@ -17,18 +18,19 @@ const StyledLabel = styled(Label)`
 `;
 
 const FieldsAndErrorsWrapper = styled.div`
-  flex: ${({ fullWidth }) => (fullWidth ? "100%" : "70%")} 0;
+  flex: ${({ fullWidth }) => (fullWidth ? "100%" : "50%")} 0;
 `;
 
 const Fields = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   width: 100%;
 `;
 
-export const FormRow = ({ children, errors, label }) => {
+export const FormRow = ({ children, errors, label, show }) => {
   return (
-    <Wrapper>
+    <Wrapper show={show}>
       {label && <StyledLabel>{label}</StyledLabel>}
       <FieldsAndErrorsWrapper fullWidth={!label}>
         <Fields>{children}</Fields>
@@ -43,7 +45,10 @@ export const FormRow = ({ children, errors, label }) => {
 FormRow.propTypes = {
   children: PropTypes.node.isRequired,
   errors: PropTypes.arrayOf(PropTypes.node).isRequired,
-  label: PropTypes.node.isRequired,
+  label: PropTypes.node,
+  show: PropTypes.bool.isRequired,
 };
 
-FormRow.defaultProps = {};
+FormRow.defaultProps = {
+  label: "",
+};

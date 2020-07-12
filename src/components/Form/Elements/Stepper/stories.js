@@ -4,7 +4,7 @@ import { text, withKnobs, boolean, select } from "@storybook/addon-knobs";
 import Stepper from "./Stepper";
 
 export default {
-  title: "Elements/Stepper",
+  title: "Components/Form/Stepper",
   component: Stepper,
   decorators: [withKnobs],
 };

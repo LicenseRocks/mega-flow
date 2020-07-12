@@ -21,7 +21,9 @@ const StyledInput = styled.input`
       stacked &&
       css`
         display: flex;
-        margin: 0 0 24px 0;
+        :not(:last-child) {
+          margin: 0 0 24px 0;
+        }
       `}
 
     &::before {

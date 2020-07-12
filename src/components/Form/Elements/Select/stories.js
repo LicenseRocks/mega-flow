@@ -4,7 +4,7 @@ import { text, withKnobs, boolean } from "@storybook/addon-knobs";
 import Select from "./Select";
 
 export default {
-  title: "Elements/Select",
+  title: "Components/Form/Select",
   component: Select,
   decorators: [withKnobs],
 };

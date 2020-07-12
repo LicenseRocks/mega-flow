@@ -4,16 +4,18 @@ import { boolean, text, withKnobs } from "@storybook/addon-knobs";
 import Input from "./Input";
 
 export default {
-  title: "Elements/Input",
+  title: "Components/Form/Input",
   component: Input,
   decorators: [withKnobs],
 };
 
 export const main = () => {
   const defaultProps = {
+    disabled: boolean("Disabled", false),
+    endIcon: "box",
     name: "textInput",
     placeholder: text("Placeholder", "Placeholder"),
-    disabled: boolean("Disabled", false),
+    startIcon: "user",
   };
 
   return <Input {...defaultProps} />;

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { Checkbox } from "./Checkbox";
 
 export default {
-  title: "Elements/Checkbox",
+  title: "Components/Form/Checkbox",
   component: Checkbox,
   decorators: [withKnobs],
 };

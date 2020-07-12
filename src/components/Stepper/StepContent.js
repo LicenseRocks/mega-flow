@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { Button, OutlineButton } from "..";
-import leftArrow from "../../assets/icons/left-arrow.svg";
+import { Button } from "..";
 import "./styles.css";
 
 const StyledContent = styled.div`
@@ -54,9 +54,9 @@ const StepContent = ({
         {children || content}
         <ActionWrapper>
           <div>
-            <OutlineButton disabled={isFirstStep} onClick={handlePrev}>
-              <img src={leftArrow} alt="Go back" />
-            </OutlineButton>
+            <Button disabled={isFirstStep} onClick={handlePrev} outline>
+              <FontAwesomeIcon icon="arrow-left" />
+            </Button>
             <StepHint>{`${currentStep} of ${stepCount} steps`}</StepHint>
           </div>
           <Button

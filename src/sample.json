@@ -4,7 +4,10 @@
         "title": "Upload documents",
         "rows": [
           {
-            "inputs": [
+            "message": "Welcome to MegaFlow. This is a message to help you through steps of this amazing workflow."
+          },
+          {
+            "fields": [
               {
                 "name": "documents",
                 "required": "You must upload at least 1 document",
@@ -21,7 +24,7 @@
         "rows": [
           {
             "label": "Product",
-            "inputs": [
+            "fields": [
               {
                 "name": "product",
                 "options": [
@@ -32,25 +35,29 @@
                   { "label": "Product 5", "value": "product5" }
                 ],
                 "required": "Product is required",
+                "startIcon": "box",
                 "type": "select"
               }
             ]
           },
           {
             "label": "Amount",
-            "inputs": [
+            "fields": [
               {
                 "defaultValue": "1",
+                "min": "1",
                 "name": "amount",
                 "placeholder": "Amount",
-                "type": "input"
+                "startIcon": "hashtag",
+                "type": "number"
               }
             ]
           },
           {
             "label": "State",
-            "inputs": [
+            "fields": [
               {
+                "expandable": true,
                 "name": "state",
                 "options": [
                   { "label": "New Software", "value": "new" },
@@ -62,10 +69,14 @@
           },
           {
             "label": "Download URL",
-            "inputs": [
+            "expandable": true,
+            "fields": [
               {
+                "defaultValue": "https://cdn.oracle.com",
                 "name": "downloadUrl",
                 "placeholder": "Download URL",
+                "startIcon": "download",
+                "readOnly": true,
                 "type": "input"
               }
             ]
@@ -76,7 +87,7 @@
         "title": "Review and finalize",
         "rows": [
           {
-            "inputs": [
+            "fields": [
               {
                 "name": "terms",
                 "options": [
@@ -88,7 +99,7 @@
             ]
           },
           {
-            "inputs": [
+            "fields": [
               {
                 "name": "owner",
                 "options": [

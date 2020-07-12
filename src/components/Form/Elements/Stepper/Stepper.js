@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import FieldWrapper from "../FieldWrapper/FieldWrapper";
-import Minus from "../../../../assets/icons/minus.svg";
-import Plus from "../../../../assets/icons/plus.svg";
 
 const StyledStepper = styled(FieldWrapper)`
   button {
@@ -54,13 +53,13 @@ const Stepper = ({ label, value, onChange, min, max, size, ...props }) => {
 
   const endIcon = () => (
     <button onClick={() => handleChange("add")} type="button">
-      <img src={Plus} alt="StepperAdd" />
+      <FontAwesomeIcon icon="plus" />
     </button>
   );
 
   const startIcon = () => (
     <button onClick={() => handleChange("sub")} type="button">
-      <img src={Minus} alt="StepperEnd" />
+      <FontAwesomeIcon icon="minus" />
     </button>
   );
 

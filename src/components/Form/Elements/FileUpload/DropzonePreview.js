@@ -1,8 +1,8 @@
+/* eslint-disable no-restricted-properties */
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-
-import Cross from "../../../../assets/icons/cross.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Item = styled.div`
   display: flex;
@@ -24,6 +24,7 @@ const RemoveIcon = styled.button.attrs(() => ({
   cursor: pointer;
   outline: none;
   user-select: none;
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 function bytesToSize(bytes) {
@@ -41,7 +42,7 @@ export const DropzonePreview = ({ files, onRemoveClick }) => {
         <div>{bytesToSize(file.size)}</div>
       </div>
       <RemoveIcon onClick={onRemoveClick}>
-        <img src={Cross} alt="Remove item" />
+        <FontAwesomeIcon icon="times" />
       </RemoveIcon>
     </Item>
   ));
