@@ -45,13 +45,20 @@ const Select = ({
   block,
   children,
   disabled,
+  endIcon,
   hasError,
   options,
   register,
+  startIcon,
   ...props
 }) => {
   return (
-    <FieldWrapper disabled={disabled} hasError={hasError}>
+    <FieldWrapper
+      disabled={disabled}
+      endIcon={endIcon}
+      hasError={hasError}
+      startIcon={startIcon}
+    >
       <StyledSelect block={block} hasError={hasError} ref={register} {...props}>
         {renderOptions(options) || children}
       </StyledSelect>
@@ -63,6 +70,7 @@ Select.propTypes = {
   block: PropTypes.bool,
   children: PropTypes.node,
   disabled: PropTypes.bool,
+  endIcon: PropTypes.string,
   hasError: PropTypes.bool,
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -71,13 +79,16 @@ Select.propTypes = {
     })
   ).isRequired,
   register: PropTypes.func.isRequired,
+  startIcon: PropTypes.string,
 };
 
 Select.defaultProps = {
   block: true,
   children: null,
   disabled: false,
+  endIcon: "",
   hasError: false,
+  startIcon: "",
 };
 
 export default Select;

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ const StyledWrapper = styled.div`
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.gray.regular};
-  padding: 0 8px;
+  padding: 0 16px;
   color: ${({ theme }) => theme.colors.black};
   outline: none;
   height: 40px;
@@ -22,6 +23,15 @@ const StyledWrapper = styled.div`
 
   &:focus-within {
     border: 1px solid ${({ theme }) => theme.colors.primary.main};
+  }
+
+  &:read-only {
+    border: 1px solid ${({ theme }) => theme.colors.gray.regular};
+    cursor: not-allowed;
+  }
+
+  svg {
+    color: ${({ theme }) => theme.colors.gray.regular};
   }
 
   ${({ disabled }) =>
@@ -48,9 +58,9 @@ const StyledWrapper = styled.div`
 const FieldWrapper = ({ children, endIcon, startIcon, ...props }) => {
   return (
     <StyledWrapper {...props}>
-      {startIcon}
+      {startIcon && <FontAwesomeIcon icon={startIcon} />}
       {children}
-      {endIcon}
+      {endIcon && <FontAwesomeIcon icon={endIcon} />}
     </StyledWrapper>
   );
 };
@@ -58,14 +68,14 @@ const FieldWrapper = ({ children, endIcon, startIcon, ...props }) => {
 FieldWrapper.propTypes = {
   block: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  endIcon: PropTypes.node,
-  startIcon: PropTypes.node,
+  endIcon: PropTypes.string,
+  startIcon: PropTypes.string,
 };
 
 FieldWrapper.defaultProps = {
   block: true,
-  endIcon: null,
-  startIcon: null,
+  endIcon: "",
+  startIcon: "",
 };
 
 export default FieldWrapper;

@@ -5,6 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { withWrapper } from "./utils";
 import { Form, Stepper } from "./components";
+import "./utils/faLibrary";
 
 const Wrapper = styled.div``;
 
@@ -31,7 +32,7 @@ const ReactJSONWizard = ({ schema }) => {
     }
   };
 
-  console.log('wizardData: ', wizardData);
+  console.log("wizardData: ", wizardData);
 
   const stepsArray = steps.map((st) => st.title);
 

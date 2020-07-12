@@ -11,9 +11,11 @@ export default {
 
 export const main = () => {
   const defaultProps = {
+    disabled: boolean("Disabled", false),
+    endIcon: "box",
     name: "textInput",
     placeholder: text("Placeholder", "Placeholder"),
-    disabled: boolean("Disabled", false),
+    startIcon: "user",
   };
 
   return <Input {...defaultProps} />;

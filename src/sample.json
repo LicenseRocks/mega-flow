@@ -32,6 +32,7 @@
                   { "label": "Product 5", "value": "product5" }
                 ],
                 "required": "Product is required",
+                "startIcon": "box",
                 "type": "select"
               }
             ]
@@ -43,6 +44,7 @@
                 "defaultValue": "1",
                 "name": "amount",
                 "placeholder": "Amount",
+                "startIcon": "hashtag",
                 "type": "input"
               }
             ]
@@ -64,8 +66,11 @@
             "label": "Download URL",
             "inputs": [
               {
+                "defaultValue": "https://cdn.oracle.com",
                 "name": "downloadUrl",
                 "placeholder": "Download URL",
+                "startIcon": "download",
+                "readOnly": true,
                 "type": "input"
               }
             ]

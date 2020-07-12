@@ -21,6 +21,10 @@ const StyledInput = styled.input`
     font-weight: normal;
   }
 
+  &:read-only {
+    cursor: not-allowed;
+  }
+
   ${({ hasError }) =>
     hasError &&
     css`
@@ -37,9 +41,22 @@ const StyledInput = styled.input`
     `}
 `;
 
-const Input = ({ block, disabled, hasError, register, ...props }) => {
+const Input = ({
+  block,
+  endIcon,
+  disabled,
+  hasError,
+  register,
+  startIcon,
+  ...props
+}) => {
   return (
-    <FieldWrapper disabled={disabled} hasError={hasError}>
+    <FieldWrapper
+      disabled={disabled}
+      endIcon={endIcon}
+      hasError={hasError}
+      startIcon={startIcon}
+    >
       <StyledInput
         block={block}
         hasError={hasError}
@@ -53,14 +70,18 @@ const Input = ({ block, disabled, hasError, register, ...props }) => {
 Input.propTypes = {
   block: PropTypes.bool,
   disabled: PropTypes.bool,
+  endIcon: PropTypes.string,
   hasError: PropTypes.bool,
   register: PropTypes.func.isRequired,
+  startIcon: PropTypes.string,
 };
 
 Input.defaultProps = {
   block: true,
   disabled: false,
+  endIcon: "",
   hasError: false,
+  startIcon: "",
 };
 
 export default Input;
