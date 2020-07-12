@@ -1,17 +1,33 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
-import { CSSTransition } from "react-transition-group";
+import styled, { css } from "styled-components";
+import { Transition } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Button } from "..";
-import "./styles.css";
 
 const StyledContent = styled.div`
   width: 100%;
   height: 100%;
   flex: 1;
   padding: 24px 24px 24px 40px;
+  transition: all ${({ duration }) => duration / 2}ms ease-in-out;
+
+  ${({ state }) => {
+    switch (state) {
+      case "entering":
+      case "exited":
+        return css`
+          -webkit-filter: blur(1rem);
+          filter: blur(1rem);
+        `;
+      default:
+        return css`
+          -webkit-filter: blur(0);
+          filter: blur(0);
+        `;
+    }
+  }};
 `;
 
 const ActionWrapper = styled.div`
@@ -29,7 +45,7 @@ const StepHint = styled.span`
   margin-left: 8px;
 `;
 
-const duration = 3000;
+const duration = 500;
 
 const StepContent = ({
   children,
@@ -49,24 +65,26 @@ const StepContent = ({
     };
   }, []);
   return (
-    <CSSTransition in={mounted} timeout={duration} classNames="stepContent">
-      <StyledContent {...props}>
-        {children || content}
-        <ActionWrapper>
-          <div>
-            <Button disabled={isFirstStep} onClick={handlePrev} outline>
-              <FontAwesomeIcon icon="arrow-left" />
-            </Button>
-            <StepHint>{`${currentStep} of ${stepCount} steps`}</StepHint>
-          </div>
-          <Button
-            content={isLastStep ? "Finish" : "Next"}
-            type="submit"
-            // disabled
-          />
-        </ActionWrapper>
-      </StyledContent>
-    </CSSTransition>
+    <Transition in={mounted} timeout={duration} unmountOnExit>
+      {(state) => (
+        <StyledContent duration={duration} state={state} {...props}>
+          {children || content}
+          <ActionWrapper>
+            <div>
+              <Button disabled={isFirstStep} onClick={handlePrev} outline>
+                <FontAwesomeIcon icon="arrow-left" />
+              </Button>
+              <StepHint>{`${currentStep} of ${stepCount} steps`}</StepHint>
+            </div>
+            <Button
+              content={isLastStep ? "Finish" : "Next"}
+              type="submit"
+              // disabled
+            />
+          </ActionWrapper>
+        </StyledContent>
+      )}
+    </Transition>
   );
 };
 
