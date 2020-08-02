@@ -1,2 +1,0 @@
-// Message
-export * from "./Message";

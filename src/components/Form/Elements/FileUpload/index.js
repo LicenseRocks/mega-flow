@@ -1,2 +1,0 @@
-// FileUpload
-export * from "./FileUpload";

@@ -1,116 +1,117 @@
 {
-    "steps": [
-      {
-        "title": "Upload documents",
-        "rows": [
-          {
-            "message": "Welcome to MegaFlow. This is a message to help you through steps of this amazing workflow."
-          },
-          {
-            "fields": [
-              {
-                "name": "documents",
-                "required": "You must upload at least 1 document",
-                "type": "fileUpload"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Specify Software",
-        "recurring": true,
-        "name": "softwares",
-        "rows": [
-          {
-            "label": "Product",
-            "fields": [
-              {
-                "name": "product",
-                "options": [
-                  { "label": "Product 1", "value": "product1" },
-                  { "label": "Product 2", "value": "product2" },
-                  { "label": "Product 3", "value": "product3" },
-                  { "label": "Product 4", "value": "product4" },
-                  { "label": "Product 5", "value": "product5" }
-                ],
-                "required": "Product is required",
-                "startIcon": "box",
-                "type": "select"
-              }
-            ]
-          },
-          {
-            "label": "Amount",
-            "fields": [
-              {
-                "defaultValue": "1",
-                "min": "1",
-                "name": "amount",
-                "placeholder": "Amount",
-                "startIcon": "hashtag",
-                "type": "number"
-              }
-            ]
-          },
-          {
-            "label": "State",
-            "fields": [
-              {
-                "expandable": true,
-                "name": "state",
-                "options": [
-                  { "label": "New Software", "value": "new" },
-                  { "label": "Used Software", "value": "used" }
-                ],
-                "type": "radio"
-              }
-            ]
-          },
-          {
-            "label": "Download URL",
-            "expandable": true,
-            "fields": [
-              {
-                "defaultValue": "https://cdn.oracle.com",
-                "name": "downloadUrl",
-                "placeholder": "Download URL",
-                "startIcon": "download",
-                "readOnly": true,
-                "type": "input"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Review and finalize",
-        "rows": [
-          {
-            "fields": [
-              {
-                "name": "terms",
-                "options": [
-                  { "label": "I have read and accept the terms of usage", "value": true }
-                ],
-                "required": "You must accept terms of usage",
-                "type": "checkbox"
-              }
-            ]
-          },
-          {
-            "fields": [
-              {
-                "name": "owner",
-                "options": [
-                  { "label": "I am the license owner or or legal representative in charge of the owner", "value": true }
-                ],
-                "required": "You must be the owner",
-                "type": "checkbox"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+  "steps": [
+    {
+      "title": "Upload documents",
+      "rows": [
+        {
+          "message": "Welcome to MegaFlow. This is a message to help you through steps of this amazing workflow."
+        },
+        {
+          "fields": [
+            {
+              "name": "documents",
+              "required": "You must upload at least 1 document",
+              "type": "fileUpload"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Specify Software",
+      "recurring": true,
+      "name": "softwares",
+      "rows": [
+        {
+          "label": "Product",
+          "fields": [
+            {
+              "async": true,
+              "defaultOptions": true,
+              "name": "product",
+              "endpoint": "https://run.mocky.io/v3/a7e06c66-251c-4ca9-a8ac-cac5284d21a0",
+              "required": "Product is required",
+              "type": "reactSelect"
+            }
+          ]
+        },
+        {
+          "label": "Amount",
+          "fields": [
+            {
+              "defaultValue": "1",
+              "min": "1",
+              "name": "amount",
+              "placeholder": "Amount",
+              "startIcon": "hashtag",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "label": "State",
+          "fields": [
+            {
+              "expandable": true,
+              "name": "state",
+              "options": [
+                { "label": "New Software", "value": "new" },
+                { "label": "Used Software", "value": "used" }
+              ],
+              "type": "radio"
+            }
+          ]
+        },
+        {
+          "label": "Download URL",
+          "expandable": true,
+          "fields": [
+            {
+              "defaultValue": "https://cdn.oracle.com",
+              "name": "downloadUrl",
+              "placeholder": "Download URL",
+              "startIcon": "download",
+              "readOnly": true,
+              "type": "input"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Review and finalize",
+      "rows": [
+        {
+          "fields": [
+            {
+              "name": "terms",
+              "options": [
+                {
+                  "label": "I have read and accept the terms of usage",
+                  "value": true
+                }
+              ],
+              "required": "You must accept terms of usage",
+              "type": "checkbox"
+            }
+          ]
+        },
+        {
+          "fields": [
+            {
+              "name": "owner",
+              "options": [
+                {
+                  "label": "I am the license owner or or legal representative in charge of the owner",
+                  "value": true
+                }
+              ],
+              "required": "You must be the owner",
+              "type": "checkbox"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

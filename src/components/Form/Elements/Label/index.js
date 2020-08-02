@@ -1,2 +1,0 @@
-// Label
-export * from "./Label";

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { FormProvider, useForm } from "react-hook-form";
+import { AppContainer, theme, Wizard } from "rockskit";
 
-import { withWrapper } from "./utils";
-import { Form, Stepper } from "./components";
+import { Form } from "./components";
 import "./utils/faLibrary";
 
 const Wrapper = styled.div``;
@@ -45,19 +45,21 @@ const ReactJSONWizard = ({ schema, onFinish }) => {
   );
 
   return (
-    <Wrapper {...wrapperProps}>
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <Stepper
-            currentStepContent={renderForm()}
-            currentStepIndex={currentStep}
-            setCurrentStepIndex={setCurrentStep}
-            steps={stepsArray}
-            {...stepperProps}
-          />
-        </form>
-      </FormProvider>
-    </Wrapper>
+    <AppContainer theme={theme}>
+      <Wrapper {...wrapperProps}>
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <Wizard
+              currentStepContent={renderForm()}
+              currentStepIndex={currentStep}
+              setCurrentStepIndex={setCurrentStep}
+              steps={stepsArray}
+              {...stepperProps}
+            />
+          </form>
+        </FormProvider>
+      </Wrapper>
+    </AppContainer>
   );
 };
 
@@ -70,4 +72,4 @@ ReactJSONWizard.defaultProps = {
   onFinish: () => {},
 };
 
-export default withWrapper(ReactJSONWizard);
+export default ReactJSONWizard;
