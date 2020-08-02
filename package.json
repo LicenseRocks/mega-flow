@@ -2,7 +2,8 @@
   "name": "react-json-wizard",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/megaflow.js",
+  "module": "dist/megaflow.es.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/LicenseRocks/react-json-wizard"
@@ -15,13 +16,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/runtime": "^7.11.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
-    "@fortawesome/react-fontawesome": "^0.1.11",
-    "react-dropzone": "^11.0.1",
     "react-hook-form": "^6.0.0",
-    "react-select": "^3.1.0",
-    "react-transition-group": "^4.4.1",
     "rockskit": "file:../rockskit/",
     "styled-components": "^5.1.1"
   },
@@ -33,6 +31,7 @@
     "@babel/preset-react": "^7.10.4",
     "@rollup/plugin-babel": "^5.0.4",
     "@rollup/plugin-commonjs": "^13.0.0",
+    "@rollup/plugin-image": "^2.0.5",
     "@rollup/plugin-node-resolve": "^8.1.0",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-knobs": "^5.3.19",
