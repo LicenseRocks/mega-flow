@@ -19,7 +19,7 @@
     "@babel/runtime": "^7.11.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "react-hook-form": "^6.2.0",
-    "rockskit": "https://github.com/LicenseRocks/rockskit",
+    "rockskit": "https://github.com/LicenseRocks/rockskit.git",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
