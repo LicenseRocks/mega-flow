@@ -6,6 +6,6 @@
 
 <div align="center">
 
-React component to build workflows based on JSON schemas Powered by React Hook Forms.
+React component to build workflows based on JSON schemas powered by React Hook Forms.
 
 </div>
