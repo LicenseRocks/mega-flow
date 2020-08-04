@@ -1,12 +1,12 @@
 {
-  "name": "react-json-wizard",
+  "name": "megaflow",
   "version": "1.0.0",
   "description": "",
   "main": "dist/megaflow.js",
   "module": "dist/megaflow.es.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LicenseRocks/react-json-wizard"
+    "url": "https://github.com/LicenseRocks/megaflow"
   },
   "scripts": {
     "build": "rollup --config",
@@ -19,7 +19,7 @@
     "@babel/runtime": "^7.11.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
-    "react-hook-form": "^6.0.0",
+    "react-hook-form": "^6.2.0",
     "rockskit": "file:../rockskit/",
     "styled-components": "^5.1.1"
   },

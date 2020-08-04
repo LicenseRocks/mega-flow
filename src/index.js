@@ -1,17 +1,25 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import { FormProvider, useForm } from "react-hook-form";
-import { AppContainer, theme, Wizard } from "rockskit";
+import { AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from "rockskit";
 
 import { Form } from "./components";
-import "./utils/faLibrary";
+import { Icons } from "./theme";
+import { MegaFlowPropTypes, MegaFlowDefaultProps } from "./props";
 
 const Wrapper = styled.div``;
 
-const ReactJSONWizard = ({ schema, onFinish }) => {
-  const parsedSchema = JSON.parse(schema);
-  const { steps, stepperProps, wrapperProps } = parsedSchema;
+const MegaFlow = ({
+  schema,
+  onFinish,
+  onStepSubmit,
+  wizardProps,
+  wrapperProps,
+}) => {
+  // Parse if schema was type of JSON string
+  const parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
+
+  const { steps } = parsedSchema;
   const [currentStep, setCurrentStep] = useState(0);
   const isCurrentLastStep = currentStep === steps.length - 1;
   const [wizardData, setWizardData] = useState({});
@@ -22,11 +30,15 @@ const ReactJSONWizard = ({ schema, onFinish }) => {
   });
 
   const onSubmit = (data) => {
-    console.log("data: ", data);
+    // Set step data in global wizard object
     setWizardData((prev) => ({
       ...prev,
       ...data,
     }));
+
+    // Send step data to props
+    if (onStepSubmit) onStepSubmit(data);
+
     if (!isCurrentLastStep) {
       setCurrentStep((prev) => prev + 1);
     } else {
@@ -45,7 +57,7 @@ const ReactJSONWizard = ({ schema, onFinish }) => {
   );
 
   return (
-    <AppContainer theme={theme}>
+    <AppContainer icons={{ ...RocksKitIcons, ...Icons }} theme={RocksKitTheme}>
       <Wrapper {...wrapperProps}>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -54,7 +66,7 @@ const ReactJSONWizard = ({ schema, onFinish }) => {
               currentStepIndex={currentStep}
               setCurrentStepIndex={setCurrentStep}
               steps={stepsArray}
-              {...stepperProps}
+              {...wizardProps}
             />
           </form>
         </FormProvider>
@@ -63,13 +75,8 @@ const ReactJSONWizard = ({ schema, onFinish }) => {
   );
 };
 
-ReactJSONWizard.propTypes = {
-  schema: PropTypes.string.isRequired,
-  onFinish: PropTypes.func,
-};
+MegaFlow.propTypes = MegaFlowPropTypes;
 
-ReactJSONWizard.defaultProps = {
-  onFinish: () => {},
-};
+MegaFlow.defaultProps = MegaFlowDefaultProps;
 
-export default ReactJSONWizard;
+export default MegaFlow;

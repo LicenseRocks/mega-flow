@@ -52,7 +52,7 @@
           "label": "State",
           "fields": [
             {
-              "expandable": true,
+              "defaultValue": "new",
               "name": "state",
               "options": [
                 { "label": "New Software", "value": "new" },
