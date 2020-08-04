@@ -1223,10 +1223,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@licenserocks/kit@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-1.0.0.tgz#a6edd536c5035f09a77483c5764e784c17aa7726"
-  integrity sha512-O65ORko1yAzWfJWri/pmIih5J3ChXhc00bIY+BdYNrHWX6q7H9Krz90RjNMZRhVMzl7oLl64rr8sA4udKY8jaw==
+"@licenserocks/kit@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-1.0.1.tgz#7bd58dfef252e71faf388bdec25dd4ae5d674a95"
+  integrity sha512-czLsF+sRxPeBRQm8Oq8GBld1elWq7myJld0Q8PdF7Z1DrrO3yjenVwbPFlnsiC9yjRcSB1azVWSf6GUwTP1u2A==
   dependencies:
     "@babel/runtime" "^7.10.5"
     "@fortawesome/fontawesome-svg-core" "^1.2.30"
