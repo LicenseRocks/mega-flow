@@ -1,12 +1,12 @@
 {
-  "name": "megaflow",
+  "name": "mega-flow",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/megaflow.js",
-  "module": "dist/megaflow.es.js",
+  "main": "dist/mega-flow.js",
+  "module": "dist/mega-flow.es.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LicenseRocks/megaflow"
+    "url": "https://github.com/LicenseRocks/mega-flow"
   },
   "scripts": {
     "build": "rollup --config",
