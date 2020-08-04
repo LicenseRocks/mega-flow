@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FormProvider, useForm } from "react-hook-form";
-import { AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from "rockskit";
+import {
+  AppContainer,
+  RocksKitIcons,
+  RocksKitTheme,
+  Wizard,
+} from "@licenserocks/kit";
 
 import { Form } from "./components";
 import { Icons } from "./theme";

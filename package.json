@@ -1,5 +1,5 @@
 {
-  "name": "mega-flow",
+  "name": "@licenserocks/mega-flow",
   "version": "1.0.0",
   "description": "",
   "main": "dist/mega-flow.js",
@@ -18,8 +18,8 @@
   "dependencies": {
     "@babel/runtime": "^7.11.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
+    "@licenserocks/kit": "^1.0.0",
     "react-hook-form": "^6.2.0",
-    "rockskit": "https://github.com/LicenseRocks/rockskit.git",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {

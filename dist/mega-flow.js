@@ -9,7 +9,7 @@ var React = require('react');
 var React__default = _interopDefault(React);
 var styled = _interopDefault(require('styled-components'));
 var reactHookForm = require('react-hook-form');
-var rockskit = require('rockskit');
+var kit = require('@licenserocks/kit');
 var PropTypes = _interopDefault(require('prop-types'));
 var _objectWithoutProperties = _interopDefault(require('@babel/runtime/helpers/objectWithoutProperties'));
 var freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
@@ -17,28 +17,28 @@ var freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
 var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
   switch (fieldType) {
     case "select":
-      return rockskit.Select;
+      return kit.Select;
 
     case "checkbox":
-      return rockskit.Checkbox;
+      return kit.Checkbox;
 
     case "radio":
-      return rockskit.Radio;
+      return kit.Radio;
 
     case "toggleSwitch":
-      return rockskit.ToggleSwitch;
+      return kit.ToggleSwitch;
 
     case "fileUpload":
-      return rockskit.FileUpload;
+      return kit.FileUpload;
 
     case "reactSelect":
-      return rockskit.ReactSelect;
+      return kit.ReactSelect;
 
     case "stepper":
-      return rockskit.Stepper;
+      return kit.Stepper;
 
     default:
-      return rockskit.Input;
+      return kit.Input;
   }
 };
 
@@ -69,12 +69,12 @@ var FormRows = function FormRows(_ref) {
     var rowKey = "step-".concat(stepIndex, "-row-").concat(idx);
     var rowErrors = [];
     var showRow = row.expandable ? expanded : true;
-    return /*#__PURE__*/React__default.createElement(rockskit.FormRow, {
+    return /*#__PURE__*/React__default.createElement(kit.FormRow, {
       errors: rowErrors,
       key: rowKey,
       label: row.label,
       show: showRow
-    }, row.message && /*#__PURE__*/React__default.createElement(rockskit.Alert, {
+    }, row.message && /*#__PURE__*/React__default.createElement(kit.Alert, {
       color: row.messageColor,
       content: row.message,
       style: {
@@ -108,7 +108,7 @@ var FormRows = function FormRows(_ref) {
         type: type
       }, field));
     }));
-  }), showExpandButton && /*#__PURE__*/React__default.createElement(rockskit.OutlineButton, {
+  }), showExpandButton && /*#__PURE__*/React__default.createElement(kit.OutlineButton, {
     color: "secondary",
     onClick: function onClick() {
       return setExpanded(function (prev) {
@@ -184,21 +184,21 @@ var Form = function Form(_ref4) {
     return fields.map(function (item, idx) {
       return /*#__PURE__*/React__default.createElement(Wrapper, {
         key: item.id
-      }, /*#__PURE__*/React__default.createElement(ButtonsWrapper, null, /*#__PURE__*/React__default.createElement(rockskit.OutlineButton, {
+      }, /*#__PURE__*/React__default.createElement(ButtonsWrapper, null, /*#__PURE__*/React__default.createElement(kit.OutlineButton, {
         color: "danger",
         disabled: fields.length === 1,
         onClick: function onClick() {
           return remove(idx);
         },
         size: "sm"
-      }, /*#__PURE__*/React__default.createElement(rockskit.Icon, {
+      }, /*#__PURE__*/React__default.createElement(kit.Icon, {
         icon: "trash",
         prefix: "fa"
       }))), renderRows(idx));
     });
   };
 
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, isRecurring ? renderRecurring() : renderRows(), isRecurring && /*#__PURE__*/React__default.createElement(rockskit.TextButton, {
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, isRecurring ? renderRecurring() : renderRows(), isRecurring && /*#__PURE__*/React__default.createElement(kit.TextButton, {
     content: "+ Add item",
     onClick: append,
     size: "sm"
@@ -297,12 +297,12 @@ var MegaFlow = function MegaFlow(_ref) {
     });
   };
 
-  return /*#__PURE__*/React__default.createElement(rockskit.AppContainer, {
-    icons: _objectSpread(_objectSpread({}, rockskit.RocksKitIcons), Icons),
-    theme: rockskit.RocksKitTheme
+  return /*#__PURE__*/React__default.createElement(kit.AppContainer, {
+    icons: _objectSpread(_objectSpread({}, kit.RocksKitIcons), Icons),
+    theme: kit.RocksKitTheme
   }, /*#__PURE__*/React__default.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React__default.createElement(reactHookForm.FormProvider, methods, /*#__PURE__*/React__default.createElement("form", {
     onSubmit: methods.handleSubmit(onSubmit)
-  }, /*#__PURE__*/React__default.createElement(rockskit.Wizard, _extends({
+  }, /*#__PURE__*/React__default.createElement(kit.Wizard, _extends({
     currentStepContent: renderForm(),
     currentStepIndex: currentStep,
     setCurrentStepIndex: setCurrentStep,

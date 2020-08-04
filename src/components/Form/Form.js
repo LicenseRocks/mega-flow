@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useFieldArray } from "react-hook-form";
-import { Icon, OutlineButton, TextButton } from "rockskit";
+import { Icon, OutlineButton, TextButton } from "@licenserocks/kit";
 
 import { FormRows } from "./FormRows";
 

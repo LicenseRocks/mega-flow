@@ -1213,6 +1213,26 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@licenserocks/kit@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-1.0.0.tgz#a6edd536c5035f09a77483c5764e784c17aa7726"
+  integrity sha512-O65ORko1yAzWfJWri/pmIih5J3ChXhc00bIY+BdYNrHWX6q7H9Krz90RjNMZRhVMzl7oLl64rr8sA4udKY8jaw==
+  dependencies:
+    "@babel/runtime" "^7.10.5"
+    "@fortawesome/fontawesome-svg-core" "^1.2.30"
+    "@fortawesome/free-brands-svg-icons" "^5.14.0"
+    "@fortawesome/free-solid-svg-icons" "^5.14.0"
+    "@fortawesome/react-fontawesome" "^0.1.11"
+    "@material-ui/core" "^4.11.0"
+    axios "^0.19.2"
+    copy-to-clipboard "^3.3.1"
+    qrcode.react "^1.0.0"
+    react-collapse "^5.0.1"
+    react-dropzone "^11.0.2"
+    react-hook-form "^6.2.0"
+    react-select "^3.1.0"
+    styled-components "^5.1.1"
+
 "@material-ui/core@^4.11.0":
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.11.0.tgz#b69b26e4553c9e53f2bfaf1053e216a0af9be15a"
@@ -10265,25 +10285,6 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
-
-"rockskit@https://github.com/LicenseRocks/rockskit":
-  version "1.0.0"
-  resolved "https://github.com/LicenseRocks/rockskit#4559ab8b7cd62f1a120657afe0b9896a5925024f"
-  dependencies:
-    "@babel/runtime" "^7.10.5"
-    "@fortawesome/fontawesome-svg-core" "^1.2.30"
-    "@fortawesome/free-brands-svg-icons" "^5.14.0"
-    "@fortawesome/free-solid-svg-icons" "^5.14.0"
-    "@fortawesome/react-fontawesome" "^0.1.11"
-    "@material-ui/core" "^4.11.0"
-    axios "^0.19.2"
-    copy-to-clipboard "^3.3.1"
-    qrcode.react "^1.0.0"
-    react-collapse "^5.0.1"
-    react-dropzone "^11.0.2"
-    react-hook-form "^6.2.0"
-    react-select "^3.1.0"
-    styled-components "^5.1.1"
 
 rollup-plugin-peer-deps-external@^2.2.3:
   version "2.2.3"

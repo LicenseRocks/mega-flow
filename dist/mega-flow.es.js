@@ -4,7 +4,7 @@ import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useFormContext, useFieldArray, useForm, FormProvider } from 'react-hook-form';
-import { FormRow, Alert, OutlineButton, Input, Stepper, ReactSelect, FileUpload, ToggleSwitch, Radio, Checkbox, Select, Icon, TextButton, AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from 'rockskit';
+import { FormRow, Alert, OutlineButton, Input, Stepper, ReactSelect, FileUpload, ToggleSwitch, Radio, Checkbox, Select, Icon, TextButton, AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from '@licenserocks/kit';
 import PropTypes from 'prop-types';
 import _objectWithoutProperties from '@babel/runtime/helpers/objectWithoutProperties';
 import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';

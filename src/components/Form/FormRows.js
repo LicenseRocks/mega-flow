@@ -13,7 +13,7 @@ import {
   Select,
   Stepper,
   ToggleSwitch,
-} from "rockskit";
+} from "@licenserocks/kit";
 
 const mapFieldTypeToComponent = (fieldType) => {
   switch (fieldType) {
