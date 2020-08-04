@@ -2,13 +2,12 @@ import _extends from '@babel/runtime/helpers/extends';
 import _defineProperty from '@babel/runtime/helpers/defineProperty';
 import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useFormContext, useFieldArray, useForm, FormProvider } from 'react-hook-form';
-import { FormRow, Alert, OutlineButton, Input, Stepper, ReactSelect, FileUpload, ToggleSwitch, Radio, Checkbox, Select, Icon, TextButton, AppContainer, theme, Wizard } from 'rockskit';
+import { FormRow, Alert, OutlineButton, Input, Stepper, ReactSelect, FileUpload, ToggleSwitch, Radio, Checkbox, Select, Icon, TextButton, AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from 'rockskit';
+import PropTypes from 'prop-types';
 import _objectWithoutProperties from '@babel/runtime/helpers/objectWithoutProperties';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowLeft, faBox, faCertificate, faCheck, faDownload, faGlobe, faHashtag, faHistory, faInfoCircle, faMinus, faParagraph, faPlus, faTimes, faTrash, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
   switch (fieldType) {
@@ -130,7 +129,7 @@ FormRows.defaultProps = {};
 
 var Wrapper = styled.div.withConfig({
   displayName: "Form__Wrapper",
-  componentId: "sc-17ur9xo-0"
+  componentId: "qcwv1d-0"
 })(["padding:", ";background-color:", ";border:1px solid ", ";border-radius:16px;margin-bottom:16px;"], function (_ref) {
   var theme = _ref.theme;
   return theme.spacing(2, 2, 2, 6);
@@ -143,7 +142,7 @@ var Wrapper = styled.div.withConfig({
 });
 var ButtonsWrapper = styled.div.withConfig({
   displayName: "Form__ButtonsWrapper",
-  componentId: "sc-17ur9xo-1"
+  componentId: "qcwv1d-1"
 })(["display:flex;justify-content:flex-end;margin-bottom:8px;"]);
 
 var Form = function Form(_ref4) {
@@ -212,23 +211,40 @@ Form.propTypes = {
 };
 Form.defaultProps = {};
 
-library.add(faArrowLeft, faBox, faCertificate, faCheck, faDownload, faGlobe, faHashtag, faHistory, faInfoCircle, faMinus, faParagraph, faPlus, faTimes, faTrash, faUser);
+var Icons = {
+  faDownload: faDownload,
+  faHashtag: faHashtag,
+  faTrash: faTrash
+};
+
+var MegaFlowPropTypes = {
+  schema: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  onFinish: PropTypes.func,
+  onStepSubmit: PropTypes.func,
+  wizardProps: PropTypes.shape,
+  wrapperProps: PropTypes.shape
+};
+var MegaFlowDefaultProps = {
+  onFinish: function onFinish() {}
+};
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var Wrapper$1 = styled.div.withConfig({
   displayName: "src__Wrapper",
-  componentId: "sc-1s2bagj-0"
+  componentId: "rs6qhj-0"
 })([""]);
 
-var ReactJSONWizard = function ReactJSONWizard(_ref) {
+var MegaFlow = function MegaFlow(_ref) {
   var schema = _ref.schema,
-      onFinish = _ref.onFinish;
-  var parsedSchema = JSON.parse(schema);
-  var steps = parsedSchema.steps,
-      stepperProps = parsedSchema.stepperProps,
-      wrapperProps = parsedSchema.wrapperProps;
+      onFinish = _ref.onFinish,
+      onStepSubmit = _ref.onStepSubmit,
+      wizardProps = _ref.wizardProps,
+      wrapperProps = _ref.wrapperProps;
+  // Parse if schema was type of JSON string
+  var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
+  var steps = parsedSchema.steps;
 
   var _useState = useState(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -248,10 +264,12 @@ var ReactJSONWizard = function ReactJSONWizard(_ref) {
   });
 
   var onSubmit = function onSubmit(data) {
-    console.log("data: ", data);
+    // Set step data in global wizard object
     setWizardData(function (prev) {
       return _objectSpread(_objectSpread({}, prev), data);
-    });
+    }); // Send step data to props
+
+    if (onStepSubmit) onStepSubmit(data);
 
     if (!isCurrentLastStep) {
       setCurrentStep(function (prev) {
@@ -275,7 +293,8 @@ var ReactJSONWizard = function ReactJSONWizard(_ref) {
   };
 
   return /*#__PURE__*/React.createElement(AppContainer, {
-    theme: theme
+    icons: _objectSpread(_objectSpread({}, RocksKitIcons), Icons),
+    theme: RocksKitTheme
   }, /*#__PURE__*/React.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React.createElement(FormProvider, methods, /*#__PURE__*/React.createElement("form", {
     onSubmit: methods.handleSubmit(onSubmit)
   }, /*#__PURE__*/React.createElement(Wizard, _extends({
@@ -283,16 +302,11 @@ var ReactJSONWizard = function ReactJSONWizard(_ref) {
     currentStepIndex: currentStep,
     setCurrentStepIndex: setCurrentStep,
     steps: stepsArray
-  }, stepperProps))))));
+  }, wizardProps))))));
 };
 
-ReactJSONWizard.propTypes = {
-  schema: PropTypes.string.isRequired,
-  onFinish: PropTypes.func
-};
-ReactJSONWizard.defaultProps = {
-  onFinish: function onFinish() {}
-};
+MegaFlow.propTypes = MegaFlowPropTypes;
+MegaFlow.defaultProps = MegaFlowDefaultProps;
 
-export default ReactJSONWizard;
+export default MegaFlow;
 //# sourceMappingURL=megaflow.es.js.map

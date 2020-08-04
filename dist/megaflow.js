@@ -7,12 +7,11 @@ var _defineProperty = _interopDefault(require('@babel/runtime/helpers/defineProp
 var _slicedToArray = _interopDefault(require('@babel/runtime/helpers/slicedToArray'));
 var React = require('react');
 var React__default = _interopDefault(React);
-var PropTypes = _interopDefault(require('prop-types'));
 var styled = _interopDefault(require('styled-components'));
 var reactHookForm = require('react-hook-form');
 var rockskit = require('rockskit');
+var PropTypes = _interopDefault(require('prop-types'));
 var _objectWithoutProperties = _interopDefault(require('@babel/runtime/helpers/objectWithoutProperties'));
-var fontawesomeSvgCore = require('@fortawesome/fontawesome-svg-core');
 var freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
 
 var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
@@ -135,7 +134,7 @@ FormRows.defaultProps = {};
 
 var Wrapper = styled.div.withConfig({
   displayName: "Form__Wrapper",
-  componentId: "sc-17ur9xo-0"
+  componentId: "qcwv1d-0"
 })(["padding:", ";background-color:", ";border:1px solid ", ";border-radius:16px;margin-bottom:16px;"], function (_ref) {
   var theme = _ref.theme;
   return theme.spacing(2, 2, 2, 6);
@@ -148,7 +147,7 @@ var Wrapper = styled.div.withConfig({
 });
 var ButtonsWrapper = styled.div.withConfig({
   displayName: "Form__ButtonsWrapper",
-  componentId: "sc-17ur9xo-1"
+  componentId: "qcwv1d-1"
 })(["display:flex;justify-content:flex-end;margin-bottom:8px;"]);
 
 var Form = function Form(_ref4) {
@@ -217,23 +216,40 @@ Form.propTypes = {
 };
 Form.defaultProps = {};
 
-fontawesomeSvgCore.library.add(freeSolidSvgIcons.faArrowLeft, freeSolidSvgIcons.faBox, freeSolidSvgIcons.faCertificate, freeSolidSvgIcons.faCheck, freeSolidSvgIcons.faDownload, freeSolidSvgIcons.faGlobe, freeSolidSvgIcons.faHashtag, freeSolidSvgIcons.faHistory, freeSolidSvgIcons.faInfoCircle, freeSolidSvgIcons.faMinus, freeSolidSvgIcons.faParagraph, freeSolidSvgIcons.faPlus, freeSolidSvgIcons.faTimes, freeSolidSvgIcons.faTrash, freeSolidSvgIcons.faUser);
+var Icons = {
+  faDownload: freeSolidSvgIcons.faDownload,
+  faHashtag: freeSolidSvgIcons.faHashtag,
+  faTrash: freeSolidSvgIcons.faTrash
+};
+
+var MegaFlowPropTypes = {
+  schema: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  onFinish: PropTypes.func,
+  onStepSubmit: PropTypes.func,
+  wizardProps: PropTypes.shape,
+  wrapperProps: PropTypes.shape
+};
+var MegaFlowDefaultProps = {
+  onFinish: function onFinish() {}
+};
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var Wrapper$1 = styled.div.withConfig({
   displayName: "src__Wrapper",
-  componentId: "sc-1s2bagj-0"
+  componentId: "rs6qhj-0"
 })([""]);
 
-var ReactJSONWizard = function ReactJSONWizard(_ref) {
+var MegaFlow = function MegaFlow(_ref) {
   var schema = _ref.schema,
-      onFinish = _ref.onFinish;
-  var parsedSchema = JSON.parse(schema);
-  var steps = parsedSchema.steps,
-      stepperProps = parsedSchema.stepperProps,
-      wrapperProps = parsedSchema.wrapperProps;
+      onFinish = _ref.onFinish,
+      onStepSubmit = _ref.onStepSubmit,
+      wizardProps = _ref.wizardProps,
+      wrapperProps = _ref.wrapperProps;
+  // Parse if schema was type of JSON string
+  var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
+  var steps = parsedSchema.steps;
 
   var _useState = React.useState(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -253,10 +269,12 @@ var ReactJSONWizard = function ReactJSONWizard(_ref) {
   });
 
   var onSubmit = function onSubmit(data) {
-    console.log("data: ", data);
+    // Set step data in global wizard object
     setWizardData(function (prev) {
       return _objectSpread(_objectSpread({}, prev), data);
-    });
+    }); // Send step data to props
+
+    if (onStepSubmit) onStepSubmit(data);
 
     if (!isCurrentLastStep) {
       setCurrentStep(function (prev) {
@@ -280,7 +298,8 @@ var ReactJSONWizard = function ReactJSONWizard(_ref) {
   };
 
   return /*#__PURE__*/React__default.createElement(rockskit.AppContainer, {
-    theme: rockskit.theme
+    icons: _objectSpread(_objectSpread({}, rockskit.RocksKitIcons), Icons),
+    theme: rockskit.RocksKitTheme
   }, /*#__PURE__*/React__default.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React__default.createElement(reactHookForm.FormProvider, methods, /*#__PURE__*/React__default.createElement("form", {
     onSubmit: methods.handleSubmit(onSubmit)
   }, /*#__PURE__*/React__default.createElement(rockskit.Wizard, _extends({
@@ -288,16 +307,11 @@ var ReactJSONWizard = function ReactJSONWizard(_ref) {
     currentStepIndex: currentStep,
     setCurrentStepIndex: setCurrentStep,
     steps: stepsArray
-  }, stepperProps))))));
+  }, wizardProps))))));
 };
 
-ReactJSONWizard.propTypes = {
-  schema: PropTypes.string.isRequired,
-  onFinish: PropTypes.func
-};
-ReactJSONWizard.defaultProps = {
-  onFinish: function onFinish() {}
-};
+MegaFlow.propTypes = MegaFlowPropTypes;
+MegaFlow.defaultProps = MegaFlowDefaultProps;
 
-module.exports = ReactJSONWizard;
+module.exports = MegaFlow;
 //# sourceMappingURL=megaflow.js.map
