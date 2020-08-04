@@ -20,7 +20,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "react-hook-form": "^6.2.0",
-    "rockskit": "file:../rockskit/",
+    "rockskit": "https://github.com/LicenseRocks/rockskit",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {

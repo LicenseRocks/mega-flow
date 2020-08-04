@@ -10273,8 +10273,9 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-"rockskit@file:../rockskit":
+"rockskit@https://github.com/LicenseRocks/rockskit":
   version "1.0.0"
+  resolved "https://github.com/LicenseRocks/rockskit#4559ab8b7cd62f1a120657afe0b9896a5925024f"
   dependencies:
     "@babel/runtime" "^7.10.5"
     "@fortawesome/fontawesome-svg-core" "^1.2.30"
