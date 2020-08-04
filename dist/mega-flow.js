@@ -1,39 +1,44 @@
-import _extends from '@babel/runtime/helpers/extends';
-import _defineProperty from '@babel/runtime/helpers/defineProperty';
-import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useFormContext, useFieldArray, useForm, FormProvider } from 'react-hook-form';
-import { FormRow, Alert, OutlineButton, Input, Stepper, ReactSelect, FileUpload, ToggleSwitch, Radio, Checkbox, Select, Icon, TextButton, AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from 'rockskit';
-import PropTypes from 'prop-types';
-import _objectWithoutProperties from '@babel/runtime/helpers/objectWithoutProperties';
-import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
+'use strict';
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var _extends = _interopDefault(require('@babel/runtime/helpers/extends'));
+var _defineProperty = _interopDefault(require('@babel/runtime/helpers/defineProperty'));
+var _slicedToArray = _interopDefault(require('@babel/runtime/helpers/slicedToArray'));
+var React = require('react');
+var React__default = _interopDefault(React);
+var styled = _interopDefault(require('styled-components'));
+var reactHookForm = require('react-hook-form');
+var rockskit = require('rockskit');
+var PropTypes = _interopDefault(require('prop-types'));
+var _objectWithoutProperties = _interopDefault(require('@babel/runtime/helpers/objectWithoutProperties'));
+var freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
 
 var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
   switch (fieldType) {
     case "select":
-      return Select;
+      return rockskit.Select;
 
     case "checkbox":
-      return Checkbox;
+      return rockskit.Checkbox;
 
     case "radio":
-      return Radio;
+      return rockskit.Radio;
 
     case "toggleSwitch":
-      return ToggleSwitch;
+      return rockskit.ToggleSwitch;
 
     case "fileUpload":
-      return FileUpload;
+      return rockskit.FileUpload;
 
     case "reactSelect":
-      return ReactSelect;
+      return rockskit.ReactSelect;
 
     case "stepper":
-      return Stepper;
+      return rockskit.Stepper;
 
     default:
-      return Input;
+      return rockskit.Input;
   }
 };
 
@@ -45,12 +50,12 @@ var FormRows = function FormRows(_ref) {
       stepIndex = _ref.stepIndex,
       wizardData = _ref.wizardData;
 
-  var _useFormContext = useFormContext(),
+  var _useFormContext = reactHookForm.useFormContext(),
       control = _useFormContext.control,
       errors = _useFormContext.errors,
       register = _useFormContext.register;
 
-  var _useState = useState(false),
+  var _useState = React.useState(false),
       _useState2 = _slicedToArray(_useState, 2),
       expanded = _useState2[0],
       setExpanded = _useState2[1];
@@ -58,18 +63,18 @@ var FormRows = function FormRows(_ref) {
   var showExpandButton = rows === null || rows === void 0 ? void 0 : rows.some(function (row) {
     return row.expandable;
   });
-  return /*#__PURE__*/React.createElement(React.Fragment, null, rows === null || rows === void 0 ? void 0 : rows.map(function (row, idx) {
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, rows === null || rows === void 0 ? void 0 : rows.map(function (row, idx) {
     var _row$fields;
 
     var rowKey = "step-".concat(stepIndex, "-row-").concat(idx);
     var rowErrors = [];
     var showRow = row.expandable ? expanded : true;
-    return /*#__PURE__*/React.createElement(FormRow, {
+    return /*#__PURE__*/React__default.createElement(rockskit.FormRow, {
       errors: rowErrors,
       key: rowKey,
       label: row.label,
       show: showRow
-    }, row.message && /*#__PURE__*/React.createElement(Alert, {
+    }, row.message && /*#__PURE__*/React__default.createElement(rockskit.Alert, {
       color: row.messageColor,
       content: row.message,
       style: {
@@ -90,7 +95,7 @@ var FormRows = function FormRows(_ref) {
       var error = isRecurring && errors[data.name] && errors[data.name][index] ? (_errors$data$name$ind = errors[data.name][index][name]) === null || _errors$data$name$ind === void 0 ? void 0 : _errors$data$name$ind.message : (_errors$name = errors[name]) === null || _errors$name === void 0 ? void 0 : _errors$name.message;
       if (error) rowErrors.push(error);
       var prevValue = isRecurring && wizardData[data.name] && wizardData[data.name][index] ? wizardData[data.name][index][name] : wizardData[name];
-      return /*#__PURE__*/React.createElement(Field, _extends({
+      return /*#__PURE__*/React__default.createElement(Field, _extends({
         control: control,
         defaultValue: prevValue || defaultValue,
         hasError: !!error,
@@ -103,7 +108,7 @@ var FormRows = function FormRows(_ref) {
         type: type
       }, field));
     }));
-  }), showExpandButton && /*#__PURE__*/React.createElement(OutlineButton, {
+  }), showExpandButton && /*#__PURE__*/React__default.createElement(rockskit.OutlineButton, {
     color: "secondary",
     onClick: function onClick() {
       return setExpanded(function (prev) {
@@ -129,7 +134,7 @@ FormRows.defaultProps = {};
 
 var Wrapper = styled.div.withConfig({
   displayName: "Form__Wrapper",
-  componentId: "qcwv1d-0"
+  componentId: "v0zaa0-0"
 })(["padding:", ";background-color:", ";border:1px solid ", ";border-radius:16px;margin-bottom:16px;"], function (_ref) {
   var theme = _ref.theme;
   return theme.spacing(2, 2, 2, 6);
@@ -142,7 +147,7 @@ var Wrapper = styled.div.withConfig({
 });
 var ButtonsWrapper = styled.div.withConfig({
   displayName: "Form__ButtonsWrapper",
-  componentId: "qcwv1d-1"
+  componentId: "v0zaa0-1"
 })(["display:flex;justify-content:flex-end;margin-bottom:8px;"]);
 
 var Form = function Form(_ref4) {
@@ -151,21 +156,21 @@ var Form = function Form(_ref4) {
       wizardData = _ref4.wizardData;
   var isRecurring = data.recurring;
 
-  var _useFieldArray = useFieldArray({
+  var _useFieldArray = reactHookForm.useFieldArray({
     name: isRecurring ? data === null || data === void 0 ? void 0 : data.name : ""
   }),
       fields = _useFieldArray.fields,
       append = _useFieldArray.append,
       remove = _useFieldArray.remove;
 
-  useEffect(function () {
+  React.useEffect(function () {
     if (fields.length === 0) {
       append();
     }
   }, []);
 
   var renderRows = function renderRows(index) {
-    return /*#__PURE__*/React.createElement(FormRows, {
+    return /*#__PURE__*/React__default.createElement(FormRows, {
       data: data,
       index: index,
       isRecurring: isRecurring,
@@ -177,23 +182,23 @@ var Form = function Form(_ref4) {
 
   var renderRecurring = function renderRecurring() {
     return fields.map(function (item, idx) {
-      return /*#__PURE__*/React.createElement(Wrapper, {
+      return /*#__PURE__*/React__default.createElement(Wrapper, {
         key: item.id
-      }, /*#__PURE__*/React.createElement(ButtonsWrapper, null, /*#__PURE__*/React.createElement(OutlineButton, {
+      }, /*#__PURE__*/React__default.createElement(ButtonsWrapper, null, /*#__PURE__*/React__default.createElement(rockskit.OutlineButton, {
         color: "danger",
         disabled: fields.length === 1,
         onClick: function onClick() {
           return remove(idx);
         },
         size: "sm"
-      }, /*#__PURE__*/React.createElement(Icon, {
+      }, /*#__PURE__*/React__default.createElement(rockskit.Icon, {
         icon: "trash",
         prefix: "fa"
       }))), renderRows(idx));
     });
   };
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, isRecurring ? renderRecurring() : renderRows(), isRecurring && /*#__PURE__*/React.createElement(TextButton, {
+  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, isRecurring ? renderRecurring() : renderRows(), isRecurring && /*#__PURE__*/React__default.createElement(rockskit.TextButton, {
     content: "+ Add item",
     onClick: append,
     size: "sm"
@@ -212,9 +217,9 @@ Form.propTypes = {
 Form.defaultProps = {};
 
 var Icons = {
-  faDownload: faDownload,
-  faHashtag: faHashtag,
-  faTrash: faTrash
+  faDownload: freeSolidSvgIcons.faDownload,
+  faHashtag: freeSolidSvgIcons.faHashtag,
+  faTrash: freeSolidSvgIcons.faTrash
 };
 
 var MegaFlowPropTypes = {
@@ -233,7 +238,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var Wrapper$1 = styled.div.withConfig({
   displayName: "src__Wrapper",
-  componentId: "rs6qhj-0"
+  componentId: "sc-8febgf-0"
 })([""]);
 
 var MegaFlow = function MegaFlow(_ref) {
@@ -246,19 +251,19 @@ var MegaFlow = function MegaFlow(_ref) {
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
   var steps = parsedSchema.steps;
 
-  var _useState = useState(0),
+  var _useState = React.useState(0),
       _useState2 = _slicedToArray(_useState, 2),
       currentStep = _useState2[0],
       setCurrentStep = _useState2[1];
 
   var isCurrentLastStep = currentStep === steps.length - 1;
 
-  var _useState3 = useState({}),
+  var _useState3 = React.useState({}),
       _useState4 = _slicedToArray(_useState3, 2),
       wizardData = _useState4[0],
       setWizardData = _useState4[1];
 
-  var methods = useForm({
+  var methods = reactHookForm.useForm({
     mode: "onBlur",
     defaultValues: wizardData
   });
@@ -285,19 +290,19 @@ var MegaFlow = function MegaFlow(_ref) {
   });
 
   var renderForm = function renderForm() {
-    return /*#__PURE__*/React.createElement(Form, {
+    return /*#__PURE__*/React__default.createElement(Form, {
       data: steps[currentStep],
       stepIndex: currentStep,
       wizardData: wizardData
     });
   };
 
-  return /*#__PURE__*/React.createElement(AppContainer, {
-    icons: _objectSpread(_objectSpread({}, RocksKitIcons), Icons),
-    theme: RocksKitTheme
-  }, /*#__PURE__*/React.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React.createElement(FormProvider, methods, /*#__PURE__*/React.createElement("form", {
+  return /*#__PURE__*/React__default.createElement(rockskit.AppContainer, {
+    icons: _objectSpread(_objectSpread({}, rockskit.RocksKitIcons), Icons),
+    theme: rockskit.RocksKitTheme
+  }, /*#__PURE__*/React__default.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React__default.createElement(reactHookForm.FormProvider, methods, /*#__PURE__*/React__default.createElement("form", {
     onSubmit: methods.handleSubmit(onSubmit)
-  }, /*#__PURE__*/React.createElement(Wizard, _extends({
+  }, /*#__PURE__*/React__default.createElement(rockskit.Wizard, _extends({
     currentStepContent: renderForm(),
     currentStepIndex: currentStep,
     setCurrentStepIndex: setCurrentStep,
@@ -308,5 +313,5 @@ var MegaFlow = function MegaFlow(_ref) {
 MegaFlow.propTypes = MegaFlowPropTypes;
 MegaFlow.defaultProps = MegaFlowDefaultProps;
 
-export default MegaFlow;
-//# sourceMappingURL=megaflow.es.js.map
+module.exports = MegaFlow;
+//# sourceMappingURL=mega-flow.js.map
