@@ -1,17 +1,17 @@
 import React from "react";
 
-import ReactJSONWizard from "./index";
+import MegaFlow from "./index";
 import schema from "./sample.json";
 
 export default {
-  title: "react-json-wizard",
+  title: "MegaFlow",
 };
 
 export const main = () => {
   return (
-    <ReactJSONWizard
+    <MegaFlow
       onFinish={() => alert("Thanks for using MegaFlow.")}
-      schema={JSON.stringify(schema)}
+      schema={schema}
     />
   );
 };

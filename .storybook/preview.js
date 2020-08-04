@@ -1,11 +1,7 @@
-import { addDecorator, addParameters } from '@storybook/react'
-
-import { Container } from './decorators'
+import { addDecorator, addParameters } from "@storybook/react";
 
 addParameters({
   options: {
-    panelPosition: 'right'
-  }
-})
-
-addDecorator(Container)
+    panelPosition: "right",
+  },
+});

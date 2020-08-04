@@ -1,17 +1,25 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import { FormProvider, useForm } from "react-hook-form";
+import { AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from "rockskit";
 
-import { withWrapper } from "./utils";
-import { Form, Stepper } from "./components";
-import "./utils/faLibrary";
+import { Form } from "./components";
+import { Icons } from "./theme";
+import { MegaFlowPropTypes, MegaFlowDefaultProps } from "./props";
 
 const Wrapper = styled.div``;
 
-const ReactJSONWizard = ({ schema, onFinish }) => {
-  const parsedSchema = JSON.parse(schema);
-  const { steps, stepperProps, wrapperProps } = parsedSchema;
+const MegaFlow = ({
+  schema,
+  onFinish,
+  onStepSubmit,
+  wizardProps,
+  wrapperProps,
+}) => {
+  // Parse if schema was type of JSON string
+  const parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
+
+  const { steps } = parsedSchema;
   const [currentStep, setCurrentStep] = useState(0);
   const isCurrentLastStep = currentStep === steps.length - 1;
   const [wizardData, setWizardData] = useState({});
@@ -22,11 +30,15 @@ const ReactJSONWizard = ({ schema, onFinish }) => {
   });
 
   const onSubmit = (data) => {
-    console.log("data: ", data);
+    // Set step data in global wizard object
     setWizardData((prev) => ({
       ...prev,
       ...data,
     }));
+
+    // Send step data to props
+    if (onStepSubmit) onStepSubmit(data);
+
     if (!isCurrentLastStep) {
       setCurrentStep((prev) => prev + 1);
     } else {
@@ -45,29 +57,26 @@ const ReactJSONWizard = ({ schema, onFinish }) => {
   );
 
   return (
-    <Wrapper {...wrapperProps}>
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <Stepper
-            currentStepContent={renderForm()}
-            currentStepIndex={currentStep}
-            setCurrentStepIndex={setCurrentStep}
-            steps={stepsArray}
-            {...stepperProps}
-          />
-        </form>
-      </FormProvider>
-    </Wrapper>
+    <AppContainer icons={{ ...RocksKitIcons, ...Icons }} theme={RocksKitTheme}>
+      <Wrapper {...wrapperProps}>
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <Wizard
+              currentStepContent={renderForm()}
+              currentStepIndex={currentStep}
+              setCurrentStepIndex={setCurrentStep}
+              steps={stepsArray}
+              {...wizardProps}
+            />
+          </form>
+        </FormProvider>
+      </Wrapper>
+    </AppContainer>
   );
 };
 
-ReactJSONWizard.propTypes = {
-  schema: PropTypes.string.isRequired,
-  onFinish: PropTypes.func,
-};
+MegaFlow.propTypes = MegaFlowPropTypes;
 
-ReactJSONWizard.defaultProps = {
-  onFinish: () => {},
-};
+MegaFlow.defaultProps = MegaFlowDefaultProps;
 
-export default withWrapper(ReactJSONWizard);
+export default MegaFlow;

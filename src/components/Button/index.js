@@ -1,2 +1,0 @@
-// Button
-export * from "./Button";

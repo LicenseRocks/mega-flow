@@ -1,5 +1,0 @@
-/**
- * Decorators
- */
-
-export * from './container'

@@ -1,2 +1,0 @@
-// ToggleSwitch
-export * from "./ToggleSwitch";

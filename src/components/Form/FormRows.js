@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useFormContext } from "react-hook-form";
-
-import { FormRow } from ".";
 import {
+  Alert,
   Checkbox,
   FileUpload,
+  FormRow,
   Input,
+  OutlineButton,
   Radio,
+  ReactSelect,
   Select,
+  Stepper,
   ToggleSwitch,
-} from "./Elements";
-import { Button, Message } from "..";
+} from "rockskit";
 
 const mapFieldTypeToComponent = (fieldType) => {
   switch (fieldType) {
@@ -25,6 +27,10 @@ const mapFieldTypeToComponent = (fieldType) => {
       return ToggleSwitch;
     case "fileUpload":
       return FileUpload;
+    case "reactSelect":
+      return ReactSelect;
+    case "stepper":
+      return Stepper;
     default:
       return Input;
   }
@@ -57,7 +63,7 @@ export const FormRows = ({
             show={showRow}
           >
             {row.message && (
-              <Message
+              <Alert
                 color={row.messageColor}
                 content={row.message}
                 style={{ marginBottom: 8 }}
@@ -107,9 +113,13 @@ export const FormRows = ({
       })}
 
       {showExpandButton && (
-        <Button onClick={() => setExpanded((prev) => !prev)} size="sm" outline>
+        <OutlineButton
+          color="secondary"
+          onClick={() => setExpanded((prev) => !prev)}
+          size="sm"
+        >
           {expanded ? "Hide Optional Params" : "Show Optional Params"}
-        </Button>
+        </OutlineButton>
       )}
     </>
   );

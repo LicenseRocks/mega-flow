@@ -2,15 +2,14 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useFieldArray } from "react-hook-form";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Icon, OutlineButton, TextButton } from "rockskit";
 
-import { Button } from "..";
 import { FormRows } from "./FormRows";
 
 const Wrapper = styled.div`
-  padding: 8px 8px 8px 24px;
-  background-color: ${({ theme }) => theme.colors.gray.light};
-  border: 1px solid ${({ theme }) => theme.colors.gray.regular};
+  padding: ${({ theme }) => theme.spacing(2, 2, 2, 6)};
+  background-color: ${({ theme }) => theme.palette.gray.light};
+  border: 1px solid ${({ theme }) => theme.palette.gray.regular};
   border-radius: 16px;
   margin-bottom: 16px;
 `;
@@ -49,14 +48,14 @@ const Form = ({ data, stepIndex, wizardData }) => {
     fields.map((item, idx) => (
       <Wrapper key={item.id}>
         <ButtonsWrapper>
-          <Button
+          <OutlineButton
             color="danger"
             disabled={fields.length === 1}
             onClick={() => remove(idx)}
             size="sm"
           >
-            <FontAwesomeIcon icon="trash" />
-          </Button>
+            <Icon icon="trash" prefix="fa" />
+          </OutlineButton>
         </ButtonsWrapper>
 
         {renderRows(idx)}
@@ -67,9 +66,7 @@ const Form = ({ data, stepIndex, wizardData }) => {
     <>
       {isRecurring ? renderRecurring() : renderRows()}
       {isRecurring && (
-        <Button onClick={append} size="sm" text>
-          + Add item
-        </Button>
+        <TextButton content="+ Add item" onClick={append} size="sm" />
       )}
     </>
   );

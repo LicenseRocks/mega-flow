@@ -1,0 +1,12 @@
+{
+  // CSS
+  "css.validate": false,
+  // Editor
+  "editor.formatOnSave": true,
+  "editor.rulers": [100],
+  "editor.tabSize": 2,
+  // Files
+  "files.trimTrailingWhitespace": true,
+  // Javascript
+  "javascript.validate.enable": false
+}
