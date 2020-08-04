@@ -36,6 +36,7 @@ const CommonJS = {
     file: pkg.main,
     format: "cjs",
     sourcemap: true,
+    exports: "auto",
   },
 };
 
@@ -46,6 +47,7 @@ const ESModules = {
     file: pkg.module,
     format: "es",
     sourcemap: true,
+    exports: "auto",
   },
 };
 

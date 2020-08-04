@@ -129,7 +129,7 @@ FormRows.defaultProps = {};
 
 var Wrapper = styled.div.withConfig({
   displayName: "Form__Wrapper",
-  componentId: "v0zaa0-0"
+  componentId: "sc-11kuada-0"
 })(["padding:", ";background-color:", ";border:1px solid ", ";border-radius:16px;margin-bottom:16px;"], function (_ref) {
   var theme = _ref.theme;
   return theme.spacing(2, 2, 2, 6);
@@ -142,7 +142,7 @@ var Wrapper = styled.div.withConfig({
 });
 var ButtonsWrapper = styled.div.withConfig({
   displayName: "Form__ButtonsWrapper",
-  componentId: "v0zaa0-1"
+  componentId: "sc-11kuada-1"
 })(["display:flex;justify-content:flex-end;margin-bottom:8px;"]);
 
 var Form = function Form(_ref4) {
@@ -233,7 +233,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var Wrapper$1 = styled.div.withConfig({
   displayName: "src__Wrapper",
-  componentId: "sc-8febgf-0"
+  componentId: "osiobx-0"
 })([""]);
 
 var MegaFlow = function MegaFlow(_ref) {
