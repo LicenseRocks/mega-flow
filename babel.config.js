@@ -3,13 +3,17 @@ module.exports = {
     [
       "@babel/env",
       {
+        loose: true,
+        shippedProposals: true,
         modules: false,
+        targets: {
+          ie: 9,
+        },
       },
     ],
     "@babel/react",
   ],
   plugins: [
-    "@babel/plugin-transform-runtime",
     [
       "styled-components",
       {

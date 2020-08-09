@@ -23,7 +23,6 @@ const baseConfig = {
     image(),
     commonjs({ include: /node_modules/ }),
     babel({
-      babelHelpers: "runtime",
       exclude: /node_modules/,
     }),
   ],

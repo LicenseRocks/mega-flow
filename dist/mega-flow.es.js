@@ -1,13 +1,51 @@
-import _extends from '@babel/runtime/helpers/extends';
-import _defineProperty from '@babel/runtime/helpers/defineProperty';
-import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useFormContext, useFieldArray, useForm, FormProvider } from 'react-hook-form';
-import { FormRow, Alert, OutlineButton, Input, Stepper, ReactSelect, FileUpload, ToggleSwitch, Radio, Checkbox, Select, Icon, TextButton, AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from '@licenserocks/kit';
+import { FormRow, Alert, OutlineButton, Input, Stepper, ReactSelect, FileUpload, ToggleSwitch, Radio, Checkbox, Select, Icon, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
 import PropTypes from 'prop-types';
-import _objectWithoutProperties from '@babel/runtime/helpers/objectWithoutProperties';
 import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _taggedTemplateLiteralLoose(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  strings.raw = raw;
+  return strings;
+}
 
 var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
   switch (fieldType) {
@@ -51,17 +89,16 @@ var FormRows = function FormRows(_ref) {
       register = _useFormContext.register;
 
   var _useState = useState(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      expanded = _useState2[0],
-      setExpanded = _useState2[1];
+      expanded = _useState[0],
+      setExpanded = _useState[1];
 
-  var showExpandButton = rows === null || rows === void 0 ? void 0 : rows.some(function (row) {
+  var showExpandButton = rows == null ? void 0 : rows.some(function (row) {
     return row.expandable;
   });
-  return /*#__PURE__*/React.createElement(React.Fragment, null, rows === null || rows === void 0 ? void 0 : rows.map(function (row, idx) {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, rows == null ? void 0 : rows.map(function (row, idx) {
     var _row$fields;
 
-    var rowKey = "step-".concat(stepIndex, "-row-").concat(idx);
+    var rowKey = "step-" + stepIndex + "-row-" + idx;
     var rowErrors = [];
     var showRow = row.expandable ? expanded : true;
     return /*#__PURE__*/React.createElement(FormRow, {
@@ -75,19 +112,19 @@ var FormRows = function FormRows(_ref) {
       style: {
         marginBottom: 8
       }
-    }), (_row$fields = row.fields) === null || _row$fields === void 0 ? void 0 : _row$fields.map(function (_ref2, fieldId) {
+    }), (_row$fields = row.fields) == null ? void 0 : _row$fields.map(function (_ref2, fieldId) {
       var _errors$data$name$ind, _errors$name;
 
       var defaultValue = _ref2.defaultValue,
           name = _ref2.name,
           required = _ref2.required,
           type = _ref2.type,
-          field = _objectWithoutProperties(_ref2, ["defaultValue", "name", "required", "type"]);
+          field = _objectWithoutPropertiesLoose(_ref2, ["defaultValue", "name", "required", "type"]);
 
       var Field = mapFieldTypeToComponent(type);
-      var fieldKey = "step-".concat(stepIndex, "-row-").concat(idx, "-field-").concat(fieldId);
-      var fieldName = isRecurring ? "".concat(data.name, "[").concat(index, "].").concat(name) : name;
-      var error = isRecurring && errors[data.name] && errors[data.name][index] ? (_errors$data$name$ind = errors[data.name][index][name]) === null || _errors$data$name$ind === void 0 ? void 0 : _errors$data$name$ind.message : (_errors$name = errors[name]) === null || _errors$name === void 0 ? void 0 : _errors$name.message;
+      var fieldKey = "step-" + stepIndex + "-row-" + idx + "-field-" + fieldId;
+      var fieldName = isRecurring ? data.name + "[" + index + "]." + name : name;
+      var error = isRecurring && errors[data.name] && errors[data.name][index] ? (_errors$data$name$ind = errors[data.name][index][name]) == null ? void 0 : _errors$data$name$ind.message : (_errors$name = errors[name]) == null ? void 0 : _errors$name.message;
       if (error) rowErrors.push(error);
       var prevValue = isRecurring && wizardData[data.name] && wizardData[data.name][index] ? wizardData[data.name][index][name] : wizardData[name];
       return /*#__PURE__*/React.createElement(Field, _extends({
@@ -127,10 +164,26 @@ FormRows.propTypes = {
 };
 FormRows.defaultProps = {};
 
-var Wrapper = styled.div.withConfig({
-  displayName: "Form__Wrapper",
-  componentId: "sc-11kuada-0"
-})(["padding:", ";background-color:", ";border:1px solid ", ";border-radius:16px;margin-bottom:16px;"], function (_ref) {
+function _templateObject2() {
+  var data = _taggedTemplateLiteralLoose(["\n  display: flex;\n  justify-content: flex-end;\n  margin-bottom: 8px;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteralLoose(["\n  padding: ", ";\n  background-color: ", ";\n  border: 1px solid ", ";\n  border-radius: 16px;\n  margin-bottom: 16px;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+var Wrapper = styled.div(_templateObject(), function (_ref) {
   var theme = _ref.theme;
   return theme.spacing(2, 2, 2, 6);
 }, function (_ref2) {
@@ -140,10 +193,7 @@ var Wrapper = styled.div.withConfig({
   var theme = _ref3.theme;
   return theme.palette.gray.regular;
 });
-var ButtonsWrapper = styled.div.withConfig({
-  displayName: "Form__ButtonsWrapper",
-  componentId: "sc-11kuada-1"
-})(["display:flex;justify-content:flex-end;margin-bottom:8px;"]);
+var ButtonsWrapper = styled.div(_templateObject2());
 
 var Form = function Form(_ref4) {
   var data = _ref4.data,
@@ -152,7 +202,7 @@ var Form = function Form(_ref4) {
   var isRecurring = data.recurring;
 
   var _useFieldArray = useFieldArray({
-    name: isRecurring ? data === null || data === void 0 ? void 0 : data.name : ""
+    name: isRecurring ? data == null ? void 0 : data.name : ""
   }),
       fields = _useFieldArray.fields,
       append = _useFieldArray.append,
@@ -228,13 +278,16 @@ var MegaFlowDefaultProps = {
   onFinish: function onFinish() {}
 };
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function _templateObject$1() {
+  var data = _taggedTemplateLiteralLoose([""]);
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var Wrapper$1 = styled.div.withConfig({
-  displayName: "src__Wrapper",
-  componentId: "osiobx-0"
-})([""]);
+  _templateObject$1 = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+var Wrapper$1 = styled.div(_templateObject$1());
 
 var MegaFlow = function MegaFlow(_ref) {
   var schema = _ref.schema,
@@ -247,16 +300,14 @@ var MegaFlow = function MegaFlow(_ref) {
   var steps = parsedSchema.steps;
 
   var _useState = useState(0),
-      _useState2 = _slicedToArray(_useState, 2),
-      currentStep = _useState2[0],
-      setCurrentStep = _useState2[1];
+      currentStep = _useState[0],
+      setCurrentStep = _useState[1];
 
   var isCurrentLastStep = currentStep === steps.length - 1;
 
-  var _useState3 = useState({}),
-      _useState4 = _slicedToArray(_useState3, 2),
-      wizardData = _useState4[0],
-      setWizardData = _useState4[1];
+  var _useState2 = useState({}),
+      wizardData = _useState2[0],
+      setWizardData = _useState2[1];
 
   var methods = useForm({
     mode: "onBlur",
@@ -266,7 +317,7 @@ var MegaFlow = function MegaFlow(_ref) {
   var onSubmit = function onSubmit(data) {
     // Set step data in global wizard object
     setWizardData(function (prev) {
-      return _objectSpread(_objectSpread({}, prev), data);
+      return _extends({}, prev, data);
     }); // Send step data to props
 
     if (onStepSubmit) onStepSubmit(data);
@@ -293,7 +344,7 @@ var MegaFlow = function MegaFlow(_ref) {
   };
 
   return /*#__PURE__*/React.createElement(AppContainer, {
-    icons: _objectSpread(_objectSpread({}, RocksKitIcons), Icons),
+    icons: _extends({}, RocksKitIcons, Icons),
     theme: RocksKitTheme
   }, /*#__PURE__*/React.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React.createElement(FormProvider, methods, /*#__PURE__*/React.createElement("form", {
     onSubmit: methods.handleSubmit(onSubmit)
