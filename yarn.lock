@@ -1149,7 +1149,7 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.30"
 
-"@fortawesome/free-solid-svg-icons@^5.13.1", "@fortawesome/free-solid-svg-icons@^5.14.0":
+"@fortawesome/free-solid-svg-icons@^5.14.0":
   version "5.14.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.14.0.tgz#970453f5e8c4915ad57856c3a0252ac63f6fec18"
   integrity sha512-M933RDM8cecaKMWDSk3FRYdnzWGW7kBBlGNGfvqLVwcwhUPNj9gcw+xZMrqBdRqxnSXdl3zWzTCNNGEtFUq67Q==
@@ -1213,10 +1213,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@licenserocks/kit@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-1.0.2.tgz#dd724c2022243938c16baa158daf47791203f557"
-  integrity sha512-/Nfgk72zxalCXIem4FHiiwMfvdtf5rgplzXYw+c/Du1Iz8AXV4x7JYQg/yS3fMi7lQEIPQabUCAB4+xGy2ApyQ==
+"@licenserocks/kit@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-1.0.4.tgz#7cf4c3b596c12170ae54065aed24c4ee0cea117f"
+  integrity sha512-UK/THjSX3MHWmRR/zxoTOIvglOcD2dP1UVoOCRgPvLH7nlbEcfVXvcKKYKNBH1HQLsTE4ecJBlClFMlLMtg2TQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.30"
     "@fortawesome/free-brands-svg-icons" "^5.14.0"
@@ -1228,7 +1228,7 @@
     qrcode.react "^1.0.0"
     react-collapse "^5.0.1"
     react-dropzone "^11.0.2"
-    react-hook-form "^6.2.0"
+    react-hook-form "^6.3.1"
     react-select "^3.1.0"
     styled-components "^5.1.1"
 
@@ -9704,10 +9704,10 @@ react-helmet-async@^1.0.2:
     react-fast-compare "^3.0.1"
     shallowequal "^1.1.0"
 
-react-hook-form@^6.2.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.3.0.tgz#5c1926d51d4532f44818ef73f96d1a8c11015a76"
-  integrity sha512-Xz7xxnILftxttc6H+miTSi2eYPehiW3XdsPaqY5dW8HcURFZPrnpxnmaRqz6JtZcbfRM8qjjppP/pOBaUzhn4w==
+react-hook-form@^6.3.1:
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.3.1.tgz#c4152ca8cc7f1f75c2f96f3b21526b7ac02bbdf9"
+  integrity sha512-gbIXrYrENNQ/e4JoyK8LNfJXYYDaccu/7uT8izOq/0vWUKEdRFwCFvP1aLZWZnuE5tAaaFOlFdjynMh9PiC/dQ==
 
 react-hotkeys@2.0.0:
   version "2.0.0"
