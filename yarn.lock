@@ -1213,10 +1213,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@licenserocks/kit@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-1.0.5.tgz#1450e71bef7ed4493c7eb3ebc362d9cf127dbd8d"
-  integrity sha512-sPXf3bgEKfqjw2fOcF79ivLw9hNlmg0LpmaVm4z4ga+Lbtj2xcuyN73D9FVnqrfegjpao70OKugnpffJoEkBbw==
+"@licenserocks/kit@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-1.0.8.tgz#996e81a33060c6371d60a7aecb7689ae8a3c9970"
+  integrity sha512-bHT3YN/asbL38E6DPLD3auwuo4+Y5P6BZbAZ/Tv1EjlxIbudQ8pEaOGRetJA72dxm4rC8ijVaWudHOi+iL1c4Q==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.30"
     "@fortawesome/free-brands-svg-icons" "^5.14.0"
@@ -1231,6 +1231,7 @@
     react-dropzone "^11.0.2"
     react-hook-form "^6.3.1"
     react-select "^3.1.0"
+    react-transition-group "^4.4.1"
     styled-components "^5.1.1"
 
 "@material-ui/core@^4.11.0":
@@ -9815,7 +9816,7 @@ react-textarea-autosize@^7.1.0:
     "@babel/runtime" "^7.1.2"
     prop-types "^15.6.0"
 
-react-transition-group@^4.3.0, react-transition-group@^4.4.0:
+react-transition-group@^4.3.0, react-transition-group@^4.4.0, react-transition-group@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
   integrity sha512-Djqr7OQ2aPUiYurhPalTrVy9ddmFCCzwhqQmtN+J3+3DzLO209Fdr70QrN8Z3DsglWql6iY1lDWAfpFiBtuKGw==

@@ -32,6 +32,10 @@
               "endpoint": "https://run.mocky.io/v3/a7e06c66-251c-4ca9-a8ac-cac5284d21a0",
               "required": "Product is required",
               "type": "reactSelect"
+            },
+            {
+              "name": "unit",
+              "placeholder": "Unit"
             }
           ]
         },
@@ -45,6 +49,10 @@
               "placeholder": "Amount",
               "startIcon": "hashtag",
               "type": "number"
+            },
+            {
+              "name": "unit",
+              "placeholder": "Unit"
             }
           ]
         },
