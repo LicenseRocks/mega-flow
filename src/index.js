@@ -9,17 +9,19 @@ import {
 } from "@licenserocks/kit";
 
 import { Form } from "./components";
-import { Icons } from "./theme";
+import { MegaFlowIcons } from "./theme";
 import { MegaFlowPropTypes, MegaFlowDefaultProps } from "./props";
 
 const Wrapper = styled.div``;
 
 const MegaFlow = ({
+  icons,
   schema,
   onFinish,
   onStepSubmit,
   wizardProps,
   wrapperProps,
+  ...props
 }) => {
   // Parse if schema was type of JSON string
   const parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
@@ -29,8 +31,7 @@ const MegaFlow = ({
   const isCurrentLastStep = currentStep === steps.length - 1;
   const [wizardData, setWizardData] = useState({});
 
-  const methods = useForm({
-    mode: "onBlur",
+  const { handleSubmit, ...methods } = useForm({
     defaultValues: wizardData,
   });
 
@@ -62,16 +63,20 @@ const MegaFlow = ({
   );
 
   return (
-    <AppContainer icons={{ ...RocksKitIcons, ...Icons }} theme={RocksKitTheme}>
+    <AppContainer
+      icons={{ ...RocksKitIcons, ...MegaFlowIcons, ...icons }}
+      theme={RocksKitTheme}
+    >
       <Wrapper {...wrapperProps}>
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Wizard
               currentStepContent={renderForm()}
               currentStepIndex={currentStep}
               setCurrentStepIndex={setCurrentStep}
               steps={stepsArray}
               {...wizardProps}
+              {...props}
             />
           </form>
         </FormProvider>

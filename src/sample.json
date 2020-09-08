@@ -11,7 +11,8 @@
             {
               "name": "documents",
               "required": "You must upload at least 1 document",
-              "type": "fileUpload"
+              "server": "https://run.mocky.io/v3/80d5e855-7a9c-4ad6-848a-fea855ca101c",
+              "type": "filePond"
             }
           ]
         }
