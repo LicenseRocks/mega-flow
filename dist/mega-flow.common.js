@@ -69,11 +69,17 @@ var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
     case "fileUpload":
       return kit.FileUpload;
 
+    case "filePond":
+      return kit.FilePond;
+
     case "reactSelect":
       return kit.ReactSelect;
 
     case "stepper":
       return kit.Stepper;
+
+    case "textArea":
+      return kit.TextArea;
 
     default:
       return kit.Input;
@@ -266,13 +272,14 @@ Form.propTypes = {
 };
 Form.defaultProps = {};
 
-var Icons = {
+var MegaFlowIcons = {
   faDownload: freeSolidSvgIcons.faDownload,
   faHashtag: freeSolidSvgIcons.faHashtag,
   faTrash: freeSolidSvgIcons.faTrash
 };
 
 var MegaFlowPropTypes = {
+  icons: PropTypes.arrayOf(PropTypes.shape()),
   schema: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   onFinish: PropTypes.func,
   onStepSubmit: PropTypes.func,
@@ -280,6 +287,7 @@ var MegaFlowPropTypes = {
   wrapperProps: PropTypes.shape
 };
 var MegaFlowDefaultProps = {
+  icons: [],
   onFinish: function onFinish() {}
 };
 
@@ -295,11 +303,14 @@ function _templateObject$1() {
 var Wrapper$1 = styled.div(_templateObject$1());
 
 var MegaFlow = function MegaFlow(_ref) {
-  var schema = _ref.schema,
+  var icons = _ref.icons,
+      schema = _ref.schema,
       onFinish = _ref.onFinish,
       onStepSubmit = _ref.onStepSubmit,
       wizardProps = _ref.wizardProps,
-      wrapperProps = _ref.wrapperProps;
+      wrapperProps = _ref.wrapperProps,
+      props = _objectWithoutPropertiesLoose(_ref, ["icons", "schema", "onFinish", "onStepSubmit", "wizardProps", "wrapperProps"]);
+
   // Parse if schema was type of JSON string
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
   var steps = parsedSchema.steps;
@@ -314,10 +325,11 @@ var MegaFlow = function MegaFlow(_ref) {
       wizardData = _useState2[0],
       setWizardData = _useState2[1];
 
-  var methods = reactHookForm.useForm({
-    mode: "onBlur",
+  var _useForm = reactHookForm.useForm({
     defaultValues: wizardData
-  });
+  }),
+      handleSubmit = _useForm.handleSubmit,
+      methods = _objectWithoutPropertiesLoose(_useForm, ["handleSubmit"]);
 
   var onSubmit = function onSubmit(data) {
     // Set step data in global wizard object
@@ -349,16 +361,16 @@ var MegaFlow = function MegaFlow(_ref) {
   };
 
   return /*#__PURE__*/React__default.createElement(kit.AppContainer, {
-    icons: _extends({}, kit.RocksKitIcons, Icons),
+    icons: _extends({}, kit.RocksKitIcons, MegaFlowIcons, icons),
     theme: kit.RocksKitTheme
   }, /*#__PURE__*/React__default.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React__default.createElement(reactHookForm.FormProvider, methods, /*#__PURE__*/React__default.createElement("form", {
-    onSubmit: methods.handleSubmit(onSubmit)
+    onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/React__default.createElement(kit.Wizard, _extends({
     currentStepContent: renderForm(),
     currentStepIndex: currentStep,
     setCurrentStepIndex: setCurrentStep,
     steps: stepsArray
-  }, wizardProps))))));
+  }, wizardProps, props))))));
 };
 
 MegaFlow.propTypes = MegaFlowPropTypes;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useFormContext, useFieldArray, useForm, FormProvider } from 'react-hook-form';
-import { FormRow, Alert, OutlineButton, Input, Stepper, ReactSelect, FileUpload, ToggleSwitch, Radio, Checkbox, Select, Icon, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
+import { FormRow, Alert, OutlineButton, Input, TextArea, Stepper, ReactSelect, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, Select, Icon, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
 import PropTypes from 'prop-types';
 import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -64,11 +64,17 @@ var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
     case "fileUpload":
       return FileUpload;
 
+    case "filePond":
+      return FilePond;
+
     case "reactSelect":
       return ReactSelect;
 
     case "stepper":
       return Stepper;
+
+    case "textArea":
+      return TextArea;
 
     default:
       return Input;
@@ -261,13 +267,14 @@ Form.propTypes = {
 };
 Form.defaultProps = {};
 
-var Icons = {
+var MegaFlowIcons = {
   faDownload: faDownload,
   faHashtag: faHashtag,
   faTrash: faTrash
 };
 
 var MegaFlowPropTypes = {
+  icons: PropTypes.arrayOf(PropTypes.shape()),
   schema: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   onFinish: PropTypes.func,
   onStepSubmit: PropTypes.func,
@@ -275,6 +282,7 @@ var MegaFlowPropTypes = {
   wrapperProps: PropTypes.shape
 };
 var MegaFlowDefaultProps = {
+  icons: [],
   onFinish: function onFinish() {}
 };
 
@@ -290,11 +298,14 @@ function _templateObject$1() {
 var Wrapper$1 = styled.div(_templateObject$1());
 
 var MegaFlow = function MegaFlow(_ref) {
-  var schema = _ref.schema,
+  var icons = _ref.icons,
+      schema = _ref.schema,
       onFinish = _ref.onFinish,
       onStepSubmit = _ref.onStepSubmit,
       wizardProps = _ref.wizardProps,
-      wrapperProps = _ref.wrapperProps;
+      wrapperProps = _ref.wrapperProps,
+      props = _objectWithoutPropertiesLoose(_ref, ["icons", "schema", "onFinish", "onStepSubmit", "wizardProps", "wrapperProps"]);
+
   // Parse if schema was type of JSON string
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
   var steps = parsedSchema.steps;
@@ -309,10 +320,11 @@ var MegaFlow = function MegaFlow(_ref) {
       wizardData = _useState2[0],
       setWizardData = _useState2[1];
 
-  var methods = useForm({
-    mode: "onBlur",
+  var _useForm = useForm({
     defaultValues: wizardData
-  });
+  }),
+      handleSubmit = _useForm.handleSubmit,
+      methods = _objectWithoutPropertiesLoose(_useForm, ["handleSubmit"]);
 
   var onSubmit = function onSubmit(data) {
     // Set step data in global wizard object
@@ -344,16 +356,16 @@ var MegaFlow = function MegaFlow(_ref) {
   };
 
   return /*#__PURE__*/React.createElement(AppContainer, {
-    icons: _extends({}, RocksKitIcons, Icons),
+    icons: _extends({}, RocksKitIcons, MegaFlowIcons, icons),
     theme: RocksKitTheme
   }, /*#__PURE__*/React.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React.createElement(FormProvider, methods, /*#__PURE__*/React.createElement("form", {
-    onSubmit: methods.handleSubmit(onSubmit)
+    onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/React.createElement(Wizard, _extends({
     currentStepContent: renderForm(),
     currentStepIndex: currentStep,
     setCurrentStepIndex: setCurrentStep,
     steps: stepsArray
-  }, wizardProps))))));
+  }, wizardProps, props))))));
 };
 
 MegaFlow.propTypes = MegaFlowPropTypes;
