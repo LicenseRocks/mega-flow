@@ -4,7 +4,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
-export const Icons = {
+export const MegaFlowIcons = {
   faDownload,
   faHashtag,
   faTrash,

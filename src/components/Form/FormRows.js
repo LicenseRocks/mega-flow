@@ -4,6 +4,7 @@ import { useFormContext } from "react-hook-form";
 import {
   Alert,
   Checkbox,
+  FilePond,
   FileUpload,
   FormRow,
   Input,
@@ -12,6 +13,7 @@ import {
   ReactSelect,
   Select,
   Stepper,
+  TextArea,
   ToggleSwitch,
 } from "@licenserocks/kit";
 
@@ -27,10 +29,14 @@ const mapFieldTypeToComponent = (fieldType) => {
       return ToggleSwitch;
     case "fileUpload":
       return FileUpload;
+    case "filePond":
+      return FilePond;
     case "reactSelect":
       return ReactSelect;
     case "stepper":
       return Stepper;
+    case "textArea":
+      return TextArea;
     default:
       return Input;
   }
