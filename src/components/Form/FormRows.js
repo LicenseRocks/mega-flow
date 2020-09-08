@@ -13,6 +13,7 @@ import {
   ReactSelect,
   Select,
   Stepper,
+  TextArea,
   ToggleSwitch,
 } from "@licenserocks/kit";
 
@@ -34,6 +35,8 @@ const mapFieldTypeToComponent = (fieldType) => {
       return ReactSelect;
     case "stepper":
       return Stepper;
+    case "textArea":
+      return TextArea;
     default:
       return Input;
   }
