@@ -19,6 +19,7 @@ const MegaFlow = ({
   schema,
   onFinish,
   onStepSubmit,
+  theme,
   wizardProps,
   wrapperProps,
   ...props
@@ -66,7 +67,7 @@ const MegaFlow = ({
   return (
     <AppContainer
       icons={{ ...RocksKitIcons, ...MegaFlowIcons, ...icons }}
-      theme={RocksKitTheme}
+      theme={theme || RocksKitTheme}
     >
       <Wrapper {...wrapperProps}>
         <FormProvider {...methods}>

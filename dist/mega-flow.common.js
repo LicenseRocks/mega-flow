@@ -183,11 +183,13 @@ FormField.propTypes = {
     recurring: PropTypes.bool,
     rows: PropTypes.arrayOf(PropTypes.shape({}))
   }).isRequired,
+  field: PropTypes.shape({}).isRequired,
+  fieldId: PropTypes.number.isRequired,
+  isRecurring: PropTypes.bool.isRequired,
   stepIndex: PropTypes.number.isRequired,
   wizardData: PropTypes.shape({}).isRequired,
-  index: PropTypes.number.isRequired,
-  isRecurring: PropTypes.bool.isRequired,
-  rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+  rowId: PropTypes.number.isRequired,
+  rowErrors: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 FormField.defaultProps = {};
 
@@ -371,8 +373,9 @@ var MegaFlowPropTypes = {
   schema: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   onFinish: PropTypes.func,
   onStepSubmit: PropTypes.func,
-  wizardProps: PropTypes.shape,
-  wrapperProps: PropTypes.shape
+  theme: PropTypes.shape(),
+  wizardProps: PropTypes.shape(),
+  wrapperProps: PropTypes.shape()
 };
 var MegaFlowDefaultProps = {
   icons: [],
@@ -395,9 +398,10 @@ var MegaFlow = function MegaFlow(_ref) {
       schema = _ref.schema,
       onFinish = _ref.onFinish,
       onStepSubmit = _ref.onStepSubmit,
+      theme = _ref.theme,
       wizardProps = _ref.wizardProps,
       wrapperProps = _ref.wrapperProps,
-      props = _objectWithoutPropertiesLoose(_ref, ["icons", "schema", "onFinish", "onStepSubmit", "wizardProps", "wrapperProps"]);
+      props = _objectWithoutPropertiesLoose(_ref, ["icons", "schema", "onFinish", "onStepSubmit", "theme", "wizardProps", "wrapperProps"]);
 
   // Parse if schema was type of JSON string
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
@@ -450,7 +454,7 @@ var MegaFlow = function MegaFlow(_ref) {
 
   return /*#__PURE__*/React__default.createElement(kit.AppContainer, {
     icons: _extends({}, kit.RocksKitIcons, MegaFlowIcons, icons),
-    theme: kit.RocksKitTheme
+    theme: theme || kit.RocksKitTheme
   }, /*#__PURE__*/React__default.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React__default.createElement(reactHookForm.FormProvider, methods, /*#__PURE__*/React__default.createElement("form", {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/React__default.createElement(kit.Wizard, _extends({
