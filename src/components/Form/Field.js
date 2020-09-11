@@ -82,24 +82,18 @@ const checkCondition = (conditions, control, wizardData) => {
 export const FormField = ({
   data,
   field,
+  hasError,
   isRecurring,
   stepIndex,
   fieldId,
   rowId,
-  rowErrors,
   wizardData,
 }) => {
-  const { control, errors, register } = useFormContext();
+  const { control, register } = useFormContext();
   const { conditions, defaultValue, name, required, type, ...others } = field;
   const Field = mapFieldTypeToComponent(type);
   const fieldKey = `step-${stepIndex}-row-${rowId}-field-${fieldId}`;
   const fieldName = isRecurring ? `${data.name}[${index}].${name}` : name;
-
-  const error =
-    isRecurring && errors[data.name] && errors[data.name][index]
-      ? errors[data.name][index][name]?.message
-      : errors[name]?.message;
-  if (error) rowErrors.push(error);
 
   const prevValue =
     isRecurring && wizardData[data.name] && wizardData[data.name][index]
@@ -113,7 +107,7 @@ export const FormField = ({
     <Field
       control={control}
       defaultValue={prevValue || defaultValue}
-      hasError={!!error}
+      hasError={hasError}
       isRequired={required}
       key={fieldKey}
       name={fieldName}
@@ -134,11 +128,11 @@ FormField.propTypes = {
   }).isRequired,
   field: PropTypes.shape({}).isRequired,
   fieldId: PropTypes.number.isRequired,
+  hasError: PropTypes.bool.isRequired,
   isRecurring: PropTypes.bool.isRequired,
   stepIndex: PropTypes.number.isRequired,
   wizardData: PropTypes.shape({}).isRequired,
   rowId: PropTypes.number.isRequired,
-  rowErrors: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 FormField.defaultProps = {};

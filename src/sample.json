@@ -1,6 +1,43 @@
 {
   "steps": [
     {
+      "title": "Basic info",
+      "rows": [
+        {
+          "label": "Title (English)",
+          "fields": [
+            {
+              "name": "title",
+              "placeholder": "The English title of the movie",
+              "required": "Title is required"
+            }
+          ]
+        },
+        {
+          "label": "Amount",
+          "fields": [
+            {
+              "name": "amount",
+              "placeholder": "Amount",
+              "required": "Amount is required",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "label": "Price",
+          "fields": [
+            {
+              "name": "price",
+              "placeholder": "Price",
+              "required": "Price is required",
+              "type": "number"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "Availability",
       "rows": [
         {

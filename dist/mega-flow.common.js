@@ -133,20 +133,17 @@ var checkCondition = function checkCondition(conditions, control, wizardData) {
 };
 
 var FormField = function FormField(_ref) {
-  var _errors$data$name$ind, _errors$name;
-
   var data = _ref.data,
       field = _ref.field,
+      hasError = _ref.hasError,
       isRecurring = _ref.isRecurring,
       stepIndex = _ref.stepIndex,
       fieldId = _ref.fieldId,
       rowId = _ref.rowId,
-      rowErrors = _ref.rowErrors,
       wizardData = _ref.wizardData;
 
   var _useFormContext = reactHookForm.useFormContext(),
       control = _useFormContext.control,
-      errors = _useFormContext.errors,
       register = _useFormContext.register;
 
   var conditions = field.conditions,
@@ -159,15 +156,13 @@ var FormField = function FormField(_ref) {
   var Field = mapFieldTypeToComponent(type);
   var fieldKey = "step-" + stepIndex + "-row-" + rowId + "-field-" + fieldId;
   var fieldName = isRecurring ? data.name + "[" + index + "]." + name : name;
-  var error = isRecurring && errors[data.name] && errors[data.name][index] ? (_errors$data$name$ind = errors[data.name][index][name]) == null ? void 0 : _errors$data$name$ind.message : (_errors$name = errors[name]) == null ? void 0 : _errors$name.message;
-  if (error) rowErrors.push(error);
   var prevValue = isRecurring && wizardData[data.name] && wizardData[data.name][index] ? wizardData[data.name][index][name] : wizardData[name];
   var showIfHasCondition = checkCondition(conditions, control, wizardData);
   if (!showIfHasCondition) return null;
   return /*#__PURE__*/React__default.createElement(Field, _extends({
     control: control,
     defaultValue: prevValue || defaultValue,
-    hasError: !!error,
+    hasError: hasError,
     isRequired: required,
     key: fieldKey,
     name: fieldName,
@@ -185,11 +180,11 @@ FormField.propTypes = {
   }).isRequired,
   field: PropTypes.shape({}).isRequired,
   fieldId: PropTypes.number.isRequired,
+  hasError: PropTypes.bool.isRequired,
   isRecurring: PropTypes.bool.isRequired,
   stepIndex: PropTypes.number.isRequired,
   wizardData: PropTypes.shape({}).isRequired,
-  rowId: PropTypes.number.isRequired,
-  rowErrors: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+  rowId: PropTypes.number.isRequired
 };
 FormField.defaultProps = {};
 
@@ -230,13 +225,17 @@ var FormRows = function FormRows(_ref) {
       content: row.message,
       mb: 2
     }), (_row$fields = row.fields) == null ? void 0 : _row$fields.map(function (field, fieldId) {
+      var _errors$data$name$ind, _errors$field$name;
+
+      var error = isRecurring && errors[data.name] && errors[data.name][index] ? (_errors$data$name$ind = errors[data.name][index][field.name]) == null ? void 0 : _errors$data$name$ind.message : (_errors$field$name = errors[field.name]) == null ? void 0 : _errors$field$name.message;
+      if (error) rowErrors.push(error);
       return /*#__PURE__*/React__default.createElement(FormField, {
         data: data,
         field: field,
         fieldId: fieldId,
+        hasError: !!error,
         isRecurring: isRecurring,
         rowId: idx,
-        rowErrors: rowErrors,
         stepIndex: stepIndex,
         wizardData: wizardData
       });

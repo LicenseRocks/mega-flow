@@ -38,18 +38,27 @@ export const FormRows = ({
               <Alert color={row.messageColor} content={row.message} mb={2} />
             )}
 
-            {row.fields?.map((field, fieldId) => (
-              <FormField
-                data={data}
-                field={field}
-                fieldId={fieldId}
-                isRecurring={isRecurring}
-                rowId={idx}
-                rowErrors={rowErrors}
-                stepIndex={stepIndex}
-                wizardData={wizardData}
-              />
-            ))}
+            {row.fields?.map((field, fieldId) => {
+              const error =
+                isRecurring && errors[data.name] && errors[data.name][index]
+                  ? errors[data.name][index][field.name]?.message
+                  : errors[field.name]?.message;
+
+              if (error) rowErrors.push(error);
+
+              return (
+                <FormField
+                  data={data}
+                  field={field}
+                  fieldId={fieldId}
+                  hasError={!!error}
+                  isRecurring={isRecurring}
+                  rowId={idx}
+                  stepIndex={stepIndex}
+                  wizardData={wizardData}
+                />
+              );
+            })}
           </FormRow>
         );
       })}
