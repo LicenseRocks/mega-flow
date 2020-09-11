@@ -36,11 +36,12 @@ const MegaFlow = ({
   });
 
   const onSubmit = (data) => {
-    // Set step data in global wizard object
-    setWizardData((prev) => ({
-      ...prev,
+    const currentState = {
+      ...wizardData,
       ...data,
-    }));
+    };
+    // Set step data in global wizard object
+    setWizardData(currentState);
 
     // Send step data to props
     if (onStepSubmit) onStepSubmit(data);
@@ -48,7 +49,7 @@ const MegaFlow = ({
     if (!isCurrentLastStep) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      onFinish(wizardData);
+      onFinish(currentState);
     }
   };
 

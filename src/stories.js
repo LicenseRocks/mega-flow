@@ -19,7 +19,7 @@ export const main = () => {
     <Wrapper>
       <MegaFlow
         headerFadeColor="#F7F7F9"
-        onFinish={() => alert("Thanks for using MegaFlow.")}
+        onFinish={(form) => console.log("form: ", form)}
         schema={schema}
       />
     </Wrapper>
