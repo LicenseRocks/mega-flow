@@ -57,6 +57,9 @@ var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
     case "select":
       return kit.Select;
 
+    case "borderedRadio":
+      return kit.BorderedRadio;
+
     case "checkbox":
       return kit.Checkbox;
 
@@ -86,6 +89,105 @@ var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
   }
 };
 
+var getConditionValues = function getConditionValues(conditions, control, wizardData) {
+  var name = conditions.map(function (c) {
+    if (c.includes(":")) {
+      var _c$split = c.split(":"),
+          _name = _c$split[0];
+
+      return _name;
+    }
+
+    return c;
+  });
+  return reactHookForm.useWatch({
+    control: control,
+    name: name,
+    defaultValue: wizardData
+  });
+};
+
+var checkCondition = function checkCondition(conditions, control, wizardData) {
+  var hasConditions = conditions && conditions.length > 0;
+
+  if (hasConditions) {
+    var conditionValues = getConditionValues(conditions, control, wizardData);
+    return conditions.some(function (c) {
+      var _conditionValues$c;
+
+      if (c.includes(":")) {
+        var _conditionValues$name;
+
+        var _c$split2 = c.split(":"),
+            name = _c$split2[0],
+            value = _c$split2[1];
+
+        return conditionValues[name] === value || ((_conditionValues$name = conditionValues[name]) == null ? void 0 : _conditionValues$name.includes(value));
+      }
+
+      return ((_conditionValues$c = conditionValues[c]) == null ? void 0 : _conditionValues$c.length) > 0;
+    });
+  }
+
+  return true;
+};
+
+var FormField = function FormField(_ref) {
+  var data = _ref.data,
+      field = _ref.field,
+      hasError = _ref.hasError,
+      isRecurring = _ref.isRecurring,
+      stepIndex = _ref.stepIndex,
+      fieldId = _ref.fieldId,
+      rowId = _ref.rowId,
+      wizardData = _ref.wizardData;
+
+  var _useFormContext = reactHookForm.useFormContext(),
+      control = _useFormContext.control,
+      register = _useFormContext.register;
+
+  var conditions = field.conditions,
+      defaultValue = field.defaultValue,
+      name = field.name,
+      required = field.required,
+      type = field.type,
+      others = _objectWithoutPropertiesLoose(field, ["conditions", "defaultValue", "name", "required", "type"]);
+
+  var Field = mapFieldTypeToComponent(type);
+  var fieldKey = "step-" + stepIndex + "-row-" + rowId + "-field-" + fieldId;
+  var fieldName = isRecurring ? data.name + "[" + index + "]." + name : name;
+  var prevValue = isRecurring && wizardData[data.name] && wizardData[data.name][index] ? wizardData[data.name][index][name] : wizardData[name];
+  var showIfHasCondition = checkCondition(conditions, control, wizardData);
+  if (!showIfHasCondition) return null;
+  return /*#__PURE__*/React__default.createElement(Field, _extends({
+    control: control,
+    defaultValue: prevValue || defaultValue,
+    hasError: hasError,
+    isRequired: required,
+    key: fieldKey,
+    name: fieldName,
+    register: register({
+      required: required
+    }),
+    type: type
+  }, others));
+};
+FormField.propTypes = {
+  data: PropTypes.shape({
+    name: PropTypes.string,
+    recurring: PropTypes.bool,
+    rows: PropTypes.arrayOf(PropTypes.shape({}))
+  }).isRequired,
+  field: PropTypes.shape({}).isRequired,
+  fieldId: PropTypes.number.isRequired,
+  hasError: PropTypes.bool.isRequired,
+  isRecurring: PropTypes.bool.isRequired,
+  stepIndex: PropTypes.number.isRequired,
+  wizardData: PropTypes.shape({}).isRequired,
+  rowId: PropTypes.number.isRequired
+};
+FormField.defaultProps = {};
+
 var FormRows = function FormRows(_ref) {
   var data = _ref.data,
       index = _ref.index,
@@ -95,9 +197,7 @@ var FormRows = function FormRows(_ref) {
       wizardData = _ref.wizardData;
 
   var _useFormContext = reactHookForm.useFormContext(),
-      control = _useFormContext.control,
-      errors = _useFormContext.errors,
-      register = _useFormContext.register;
+      errors = _useFormContext.errors;
 
   var _useState = React.useState(false),
       expanded = _useState[0],
@@ -105,6 +205,9 @@ var FormRows = function FormRows(_ref) {
 
   var showExpandButton = rows == null ? void 0 : rows.some(function (row) {
     return row.expandable;
+  });
+  var checkConditions = rows == null ? void 0 : rows.some(function (row) {
+    return;
   });
   return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, rows == null ? void 0 : rows.map(function (row, idx) {
     var _row$fields;
@@ -120,36 +223,22 @@ var FormRows = function FormRows(_ref) {
     }, row.message && /*#__PURE__*/React__default.createElement(kit.Alert, {
       color: row.messageColor,
       content: row.message,
-      style: {
-        marginBottom: 8
-      }
-    }), (_row$fields = row.fields) == null ? void 0 : _row$fields.map(function (_ref2, fieldId) {
-      var _errors$data$name$ind, _errors$name;
+      mb: 2
+    }), (_row$fields = row.fields) == null ? void 0 : _row$fields.map(function (field, fieldId) {
+      var _errors$data$name$ind, _errors$field$name;
 
-      var defaultValue = _ref2.defaultValue,
-          name = _ref2.name,
-          required = _ref2.required,
-          type = _ref2.type,
-          field = _objectWithoutPropertiesLoose(_ref2, ["defaultValue", "name", "required", "type"]);
-
-      var Field = mapFieldTypeToComponent(type);
-      var fieldKey = "step-" + stepIndex + "-row-" + idx + "-field-" + fieldId;
-      var fieldName = isRecurring ? data.name + "[" + index + "]." + name : name;
-      var error = isRecurring && errors[data.name] && errors[data.name][index] ? (_errors$data$name$ind = errors[data.name][index][name]) == null ? void 0 : _errors$data$name$ind.message : (_errors$name = errors[name]) == null ? void 0 : _errors$name.message;
+      var error = isRecurring && errors[data.name] && errors[data.name][index] ? (_errors$data$name$ind = errors[data.name][index][field.name]) == null ? void 0 : _errors$data$name$ind.message : (_errors$field$name = errors[field.name]) == null ? void 0 : _errors$field$name.message;
       if (error) rowErrors.push(error);
-      var prevValue = isRecurring && wizardData[data.name] && wizardData[data.name][index] ? wizardData[data.name][index][name] : wizardData[name];
-      return /*#__PURE__*/React__default.createElement(Field, _extends({
-        control: control,
-        defaultValue: prevValue || defaultValue,
+      return /*#__PURE__*/React__default.createElement(FormField, {
+        data: data,
+        field: field,
+        fieldId: fieldId,
         hasError: !!error,
-        isRequired: required,
-        key: fieldKey,
-        name: fieldName,
-        register: register({
-          required: required
-        }),
-        type: type
-      }, field));
+        isRecurring: isRecurring,
+        rowId: idx,
+        stepIndex: stepIndex,
+        wizardData: wizardData
+      });
     }));
   }), showExpandButton && /*#__PURE__*/React__default.createElement(kit.OutlineButton, {
     color: "secondary",
@@ -283,8 +372,9 @@ var MegaFlowPropTypes = {
   schema: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   onFinish: PropTypes.func,
   onStepSubmit: PropTypes.func,
-  wizardProps: PropTypes.shape,
-  wrapperProps: PropTypes.shape
+  theme: PropTypes.shape(),
+  wizardProps: PropTypes.shape(),
+  wrapperProps: PropTypes.shape()
 };
 var MegaFlowDefaultProps = {
   icons: [],
@@ -307,9 +397,10 @@ var MegaFlow = function MegaFlow(_ref) {
       schema = _ref.schema,
       onFinish = _ref.onFinish,
       onStepSubmit = _ref.onStepSubmit,
+      theme = _ref.theme,
       wizardProps = _ref.wizardProps,
       wrapperProps = _ref.wrapperProps,
-      props = _objectWithoutPropertiesLoose(_ref, ["icons", "schema", "onFinish", "onStepSubmit", "wizardProps", "wrapperProps"]);
+      props = _objectWithoutPropertiesLoose(_ref, ["icons", "schema", "onFinish", "onStepSubmit", "theme", "wizardProps", "wrapperProps"]);
 
   // Parse if schema was type of JSON string
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
@@ -332,10 +423,10 @@ var MegaFlow = function MegaFlow(_ref) {
       methods = _objectWithoutPropertiesLoose(_useForm, ["handleSubmit"]);
 
   var onSubmit = function onSubmit(data) {
-    // Set step data in global wizard object
-    setWizardData(function (prev) {
-      return _extends({}, prev, data);
-    }); // Send step data to props
+    var currentState = _extends({}, wizardData, data); // Set step data in global wizard object
+
+
+    setWizardData(currentState); // Send step data to props
 
     if (onStepSubmit) onStepSubmit(data);
 
@@ -344,7 +435,7 @@ var MegaFlow = function MegaFlow(_ref) {
         return prev + 1;
       });
     } else {
-      onFinish(wizardData);
+      onFinish(currentState);
     }
   };
 
@@ -362,7 +453,7 @@ var MegaFlow = function MegaFlow(_ref) {
 
   return /*#__PURE__*/React__default.createElement(kit.AppContainer, {
     icons: _extends({}, kit.RocksKitIcons, MegaFlowIcons, icons),
-    theme: kit.RocksKitTheme
+    theme: theme || kit.RocksKitTheme
   }, /*#__PURE__*/React__default.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React__default.createElement(reactHookForm.FormProvider, methods, /*#__PURE__*/React__default.createElement("form", {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/React__default.createElement(kit.Wizard, _extends({

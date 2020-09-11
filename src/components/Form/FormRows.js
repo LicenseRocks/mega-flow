@@ -1,46 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useFormContext } from "react-hook-form";
-import {
-  Alert,
-  Checkbox,
-  FilePond,
-  FileUpload,
-  FormRow,
-  Input,
-  OutlineButton,
-  Radio,
-  ReactSelect,
-  Select,
-  Stepper,
-  TextArea,
-  ToggleSwitch,
-} from "@licenserocks/kit";
+import { Alert, FormRow, OutlineButton } from "@licenserocks/kit";
 
-const mapFieldTypeToComponent = (fieldType) => {
-  switch (fieldType) {
-    case "select":
-      return Select;
-    case "checkbox":
-      return Checkbox;
-    case "radio":
-      return Radio;
-    case "toggleSwitch":
-      return ToggleSwitch;
-    case "fileUpload":
-      return FileUpload;
-    case "filePond":
-      return FilePond;
-    case "reactSelect":
-      return ReactSelect;
-    case "stepper":
-      return Stepper;
-    case "textArea":
-      return TextArea;
-    default:
-      return Input;
-  }
-};
+import { FormField } from "./Field";
 
 export const FormRows = ({
   data,
@@ -50,9 +13,12 @@ export const FormRows = ({
   stepIndex,
   wizardData,
 }) => {
-  const { control, errors, register } = useFormContext();
+  const { errors } = useFormContext();
   const [expanded, setExpanded] = useState(false);
   const showExpandButton = rows?.some((row) => row.expandable);
+  const checkConditions = rows?.some((row) => {
+    return;
+  });
 
   return (
     <>
@@ -69,51 +35,30 @@ export const FormRows = ({
             show={showRow}
           >
             {row.message && (
-              <Alert
-                color={row.messageColor}
-                content={row.message}
-                style={{ marginBottom: 8 }}
-              />
+              <Alert color={row.messageColor} content={row.message} mb={2} />
             )}
 
-            {row.fields?.map(
-              ({ defaultValue, name, required, type, ...field }, fieldId) => {
-                const Field = mapFieldTypeToComponent(type);
-                const fieldKey = `step-${stepIndex}-row-${idx}-field-${fieldId}`;
-                const fieldName = isRecurring
-                  ? `${data.name}[${index}].${name}`
-                  : name;
+            {row.fields?.map((field, fieldId) => {
+              const error =
+                isRecurring && errors[data.name] && errors[data.name][index]
+                  ? errors[data.name][index][field.name]?.message
+                  : errors[field.name]?.message;
 
-                const error =
-                  isRecurring && errors[data.name] && errors[data.name][index]
-                    ? errors[data.name][index][name]?.message
-                    : errors[name]?.message;
-                if (error) rowErrors.push(error);
+              if (error) rowErrors.push(error);
 
-                const prevValue =
-                  isRecurring &&
-                  wizardData[data.name] &&
-                  wizardData[data.name][index]
-                    ? wizardData[data.name][index][name]
-                    : wizardData[name];
-
-                return (
-                  <Field
-                    control={control}
-                    defaultValue={prevValue || defaultValue}
-                    hasError={!!error}
-                    isRequired={required}
-                    key={fieldKey}
-                    name={fieldName}
-                    register={register({
-                      required,
-                    })}
-                    type={type}
-                    {...field}
-                  />
-                );
-              }
-            )}
+              return (
+                <FormField
+                  data={data}
+                  field={field}
+                  fieldId={fieldId}
+                  hasError={!!error}
+                  isRecurring={isRecurring}
+                  rowId={idx}
+                  stepIndex={stepIndex}
+                  wizardData={wizardData}
+                />
+              );
+            })}
           </FormRow>
         );
       })}
