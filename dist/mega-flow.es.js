@@ -435,7 +435,9 @@ var MegaFlow = function MegaFlow(_ref) {
   };
 
   var stepsArray = steps.map(function (st) {
-    return st.title;
+    return {
+      title: st.title
+    };
   });
 
   var renderForm = function renderForm() {

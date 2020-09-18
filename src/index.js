@@ -54,7 +54,9 @@ const MegaFlow = ({
     }
   };
 
-  const stepsArray = steps.map((st) => st.title);
+  const stepsArray = steps.map((st) => ({
+    title: st.title,
+  }));
 
   const renderForm = () => (
     <Form
