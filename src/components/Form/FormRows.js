@@ -16,9 +16,6 @@ export const FormRows = ({
   const { errors } = useFormContext();
   const [expanded, setExpanded] = useState(false);
   const showExpandButton = rows?.some((row) => row.expandable);
-  const checkConditions = rows?.some((row) => {
-    return;
-  });
 
   return (
     <>
@@ -53,6 +50,7 @@ export const FormRows = ({
                   fieldId={fieldId}
                   hasError={!!error}
                   isRecurring={isRecurring}
+                  recurringIndex={index}
                   rowId={idx}
                   stepIndex={stepIndex}
                   wizardData={wizardData}

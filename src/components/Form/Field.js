@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useFormContext, useWatch } from "react-hook-form";
 import {
-  Alert,
   BorderedRadio,
   Checkbox,
   FilePond,
   FileUpload,
-  FormRow,
   Input,
-  OutlineButton,
+  PriceField,
   Radio,
   ReactSelect,
   Select,
@@ -34,6 +32,8 @@ const mapFieldTypeToComponent = (fieldType) => {
       return FileUpload;
     case "filePond":
       return FilePond;
+    case "price":
+      return PriceField;
     case "reactSelect":
       return ReactSelect;
     case "stepper":
@@ -48,8 +48,8 @@ const mapFieldTypeToComponent = (fieldType) => {
 const getConditionValues = (conditions, control, wizardData) => {
   const name = conditions.map((c) => {
     if (c.includes(":")) {
-      const [name] = c.split(":");
-      return name;
+      const [n] = c.split(":");
+      return n;
     }
     return c;
   });
@@ -84,6 +84,7 @@ export const FormField = ({
   field,
   hasError,
   isRecurring,
+  recurringIndex,
   stepIndex,
   fieldId,
   rowId,
@@ -93,11 +94,15 @@ export const FormField = ({
   const { conditions, defaultValue, name, required, type, ...others } = field;
   const Field = mapFieldTypeToComponent(type);
   const fieldKey = `step-${stepIndex}-row-${rowId}-field-${fieldId}`;
-  const fieldName = isRecurring ? `${data.name}[${index}].${name}` : name;
+  const fieldName = isRecurring
+    ? `${data.name}[${recurringIndex}].${name}`
+    : name;
 
   const prevValue =
-    isRecurring && wizardData[data.name] && wizardData[data.name][index]
-      ? wizardData[data.name][index][name]
+    isRecurring &&
+    wizardData[data.name] &&
+    wizardData[data.name][recurringIndex]
+      ? wizardData[data.name][recurringIndex][name]
       : wizardData[name];
 
   const showIfHasCondition = checkCondition(conditions, control, wizardData);
@@ -126,13 +131,22 @@ FormField.propTypes = {
     recurring: PropTypes.bool,
     rows: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
-  field: PropTypes.shape({}).isRequired,
+  field: PropTypes.shape({
+    conditions: PropTypes.arrayOf(PropTypes.string),
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    name: PropTypes.string,
+    required: PropTypes.string,
+    type: PropTypes.string,
+  }).isRequired,
   fieldId: PropTypes.number.isRequired,
   hasError: PropTypes.bool.isRequired,
   isRecurring: PropTypes.bool.isRequired,
+  recurringIndex: PropTypes.number,
   stepIndex: PropTypes.number.isRequired,
   wizardData: PropTypes.shape({}).isRequired,
   rowId: PropTypes.number.isRequired,
 };
 
-FormField.defaultProps = {};
+FormField.defaultProps = {
+  recurringIndex: null,
+};

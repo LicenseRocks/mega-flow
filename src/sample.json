@@ -31,7 +31,7 @@
               "name": "price",
               "placeholder": "Price",
               "required": "Price is required",
-              "type": "number"
+              "type": "price"
             }
           ]
         }
@@ -62,9 +62,12 @@
         {
           "fields": [
             {
-              "isMulti": true,
+              "allowSelectAll": true,
+              "allOption": {
+                "label": "All rights",
+                "value": "*"
+              },
               "options": [
-                { "label": "All rights", "value": "all" },
                 { "label": "Theatrical", "value": "theatrical" },
                 { "label": "Non-Theatrical", "value": "non-theatrical" },
                 { "label": "TVOD (Transactional VoD)", "value": "tvod" },
@@ -96,10 +99,13 @@
         {
           "fields": [
             {
-              "isMulti": true,
+              "allowSelectAll": true,
+              "allOption": {
+                "label": "All countries",
+                "value": "*"
+              },
               "name": "territories",
               "options": [
-                { "label": "All countries", "value": "all" },
                 { "label": "Afghanistan", "value": "AF" },
                 { "label": "Åland Islands", "value": "AX" },
                 { "label": "Albania", "value": "AL" },
