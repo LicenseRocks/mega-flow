@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useFormContext, useWatch, useFieldArray, useForm, FormProvider } from 'react-hook-form';
-import { Input, TextArea, Stepper, ReactSelect, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, FormRow, Alert, OutlineButton, Icon, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
+import { Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, FormRow, Alert, OutlineButton, Icon, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
 import PropTypes from 'prop-types';
 import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -70,6 +70,9 @@ var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
     case "filePond":
       return FilePond;
 
+    case "price":
+      return PriceField;
+
     case "reactSelect":
       return ReactSelect;
 
@@ -88,9 +91,9 @@ var getConditionValues = function getConditionValues(conditions, control, wizard
   var name = conditions.map(function (c) {
     if (c.includes(":")) {
       var _c$split = c.split(":"),
-          _name = _c$split[0];
+          n = _c$split[0];
 
-      return _name;
+      return n;
     }
 
     return c;
@@ -132,6 +135,7 @@ var FormField = function FormField(_ref) {
       field = _ref.field,
       hasError = _ref.hasError,
       isRecurring = _ref.isRecurring,
+      recurringIndex = _ref.recurringIndex,
       stepIndex = _ref.stepIndex,
       fieldId = _ref.fieldId,
       rowId = _ref.rowId,
@@ -150,8 +154,8 @@ var FormField = function FormField(_ref) {
 
   var Field = mapFieldTypeToComponent(type);
   var fieldKey = "step-" + stepIndex + "-row-" + rowId + "-field-" + fieldId;
-  var fieldName = isRecurring ? data.name + "[" + index + "]." + name : name;
-  var prevValue = isRecurring && wizardData[data.name] && wizardData[data.name][index] ? wizardData[data.name][index][name] : wizardData[name];
+  var fieldName = isRecurring ? data.name + "[" + recurringIndex + "]." + name : name;
+  var prevValue = isRecurring && wizardData[data.name] && wizardData[data.name][recurringIndex] ? wizardData[data.name][recurringIndex][name] : wizardData[name];
   var showIfHasCondition = checkCondition(conditions, control, wizardData);
   if (!showIfHasCondition) return null;
   return /*#__PURE__*/React.createElement(Field, _extends({
@@ -173,15 +177,24 @@ FormField.propTypes = {
     recurring: PropTypes.bool,
     rows: PropTypes.arrayOf(PropTypes.shape({}))
   }).isRequired,
-  field: PropTypes.shape({}).isRequired,
+  field: PropTypes.shape({
+    conditions: PropTypes.arrayOf(PropTypes.string),
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    name: PropTypes.string,
+    required: PropTypes.string,
+    type: PropTypes.string
+  }).isRequired,
   fieldId: PropTypes.number.isRequired,
   hasError: PropTypes.bool.isRequired,
   isRecurring: PropTypes.bool.isRequired,
+  recurringIndex: PropTypes.number,
   stepIndex: PropTypes.number.isRequired,
   wizardData: PropTypes.shape({}).isRequired,
   rowId: PropTypes.number.isRequired
 };
-FormField.defaultProps = {};
+FormField.defaultProps = {
+  recurringIndex: null
+};
 
 var FormRows = function FormRows(_ref) {
   var data = _ref.data,
@@ -200,9 +213,6 @@ var FormRows = function FormRows(_ref) {
 
   var showExpandButton = rows == null ? void 0 : rows.some(function (row) {
     return row.expandable;
-  });
-  var checkConditions = rows == null ? void 0 : rows.some(function (row) {
-    return;
   });
   return /*#__PURE__*/React.createElement(React.Fragment, null, rows == null ? void 0 : rows.map(function (row, idx) {
     var _row$fields;
@@ -230,6 +240,7 @@ var FormRows = function FormRows(_ref) {
         fieldId: fieldId,
         hasError: !!error,
         isRecurring: isRecurring,
+        recurringIndex: index,
         rowId: idx,
         stepIndex: stepIndex,
         wizardData: wizardData
