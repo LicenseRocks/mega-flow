@@ -1,6 +1,6 @@
 {
   "name": "@licenserocks/mega-flow",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "",
   "main": "dist/mega-flow.common.js",
   "module": "dist/mega-flow.es.js",
@@ -16,10 +16,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "@licenserocks/kit": "^1.6.2",
-    "react-hook-form": "^6.7.2",
-    "styled-components": "^5.1.1"
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@licenserocks/kit": "^1.6.3",
+    "react-hook-form": "^6.9.2",
+    "styled-components": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
