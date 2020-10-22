@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/LicenseRocks/megaflow/master/mega-flow.jpg" width="150">
+  <img src="https://license.rocks/wp-content/uploads/2020/10/MegaFlow.jpg" width="250">
 </p>
 
 <h1 align="center">MegaFlow</h1>
