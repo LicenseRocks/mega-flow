@@ -225,10 +225,12 @@ var FormRows = function FormRows(_ref) {
     var rowKey = "step-" + stepIndex + "-row-" + idx;
     var rowErrors = [];
     var showRow = row.expandable ? expanded : true;
-    return /*#__PURE__*/React__default.createElement(kit.FormRow, {
+    return /*#__PURE__*/React__default.createElement(React.Fragment, {
+      key: rowKey
+    }, /*#__PURE__*/React__default.createElement(kit.FormRow, {
       errors: rowErrors,
-      key: rowKey,
       label: row.label,
+      mb: row == null ? void 0 : row.marginBottom,
       show: showRow
     }, row.message && /*#__PURE__*/React__default.createElement(kit.Alert, {
       color: row.messageColor,
@@ -250,6 +252,8 @@ var FormRows = function FormRows(_ref) {
         stepIndex: stepIndex,
         wizardData: wizardData
       });
+    })), (row == null ? void 0 : row.divider) && /*#__PURE__*/React__default.createElement(kit.Divider, {
+      my: row == null ? void 0 : row.dividerSize
     }));
   }), showExpandButton && /*#__PURE__*/React__default.createElement(kit.OutlineButton, {
     color: "secondary",

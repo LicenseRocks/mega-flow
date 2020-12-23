@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import styled from 'styled-components';
 import { useFormContext, useWatch, useFieldArray, useForm, FormProvider } from 'react-hook-form';
-import { Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, FormRow, Alert, OutlineButton, Icon, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
+import { Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, FormRow, Alert, Divider, OutlineButton, Icon, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
 import PropTypes from 'prop-types';
 import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -220,10 +220,12 @@ var FormRows = function FormRows(_ref) {
     var rowKey = "step-" + stepIndex + "-row-" + idx;
     var rowErrors = [];
     var showRow = row.expandable ? expanded : true;
-    return /*#__PURE__*/React.createElement(FormRow, {
+    return /*#__PURE__*/React.createElement(Fragment, {
+      key: rowKey
+    }, /*#__PURE__*/React.createElement(FormRow, {
       errors: rowErrors,
-      key: rowKey,
       label: row.label,
+      mb: row == null ? void 0 : row.marginBottom,
       show: showRow
     }, row.message && /*#__PURE__*/React.createElement(Alert, {
       color: row.messageColor,
@@ -245,6 +247,8 @@ var FormRows = function FormRows(_ref) {
         stepIndex: stepIndex,
         wizardData: wizardData
       });
+    })), (row == null ? void 0 : row.divider) && /*#__PURE__*/React.createElement(Divider, {
+      my: row == null ? void 0 : row.dividerSize
     }));
   }), showExpandButton && /*#__PURE__*/React.createElement(OutlineButton, {
     color: "secondary",

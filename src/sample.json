@@ -4,6 +4,7 @@
       "title": "Basic info",
       "rows": [
         {
+          "divider": true,
           "label": "Title (English)",
           "fields": [
             {
@@ -22,7 +23,8 @@
               "required": "Amount is required",
               "type": "number"
             }
-          ]
+          ],
+          "marginBottom": 8
         },
         {
           "label": "Price",
