@@ -404,13 +404,15 @@
               "conditions": ["duration:from"],
               "name": "from",
               "placeholder": "From (e.g 2020-09-20)",
-              "required": "From is required"
+              "required": "From is required",
+              "type": "datepicker"
             },
             {
               "conditions": ["duration:until"],
               "name": "until",
               "placeholder": "Until (e.g 2020-09-20)",
-              "required": "Until is required"
+              "required": "Until is required",
+              "type": "datepicker"
             }
           ]
         }

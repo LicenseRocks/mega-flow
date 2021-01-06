@@ -54,6 +54,9 @@ function _taggedTemplateLiteralLoose(strings, raw) {
 
 var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
   switch (fieldType) {
+    case "datepicker":
+      return kit.Datepicker;
+
     case "select":
       return kit.Select;
 

@@ -1,7 +1,7 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import styled from 'styled-components';
 import { useFormContext, useWatch, useFieldArray, useForm, FormProvider } from 'react-hook-form';
-import { Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, FormRow, Alert, Divider, OutlineButton, Icon, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
+import { Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, Datepicker, FormRow, Alert, Divider, OutlineButton, Icon, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
 import PropTypes from 'prop-types';
 import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -49,6 +49,9 @@ function _taggedTemplateLiteralLoose(strings, raw) {
 
 var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
   switch (fieldType) {
+    case "datepicker":
+      return Datepicker;
+
     case "select":
       return Select;
 

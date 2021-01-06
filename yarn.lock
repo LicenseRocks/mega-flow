@@ -1220,10 +1220,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@licenserocks/kit@^1.17.4":
-  version "1.17.4"
-  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-1.17.4.tgz#f7c9411a27118b68b921db360bb6ea44128ccf40"
-  integrity sha512-Av5s/Q7Yrt+rTkawFkI39Rieh0xNvGj69W1BY4l1KY0qHHh/hAIjUjK9Q5JILnDZaY9UbwbguWNWEebOR6mxdg==
+"@licenserocks/kit@^1.18.1":
+  version "1.18.1"
+  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-1.18.1.tgz#7936bc1ca65558e1659c2708c3065545eb624082"
+  integrity sha512-wKS1L8Hn9AiTC7Px9Jf39xWjvcXdKqIzDEvQvLMVLmpLT+aydK3d6WE0Nj9WLvcOt91unwJWmCphgHyGN3IMgg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.32"
     "@fortawesome/free-brands-svg-icons" "^5.15.1"
@@ -1240,6 +1240,7 @@
     qrcode.react "^1.0.0"
     react-collapse "^5.0.1"
     react-content-loader "^5.1.0"
+    react-day-picker "^7.4.8"
     react-dropzone "^11.0.2"
     react-filepond "^7.0.1"
     react-hook-form "^6.9.5"
@@ -9724,6 +9725,13 @@ react-content-loader@^5.1.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-5.1.1.tgz#0e0ac1d582c5535f4006dcec4c7d3378df427d37"
   integrity sha512-PZ9J8B3i/w8bs32xZfGjJDPEOfo8CYBpwOVwklAR1FZ/ymMkZHbTK2ccuaHP9KrlixkBNpNZw5vsim97lsOCMA==
+
+react-day-picker@^7.4.8:
+  version "7.4.8"
+  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.4.8.tgz#675625240d3fae1b41c0a9d5177c968c8517c1d4"
+  integrity sha512-pp0hnxFVoRuBQcRdR1Hofw4CQtOCGVmzCNrscyvS0Q8NEc+UiYLEDqE5dk37bf0leSnBW4lheIt0CKKhuKzDVw==
+  dependencies:
+    prop-types "^15.6.2"
 
 react-dev-utils@^9.0.0:
   version "9.1.0"
