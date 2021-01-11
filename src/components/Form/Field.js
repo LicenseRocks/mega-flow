@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import {
   BorderedRadio,
   Checkbox,
@@ -16,6 +16,8 @@ import {
   TextArea,
   ToggleSwitch,
 } from "@licenserocks/kit";
+
+import { checkCondition } from "../../helpers";
 
 const mapFieldTypeToComponent = (fieldType) => {
   switch (fieldType) {
@@ -46,40 +48,6 @@ const mapFieldTypeToComponent = (fieldType) => {
     default:
       return Input;
   }
-};
-
-const getConditionValues = (conditions, control, wizardData) => {
-  const name = conditions.map((c) => {
-    if (c.includes(":")) {
-      const [n] = c.split(":");
-      return n;
-    }
-    return c;
-  });
-  return useWatch({
-    control,
-    name,
-    defaultValue: wizardData,
-  });
-};
-
-const checkCondition = (conditions, control, wizardData) => {
-  const hasConditions = conditions && conditions.length > 0;
-  if (hasConditions) {
-    const conditionValues = getConditionValues(conditions, control, wizardData);
-
-    return conditions.some((c) => {
-      if (c.includes(":")) {
-        const [name, value] = c.split(":");
-        return (
-          conditionValues[name] === value ||
-          conditionValues[name]?.includes(value)
-        );
-      }
-      return conditionValues[c]?.length > 0;
-    });
-  }
-  return true;
 };
 
 export const FormField = ({

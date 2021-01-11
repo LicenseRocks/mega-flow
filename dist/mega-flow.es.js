@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import styled from 'styled-components';
-import { useFormContext, useWatch, useFieldArray, useForm, FormProvider } from 'react-hook-form';
+import { useWatch, useFormContext, useFieldArray, useForm, FormProvider } from 'react-hook-form';
 import { Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, Datepicker, FormRow, Alert, Divider, OutlineButton, Icon, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
 import PropTypes from 'prop-types';
 import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -47,6 +47,49 @@ function _taggedTemplateLiteralLoose(strings, raw) {
   return strings;
 }
 
+var getConditionValues = function getConditionValues(conditions, control, wizardData) {
+  var name = conditions.map(function (c) {
+    if (c.includes(":")) {
+      var _c$split = c.split(":"),
+          n = _c$split[0];
+
+      return n;
+    }
+
+    return c;
+  });
+  return useWatch({
+    control: control,
+    name: name,
+    defaultValue: wizardData
+  });
+};
+
+var checkCondition = function checkCondition(conditions, control, wizardData) {
+  var hasConditions = conditions && conditions.length > 0;
+
+  if (hasConditions) {
+    var conditionValues = getConditionValues(conditions, control, wizardData);
+    return conditions.some(function (c) {
+      var _conditionValues$c;
+
+      if (c.includes(":")) {
+        var _conditionValues$name;
+
+        var _c$split2 = c.split(":"),
+            name = _c$split2[0],
+            value = _c$split2[1];
+
+        return conditionValues[name] === value || ((_conditionValues$name = conditionValues[name]) == null ? void 0 : _conditionValues$name.includes(value));
+      }
+
+      return ((_conditionValues$c = conditionValues[c]) == null ? void 0 : _conditionValues$c.length) > 0 || !!conditionValues[c];
+    });
+  }
+
+  return true;
+};
+
 var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
   switch (fieldType) {
     case "datepicker":
@@ -88,49 +131,6 @@ var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
     default:
       return Input;
   }
-};
-
-var getConditionValues = function getConditionValues(conditions, control, wizardData) {
-  var name = conditions.map(function (c) {
-    if (c.includes(":")) {
-      var _c$split = c.split(":"),
-          n = _c$split[0];
-
-      return n;
-    }
-
-    return c;
-  });
-  return useWatch({
-    control: control,
-    name: name,
-    defaultValue: wizardData
-  });
-};
-
-var checkCondition = function checkCondition(conditions, control, wizardData) {
-  var hasConditions = conditions && conditions.length > 0;
-
-  if (hasConditions) {
-    var conditionValues = getConditionValues(conditions, control, wizardData);
-    return conditions.some(function (c) {
-      var _conditionValues$c;
-
-      if (c.includes(":")) {
-        var _conditionValues$name;
-
-        var _c$split2 = c.split(":"),
-            name = _c$split2[0],
-            value = _c$split2[1];
-
-        return conditionValues[name] === value || ((_conditionValues$name = conditionValues[name]) == null ? void 0 : _conditionValues$name.includes(value));
-      }
-
-      return ((_conditionValues$c = conditionValues[c]) == null ? void 0 : _conditionValues$c.length) > 0;
-    });
-  }
-
-  return true;
 };
 
 var FormField = function FormField(_ref) {
@@ -199,6 +199,12 @@ FormField.defaultProps = {
   recurringIndex: null
 };
 
+var checkRowConditions = function checkRowConditions(fields, control, wizardData) {
+  return fields == null ? void 0 : fields.some(function (field) {
+    return field.conditions && !checkCondition(field.conditions, control, wizardData);
+  });
+};
+
 var FormRows = function FormRows(_ref) {
   var data = _ref.data,
       index = _ref.index,
@@ -208,6 +214,7 @@ var FormRows = function FormRows(_ref) {
       wizardData = _ref.wizardData;
 
   var _useFormContext = useFormContext(),
+      control = _useFormContext.control,
       errors = _useFormContext.errors;
 
   var _useState = useState(false),
@@ -222,12 +229,15 @@ var FormRows = function FormRows(_ref) {
 
     var rowKey = "step-" + stepIndex + "-row-" + idx;
     var rowErrors = [];
-    var showRow = row.expandable ? expanded : true;
+    var showIfHasCondition = checkRowConditions(row.fields, control, wizardData);
+    var showRow = showIfHasCondition || row.expandable ? expanded : true;
     return /*#__PURE__*/React.createElement(Fragment, {
       key: rowKey
     }, /*#__PURE__*/React.createElement(FormRow, {
       errors: rowErrors,
       label: row.label,
+      labelAlign: row.labelAlign,
+      labelGutter: row.labelGutter,
       mb: row == null ? void 0 : row.marginBottom,
       show: showRow
     }, row.message && /*#__PURE__*/React.createElement(Alert, {

@@ -1,2 +1,2 @@
-// generateForm
-export { default as generateForm } from "./generateForm";
+// conditions
+export * from "./conditions";

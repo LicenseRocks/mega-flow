@@ -4,6 +4,14 @@ import { useFormContext } from "react-hook-form";
 import { Alert, Divider, FormRow, OutlineButton } from "@licenserocks/kit";
 
 import { FormField } from "./Field";
+import { checkCondition } from "../../helpers";
+
+const checkRowConditions = (fields, control, wizardData) => {
+  return fields?.some(
+    (field) =>
+      field.conditions && !checkCondition(field.conditions, control, wizardData)
+  );
+};
 
 export const FormRows = ({
   data,
@@ -13,7 +21,7 @@ export const FormRows = ({
   stepIndex,
   wizardData,
 }) => {
-  const { errors } = useFormContext();
+  const { control, errors } = useFormContext();
   const [expanded, setExpanded] = useState(false);
   const showExpandButton = rows?.some((row) => row.expandable);
 
@@ -22,13 +30,20 @@ export const FormRows = ({
       {rows?.map((row, idx) => {
         const rowKey = `step-${stepIndex}-row-${idx}`;
         const rowErrors = [];
-        const showRow = row.expandable ? expanded : true;
+        const showIfHasCondition = checkRowConditions(
+          row.fields,
+          control,
+          wizardData
+        );
+        const showRow = showIfHasCondition || row.expandable ? expanded : true;
 
         return (
           <Fragment key={rowKey}>
             <FormRow
               errors={rowErrors}
               label={row.label}
+              labelAlign={row.labelAlign}
+              labelGutter={row.labelGutter}
               mb={row?.marginBottom}
               show={showRow}
             >
