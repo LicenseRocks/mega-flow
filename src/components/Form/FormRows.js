@@ -1,17 +1,21 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
 import { Alert, Divider, FormRow, OutlineButton } from "@licenserocks/kit";
 
 import { FormField } from "./Field";
 import { checkCondition } from "../../helpers";
 
-const checkRowConditions = (fields, control, wizardData) => {
-  return fields?.some(
-    (field) =>
-      field.conditions && !checkCondition(field.conditions, control, wizardData)
-  );
-};
+const StyledRow = styled(FormRow)`
+  && {
+    label {
+      :only-child {
+        display: none;
+      }
+    }
+  }
+`;
 
 export const FormRows = ({
   data,
@@ -21,7 +25,7 @@ export const FormRows = ({
   stepIndex,
   wizardData,
 }) => {
-  const { control, errors } = useFormContext();
+  const { errors, watch } = useFormContext();
   const [expanded, setExpanded] = useState(false);
   const showExpandButton = rows?.some((row) => row.expandable);
 
@@ -30,16 +34,11 @@ export const FormRows = ({
       {rows?.map((row, idx) => {
         const rowKey = `step-${stepIndex}-row-${idx}`;
         const rowErrors = [];
-        const showIfHasCondition = checkRowConditions(
-          row.fields,
-          control,
-          wizardData
-        );
-        const showRow = showIfHasCondition || row.expandable ? expanded : true;
+        const showRow = row.expandable ? expanded : true;
 
         return (
           <Fragment key={rowKey}>
-            <FormRow
+            <StyledRow
               errors={rowErrors}
               label={row.label}
               labelAlign={row.labelAlign}
@@ -59,6 +58,13 @@ export const FormRows = ({
 
                 if (error) rowErrors.push(error);
 
+                const showIfHasCondition = checkCondition(
+                  field.conditions,
+                  watch,
+                  wizardData
+                );
+                if (!showIfHasCondition) return null;
+
                 return (
                   <FormField
                     data={data}
@@ -73,7 +79,7 @@ export const FormRows = ({
                   />
                 );
               })}
-            </FormRow>
+            </StyledRow>
 
             {row?.divider && <Divider my={row?.dividerSize} />}
           </Fragment>

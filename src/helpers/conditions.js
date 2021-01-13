@@ -1,6 +1,4 @@
-import { useWatch } from "react-hook-form";
-
-const getConditionValues = (conditions, control, wizardData) => {
+const getConditionValues = (conditions, watch, wizardData) => {
   const name = conditions.map((c) => {
     if (c.includes(":")) {
       const [n] = c.split(":");
@@ -9,17 +7,13 @@ const getConditionValues = (conditions, control, wizardData) => {
     return c;
   });
 
-  return useWatch({
-    control,
-    name,
-    defaultValue: wizardData,
-  });
+  return watch(name, wizardData);
 };
 
-export const checkCondition = (conditions, control, wizardData) => {
+export const checkCondition = (conditions, watch, wizardData) => {
   const hasConditions = conditions && conditions.length > 0;
   if (hasConditions) {
-    const conditionValues = getConditionValues(conditions, control, wizardData);
+    const conditionValues = getConditionValues(conditions, watch, wizardData);
 
     return conditions.some((c) => {
       if (c.includes(":")) {

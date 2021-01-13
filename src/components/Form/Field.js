@@ -17,8 +17,6 @@ import {
   ToggleSwitch,
 } from "@licenserocks/kit";
 
-import { checkCondition } from "../../helpers";
-
 const mapFieldTypeToComponent = (fieldType) => {
   switch (fieldType) {
     case "datepicker":
@@ -76,9 +74,6 @@ export const FormField = ({
       ? wizardData[data.name][recurringIndex][name]
       : wizardData[name];
 
-  const showIfHasCondition = checkCondition(conditions, control, wizardData);
-
-  if (!showIfHasCondition) return null;
   return (
     <Field
       control={control}

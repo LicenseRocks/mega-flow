@@ -52,49 +52,6 @@ function _taggedTemplateLiteralLoose(strings, raw) {
   return strings;
 }
 
-var getConditionValues = function getConditionValues(conditions, control, wizardData) {
-  var name = conditions.map(function (c) {
-    if (c.includes(":")) {
-      var _c$split = c.split(":"),
-          n = _c$split[0];
-
-      return n;
-    }
-
-    return c;
-  });
-  return reactHookForm.useWatch({
-    control: control,
-    name: name,
-    defaultValue: wizardData
-  });
-};
-
-var checkCondition = function checkCondition(conditions, control, wizardData) {
-  var hasConditions = conditions && conditions.length > 0;
-
-  if (hasConditions) {
-    var conditionValues = getConditionValues(conditions, control, wizardData);
-    return conditions.some(function (c) {
-      var _conditionValues$c;
-
-      if (c.includes(":")) {
-        var _conditionValues$name;
-
-        var _c$split2 = c.split(":"),
-            name = _c$split2[0],
-            value = _c$split2[1];
-
-        return conditionValues[name] === value || ((_conditionValues$name = conditionValues[name]) == null ? void 0 : _conditionValues$name.includes(value));
-      }
-
-      return ((_conditionValues$c = conditionValues[c]) == null ? void 0 : _conditionValues$c.length) > 0 || !!conditionValues[c];
-    });
-  }
-
-  return true;
-};
-
 var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
   switch (fieldType) {
     case "datepicker":
@@ -164,8 +121,6 @@ var FormField = function FormField(_ref) {
   var fieldKey = "step-" + stepIndex + "-row-" + rowId + "-field-" + fieldId;
   var fieldName = isRecurring ? data.name + "[" + recurringIndex + "]." + name : name;
   var prevValue = isRecurring && wizardData[data.name] && wizardData[data.name][recurringIndex] ? wizardData[data.name][recurringIndex][name] : wizardData[name];
-  var showIfHasCondition = checkCondition(conditions, control, wizardData);
-  if (!showIfHasCondition) return null;
   return /*#__PURE__*/React__default.createElement(Field, _extends({
     control: control,
     defaultValue: prevValue || defaultValue,
@@ -204,12 +159,55 @@ FormField.defaultProps = {
   recurringIndex: null
 };
 
-var checkRowConditions = function checkRowConditions(fields, control, wizardData) {
-  return fields == null ? void 0 : fields.some(function (field) {
-    return field.conditions && !checkCondition(field.conditions, control, wizardData);
+var getConditionValues = function getConditionValues(conditions, watch, wizardData) {
+  var name = conditions.map(function (c) {
+    if (c.includes(":")) {
+      var _c$split = c.split(":"),
+          n = _c$split[0];
+
+      return n;
+    }
+
+    return c;
   });
+  return watch(name, wizardData);
 };
 
+var checkCondition = function checkCondition(conditions, watch, wizardData) {
+  var hasConditions = conditions && conditions.length > 0;
+
+  if (hasConditions) {
+    var conditionValues = getConditionValues(conditions, watch, wizardData);
+    return conditions.some(function (c) {
+      var _conditionValues$c;
+
+      if (c.includes(":")) {
+        var _conditionValues$name;
+
+        var _c$split2 = c.split(":"),
+            name = _c$split2[0],
+            value = _c$split2[1];
+
+        return conditionValues[name] === value || ((_conditionValues$name = conditionValues[name]) == null ? void 0 : _conditionValues$name.includes(value));
+      }
+
+      return ((_conditionValues$c = conditionValues[c]) == null ? void 0 : _conditionValues$c.length) > 0 || !!conditionValues[c];
+    });
+  }
+
+  return true;
+};
+
+function _templateObject() {
+  var data = _taggedTemplateLiteralLoose(["\n  && {\n    label {\n      :only-child {\n        display: none;\n      }\n    }\n  }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+var StyledRow = styled(kit.FormRow)(_templateObject());
 var FormRows = function FormRows(_ref) {
   var data = _ref.data,
       index = _ref.index,
@@ -219,8 +217,8 @@ var FormRows = function FormRows(_ref) {
       wizardData = _ref.wizardData;
 
   var _useFormContext = reactHookForm.useFormContext(),
-      control = _useFormContext.control,
-      errors = _useFormContext.errors;
+      errors = _useFormContext.errors,
+      watch = _useFormContext.watch;
 
   var _useState = React.useState(false),
       expanded = _useState[0],
@@ -234,11 +232,10 @@ var FormRows = function FormRows(_ref) {
 
     var rowKey = "step-" + stepIndex + "-row-" + idx;
     var rowErrors = [];
-    var showIfHasCondition = checkRowConditions(row.fields, control, wizardData);
-    var showRow = showIfHasCondition || row.expandable ? expanded : true;
+    var showRow = row.expandable ? expanded : true;
     return /*#__PURE__*/React__default.createElement(React.Fragment, {
       key: rowKey
-    }, /*#__PURE__*/React__default.createElement(kit.FormRow, {
+    }, /*#__PURE__*/React__default.createElement(StyledRow, {
       errors: rowErrors,
       label: row.label,
       labelAlign: row.labelAlign,
@@ -254,6 +251,8 @@ var FormRows = function FormRows(_ref) {
 
       var error = isRecurring && errors[data.name] && errors[data.name][index] ? (_errors$data$name$ind = errors[data.name][index][field.name]) == null ? void 0 : _errors$data$name$ind.message : (_errors$field$name = errors[field.name]) == null ? void 0 : _errors$field$name.message;
       if (error) rowErrors.push(error);
+      var showIfHasCondition = checkCondition(field.conditions, watch, wizardData);
+      if (!showIfHasCondition) return null;
       return /*#__PURE__*/React__default.createElement(FormField, {
         data: data,
         field: field,
@@ -302,16 +301,16 @@ function _templateObject2() {
   return data;
 }
 
-function _templateObject() {
+function _templateObject$1() {
   var data = _taggedTemplateLiteralLoose(["\n  padding: ", ";\n  background-color: ", ";\n  border: 1px solid ", ";\n  border-radius: 16px;\n  margin-bottom: 16px;\n"]);
 
-  _templateObject = function _templateObject() {
+  _templateObject$1 = function _templateObject() {
     return data;
   };
 
   return data;
 }
-var Wrapper = styled.div(_templateObject(), function (_ref) {
+var Wrapper = styled.div(_templateObject$1(), function (_ref) {
   var theme = _ref.theme;
   return theme.spacing(2, 2, 2, 6);
 }, function (_ref2) {
@@ -409,16 +408,16 @@ var MegaFlowDefaultProps = {
   onFinish: function onFinish() {}
 };
 
-function _templateObject$1() {
+function _templateObject$2() {
   var data = _taggedTemplateLiteralLoose([""]);
 
-  _templateObject$1 = function _templateObject() {
+  _templateObject$2 = function _templateObject() {
     return data;
   };
 
   return data;
 }
-var Wrapper$1 = styled.div(_templateObject$1());
+var Wrapper$1 = styled.div(_templateObject$2());
 
 var MegaFlow = function MegaFlow(_ref) {
   var icons = _ref.icons,
