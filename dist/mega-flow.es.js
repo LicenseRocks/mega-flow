@@ -331,7 +331,7 @@ var Form = function Form(_ref4) {
       remove = _useFieldArray.remove;
 
   useEffect(function () {
-    if (fields.length === 0) {
+    if (isRecurring && fields.length === 0) {
       append();
     }
   }, []);
