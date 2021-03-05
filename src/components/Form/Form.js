@@ -28,7 +28,7 @@ const Form = ({ data, stepIndex, wizardData }) => {
   });
 
   useEffect(() => {
-    if (fields.length === 0) {
+    if (isRecurring && fields.length === 0) {
       append();
     }
   }, []);

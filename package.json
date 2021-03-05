@@ -16,10 +16,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@licenserocks/kit": "^1.18.15",
-    "react-hook-form": "^6.9.5",
-    "styled-components": "^5.2.0"
+    "react-hook-form": "^6.15.4",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
