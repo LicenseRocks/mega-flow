@@ -20,6 +20,8 @@ const MegaFlow = ({
   onFinish,
   onStepSubmit,
   theme,
+  watcher,
+  watchList,
   wizardProps,
   wrapperProps,
   ...props
@@ -35,6 +37,10 @@ const MegaFlow = ({
   const { handleSubmit, ...methods } = useForm({
     defaultValues: wizardData,
   });
+
+  if (watcher && watchList.length > 0) {
+    watcher(methods.watch(watchList));
+  }
 
   const onSubmit = (data) => {
     const currentState = {

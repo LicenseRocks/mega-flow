@@ -6,6 +6,8 @@ export const MegaFlowPropTypes = {
   onFinish: PropTypes.func,
   onStepSubmit: PropTypes.func,
   theme: PropTypes.shape(),
+  watcher: PropTypes.func,
+  watchList: PropTypes.arrayOf(PropTypes.string),
   wizardProps: PropTypes.shape(),
   wrapperProps: PropTypes.shape(),
 };
@@ -13,4 +15,5 @@ export const MegaFlowPropTypes = {
 export const MegaFlowDefaultProps = {
   icons: [],
   onFinish: () => {},
+  watchList: [],
 };

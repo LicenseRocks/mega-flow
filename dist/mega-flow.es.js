@@ -395,12 +395,15 @@ var MegaFlowPropTypes = {
   onFinish: PropTypes.func,
   onStepSubmit: PropTypes.func,
   theme: PropTypes.shape(),
+  watcher: PropTypes.func,
+  watchList: PropTypes.arrayOf(PropTypes.string),
   wizardProps: PropTypes.shape(),
   wrapperProps: PropTypes.shape()
 };
 var MegaFlowDefaultProps = {
   icons: [],
-  onFinish: function onFinish() {}
+  onFinish: function onFinish() {},
+  watchList: []
 };
 
 function _templateObject$2() {
@@ -420,9 +423,11 @@ var MegaFlow = function MegaFlow(_ref) {
       onFinish = _ref.onFinish,
       onStepSubmit = _ref.onStepSubmit,
       theme = _ref.theme,
+      watcher = _ref.watcher,
+      watchList = _ref.watchList,
       wizardProps = _ref.wizardProps,
       wrapperProps = _ref.wrapperProps,
-      props = _objectWithoutPropertiesLoose(_ref, ["icons", "schema", "onFinish", "onStepSubmit", "theme", "wizardProps", "wrapperProps"]);
+      props = _objectWithoutPropertiesLoose(_ref, ["icons", "schema", "onFinish", "onStepSubmit", "theme", "watcher", "watchList", "wizardProps", "wrapperProps"]);
 
   // Parse if schema was type of JSON string
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
@@ -443,6 +448,10 @@ var MegaFlow = function MegaFlow(_ref) {
   }),
       handleSubmit = _useForm.handleSubmit,
       methods = _objectWithoutPropertiesLoose(_useForm, ["handleSubmit"]);
+
+  if (watcher && watchList.length > 0) {
+    watcher(methods.watch(watchList));
+  }
 
   var onSubmit = function onSubmit(data) {
     var currentState = _extends({}, wizardData, data); // Set step data in global wizard object
