@@ -56,38 +56,7 @@
                     "labelGutter": true
                 },
                 {
-                    "label": "Video Storage Method",
-                    "fields": [
-                        {
-                            "name": "videoStorageOption",
-                            "type": "radio",
-                            "options": [
-                                {
-                                    "label": "Centralized Storage (AWS S3)",
-                                    "value": "s3"
-                                },
-                                {
-                                    "label": "Permanent Storage (Arweave)",
-                                    "value": "arweave"
-                                }
-                            ],
-                            "stacked": false,
-                            "defaultValue": "s3"
-                        }
-                    ],
-                    "hint": "Difference between Centerialized and Permanent storage"
-                },
-                {
-                    "label": "Video Downloadable",
-                    "fields": [
-                        {
-                            "name": "videoDownloadable",
-                            "type": "toggleSwitch"
-                        }
-                    ]
-                },
-                {
-                    "message": "If you specify the video as \"Downloadable\", the buyer has can download the video after purchasing it."
+                    "message": "Do you want to store also your media assets fully decentralized forever? Drop us a mail at hello@licenserocks.de"
                 }
             ],
             "title": "Upload assets"

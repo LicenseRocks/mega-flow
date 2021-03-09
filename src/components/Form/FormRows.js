@@ -29,10 +29,9 @@ const Hint = styled.span`
   border-radius: 100%;
   width: 20px;
   height: 20px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  display: inline-block;
   margin-left: 8px;
   vertical-align: middle;
 
