@@ -3,49 +3,104 @@
         {
             "rows": [
                 {
-                    "message": "This is your workflow for tokenizing images. We can vary the flow to support your desired license use case."
-                },
-                {
+                    "label": "Cover",
                     "fields": [
                         {
-                            "name": "document",
+                            "accept": "image/*",
+                            "name": "cover",
                             "type": "fileUpload",
-                            "required": "You must upload at least 1 document"
+                            "multiple": false,
+                            "required": "You must upload image cover"
                         }
-                    ]
+                    ],
+                    "hint": "Supported file types: image/* (jpg, png, jpeg) - Max size: 2MB",
+                    "labelAlign": "start",
+                    "labelGutter": true
                 },
                 {
-                    "label": "Storage method",
+                    "label": "Cover Storage Method",
                     "fields": [
                         {
                             "name": "storageOption",
                             "type": "radio",
                             "options": [
                                 {
-                                    "label": "S3",
+                                    "label": "Centralized Storage (AWS S3)",
                                     "value": "s3"
                                 },
                                 {
-                                    "label": "Arweave (Permanent Storage)",
+                                    "label": "Permanent Storage (Arweave)",
                                     "value": "arweave"
                                 }
                             ],
+                            "stacked": false,
                             "defaultValue": "s3"
                         }
+                    ],
+                    "divider": "Divider",
+                    "hint": "Difference between Centerialized and Permanent storage"
+                },
+                {
+                    "label": "Music Video",
+                    "fields": [
+                        {
+                            "accept": "video/*",
+                            "name": "video",
+                            "type": "fileUpload",
+                            "multiple": false,
+                            "required": "You must upload video"
+                        }
+                    ],
+                    "hint": "Supported file types: video/* (mp4, mpeg, webm) - Max size: 100MB",
+                    "labelAlign": "start",
+                    "labelGutter": true
+                },
+                {
+                    "label": "Video Storage Method",
+                    "fields": [
+                        {
+                            "name": "videoStorageOption",
+                            "type": "radio",
+                            "options": [
+                                {
+                                    "label": "Centralized Storage (AWS S3)",
+                                    "value": "s3"
+                                },
+                                {
+                                    "label": "Permanent Storage (Arweave)",
+                                    "value": "arweave"
+                                }
+                            ],
+                            "stacked": false,
+                            "defaultValue": "s3"
+                        }
+                    ],
+                    "hint": "Difference between Centerialized and Permanent storage"
+                },
+                {
+                    "label": "Video Downloadable",
+                    "fields": [
+                        {
+                            "name": "videoDownloadable",
+                            "type": "toggleSwitch"
+                        }
                     ]
+                },
+                {
+                    "message": "If you specify the video as \"Downloadable\", the buyer has can download the video after purchasing it."
                 }
             ],
-            "title": "Upload documents"
-        },
-        {
+            "title": "Upload assets"
+          },
+          {
             "rows": [
                 {
                     "label": "Title",
                     "fields": [
                         {
                             "name": "title",
-                            "required": "Title is required",
-                            "placeholder": "Provide product name"
+                            "required": "Name is required",
+                            "placeholder": "Name of your listed Video"
                         }
                     ]
                 },
@@ -54,20 +109,59 @@
                     "fields": [
                         {
                             "name": "description",
-                            "placeholder": "Provide product description"
+                            "placeholder": "Music video description"
                         }
                     ]
                 },
                 {
+                    "divider": true,
                     "label": "Credit Line",
                     "fields": [
                         {
                             "name": "creditLine",
-                            "placeholder": "Provide product Credit Line"
+                            "placeholder": "Music video credit line"
                         }
                     ]
                 },
                 {
+                    "divider": true,
+                    "label": "Amount",
+                    "fields": [
+                        {
+                            "name": "amountType",
+                            "type": "radio",
+                            "options": [
+                                {
+                                    "label": "Unique",
+                                    "value": "unique"
+                                },
+                                {
+                                    "label": "Limited",
+                                    "value": "limited"
+                                },
+                                {
+                                    "label": "Unlimited",
+                                    "value": "unlimited"
+                                }
+                            ],
+                            "defaultValue": "unique"
+                        },
+                        {
+                            "conditions": [
+                                "amountType:limited"
+                            ],
+                            "min": 2,
+                            "max": 100,
+                            "name": "amount",
+                            "type": "number",
+                            "required": "Amount is required",
+                            "placeholder": "Amount (2-100)"
+                        }
+                    ],
+                    "hint": "Unique: 1, Limited: 2-100, Unlimited: > 100"
+                },
+                {
+                    "divider": true,
                     "label": "Price",
                     "fields": [
                         {
@@ -87,97 +181,18 @@
                     ]
                 },
                 {
-                    "label": "Enable bidding?",
+                    "label": "Unlockable content",
                     "fields": [
                         {
-                            "name": "biddingEnabled",
-                            "type": "toggleSwitch"
+                            "name": "secretPhrase",
+                            "placeholder": "Unlockable content"
                         }
                     ],
-                    "divider": true
-                },
-                {
-                    "label": "Enable license fee?",
-                    "fields": [
-                        {
-                            "name": "licenseFee",
-                            "type": "checkbox",
-                            "options": [
-                                {
-                                    "label": "None",
-                                    "value": "none"
-                                },
-                                {
-                                    "label": "Creator",
-                                    "value": "creator"
-                                },
-                                {
-                                    "label": "Donation",
-                                    "value": "donation"
-                                }
-                            ],
-                            "required": "Fee type is required",
-                            "placeholder": "Please select fee type"
-                        },
-                        {
-                            "name": "creatorFee",
-                            "required": "Creator fee is required",
-                            "conditions": [
-                                "licenseFee:creator"
-                            ],
-                            "placeholder": "1-99%"
-                        },
-                        {
-                            "name": "donationFee",
-                            "required": "Donation fee is required",
-                            "conditions": [
-                                "licenseFee:donation"
-                            ],
-                            "placeholder": "1-99%"
-                        }
-                    ],
-                    "divider": true
-                },
-                {
-                    "label": "Enable limited print?",
-                    "fields": [
-                        {
-                            "name": "limitedPrint",
-                            "type": "checkbox",
-                            "options": [
-                                {
-                                    "label": "None",
-                                    "value": "none"
-                                },
-                                {
-                                    "label": "Unlimited",
-                                    "value": "unlimited"
-                                },
-                                {
-                                    "label": "Unique",
-                                    "value": "unique"
-                                },
-                                {
-                                    "label": "Limited",
-                                    "value": "limited"
-                                }
-                            ],
-                            "required": "Limit print is required",
-                            "placeholder": "Please select print options"
-                        },
-                        {
-                            "name": "limited",
-                            "required": "Limit is required",
-                            "conditions": [
-                                "limitedPrint:limited"
-                            ],
-                            "placeholder": "Please provide number"
-                        }
-                    ]
+                    "hint": "Value of this field would be visible only to owners"
                 }
             ],
             "title": "Specify meta-data"
-        },
+          },
         {
             "rows": [
                 {
@@ -187,7 +202,7 @@
                             "type": "checkbox",
                             "options": [
                                 {
-                                    "label": "I have read and accept the terms of usage",
+                                    "label": "I have read and accept the terms of usage.",
                                     "value": true
                                 }
                             ],
@@ -202,11 +217,11 @@
                             "type": "checkbox",
                             "options": [
                                 {
-                                    "label": "I am the license owner or or legal representative in charge of the owner",
+                                    "label": "I am the copyright holder of that Music video that I upload and / or I am legal representative of that copyright holder.",
                                     "value": true
                                 }
                             ],
-                            "required": "You must be the owner"
+                            "required": "You must be the copyright holder / legal representative"
                         }
                     ]
                 }

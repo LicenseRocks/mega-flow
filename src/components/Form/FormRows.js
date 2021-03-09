@@ -2,7 +2,14 @@ import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useFormContext } from "react-hook-form";
-import { Alert, Divider, FormRow, OutlineButton } from "@licenserocks/kit";
+import {
+  Alert,
+  Divider,
+  FormRow,
+  Icon,
+  OutlineButton,
+  Tooltip,
+} from "@licenserocks/kit";
 
 import { FormField } from "./Field";
 import { checkCondition } from "../../helpers";
@@ -14,6 +21,24 @@ const StyledRow = styled(FormRow)`
         display: none;
       }
     }
+  }
+`;
+
+const Hint = styled.span`
+  background: #f0f0f4;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: inline-block;
+  margin-left: 8px;
+  vertical-align: middle;
+
+  svg {
+    color: #8685a6;
+    font-size: 10px;
   }
 `;
 
@@ -35,12 +60,21 @@ export const FormRows = ({
         const rowKey = `step-${stepIndex}-row-${idx}`;
         const rowErrors = [];
         const showRow = row.expandable ? expanded : true;
+        const label = [...(row.label || [])];
+        if (row.hint)
+          label.push(
+            <Tooltip content={row.hint}>
+              <Hint>
+                <Icon icon="question" />
+              </Hint>
+            </Tooltip>
+          );
 
         return (
           <Fragment key={rowKey}>
             <StyledRow
               errors={rowErrors}
-              label={row.label}
+              label={label.length > 0 ? label : null}
               labelAlign={row.labelAlign}
               labelGutter={row.labelGutter}
               mb={row?.marginBottom}

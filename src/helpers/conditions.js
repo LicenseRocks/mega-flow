@@ -20,7 +20,7 @@ export const checkCondition = (conditions, watch, wizardData) => {
         const [name, value] = c.split(":");
         return (
           conditionValues[name] === value ||
-          conditionValues[name]?.includes(value)
+          (Array.isArray(value) && conditionValues[name]?.includes(value))
         );
       }
       return conditionValues[c]?.length > 0 || !!conditionValues[c];

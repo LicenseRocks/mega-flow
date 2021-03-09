@@ -1,7 +1,7 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import styled from 'styled-components';
 import { useFormContext, useFieldArray, useForm, FormProvider } from 'react-hook-form';
-import { Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, Datepicker, FormRow, Alert, Divider, OutlineButton, Icon, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
+import { Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, Datepicker, FormRow, Tooltip, Icon, Alert, Divider, OutlineButton, TextButton, AppContainer, RocksKitTheme, Wizard, RocksKitIcons } from '@licenserocks/kit';
 import PropTypes from 'prop-types';
 import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -183,7 +183,7 @@ var checkCondition = function checkCondition(conditions, watch, wizardData) {
             name = _c$split2[0],
             value = _c$split2[1];
 
-        return conditionValues[name] === value || ((_conditionValues$name = conditionValues[name]) == null ? void 0 : _conditionValues$name.includes(value));
+        return conditionValues[name] === value || Array.isArray(value) && ((_conditionValues$name = conditionValues[name]) == null ? void 0 : _conditionValues$name.includes(value));
       }
 
       return ((_conditionValues$c = conditionValues[c]) == null ? void 0 : _conditionValues$c.length) > 0 || !!conditionValues[c];
@@ -192,6 +192,16 @@ var checkCondition = function checkCondition(conditions, watch, wizardData) {
 
   return true;
 };
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteralLoose(["\n  background: #f0f0f4;\n  border-radius: 100%;\n  width: 20px;\n  height: 20px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  display: inline-block;\n  margin-left: 8px;\n  vertical-align: middle;\n\n  svg {\n    color: #8685a6;\n    font-size: 10px;\n  }\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject() {
   var data = _taggedTemplateLiteralLoose(["\n  && {\n    label {\n      :only-child {\n        display: none;\n      }\n    }\n  }\n"]);
@@ -203,6 +213,7 @@ function _templateObject() {
   return data;
 }
 var StyledRow = styled(FormRow)(_templateObject());
+var Hint = styled.span(_templateObject2());
 var FormRows = function FormRows(_ref) {
   var data = _ref.data,
       index = _ref.index,
@@ -228,11 +239,17 @@ var FormRows = function FormRows(_ref) {
     var rowKey = "step-" + stepIndex + "-row-" + idx;
     var rowErrors = [];
     var showRow = row.expandable ? expanded : true;
+    var label = [].concat(row.label || []);
+    if (row.hint) label.push( /*#__PURE__*/React.createElement(Tooltip, {
+      content: row.hint
+    }, /*#__PURE__*/React.createElement(Hint, null, /*#__PURE__*/React.createElement(Icon, {
+      icon: "question"
+    }))));
     return /*#__PURE__*/React.createElement(Fragment, {
       key: rowKey
     }, /*#__PURE__*/React.createElement(StyledRow, {
       errors: rowErrors,
-      label: row.label,
+      label: label.length > 0 ? label : null,
       labelAlign: row.labelAlign,
       labelGutter: row.labelGutter,
       mb: row == null ? void 0 : row.marginBottom,
@@ -286,10 +303,10 @@ FormRows.propTypes = {
 };
 FormRows.defaultProps = {};
 
-function _templateObject2() {
+function _templateObject2$1() {
   var data = _taggedTemplateLiteralLoose(["\n  display: flex;\n  justify-content: flex-end;\n  margin-bottom: 8px;\n"]);
 
-  _templateObject2 = function _templateObject2() {
+  _templateObject2$1 = function _templateObject2() {
     return data;
   };
 
@@ -315,7 +332,7 @@ var Wrapper = styled.div(_templateObject$1(), function (_ref) {
   var theme = _ref3.theme;
   return theme.palette.gray.regular;
 });
-var ButtonsWrapper = styled.div(_templateObject2());
+var ButtonsWrapper = styled.div(_templateObject2$1());
 
 var Form = function Form(_ref4) {
   var data = _ref4.data,
