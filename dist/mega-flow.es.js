@@ -181,9 +181,12 @@ var checkCondition = function checkCondition(conditions, watch, wizardData) {
 
         var _c$split2 = c.split(":"),
             name = _c$split2[0],
-            value = _c$split2[1];
+            value = _c$split2[1],
+            not = _c$split2[2];
 
-        return conditionValues[name] === value || Array.isArray(value) && ((_conditionValues$name = conditionValues[name]) == null ? void 0 : _conditionValues$name.includes(value));
+        var isTrue = conditionValues[name] === value || Array.isArray(value) && ((_conditionValues$name = conditionValues[name]) == null ? void 0 : _conditionValues$name.includes(value)) || value === "true" && Boolean(conditionValues[name]);
+        if (not) return !isTrue;
+        return isTrue;
       }
 
       return ((_conditionValues$c = conditionValues[c]) == null ? void 0 : _conditionValues$c.length) > 0 || !!conditionValues[c];
@@ -238,10 +241,15 @@ var FormRows = function FormRows(_ref) {
 
     var rowKey = "step-" + stepIndex + "-row-" + idx;
     var rowErrors = [];
+    var rowConditions = checkCondition(row.conditions, watch, wizardData);
+    if (!rowConditions) return null;
     var showRow = row.expandable ? expanded : true;
     var label = [].concat(row.label || []);
     if (row.hint) label.push( /*#__PURE__*/React.createElement(Tooltip, {
-      content: row.hint
+      content: row.hint,
+      contentProps: {
+        fontStyle: "normal"
+      }
     }, /*#__PURE__*/React.createElement(Hint, null, /*#__PURE__*/React.createElement(Icon, {
       icon: "question"
     }))));

@@ -26,7 +26,7 @@ export const main = () => {
         onFinish={(form) => console.log("form: ", form)}
         schema={schema}
         watcher={handleWatcher}
-        watchList={["document"]}
+        watchList={["document", "biddingEnabled"]}
       />
     </Wrapper>
   );

@@ -58,11 +58,14 @@ export const FormRows = ({
       {rows?.map((row, idx) => {
         const rowKey = `step-${stepIndex}-row-${idx}`;
         const rowErrors = [];
+        const rowConditions = checkCondition(row.conditions, watch, wizardData);
+        if (!rowConditions) return null;
+
         const showRow = row.expandable ? expanded : true;
         const label = [...(row.label || [])];
         if (row.hint)
           label.push(
-            <Tooltip content={row.hint}>
+            <Tooltip content={row.hint} contentProps={{ fontStyle: "normal" }}>
               <Hint>
                 <Icon icon="question" />
               </Hint>

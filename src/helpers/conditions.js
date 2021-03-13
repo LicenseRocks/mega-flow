@@ -17,11 +17,14 @@ export const checkCondition = (conditions, watch, wizardData) => {
 
     return conditions.some((c) => {
       if (c.includes(":")) {
-        const [name, value] = c.split(":");
-        return (
+        const [name, value, not] = c.split(":");
+        const isTrue =
           conditionValues[name] === value ||
-          (Array.isArray(value) && conditionValues[name]?.includes(value))
-        );
+          (Array.isArray(value) && conditionValues[name]?.includes(value)) ||
+          (value === "true" && Boolean(conditionValues[name]));
+
+        if (not) return !isTrue;
+        return isTrue;
       }
       return conditionValues[c]?.length > 0 || !!conditionValues[c];
     });

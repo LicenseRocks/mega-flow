@@ -3,21 +3,22 @@
         {
             "rows": [
                 {
+                    "hint": "Supported file types: image/* (jpg, png, jpeg) - Max size: 2MB",
                     "label": "Cover",
                     "fields": [
                         {
-                            "accept": "image/*",
                             "name": "cover",
                             "type": "fileUpload",
+                            "accept": "image/*",
                             "multiple": false,
                             "required": "You must upload image cover"
                         }
                     ],
-                    "hint": "Supported file types: image/* (jpg, png, jpeg) - Max size: 2MB",
                     "labelAlign": "start",
                     "labelGutter": true
                 },
                 {
+                    "hint": "Difference between Centerialized and Permanent storage",
                     "label": "Cover Storage Method",
                     "fields": [
                         {
@@ -37,39 +38,20 @@
                             "defaultValue": "s3"
                         }
                     ],
-                    "divider": "Divider",
-                    "hint": "Difference between Centerialized and Permanent storage"
-                },
-                {
-                    "label": "Music Video",
-                    "fields": [
-                        {
-                            "accept": "video/*",
-                            "name": "video",
-                            "type": "fileUpload",
-                            "multiple": false,
-                            "required": "You must upload video"
-                        }
-                    ],
-                    "hint": "Supported file types: video/* (mp4, mpeg, webm) - Max size: 100MB",
-                    "labelAlign": "start",
-                    "labelGutter": true
-                },
-                {
-                    "message": "Do you want to store also your media assets fully decentralized forever? Drop us a mail at hello@licenserocks.de"
+                    "divider": "Divider"
                 }
             ],
             "title": "Upload assets"
-          },
-          {
+        },
+        {
             "rows": [
                 {
-                    "label": "Title",
+                    "label": "Name",
                     "fields": [
                         {
                             "name": "title",
                             "required": "Name is required",
-                            "placeholder": "Name of your listed Video"
+                            "placeholder": "Name of the digital merchandise"
                         }
                     ]
                 },
@@ -78,22 +60,95 @@
                     "fields": [
                         {
                             "name": "description",
-                            "placeholder": "Music video description"
+                            "placeholder": "Merchandise description"
                         }
                     ]
                 },
                 {
-                    "divider": true,
-                    "label": "Credit Line",
+                  "label": "Creator",
+                  "fields": [
+                      {
+                          "defaultValue": "me",
+                          "name": "creator",
+                          "options": [
+                              { "label": "Me", "value": "me" }
+                          ],
+                          "type": "checkbox"
+                      },
+                      {
+                          "conditions": ["creator:me:not"],
+                          "name": "creatorCustom",
+                          "placeholder": "Add other merchandise creators"
+                      }
+                  ],
+                  "divider": true
+                },
+                {
+                    "label": "Artist",
                     "fields": [
                         {
-                            "name": "creditLine",
-                            "placeholder": "Music video credit line"
+                            "name": "artist",
+                            "placeholder": "Artist name"
+                        }
+                    ],
+                    "divider": true
+                },
+                {
+                    "label": "Merchandise Type",
+                    "fields": [
+                        {
+                            "name": "type",
+                            "type": "select",
+                            "options": [
+                                {
+                                    "label": "Clothes Vouchers",
+                                    "value": "clothesVoucher"
+                                },
+                                {
+                                    "label": "Gift Vouchers",
+                                    "value": "giftVoucher"
+                                },
+                                {
+                                    "label": "Event Vouchers",
+                                    "value": "eventVoucher"
+                                },
+                                {
+                                    "label": "Lottery Events",
+                                    "value": "lotteryEvent"
+                                },
+                                {
+                                    "label": "Personalized Cover Labels",
+                                    "value": "personalizedCoverLabel"
+                                },
+                                {
+                                    "label": "Other",
+                                    "value": "other"
+                                }
+                            ],
+                            "placeholder": "Merchandise Type"
+                        },
+                        {
+                            "name": "otherType",
+                            "conditions": [
+                                "type:other"
+                            ],
+                            "placeholder": "Please enter any other merchandise type"
                         }
                     ]
                 },
                 {
-                    "divider": true,
+                    "hint": "Value of this field would be visible only to owners",
+                    "label": "Unlockable content",
+                    "fields": [
+                        {
+                            "name": "secretPhrase",
+                            "placeholder": "Unlockable content"
+                        }
+                    ],
+                    "divider": true
+                },
+                {
+                    "hint": "Unique: 1, Limited: 2-100, Unlimited: > 100",
                     "label": "Amount",
                     "fields": [
                         {
@@ -116,52 +171,123 @@
                             "defaultValue": "unique"
                         },
                         {
-                            "conditions": [
-                                "amountType:limited"
-                            ],
                             "min": 2,
-                            "max": 100,
                             "name": "amount",
                             "type": "number",
                             "required": "Amount is required",
+                            "conditions": [
+                                "amountType:limited",
+                                "amountType:unlimited"
+                            ],
                             "placeholder": "Amount (2-100)"
                         }
                     ],
-                    "hint": "Unique: 1, Limited: 2-100, Unlimited: > 100"
+                    "divider": true
                 },
                 {
-                    "divider": true,
-                    "label": "Price",
-                    "fields": [
-                        {
-                            "min": "0.01",
-                            "name": "price",
-                            "type": "price",
-                            "required": "Price is required",
-                            "currencies": [
-                                {
-                                    "sign": "€",
-                                    "label": "EUR (€)",
-                                    "value": "eur"
-                                }
-                            ],
-                            "placeholder": "Price"
-                        }
-                    ]
-                },
-                {
-                    "label": "Unlockable content",
-                    "fields": [
-                        {
-                            "name": "secretPhrase",
-                            "placeholder": "Unlockable content"
-                        }
-                    ],
-                    "hint": "Value of this field would be visible only to owners"
-                }
+                  "label": "Enable bidding?",
+                  "fields": [
+                      {
+                          "name": "biddingEnabled",
+                          "type": "toggleSwitch"
+                      }
+                  ]
+              },
+              {
+                  "conditions": ["biddingEnabled:true:not"],
+                  "label": "Price",
+                  "fields": [
+                      {
+                          "inputProps": {
+                              "placeholder": "Price"
+                          },
+                          "min": "0.01",
+                          "name": "price",
+                          "type": "price",
+                          "required": "Price is required",
+                          "currencies": [
+                              {
+                                  "sign": "€",
+                                  "label": "EUR (€)",
+                                  "value": "eur"
+                              }
+                          ]
+                      }
+                  ],
+                  "divider": true
+              },
+              {
+                  "conditions": ["biddingEnabled:true"],
+                  "label": "Starting Price",
+                  "fields": [
+                      {
+                          "inputProps": {
+                              "placeholder": "Starting Price"
+                          },
+                          "min": "0.01",
+                          "name": "startingPrice",
+                          "type": "price",
+                          "required": "Starting Price is required",
+                          "currencies": [
+                              {
+                                  "sign": "€",
+                                  "label": "EUR (€)",
+                                  "value": "eur"
+                              }
+                          ]
+                      }
+                  ],
+                  "divider": true
+              },
+              {
+                  "hint": "License fee",
+                  "label": "License fee",
+                  "fields": [
+                      {
+                          "defaultValue": false,
+                          "name": "feeEnabled",
+                          "type": "toggleSwitch"
+                      }
+                  ]
+              },
+              {
+                  "conditions": ["feeEnabled:true"],
+                  "label": "Fee percentage",
+                  "fields": [
+                      {
+                          "min": "1",
+                          "max": "99",
+                          "name": "fee",
+                          "type": "number",
+                          "placeholder": "Fee percentage (1-99)",
+                          "required": "Fee percentage is required"
+                      }
+                  ]
+              },
+              {
+                  "conditions": ["feeEnabled:true"],
+                  "label": "Fee recipient address",
+                  "fields": [
+                      {
+                          "defaultValue": "yes",
+                          "name": "defaultFeeAddress",
+                          "options": [
+                              { "label": "Use my default address stored in the platform", "value": "yes" }
+                          ],
+                          "type": "checkbox"
+                      },
+                      {
+                          "conditions": ["defaultFeeAddress:yes:not"],
+                          "name": "feeAddress",
+                          "placeholder": "Fee recipient address",
+                          "required": "Fee recipient address is required"
+                      }
+                  ],
+                  "divider": true
+              }
             ],
             "title": "Specify meta-data"
-          },
+        },
         {
             "rows": [
                 {
@@ -186,11 +312,11 @@
                             "type": "checkbox",
                             "options": [
                                 {
-                                    "label": "I am the copyright holder of that Music video that I upload and / or I am legal representative of that copyright holder.",
+                                    "label": "I am the owner of this merchandise.",
                                     "value": true
                                 }
                             ],
-                            "required": "You must be the copyright holder / legal representative"
+                            "required": "You must be the merchandise owner"
                         }
                     ]
                 }
@@ -198,4 +324,4 @@
             "title": "Review and finalize"
         }
     ]
-}
+  }
