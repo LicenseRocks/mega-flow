@@ -15,6 +15,7 @@ import { MegaFlowPropTypes, MegaFlowDefaultProps } from "./props";
 const Wrapper = styled.div``;
 
 const MegaFlow = ({
+  defaultValues,
   icons,
   schema,
   onFinish,
@@ -32,7 +33,7 @@ const MegaFlow = ({
   const { steps } = parsedSchema;
   const [currentStep, setCurrentStep] = useState(0);
   const isCurrentLastStep = currentStep === steps.length - 1;
-  const [wizardData, setWizardData] = useState({});
+  const [wizardData, setWizardData] = useState(defaultValues);
 
   const { handleSubmit, ...methods } = useForm({
     defaultValues: wizardData,

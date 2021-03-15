@@ -22,6 +22,9 @@ export const main = () => {
   return (
     <Wrapper>
       <MegaFlow
+        defaultValues={{
+          feeAddress: "xiff8s7da8s79fs7f9",
+        }}
         headerFadeColor="#F7F7F9"
         onFinish={(form) => console.log("form: ", form)}
         schema={schema}

@@ -265,26 +265,16 @@
                   ]
               },
               {
-                  "conditions": ["feeEnabled:true"],
-                  "label": "Fee recipient address",
-                  "fields": [
-                      {
-                          "defaultValue": "yes",
-                          "name": "defaultFeeAddress",
-                          "options": [
-                              { "label": "Use my default address stored in the platform", "value": "yes" }
-                          ],
-                          "type": "checkbox"
-                      },
-                      {
-                          "conditions": ["defaultFeeAddress:yes:not"],
-                          "name": "feeAddress",
-                          "placeholder": "Fee recipient address",
-                          "required": "Fee recipient address is required"
-                      }
-                  ],
-                  "divider": true
-              }
+                "conditions": ["feeEnabled:true"],
+                "label": "Fee recipient address",
+                "fields": [
+                    {
+                        "name": "feeAddress",
+                        "placeholder": "Fee recipient address",
+                        "required": "Fee recipient is required"
+                    }
+                ]
+            }
             ],
             "title": "Specify meta-data"
         },

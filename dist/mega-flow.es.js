@@ -443,7 +443,8 @@ function _templateObject$2() {
 var Wrapper$1 = styled.div(_templateObject$2());
 
 var MegaFlow = function MegaFlow(_ref) {
-  var icons = _ref.icons,
+  var defaultValues = _ref.defaultValues,
+      icons = _ref.icons,
       schema = _ref.schema,
       onFinish = _ref.onFinish,
       onStepSubmit = _ref.onStepSubmit,
@@ -452,7 +453,7 @@ var MegaFlow = function MegaFlow(_ref) {
       watchList = _ref.watchList,
       wizardProps = _ref.wizardProps,
       wrapperProps = _ref.wrapperProps,
-      props = _objectWithoutPropertiesLoose(_ref, ["icons", "schema", "onFinish", "onStepSubmit", "theme", "watcher", "watchList", "wizardProps", "wrapperProps"]);
+      props = _objectWithoutPropertiesLoose(_ref, ["defaultValues", "icons", "schema", "onFinish", "onStepSubmit", "theme", "watcher", "watchList", "wizardProps", "wrapperProps"]);
 
   // Parse if schema was type of JSON string
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
@@ -464,7 +465,7 @@ var MegaFlow = function MegaFlow(_ref) {
 
   var isCurrentLastStep = currentStep === steps.length - 1;
 
-  var _useState2 = useState({}),
+  var _useState2 = useState(defaultValues),
       wizardData = _useState2[0],
       setWizardData = _useState2[1];
 
