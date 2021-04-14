@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useFieldArray } from "react-hook-form";
@@ -27,12 +27,6 @@ const Form = ({ data, stepIndex, wizardData }) => {
     name: isRecurring ? data?.name : "",
   });
 
-  useEffect(() => {
-    if (isRecurring && fields.length === 0) {
-      append();
-    }
-  }, []);
-
   const renderRows = (index) => (
     <FormRows
       data={data}
@@ -48,12 +42,7 @@ const Form = ({ data, stepIndex, wizardData }) => {
     fields.map((item, idx) => (
       <Wrapper key={item.id}>
         <ButtonsWrapper>
-          <OutlineButton
-            color="danger"
-            disabled={fields.length === 1}
-            onClick={() => remove(idx)}
-            size="sm"
-          >
+          <OutlineButton color="danger" onClick={() => remove(idx)} size="sm">
             <Icon icon="trash" prefix="fa" />
           </OutlineButton>
         </ButtonsWrapper>

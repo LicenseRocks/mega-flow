@@ -58,7 +58,14 @@ export const FormRows = ({
       {rows?.map((row, idx) => {
         const rowKey = `step-${stepIndex}-row-${idx}`;
         const rowErrors = [];
-        const rowConditions = checkCondition(row.conditions, watch, wizardData);
+        const rowConditions = checkCondition(
+          row.conditions,
+          watch,
+          wizardData,
+          isRecurring,
+          data.name,
+          index
+        );
         if (!rowConditions) return null;
 
         const showRow = row.expandable ? expanded : true;
@@ -97,7 +104,10 @@ export const FormRows = ({
                 const showIfHasCondition = checkCondition(
                   field.conditions,
                   watch,
-                  wizardData
+                  wizardData,
+                  isRecurring,
+                  data.name,
+                  index
                 );
                 if (!showIfHasCondition) return null;
 

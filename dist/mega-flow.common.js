@@ -159,7 +159,7 @@ FormField.defaultProps = {
   recurringIndex: null
 };
 
-var getConditionValues = function getConditionValues(conditions, watch, wizardData) {
+var getConditionValues = function getConditionValues(conditions, watch, wizardData, isRecurring, recurringName) {
   var name = conditions.map(function (c) {
     if (c.includes(":")) {
       var _c$split = c.split(":"),
@@ -170,32 +170,38 @@ var getConditionValues = function getConditionValues(conditions, watch, wizardDa
 
     return c;
   });
-  return watch(name, wizardData);
+  return watch(isRecurring ? [recurringName] : name, wizardData);
 };
 
-var checkCondition = function checkCondition(conditions, watch, wizardData) {
+var checkCondition = function checkCondition(conditions, watch, wizardData, isRecurring, recurringName, recurringIndex) {
   var hasConditions = conditions && conditions.length > 0;
 
   if (hasConditions) {
-    var conditionValues = getConditionValues(conditions, watch, wizardData);
-    return conditions.some(function (c) {
-      var _conditionValues$c;
+    var _conditionValues$recu;
 
-      if (c.includes(":")) {
-        var _conditionValues$name;
+    var conditionValues = getConditionValues(conditions, watch, wizardData, isRecurring, recurringName);
+    var target = isRecurring ? conditionValues == null ? void 0 : (_conditionValues$recu = conditionValues[recurringName]) == null ? void 0 : _conditionValues$recu[recurringIndex] : conditionValues;
 
-        var _c$split2 = c.split(":"),
-            name = _c$split2[0],
-            value = _c$split2[1],
-            not = _c$split2[2];
+    if (conditionValues && target) {
+      return conditions.some(function (c) {
+        var _target$c;
 
-        var isTrue = conditionValues[name] === value || Array.isArray(value) && ((_conditionValues$name = conditionValues[name]) == null ? void 0 : _conditionValues$name.includes(value)) || value === "true" && Boolean(conditionValues[name]);
-        if (not) return !isTrue;
-        return isTrue;
-      }
+        if (c.includes(":")) {
+          var _target$name;
 
-      return ((_conditionValues$c = conditionValues[c]) == null ? void 0 : _conditionValues$c.length) > 0 || !!conditionValues[c];
-    });
+          var _c$split2 = c.split(":"),
+              name = _c$split2[0],
+              value = _c$split2[1],
+              not = _c$split2[2];
+
+          var isTrue = target[name] === value || Array.isArray(value) && ((_target$name = target[name]) == null ? void 0 : _target$name.includes(value)) || value === "true" && Boolean(target[name]);
+          if (not) return !isTrue;
+          return isTrue;
+        }
+
+        return ((_target$c = target[c]) == null ? void 0 : _target$c.length) > 0 || !!target[c];
+      });
+    }
   }
 
   return true;
@@ -246,7 +252,7 @@ var FormRows = function FormRows(_ref) {
 
     var rowKey = "step-" + stepIndex + "-row-" + idx;
     var rowErrors = [];
-    var rowConditions = checkCondition(row.conditions, watch, wizardData);
+    var rowConditions = checkCondition(row.conditions, watch, wizardData, isRecurring, data.name, index);
     if (!rowConditions) return null;
     var showRow = row.expandable ? expanded : true;
     var label = [].concat(row.label || []);
@@ -276,7 +282,7 @@ var FormRows = function FormRows(_ref) {
 
       var error = isRecurring && errors[data.name] && errors[data.name][index] ? (_errors$data$name$ind = errors[data.name][index][field.name]) == null ? void 0 : _errors$data$name$ind.message : (_errors$field$name = errors[field.name]) == null ? void 0 : _errors$field$name.message;
       if (error) rowErrors.push(error);
-      var showIfHasCondition = checkCondition(field.conditions, watch, wizardData);
+      var showIfHasCondition = checkCondition(field.conditions, watch, wizardData, isRecurring, data.name, index);
       if (!showIfHasCondition) return null;
       return /*#__PURE__*/React__default.createElement(FormField, {
         data: data,
@@ -360,12 +366,6 @@ var Form = function Form(_ref4) {
       append = _useFieldArray.append,
       remove = _useFieldArray.remove;
 
-  React.useEffect(function () {
-    if (isRecurring && fields.length === 0) {
-      append();
-    }
-  }, []);
-
   var renderRows = function renderRows(index) {
     return /*#__PURE__*/React__default.createElement(FormRows, {
       data: data,
@@ -383,7 +383,6 @@ var Form = function Form(_ref4) {
         key: item.id
       }, /*#__PURE__*/React__default.createElement(ButtonsWrapper, null, /*#__PURE__*/React__default.createElement(kit.OutlineButton, {
         color: "danger",
-        disabled: fields.length === 1,
         onClick: function onClick() {
           return remove(idx);
         },
