@@ -18,7 +18,7 @@
                     "labelGutter": true
                 },
                 {
-                    "hint": "Difference between Centerialized and Permanent storage",
+                    "hint": "Select between the centralized managed encrypted cloud storage on AWS and permanent storage on Arweave (200 years solid storage)",
                     "label": "Cover Storage Method",
                     "fields": [
                         {
@@ -26,11 +26,11 @@
                             "type": "radio",
                             "options": [
                                 {
-                                    "label": "Centralized Storage (AWS S3)",
+                                    "label": "AWS S3 Centralized Encrypted Storage",
                                     "value": "s3"
                                 },
                                 {
-                                    "label": "Permanent Storage (Arweave)",
+                                    "label": "Arweave Permanent Storage",
                                     "value": "arweave"
                                 }
                             ],
@@ -85,7 +85,7 @@
                     ]
                 }
             ],
-            "title": "Upload assets"
+            "title": "Media Assets"
         },
         {
             "rows": [
@@ -110,7 +110,74 @@
                     "divider": true
                 },
                 {
-                    "hint": "Unique: 1, Limited: 2-100",
+                    "label": "License Type",
+                    "hint": "Choose between Private and Commercial",
+                    "fields": [
+                        {
+                            "name": "licenseType",
+                            "options": [
+                                {
+                                    "label": "Private",
+                                    "value": "private"
+                                },
+                                {
+                                    "label": "Commercial",
+                                    "value": "commercial"
+                                }
+                            ],
+                            "type": "borderedRadio"
+                        }
+                    ],
+                    "marginBottom": 8
+                },
+                {
+                    "conditions": [
+                        "licenseType:commercial"
+                    ],
+                    "label": " ",
+                    "fields": [
+                        {
+                            "name": "licenseTypeCommercial",
+                            "options": [
+                                {
+                                    "label": "Event",
+                                    "value": "event",
+                                    "icon": "calendar-day"
+                                },
+                                {
+                                    "label": "Radio",
+                                    "value": "radio",
+                                    "icon": "broadcast-tower"
+                                },
+                                {
+                                    "label": "TV",
+                                    "value": "tv",
+                                    "icon": "tv"
+                                },
+                                {
+                                    "label": "Videos",
+                                    "value": "video",
+                                    "icon": "video"
+                                },
+                                {
+                                    "label": "NFTs",
+                                    "value": "nft",
+                                    "icon": "gem"
+                                },
+                                {
+                                    "label": "Reuse",
+                                    "value": "reuse",
+                                    "icon": "recycle"
+                                }
+                            ],
+                            "stacked": false,
+                            "type": "radio"
+                        }
+                    ],
+                    "divider": true
+                },
+                {
+                    "hint": "Unique: 1, Limited: > 1",
                     "label": "Amount",
                     "fields": [
                         {
@@ -136,7 +203,7 @@
                             "conditions": [
                                 "amountType:limited"
                             ],
-                            "placeholder": "Amount (2-100)"
+                            "placeholder": "Amount ( > 1)"
                         }
                     ],
                     "divider": true
@@ -196,155 +263,14 @@
                                 }
                             ]
                         }
-                    ],
-                    "divider": true
-                },
-                {
-                    "hint": "Creator fee",
-                    "label": "Creator fee",
-                    "fields": [
-                        {
-                            "name": "creatorFeeEnabled",
-                            "type": "toggleSwitch"
-                        }
-                    ]
-                },
-                {
-                    "conditions": [
-                        "creatorFeeEnabled:true"
-                    ],
-                    "label": "Creator fee amount",
-                    "fields": [
-                        {
-                            "name": "creatorFeeAmountType",
-                            "type": "radio",
-                            "options": [
-                                {
-                                    "label": "Fixed",
-                                    "value": "FIXED"
-                                },
-                                {
-                                    "label": "Percentage",
-                                    "value": "PERCENTAGE"
-                                }
-                            ],
-                            "stacked": false,
-                            "required": "Fee amount is required"
-                        }
-                    ]
-                },
-                {
-                    "conditions": [
-                        "creatorFeeAmountType"
-                    ],
-                    "label": " ",
-                    "fields": [
-                        {
-                            "conditions": [
-                                "creatorFeeAmountType:PERCENTAGE"
-                            ],
-                            "min": "1",
-                            "max": "99",
-                            "name": "creatorFeePercentage",
-                            "type": "number",
-                            "placeholder": "Fee percentage (1-99)",
-                            "required": "Fee percentage is required"
-                        },
-                        {
-                            "conditions": [
-                                "creatorFeeAmountType:FIXED"
-                            ],
-                            "min": "1",
-                            "name": "creatorFeeAmount",
-                            "type": "price",
-                            "placeholder": "Fee amount (EUR)",
-                            "required": "Fee amount is required"
-                        }
-                    ]
-                },
-                {
-                    "conditions": [
-                        "creatorFeeEnabled:true"
-                    ],
-                    "label": "Creator fee recipient address",
-                    "fields": [
-                        {
-                            "name": "creatorFeeAddress",
-                            "placeholder": "Fee recipient address",
-                            "required": "Fee recipient address is required"
-                        }
-                    ],
-                    "divider": true
-                },
-                {
-                    "hint": "Reseller fee",
-                    "label": "Reseller fee",
-                    "fields": [
-                        {
-                            "name": "resellerFeeEnabled",
-                            "type": "toggleSwitch"
-                        }
-                    ]
-                },
-                {
-                    "conditions": [
-                        "resellerFeeEnabled:true"
-                    ],
-                    "label": "Reseller fee amount",
-                    "fields": [
-                        {
-                            "name": "resellerFeeAmountType",
-                            "type": "radio",
-                            "options": [
-                                {
-                                    "label": "Fixed",
-                                    "value": "FIXED"
-                                },
-                                {
-                                    "label": "Percentage",
-                                    "value": "PERCENTAGE"
-                                }
-                            ],
-                            "stacked": false,
-                            "required": "Fee amount is required"
-                        }
-                    ]
-                },
-                {
-                    "conditions": [
-                        "resellerFeeAmountType"
-                    ],
-                    "label": " ",
-                    "fields": [
-                        {
-                            "conditions": [
-                                "resellerFeeAmountType:PERCENTAGE"
-                            ],
-                            "min": "1",
-                            "max": "99",
-                            "name": "resellerFeePercentage",
-                            "type": "number",
-                            "placeholder": "Fee percentage (1-99)",
-                            "required": "Fee percentage is required"
-                        },
-                        {
-                            "conditions": [
-                                "resellerFeeAmountType:FIXED"
-                            ],
-                            "min": "1",
-                            "name": "resellerFeeAmount",
-                            "type": "price",
-                            "placeholder": "Fee amount (EUR)",
-                            "required": "Fee amount is required"
-                        }
                     ]
                 }
             ],
-            "title": "Meta-data and Price"
+            "title": "License Metrics"
         },
         {
             "recurring": true,
-            "name": "copyrights",
+            "name": "initialSalesFees",
             "rows": [
                 {
                     "label": "Name",
@@ -353,6 +279,42 @@
                             "name": "feeName",
                             "placeholder": "Copyright holder name",
                             "required": "Fee name is required"
+                        }
+                    ]
+                },
+                {
+                    "label": "Category",
+                    "fields": [
+                        {
+                            "name": "feeCategory",
+                            "options": [
+                                {
+                                    "label": "Creator Rights",
+                                    "value": "creator"
+                                },
+                                {
+                                    "label": "Recording Rights",
+                                    "value": "recording"
+                                },
+                                {
+                                    "label": "Publishing Rights",
+                                    "value": "publishing"
+                                },
+                                {
+                                    "label": "Collection Society Rights",
+                                    "value": "collection"
+                                }
+                            ],
+                            "placeholder": "Copyright category",
+                            "type": "reactSelect",
+                            "required": "Category is required"
+                        },
+                        {
+                            "content": "GEMA Look Up",
+                            "href": "https://www.gema.de/musikurheber/online-services-fuer-gema-mitglieder/repertoiresuche-erweiterter-zugang/",
+                            "size": "sm",
+                            "target": "_blank",
+                            "type": "link"
                         }
                     ]
                 },
@@ -389,7 +351,8 @@
                             ],
                             "min": "1",
                             "max": "99",
-                            "name": "feePercentage",
+                            "step": "0.01",
+                            "name": "feeAmountPercentage",
                             "type": "number",
                             "placeholder": "Fee percentage (1-99)",
                             "required": "Fee percentage is required"
@@ -398,10 +361,19 @@
                             "conditions": [
                                 "feeAmountType:FIXED"
                             ],
-                            "min": "1",
-                            "name": "feeAmount",
+                            "inputProps": {
+                                "placeholder": "Fee fixed amount"
+                            },
+                            "min": "0.01",
+                            "name": "feeAmountFixed",
                             "type": "price",
-                            "placeholder": "Fee amount (EUR)",
+                            "currencies": [
+                                {
+                                    "sign": "€",
+                                    "label": "EUR (€)",
+                                    "value": "eur"
+                                }
+                            ],
                             "required": "Fee amount is required"
                         }
                     ]
@@ -444,7 +416,7 @@
                                 "feeRecipientType:USER"
                             ],
                             "defaultOptions": true,
-                            "endpoint": "https://run.mocky.io/v3/a7e06c66-251c-4ca9-a8ac-cac5284d21a0",
+                            "endpoint": "http://localhost:3000/api/users",
                             "name": "feeUser",
                             "type": "reactSelect",
                             "placeholder": "Fee recipient",
@@ -454,42 +426,167 @@
                     "divider": true
                 }
             ],
-            "title": "Copyrights"
+            "title": "Sales Fees"
         },
         {
+            "recurring": true,
+            "name": "secondarySalesFees",
             "rows": [
                 {
+                    "label": "Name",
                     "fields": [
                         {
-                            "name": "terms",
-                            "type": "checkbox",
-                            "options": [
-                                {
-                                    "label": "I have read and accept the terms of usage.",
-                                    "value": true
-                                }
-                            ],
-                            "required": "You must accept terms of usage"
+                            "name": "feeName",
+                            "placeholder": "Copyright holder name",
+                            "required": "Fee name is required"
                         }
                     ]
                 },
                 {
+                    "label": "Category",
                     "fields": [
                         {
-                            "name": "owner",
-                            "type": "checkbox",
+                            "name": "feeCategory",
                             "options": [
                                 {
-                                    "label": "I am the copyright holder of that Image that I upload and / or I am legal representative of that copyright holder.",
-                                    "value": true
+                                    "label": "Creator Rights",
+                                    "value": "creator"
+                                },
+                                {
+                                    "label": "Recording Rights",
+                                    "value": "recording"
+                                },
+                                {
+                                    "label": "Publishing Rights",
+                                    "value": "publishing"
+                                },
+                                {
+                                    "label": "Collection Society Rights",
+                                    "value": "collection"
                                 }
                             ],
-                            "required": "You must be the copyright holder / legal representative"
+                            "placeholder": "Copyright category",
+                            "type": "reactSelect",
+                            "required": "Category is required"
+                        },
+                        {
+                            "content": "GEMA Look Up",
+                            "href": "https://www.gema.de/musikurheber/online-services-fuer-gema-mitglieder/repertoiresuche-erweiterter-zugang/",
+                            "size": "sm",
+                            "target": "_blank",
+                            "type": "link"
                         }
                     ]
+                },
+                {
+                    "label": "Fee Amount",
+                    "fields": [
+                        {
+                            "min": "1",
+                            "max": "99",
+                            "step": "0.01",
+                            "name": "feeAmountPercentage",
+                            "type": "number",
+                            "placeholder": "Fee percentage (1-99)",
+                            "required": "Fee percentage is required"
+                        }
+                    ]
+                },
+                {
+                    "label": "Share recipient",
+                    "fields": [
+                        {
+                            "name": "feeRecipientType",
+                            "type": "radio",
+                            "options": [
+                                {
+                                    "label": "Address",
+                                    "value": "ADDRESS"
+                                },
+                                {
+                                    "label": "Platform User",
+                                    "value": "USER"
+                                }
+                            ],
+                            "stacked": false,
+                            "required": "Fee recipient is required"
+                        }
+                    ]
+                },
+                {
+                    "label": " ",
+                    "fields": [
+                        {
+                            "conditions": [
+                                "feeRecipientType:ADDRESS"
+                            ],
+                            "name": "feeAddress",
+                            "placeholder": "Fee recipient address",
+                            "required": "Fee recipient address is required"
+                        },
+                        {
+                            "async": true,
+                            "conditions": [
+                                "feeRecipientType:USER"
+                            ],
+                            "defaultOptions": true,
+                            "endpoint": "http://localhost:3000/api/users",
+                            "name": "feeUser",
+                            "type": "reactSelect",
+                            "placeholder": "Fee recipient",
+                            "required": "Fee recipient user is required"
+                        }
+                    ],
+                    "divider": true
                 }
             ],
-            "title": "Review and finalize"
+            "title": "Recurring Fee"
+        },
+        {
+            "steps": [
+                {
+                    "rows": [
+                        {
+                            "fields": [
+                                {
+                                    "name": "terms",
+                                    "type": "checkbox",
+                                    "options": [
+                                        {
+                                            "label": "I have read and accept the terms of usage.",
+                                            "value": true
+                                        }
+                                    ],
+                                    "required": "You must accept terms of usage"
+                                },
+                                {
+                                    "content": "Term of Usage",
+                                    "href": "https://localhost:3000",
+                                    "size": "sm",
+                                    "target": "_blank",
+                                    "type": "link"
+                                }
+                            ]
+                        },
+                        {
+                            "fields": [
+                                {
+                                    "name": "owner",
+                                    "type": "checkbox",
+                                    "options": [
+                                        {
+                                            "label": "I am the copyright holder of that Image that I upload and / or I am legal representative of that copyright holder.",
+                                            "value": true
+                                        }
+                                    ],
+                                    "required": "You must be the copyright holder / legal representative"
+                                }
+                            ]
+                        }
+                    ],
+                    "title": "Review & Publish"
+                }
+            ]
         }
     ]
 }

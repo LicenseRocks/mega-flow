@@ -1,39 +1,47 @@
 {
-    "parser": "babel-eslint",
-    "env": {
-        "browser": true,
-        "es6": true
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": ["airbnb", "plugin:prettier/recommended"],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "plugins": ["react"],
-    "rules": {
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
-        }
-      ],
-      "import/prefer-default-export": "off",
-      "react/jsx-props-no-spreading": "off",
-      "import/no-extraneous-dependencies": "off"
-    },
-    "overrides": [
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
       {
-        "files": ["stories.js"],
-        "rules": {
-          "react/prop-types": "off"
-        }
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
       }
-    ]
-  }
-  
+    ],
+    "import/prefer-default-export": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/no-extraneous-dependencies": "off",
+    "eslint/no-return-assign": "off",
+    "eslint/no-param-reassign": "off"
+  },
+  "overrides": [
+    {
+      "files": [
+        "stories.js"
+      ],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    }
+  ]
+}

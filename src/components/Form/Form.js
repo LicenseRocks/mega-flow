@@ -20,7 +20,7 @@ const ButtonsWrapper = styled.div`
   margin-bottom: 8px;
 `;
 
-const Form = ({ data, stepIndex, wizardData }) => {
+const Form = ({ data, stepIndex, stepFormData }) => {
   const isRecurring = data.recurring;
 
   const { fields, append, remove } = useFieldArray({
@@ -34,7 +34,7 @@ const Form = ({ data, stepIndex, wizardData }) => {
       isRecurring={isRecurring}
       rows={data.rows}
       stepIndex={stepIndex}
-      wizardData={wizardData}
+      stepData={stepFormData}
     />
   );
 
@@ -68,9 +68,11 @@ Form.propTypes = {
     rows: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
   stepIndex: PropTypes.number.isRequired,
-  wizardData: PropTypes.shape({}).isRequired,
+  stepFormData: PropTypes.shape({}),
 };
 
-Form.defaultProps = {};
+Form.defaultProps = {
+  stepFormData: {},
+};
 
 export default Form;

@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { FormProvider, useForm } from "react-hook-form";
 import {
   AppContainer,
   RocksKitIcons,
   RocksKitTheme,
   Wizard,
 } from "@licenserocks/kit";
+import { FormProvider, useForm } from "react-hook-form";
 
 import { Form } from "./components";
 import { MegaFlowIcons } from "./theme";
 import { MegaFlowPropTypes, MegaFlowDefaultProps } from "./props";
 
 const Wrapper = styled.div``;
+
+const getOutputData = (output) =>
+  Object.values(output).reduce((obj, acc) => (obj = { ...obj, ...acc }), {});
 
 const MegaFlow = ({
   defaultValues,
@@ -22,7 +25,6 @@ const MegaFlow = ({
   onStepSubmit,
   theme,
   watcher,
-  watchList,
   wizardProps,
   wrapperProps,
   ...props
@@ -35,18 +37,24 @@ const MegaFlow = ({
   const isCurrentLastStep = currentStep === steps.length - 1;
   const [wizardData, setWizardData] = useState(defaultValues);
 
-  const { handleSubmit, ...methods } = useForm({
-    defaultValues: wizardData,
-  });
+  const { formState, handleSubmit, ...methods } = useForm();
 
-  if (watcher && watchList.length > 0) {
-    watcher(methods.watch(watchList));
-  }
+  const stepFormData = wizardData[currentStep];
+
+  useEffect(() => {
+    if (stepFormData) {
+      methods.reset(stepFormData);
+    }
+
+    if (watcher) {
+      watcher(getOutputData(wizardData));
+    }
+  }, [currentStep]);
 
   const onSubmit = (data) => {
     const currentState = {
       ...wizardData,
-      ...data,
+      [currentStep]: data,
     };
     // Set step data in global wizard object
     setWizardData(currentState);
@@ -57,7 +65,7 @@ const MegaFlow = ({
     if (!isCurrentLastStep) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      onFinish(currentState);
+      onFinish(getOutputData(currentState));
     }
   };
 
@@ -68,8 +76,9 @@ const MegaFlow = ({
   const renderForm = () => (
     <Form
       data={steps[currentStep]}
+      key={currentStep}
       stepIndex={currentStep}
-      wizardData={wizardData}
+      stepFormData={stepFormData}
     />
   );
 
@@ -79,8 +88,8 @@ const MegaFlow = ({
       theme={theme || RocksKitTheme}
     >
       <Wrapper {...wrapperProps}>
-        <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormProvider {...methods}>
             <Wizard
               currentStepContent={renderForm()}
               currentStepIndex={currentStep}
@@ -89,8 +98,8 @@ const MegaFlow = ({
               {...wizardProps}
               {...props}
             />
-          </form>
-        </FormProvider>
+          </FormProvider>
+        </form>
       </Wrapper>
     </AppContainer>
   );

@@ -14,6 +14,7 @@ import {
   Select,
   Stepper,
   TextArea,
+  TextButton,
   ToggleSwitch,
 } from "@licenserocks/kit";
 
@@ -57,10 +58,12 @@ export const FormField = ({
   stepIndex,
   fieldId,
   rowId,
-  wizardData,
+  stepData,
 }) => {
   const { control, register } = useFormContext();
   const { conditions, defaultValue, name, required, type, ...others } = field;
+  if (type === "link") return <TextButton {...others} />;
+
   const Field = mapFieldTypeToComponent(type);
   const fieldKey = `step-${stepIndex}-row-${rowId}-field-${fieldId}`;
   const fieldName = isRecurring
@@ -68,11 +71,9 @@ export const FormField = ({
     : name;
 
   const prevValue =
-    isRecurring &&
-    wizardData[data.name] &&
-    wizardData[data.name][recurringIndex]
-      ? wizardData[data.name][recurringIndex][name]
-      : wizardData[name];
+    isRecurring && stepData[data.name] && stepData[data.name][recurringIndex]
+      ? stepData[data.name][recurringIndex][name]
+      : stepData[name];
 
   return (
     <Field
@@ -109,7 +110,7 @@ FormField.propTypes = {
   isRecurring: PropTypes.bool.isRequired,
   recurringIndex: PropTypes.number,
   stepIndex: PropTypes.number.isRequired,
-  wizardData: PropTypes.shape({}).isRequired,
+  stepData: PropTypes.shape({}).isRequired,
   rowId: PropTypes.number.isRequired,
 };
 

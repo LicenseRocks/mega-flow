@@ -47,7 +47,7 @@ export const FormRows = ({
   isRecurring,
   rows,
   stepIndex,
-  wizardData,
+  stepData,
 }) => {
   const { errors, watch } = useFormContext();
   const [expanded, setExpanded] = useState(false);
@@ -61,7 +61,7 @@ export const FormRows = ({
         const rowConditions = checkCondition(
           row.conditions,
           watch,
-          wizardData,
+          stepData,
           isRecurring,
           data.name,
           index
@@ -104,7 +104,7 @@ export const FormRows = ({
                 const showIfHasCondition = checkCondition(
                   field.conditions,
                   watch,
-                  wizardData,
+                  stepData,
                   isRecurring,
                   data.name,
                   index
@@ -121,7 +121,7 @@ export const FormRows = ({
                     recurringIndex={index}
                     rowId={idx}
                     stepIndex={stepIndex}
-                    wizardData={wizardData}
+                    stepData={stepData}
                   />
                 );
               })}
@@ -152,7 +152,7 @@ FormRows.propTypes = {
     rows: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
   stepIndex: PropTypes.number.isRequired,
-  wizardData: PropTypes.shape({}).isRequired,
+  stepData: PropTypes.shape({}).isRequired,
   index: PropTypes.number.isRequired,
   isRecurring: PropTypes.bool.isRequired,
   rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired,

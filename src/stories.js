@@ -15,21 +15,19 @@ const Wrapper = styled.div`
 `;
 
 export const main = () => {
-  const handleWatcher = (data) => {
+  const handleWatch = (data) => {
     console.log("data: ", data);
   };
 
   return (
     <Wrapper>
       <MegaFlow
-        defaultValues={{
-          creatorFeeAddress: "xiff8s7da8s79fs7f9",
+        // defaultValues={{}}
+        onFinish={(output) => {
+          console.log("output: ", output);
         }}
-        headerFadeColor="#F7F7F9"
-        onFinish={(form) => console.log("form: ", form)}
         schema={schema}
-        watcher={handleWatcher}
-        watchList={["document", "biddingEnabled"]}
+        watcher={handleWatch}
       />
     </Wrapper>
   );

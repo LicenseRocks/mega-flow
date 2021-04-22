@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 
 export const MegaFlowPropTypes = {
+  defaultValues: PropTypes.shape({}),
   icons: PropTypes.arrayOf(PropTypes.shape()),
   schema: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   onFinish: PropTypes.func,
@@ -13,7 +14,8 @@ export const MegaFlowPropTypes = {
 };
 
 export const MegaFlowDefaultProps = {
+  defaultValues: {},
   icons: [],
-  onFinish: () => {},
+  onFinish: () => { },
   watchList: [],
 };
