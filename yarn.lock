@@ -1232,10 +1232,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@licenserocks/kit@^1.21.1":
-  version "1.21.1"
-  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-1.21.1.tgz#ace1e332c668f54b4cf516bfe6d10a6a6a975354"
-  integrity sha512-1HXnnoAFRL8mottCYc1QNQdEIWoCp05EKGwcj2KPv+UZnMs/3t4VkJ9+Y24XXDu83wkkzT3IeOGZx5sk099W3Q==
+"@licenserocks/kit@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-2.0.3.tgz#9c54b6f93454d12cf2db2a9121c1fe4f1d14cb3c"
+  integrity sha512-VxWk632buByR16OnpuHQj1tTQdjnB54U0L402357zdpb0LpZ7UdXvV7m13AXkU1AbK9vROOkeJ3uyvOZHEUQNg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.32"
     "@fortawesome/free-brands-svg-icons" "^5.15.1"

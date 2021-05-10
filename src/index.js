@@ -85,7 +85,7 @@ const MegaFlow = ({
   return (
     <AppContainer
       icons={{ ...RocksKitIcons, ...MegaFlowIcons, ...icons }}
-      theme={theme || RocksKitTheme}
+      theme={theme || RocksKitTheme()}
     >
       <Wrapper {...wrapperProps}>
         <form onSubmit={handleSubmit(onSubmit)}>

@@ -535,7 +535,7 @@ var MegaFlow = function MegaFlow(_ref) {
 
   return /*#__PURE__*/React__default.createElement(kit.AppContainer, {
     icons: _extends({}, kit.RocksKitIcons, MegaFlowIcons, icons),
-    theme: theme || kit.RocksKitTheme
+    theme: theme || kit.RocksKitTheme()
   }, /*#__PURE__*/React__default.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React__default.createElement("form", {
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/React__default.createElement(reactHookForm.FormProvider, methods, /*#__PURE__*/React__default.createElement(kit.Wizard, _extends({
