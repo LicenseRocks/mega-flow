@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 import {
   BorderedRadio,
   Checkbox,
-  Datepicker,
+  FormDatepicker,
   FilePond,
   FileUpload,
   Input,
@@ -21,7 +21,7 @@ import {
 const mapFieldTypeToComponent = (fieldType) => {
   switch (fieldType) {
     case "datepicker":
-      return Datepicker;
+      return FormDatepicker;
     case "select":
       return Select;
     case "borderedRadio":

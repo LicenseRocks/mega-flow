@@ -72,17 +72,45 @@
                     "conditions": [
                         "assetSameAsCover:true:not"
                     ],
-                    "message": "Do you want to store also your media assets fully decentralized forever? Drop us a mail at hello@licenserocks.de"
+                    "message": "Do you want to store your media assets forever in a fully decentralized manner? Drop us a mail at hello@licenserocks.de"
                 },
                 {
                     "hint": "Value of this field would be visible only to owners",
-                    "label": "Unlockable bonus content",
+                    "label": "Bonus Text",
                     "fields": [
                         {
                             "name": "secretPhrase",
-                            "placeholder": "Unlockable content"
+                            "placeholder": "Unlockable bonus content"
                         }
                     ]
+                },
+                {
+                    "hint": "These media would be visible only to owners",
+                    "label": "Bonus Media",
+                    "fields": [
+                        {
+                            "name": "bonusMediaEnabled",
+                            "type": "toggleSwitch"
+                        }
+                    ]
+                },
+                {
+                    "conditions": [
+                        "bonusMediaEnabled:true"
+                    ],
+                    "label": " ",
+                    "fields": [
+                        {
+                            "fileNameEditable": true,
+                            "name": "downloadableAsset",
+                            "type": "fileUpload",
+                            "accept": "",
+                            "multiple": true,
+                            "required": "You must upload an asset file"
+                        }
+                    ],
+                    "labelAlign": "start",
+                    "labelGutter": true
                 }
             ],
             "title": "Media Assets"
@@ -100,78 +128,29 @@
                     ]
                 },
                 {
-                    "label": "Description",
+                    "label": "Description - EN",
                     "fields": [
                         {
                             "name": "description",
-                            "placeholder": "Image description"
+                            "placeholder": "Image description (EN)",
+                            "type": "textArea"
                         }
-                    ],
-                    "divider": true
+                    ]
                 },
                 {
-                    "label": "License Type",
-                    "hint": "Choose between Private and Commercial",
+                    "label": "Description - DE (if No, only EN description will be displayed)",
                     "fields": [
                         {
-                            "name": "licenseType",
-                            "options": [
-                                {
-                                    "label": "Private",
-                                    "value": "private"
-                                },
-                                {
-                                    "label": "Commercial",
-                                    "value": "commercial"
-                                }
-                            ],
-                            "type": "borderedRadio"
-                        }
-                    ],
-                    "marginBottom": 8
-                },
-                {
-                    "conditions": [
-                        "licenseType:commercial"
-                    ],
-                    "label": " ",
-                    "fields": [
+                            "name": "hasDescriptionDe",
+                            "type": "toggleSwitch"
+                        },
                         {
-                            "name": "licenseTypeCommercial",
-                            "options": [
-                                {
-                                    "label": "Event",
-                                    "value": "event",
-                                    "icon": "calendar-day"
-                                },
-                                {
-                                    "label": "Radio",
-                                    "value": "radio",
-                                    "icon": "broadcast-tower"
-                                },
-                                {
-                                    "label": "TV",
-                                    "value": "tv",
-                                    "icon": "tv"
-                                },
-                                {
-                                    "label": "Videos",
-                                    "value": "video",
-                                    "icon": "video"
-                                },
-                                {
-                                    "label": "NFTs",
-                                    "value": "nft",
-                                    "icon": "gem"
-                                },
-                                {
-                                    "label": "Reuse",
-                                    "value": "reuse",
-                                    "icon": "recycle"
-                                }
+                            "conditions": [
+                                "hasDescriptionDe"
                             ],
-                            "stacked": false,
-                            "type": "radio"
+                            "name": "descriptionDe",
+                            "placeholder": "Image description (DE)",
+                            "type": "textArea"
                         }
                     ],
                     "divider": true
@@ -262,6 +241,75 @@
                                     "value": "eur"
                                 }
                             ]
+                        }
+                    ],
+                    "divider": true
+                },
+                {
+                    "label": "License Type",
+                    "hint": "Choose between Private and Commercial",
+                    "fields": [
+                        {
+                            "name": "licenseType",
+                            "options": [
+                                {
+                                    "label": "Private",
+                                    "value": "private"
+                                },
+                                {
+                                    "label": "Commercial",
+                                    "value": "commercial"
+                                }
+                            ],
+                            "required": "License type is required",
+                            "type": "borderedRadio"
+                        }
+                    ],
+                    "marginBottom": 4
+                },
+                {
+                    "conditions": [
+                        "licenseType:commercial"
+                    ],
+                    "label": " ",
+                    "fields": [
+                        {
+                            "name": "licenseTypeCommercial",
+                            "options": [
+                                {
+                                    "label": "Event",
+                                    "value": "event",
+                                    "icon": "calendar-day"
+                                },
+                                {
+                                    "label": "Radio",
+                                    "value": "radio",
+                                    "icon": "broadcast-tower"
+                                },
+                                {
+                                    "label": "TV",
+                                    "value": "tv",
+                                    "icon": "tv"
+                                },
+                                {
+                                    "label": "Videos",
+                                    "value": "video",
+                                    "icon": "video"
+                                },
+                                {
+                                    "label": "NFTs",
+                                    "value": "nft",
+                                    "icon": "gem"
+                                },
+                                {
+                                    "label": "Reuse",
+                                    "value": "reuse",
+                                    "icon": "recycle"
+                                }
+                            ],
+                            "required": "Commercial type is required",
+                            "stacked": false,
+                            "type": "radio"
                         }
                     ]
                 }
@@ -543,50 +591,46 @@
             "title": "Recurring Fee"
         },
         {
-            "steps": [
+            "rows": [
                 {
-                    "rows": [
+                    "fields": [
                         {
-                            "fields": [
+                            "name": "terms",
+                            "type": "checkbox",
+                            "options": [
                                 {
-                                    "name": "terms",
-                                    "type": "checkbox",
-                                    "options": [
-                                        {
-                                            "label": "I have read and accept the terms of usage.",
-                                            "value": true
-                                        }
-                                    ],
-                                    "required": "You must accept terms of usage"
-                                },
-                                {
-                                    "content": "Term of Usage",
-                                    "href": "https://localhost:3000",
-                                    "size": "sm",
-                                    "target": "_blank",
-                                    "type": "link"
+                                    "label": "I have read and accept the terms of usage.",
+                                    "value": true
                                 }
-                            ]
+                            ],
+                            "required": "You must accept terms of usage"
                         },
                         {
-                            "fields": [
-                                {
-                                    "name": "owner",
-                                    "type": "checkbox",
-                                    "options": [
-                                        {
-                                            "label": "I am the copyright holder of that Image that I upload and / or I am legal representative of that copyright holder.",
-                                            "value": true
-                                        }
-                                    ],
-                                    "required": "You must be the copyright holder / legal representative"
-                                }
-                            ]
+                            "content": "Term of Usage",
+                            "href": "/terms",
+                            "size": "sm",
+                            "target": "_blank",
+                            "type": "link"
                         }
-                    ],
-                    "title": "Review & Publish"
+                    ]
+                },
+                {
+                    "fields": [
+                        {
+                            "name": "owner",
+                            "type": "checkbox",
+                            "options": [
+                                {
+                                    "label": "I am the copyright holder of that Image that I upload and / or I am legal representative of that copyright holder.",
+                                    "value": true
+                                }
+                            ],
+                            "required": "You must be the copyright holder / legal representative"
+                        }
+                    ]
                 }
-            ]
+            ],
+            "title": "Review & Publish"
         }
     ]
 }

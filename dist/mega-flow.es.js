@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import styled from 'styled-components';
-import { TextButton, Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, Datepicker, FormRow, Tooltip, Icon, Alert, Divider, OutlineButton, AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from '@licenserocks/kit';
+import { TextButton, Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, FormDatepicker, FormRow, Tooltip, Icon, Alert, Divider, OutlineButton, AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from '@licenserocks/kit';
 import { useFormContext, useFieldArray, useForm, FormProvider } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -50,7 +50,7 @@ function _taggedTemplateLiteralLoose(strings, raw) {
 var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
   switch (fieldType) {
     case "datepicker":
-      return Datepicker;
+      return FormDatepicker;
 
     case "select":
       return Select;
@@ -448,7 +448,7 @@ var Wrapper$1 = styled.div(_templateObject$2());
 
 var getOutputData = function getOutputData(output) {
   return Object.values(output).reduce(function (obj, acc) {
-    return obj = _extends({}, obj, acc);
+    return _extends({}, obj, acc);
   }, {});
 };
 
@@ -458,11 +458,12 @@ var MegaFlow = function MegaFlow(_ref) {
       schema = _ref.schema,
       onFinish = _ref.onFinish,
       onStepSubmit = _ref.onStepSubmit,
+      _renderActionButtons = _ref.renderActionButtons,
       theme = _ref.theme,
       watcher = _ref.watcher,
       wizardProps = _ref.wizardProps,
       wrapperProps = _ref.wrapperProps,
-      props = _objectWithoutPropertiesLoose(_ref, ["defaultValues", "icons", "schema", "onFinish", "onStepSubmit", "theme", "watcher", "wizardProps", "wrapperProps"]);
+      props = _objectWithoutPropertiesLoose(_ref, ["defaultValues", "icons", "schema", "onFinish", "onStepSubmit", "renderActionButtons", "theme", "watcher", "wizardProps", "wrapperProps"]);
 
   // Parse if schema was type of JSON string
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
@@ -536,6 +537,9 @@ var MegaFlow = function MegaFlow(_ref) {
   }, /*#__PURE__*/React.createElement(FormProvider, methods, /*#__PURE__*/React.createElement(Wizard, _extends({
     currentStepContent: renderForm(),
     currentStepIndex: currentStep,
+    renderActionButtons: function renderActionButtons() {
+      return _renderActionButtons(getOutputData(wizardData));
+    },
     setCurrentStepIndex: setCurrentStep,
     steps: stepsArray
   }, wizardProps, props))))));

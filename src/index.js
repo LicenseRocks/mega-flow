@@ -15,7 +15,7 @@ import { MegaFlowPropTypes, MegaFlowDefaultProps } from "./props";
 const Wrapper = styled.div``;
 
 const getOutputData = (output) =>
-  Object.values(output).reduce((obj, acc) => (obj = { ...obj, ...acc }), {});
+  Object.values(output).reduce((obj, acc) => ({ ...obj, ...acc }), {});
 
 const MegaFlow = ({
   defaultValues,
@@ -23,6 +23,7 @@ const MegaFlow = ({
   schema,
   onFinish,
   onStepSubmit,
+  renderActionButtons,
   theme,
   watcher,
   wizardProps,
@@ -93,6 +94,9 @@ const MegaFlow = ({
             <Wizard
               currentStepContent={renderForm()}
               currentStepIndex={currentStep}
+              renderActionButtons={() =>
+                renderActionButtons(getOutputData(wizardData))
+              }
               setCurrentStepIndex={setCurrentStep}
               steps={stepsArray}
               {...wizardProps}
