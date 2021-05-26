@@ -111,6 +111,46 @@
                     ],
                     "labelAlign": "start",
                     "labelGutter": true
+                },
+                {
+                    "hint": "The Sales Contract you can upload for buyers who will buy your NFT",
+                    "label": "Sales Contract",
+                    "fields": [
+                        {
+                            "name": "salesContractEnabled",
+                            "type": "toggleSwitch"
+                        }
+                    ]
+                },
+                {
+                    "conditions": [
+                        "salesContractEnabled:true"
+                    ],
+                    "label": " ",
+                    "fields": [
+                        {
+                            "name": "salesContract",
+                            "type": "fileUpload",
+                            "accept": "application/pdf, image/*",
+                            "multiple": true,
+                            "required": "You must upload an asset file"
+                        }
+                    ]
+                },
+                {
+                    "conditions": [
+                        "salesContractEnabled:true"
+                    ],
+                    "label": " ",
+                    "fields": [
+                        {
+                            "content": "Sales Contract Template",
+                            "href": "/docs/sales-contract-template.pdf",
+                            "size": "sm",
+                            "target": "_blank",
+                            "type": "link"
+                        }
+                    ]
                 }
             ],
             "title": "Media Assets"
