@@ -379,7 +379,7 @@ var Form = function Form(_ref4) {
   };
 
   var renderRecurring = function renderRecurring() {
-    return fields.map(function (item, idx) {
+    return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, fields.map(function (item, idx) {
       return /*#__PURE__*/React__default.createElement(Wrapper, {
         key: item.id
       }, /*#__PURE__*/React__default.createElement(ButtonsWrapper, null, /*#__PURE__*/React__default.createElement(kit.OutlineButton, {
@@ -392,14 +392,14 @@ var Form = function Form(_ref4) {
         icon: "trash",
         prefix: "fa"
       }))), renderRows(idx));
-    });
+    }), /*#__PURE__*/React__default.createElement(kit.TextButton, {
+      content: "+ Add item",
+      onClick: append,
+      size: "sm"
+    }));
   };
 
-  return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, isRecurring ? renderRecurring() : renderRows(), isRecurring && /*#__PURE__*/React__default.createElement(kit.TextButton, {
-    content: "+ Add item",
-    onClick: append,
-    size: "sm"
-  }));
+  return isRecurring ? renderRecurring() : renderRows();
 };
 
 Form.propTypes = {
@@ -482,7 +482,7 @@ var MegaFlow = function MegaFlow(_ref) {
 
   var isCurrentLastStep = currentStep === steps.length - 1;
 
-  var _useState2 = React.useState(defaultValues),
+  var _useState2 = React.useState({}),
       wizardData = _useState2[0],
       setWizardData = _useState2[1];
 
@@ -491,11 +491,9 @@ var MegaFlow = function MegaFlow(_ref) {
       handleSubmit = _useForm.handleSubmit,
       methods = _objectWithoutPropertiesLoose(_useForm, ["formState", "handleSubmit"]);
 
-  var stepFormData = wizardData[currentStep];
+  var stepFormData = wizardData[currentStep] || defaultValues;
   React.useEffect(function () {
-    if (stepFormData) {
-      methods.reset(stepFormData);
-    }
+    methods.reset(stepFormData);
 
     if (watcher) {
       watcher(getOutputData(wizardData));

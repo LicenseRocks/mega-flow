@@ -23,7 +23,7 @@ export const main = () => {
   return (
     <Wrapper>
       <MegaFlow
-        // defaultValues={{}}
+        defaultValues={{}}
         onFinish={(output) => {
           console.log("output: ", output);
         }}

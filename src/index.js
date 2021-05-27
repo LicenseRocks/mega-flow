@@ -36,16 +36,13 @@ const MegaFlow = ({
   const { steps } = parsedSchema;
   const [currentStep, setCurrentStep] = useState(0);
   const isCurrentLastStep = currentStep === steps.length - 1;
-  const [wizardData, setWizardData] = useState(defaultValues);
-
+  const [wizardData, setWizardData] = useState({});
   const { formState, handleSubmit, ...methods } = useForm();
 
-  const stepFormData = wizardData[currentStep];
+  const stepFormData = wizardData[currentStep] || defaultValues;
 
   useEffect(() => {
-    if (stepFormData) {
-      methods.reset(stepFormData);
-    }
+    methods.reset(stepFormData);
 
     if (watcher) {
       watcher(getOutputData(wizardData));

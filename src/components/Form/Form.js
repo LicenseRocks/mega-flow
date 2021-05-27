@@ -38,27 +38,25 @@ const Form = ({ data, stepIndex, stepFormData }) => {
     />
   );
 
-  const renderRecurring = () =>
-    fields.map((item, idx) => (
-      <Wrapper key={item.id}>
-        <ButtonsWrapper>
-          <OutlineButton color="danger" onClick={() => remove(idx)} size="sm">
-            <Icon icon="trash" prefix="fa" />
-          </OutlineButton>
-        </ButtonsWrapper>
-
-        {renderRows(idx)}
-      </Wrapper>
-    ));
-
-  return (
+  const renderRecurring = () => (
     <>
-      {isRecurring ? renderRecurring() : renderRows()}
-      {isRecurring && (
-        <TextButton content="+ Add item" onClick={append} size="sm" />
-      )}
+      {fields.map((item, idx) => (
+        <Wrapper key={item.id}>
+          <ButtonsWrapper>
+            <OutlineButton color="danger" onClick={() => remove(idx)} size="sm">
+              <Icon icon="trash" prefix="fa" />
+            </OutlineButton>
+          </ButtonsWrapper>
+
+          {renderRows(idx)}
+        </Wrapper>
+      ))}
+
+      <TextButton content="+ Add item" onClick={append} size="sm" />
     </>
   );
+
+  return isRecurring ? renderRecurring() : renderRows();
 };
 
 Form.propTypes = {

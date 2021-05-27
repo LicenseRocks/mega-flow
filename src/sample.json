@@ -639,18 +639,11 @@
                             "type": "checkbox",
                             "options": [
                                 {
-                                    "label": "I have read and accept the terms of usage.",
+                                    "labelHtml": "I have read and accept the <a href=\"/terms\" target=\"_blank\">terms of usage.</a>",
                                     "value": true
                                 }
                             ],
                             "required": "You must accept terms of usage"
-                        },
-                        {
-                            "content": "Term of Usage",
-                            "href": "/terms",
-                            "size": "sm",
-                            "target": "_blank",
-                            "type": "link"
                         }
                     ]
                 },
