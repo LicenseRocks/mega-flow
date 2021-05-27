@@ -96,6 +96,7 @@ var FormField = function FormField(_ref) {
       hasError = _ref.hasError,
       isRecurring = _ref.isRecurring,
       recurringIndex = _ref.recurringIndex,
+      recurringDisabled = _ref.recurringDisabled,
       stepIndex = _ref.stepIndex,
       fieldId = _ref.fieldId,
       rowId = _ref.rowId,
@@ -120,7 +121,9 @@ var FormField = function FormField(_ref) {
   return /*#__PURE__*/React.createElement(Field, _extends({
     control: control,
     defaultValue: prevValue || defaultValue,
+    disabled: recurringDisabled,
     hasError: hasError,
+    isDisabled: recurringDisabled,
     isRequired: required,
     key: fieldKey,
     name: fieldName,
@@ -146,13 +149,15 @@ FormField.propTypes = {
   fieldId: PropTypes.number.isRequired,
   hasError: PropTypes.bool.isRequired,
   isRecurring: PropTypes.bool.isRequired,
+  recurringDisabled: PropTypes.bool,
   recurringIndex: PropTypes.number,
   stepIndex: PropTypes.number.isRequired,
   stepData: PropTypes.shape({}).isRequired,
   rowId: PropTypes.number.isRequired
 };
 FormField.defaultProps = {
-  recurringIndex: null
+  recurringIndex: null,
+  recurringDisabled: false
 };
 
 var getConditionValues = function getConditionValues(conditions, watch, wizardData, isRecurring, recurringName) {
@@ -228,6 +233,7 @@ var FormRows = function FormRows(_ref) {
   var data = _ref.data,
       index = _ref.index,
       isRecurring = _ref.isRecurring,
+      recurringDisabled = _ref.recurringDisabled,
       rows = _ref.rows,
       stepIndex = _ref.stepIndex,
       stepData = _ref.stepData;
@@ -287,6 +293,7 @@ var FormRows = function FormRows(_ref) {
         hasError: !!error,
         isRecurring: isRecurring,
         recurringIndex: index,
+        recurringDisabled: recurringDisabled,
         rowId: idx,
         stepIndex: stepIndex,
         stepData: stepData
@@ -314,9 +321,12 @@ FormRows.propTypes = {
   stepData: PropTypes.shape({}).isRequired,
   index: PropTypes.number.isRequired,
   isRecurring: PropTypes.bool.isRequired,
+  recurringDisabled: PropTypes.bool,
   rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
-FormRows.defaultProps = {};
+FormRows.defaultProps = {
+  recurringDisabled: false
+};
 
 function _templateObject2$1() {
   var data = _taggedTemplateLiteralLoose(["\n  display: flex;\n  justify-content: flex-end;\n  margin-bottom: 8px;\n"]);
@@ -351,6 +361,7 @@ var ButtonsWrapper = styled.div(_templateObject2$1());
 
 var Form = function Form(_ref4) {
   var data = _ref4.data,
+      defaultValues = _ref4.defaultValues,
       stepIndex = _ref4.stepIndex,
       stepFormData = _ref4.stepFormData;
   var isRecurring = data.recurring;
@@ -362,11 +373,12 @@ var Form = function Form(_ref4) {
       append = _useFieldArray.append,
       remove = _useFieldArray.remove;
 
-  var renderRows = function renderRows(index) {
+  var renderRows = function renderRows(index, recurringDisabled) {
     return /*#__PURE__*/React.createElement(FormRows, {
       data: data,
       index: index,
       isRecurring: isRecurring,
+      recurringDisabled: recurringDisabled,
       rows: data.rows,
       stepIndex: stepIndex,
       stepData: stepFormData
@@ -375,10 +387,15 @@ var Form = function Form(_ref4) {
 
   var renderRecurring = function renderRecurring() {
     return /*#__PURE__*/React.createElement(React.Fragment, null, fields.map(function (item, idx) {
+      var _defaultValues$data$n, _defaultValues$data$n2;
+
+      var disabled = defaultValues == null ? void 0 : (_defaultValues$data$n = defaultValues[data.name]) == null ? void 0 : (_defaultValues$data$n2 = _defaultValues$data$n[idx]) == null ? void 0 : _defaultValues$data$n2.disabled;
       return /*#__PURE__*/React.createElement(Wrapper, {
-        key: item.id
+        key: item.id,
+        disabled: disabled
       }, /*#__PURE__*/React.createElement(ButtonsWrapper, null, /*#__PURE__*/React.createElement(OutlineButton, {
         color: "danger",
+        disabled: disabled,
         onClick: function onClick() {
           return remove(idx);
         },
@@ -386,7 +403,7 @@ var Form = function Form(_ref4) {
       }, /*#__PURE__*/React.createElement(Icon, {
         icon: "trash",
         prefix: "fa"
-      }))), renderRows(idx));
+      }))), renderRows(idx, disabled));
     }), /*#__PURE__*/React.createElement(TextButton, {
       content: "+ Add item",
       onClick: append,
@@ -525,7 +542,8 @@ var MegaFlow = function MegaFlow(_ref) {
       data: steps[currentStep],
       key: currentStep,
       stepIndex: currentStep,
-      stepFormData: stepFormData
+      stepFormData: stepFormData,
+      defaultValues: defaultValues
     });
   };
 

@@ -55,6 +55,7 @@ export const FormField = ({
   hasError,
   isRecurring,
   recurringIndex,
+  recurringDisabled,
   stepIndex,
   fieldId,
   rowId,
@@ -79,7 +80,9 @@ export const FormField = ({
     <Field
       control={control}
       defaultValue={prevValue || defaultValue}
+      disabled={recurringDisabled}
       hasError={hasError}
+      isDisabled={recurringDisabled}
       isRequired={required}
       key={fieldKey}
       name={fieldName}
@@ -108,6 +111,7 @@ FormField.propTypes = {
   fieldId: PropTypes.number.isRequired,
   hasError: PropTypes.bool.isRequired,
   isRecurring: PropTypes.bool.isRequired,
+  recurringDisabled: PropTypes.bool,
   recurringIndex: PropTypes.number,
   stepIndex: PropTypes.number.isRequired,
   stepData: PropTypes.shape({}).isRequired,
@@ -116,4 +120,5 @@ FormField.propTypes = {
 
 FormField.defaultProps = {
   recurringIndex: null,
+  recurringDisabled: false,
 };

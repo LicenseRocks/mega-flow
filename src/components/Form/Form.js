@@ -20,18 +20,19 @@ const ButtonsWrapper = styled.div`
   margin-bottom: 8px;
 `;
 
-const Form = ({ data, stepIndex, stepFormData }) => {
+const Form = ({ data, defaultValues, stepIndex, stepFormData }) => {
   const isRecurring = data.recurring;
 
   const { fields, append, remove } = useFieldArray({
     name: isRecurring ? data?.name : "",
   });
 
-  const renderRows = (index) => (
+  const renderRows = (index, recurringDisabled) => (
     <FormRows
       data={data}
       index={index}
       isRecurring={isRecurring}
+      recurringDisabled={recurringDisabled}
       rows={data.rows}
       stepIndex={stepIndex}
       stepData={stepFormData}
@@ -40,17 +41,25 @@ const Form = ({ data, stepIndex, stepFormData }) => {
 
   const renderRecurring = () => (
     <>
-      {fields.map((item, idx) => (
-        <Wrapper key={item.id}>
-          <ButtonsWrapper>
-            <OutlineButton color="danger" onClick={() => remove(idx)} size="sm">
-              <Icon icon="trash" prefix="fa" />
-            </OutlineButton>
-          </ButtonsWrapper>
+      {fields.map((item, idx) => {
+        const disabled = defaultValues?.[data.name]?.[idx]?.disabled;
+        return (
+          <Wrapper key={item.id} disabled={disabled}>
+            <ButtonsWrapper>
+              <OutlineButton
+                color="danger"
+                disabled={disabled}
+                onClick={() => remove(idx)}
+                size="sm"
+              >
+                <Icon icon="trash" prefix="fa" />
+              </OutlineButton>
+            </ButtonsWrapper>
 
-          {renderRows(idx)}
-        </Wrapper>
-      ))}
+            {renderRows(idx, disabled)}
+          </Wrapper>
+        );
+      })}
 
       <TextButton content="+ Add item" onClick={append} size="sm" />
     </>
