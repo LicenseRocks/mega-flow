@@ -4,7 +4,8 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
-var styled = _interopDefault(require('styled-components'));
+var styled = require('styled-components');
+var styled__default = _interopDefault(styled);
 var kit = require('@licenserocks/kit');
 var reactHookForm = require('react-hook-form');
 var PropTypes = _interopDefault(require('prop-types'));
@@ -101,7 +102,6 @@ var FormField = function FormField(_ref) {
       hasError = _ref.hasError,
       isRecurring = _ref.isRecurring,
       recurringIndex = _ref.recurringIndex,
-      recurringDisabled = _ref.recurringDisabled,
       stepIndex = _ref.stepIndex,
       fieldId = _ref.fieldId,
       rowId = _ref.rowId,
@@ -126,9 +126,7 @@ var FormField = function FormField(_ref) {
   return /*#__PURE__*/React__default.createElement(Field, _extends({
     control: control,
     defaultValue: prevValue || defaultValue,
-    disabled: recurringDisabled,
     hasError: hasError,
-    isDisabled: recurringDisabled,
     isRequired: required,
     key: fieldKey,
     name: fieldName,
@@ -154,15 +152,13 @@ FormField.propTypes = {
   fieldId: PropTypes.number.isRequired,
   hasError: PropTypes.bool.isRequired,
   isRecurring: PropTypes.bool.isRequired,
-  recurringDisabled: PropTypes.bool,
   recurringIndex: PropTypes.number,
   stepIndex: PropTypes.number.isRequired,
   stepData: PropTypes.shape({}).isRequired,
   rowId: PropTypes.number.isRequired
 };
 FormField.defaultProps = {
-  recurringIndex: null,
-  recurringDisabled: false
+  recurringIndex: null
 };
 
 var getConditionValues = function getConditionValues(conditions, watch, wizardData, isRecurring, recurringName) {
@@ -232,13 +228,12 @@ function _templateObject() {
 
   return data;
 }
-var StyledRow = styled(kit.FormRow)(_templateObject());
-var Hint = styled.span(_templateObject2());
+var StyledRow = styled__default(kit.FormRow)(_templateObject());
+var Hint = styled__default.span(_templateObject2());
 var FormRows = function FormRows(_ref) {
   var data = _ref.data,
       index = _ref.index,
       isRecurring = _ref.isRecurring,
-      recurringDisabled = _ref.recurringDisabled,
       rows = _ref.rows,
       stepIndex = _ref.stepIndex,
       stepData = _ref.stepData;
@@ -298,7 +293,6 @@ var FormRows = function FormRows(_ref) {
         hasError: !!error,
         isRecurring: isRecurring,
         recurringIndex: index,
-        recurringDisabled: recurringDisabled,
         rowId: idx,
         stepIndex: stepIndex,
         stepData: stepData
@@ -326,15 +320,12 @@ FormRows.propTypes = {
   stepData: PropTypes.shape({}).isRequired,
   index: PropTypes.number.isRequired,
   isRecurring: PropTypes.bool.isRequired,
-  recurringDisabled: PropTypes.bool,
   rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
-FormRows.defaultProps = {
-  recurringDisabled: false
-};
+FormRows.defaultProps = {};
 
 function _templateObject2$1() {
-  var data = _taggedTemplateLiteralLoose(["\n  display: flex;\n  justify-content: flex-end;\n  margin-bottom: 8px;\n"]);
+  var data = _taggedTemplateLiteralLoose(["\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  margin-bottom: 8px;\n"]);
 
   _templateObject2$1 = function _templateObject2() {
     return data;
@@ -344,7 +335,7 @@ function _templateObject2$1() {
 }
 
 function _templateObject$1() {
-  var data = _taggedTemplateLiteralLoose(["\n  padding: ", ";\n  background-color: ", ";\n  border: 1px solid ", ";\n  border-radius: 16px;\n  margin-bottom: 16px;\n"]);
+  var data = _taggedTemplateLiteralLoose(["\n  padding: ", ";\n  background-color: ", ";\n  border: 1px solid ", ";\n  border-radius: 16px;\n  margin-bottom: 16px;\n\n  && {\n    ", "\n  }\n"]);
 
   _templateObject$1 = function _templateObject() {
     return data;
@@ -352,7 +343,7 @@ function _templateObject$1() {
 
   return data;
 }
-var Wrapper = styled.div(_templateObject$1(), function (_ref) {
+var Wrapper = styled__default.div(_templateObject$1(), function (_ref) {
   var theme = _ref.theme;
   return theme.spacing(2, 2, 2, 6);
 }, function (_ref2) {
@@ -361,14 +352,17 @@ var Wrapper = styled.div(_templateObject$1(), function (_ref) {
 }, function (_ref3) {
   var theme = _ref3.theme;
   return theme.palette.gray.regular;
+}, function (_ref4) {
+  var disabled = _ref4.disabled;
+  return disabled && styled.css(["opacity:0.5;cursor:not-allowed !important;pointer-events:none;"]);
 });
-var ButtonsWrapper = styled.div(_templateObject2$1());
+var ButtonsWrapper = styled__default.div(_templateObject2$1());
 
-var Form = function Form(_ref4) {
-  var data = _ref4.data,
-      defaultValues = _ref4.defaultValues,
-      stepIndex = _ref4.stepIndex,
-      stepFormData = _ref4.stepFormData;
+var Form = function Form(_ref5) {
+  var data = _ref5.data,
+      defaultValues = _ref5.defaultValues,
+      stepIndex = _ref5.stepIndex,
+      stepFormData = _ref5.stepFormData;
   var isRecurring = data.recurring;
 
   var _useFieldArray = reactHookForm.useFieldArray({
@@ -378,12 +372,11 @@ var Form = function Form(_ref4) {
       append = _useFieldArray.append,
       remove = _useFieldArray.remove;
 
-  var renderRows = function renderRows(index, recurringDisabled) {
+  var renderRows = function renderRows(index) {
     return /*#__PURE__*/React__default.createElement(FormRows, {
       data: data,
       index: index,
       isRecurring: isRecurring,
-      recurringDisabled: recurringDisabled,
       rows: data.rows,
       stepIndex: stepIndex,
       stepData: stepFormData
@@ -398,7 +391,10 @@ var Form = function Form(_ref4) {
       return /*#__PURE__*/React__default.createElement(Wrapper, {
         key: item.id,
         disabled: disabled
-      }, /*#__PURE__*/React__default.createElement(ButtonsWrapper, null, /*#__PURE__*/React__default.createElement(kit.OutlineButton, {
+      }, /*#__PURE__*/React__default.createElement(ButtonsWrapper, null, disabled && /*#__PURE__*/React__default.createElement(kit.Alert, {
+        content: "This is a default item and can't be removed/changed.",
+        mr: 2
+      }), /*#__PURE__*/React__default.createElement(kit.OutlineButton, {
         color: "danger",
         disabled: disabled,
         onClick: function onClick() {
@@ -408,7 +404,7 @@ var Form = function Form(_ref4) {
       }, /*#__PURE__*/React__default.createElement(kit.Icon, {
         icon: "trash",
         prefix: "fa"
-      }))), renderRows(idx, disabled));
+      }))), renderRows(idx));
     }), /*#__PURE__*/React__default.createElement(kit.TextButton, {
       content: "+ Add item",
       onClick: append,
@@ -468,7 +464,7 @@ function _templateObject$2() {
 
   return data;
 }
-var Wrapper$1 = styled.div(_templateObject$2());
+var Wrapper$1 = styled__default.div(_templateObject$2());
 
 var getOutputData = function getOutputData(output) {
   return Object.values(output).reduce(function (obj, acc) {

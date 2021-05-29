@@ -45,7 +45,6 @@ export const FormRows = ({
   data,
   index,
   isRecurring,
-  recurringDisabled,
   rows,
   stepIndex,
   stepData,
@@ -120,7 +119,6 @@ export const FormRows = ({
                     hasError={!!error}
                     isRecurring={isRecurring}
                     recurringIndex={index}
-                    recurringDisabled={recurringDisabled}
                     rowId={idx}
                     stepIndex={stepIndex}
                     stepData={stepData}
@@ -157,10 +155,7 @@ FormRows.propTypes = {
   stepData: PropTypes.shape({}).isRequired,
   index: PropTypes.number.isRequired,
   isRecurring: PropTypes.bool.isRequired,
-  recurringDisabled: PropTypes.bool,
   rows: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-FormRows.defaultProps = {
-  recurringDisabled: false,
-};
+FormRows.defaultProps = {};

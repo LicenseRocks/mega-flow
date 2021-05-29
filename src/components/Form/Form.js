@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useFieldArray } from "react-hook-form";
-import { Icon, OutlineButton, TextButton } from "@licenserocks/kit";
+import { Alert, Icon, OutlineButton, TextButton } from "@licenserocks/kit";
 
 import { FormRows } from "./FormRows";
 
@@ -12,10 +12,21 @@ const Wrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.palette.gray.regular};
   border-radius: 16px;
   margin-bottom: 16px;
+
+  && {
+    ${({ disabled }) =>
+    disabled &&
+    css`
+        opacity: 0.5;
+        cursor: not-allowed !important;
+        pointer-events: none;
+      `}
+  }
 `;
 
 const ButtonsWrapper = styled.div`
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   margin-bottom: 8px;
 `;
@@ -27,12 +38,11 @@ const Form = ({ data, defaultValues, stepIndex, stepFormData }) => {
     name: isRecurring ? data?.name : "",
   });
 
-  const renderRows = (index, recurringDisabled) => (
+  const renderRows = (index) => (
     <FormRows
       data={data}
       index={index}
       isRecurring={isRecurring}
-      recurringDisabled={recurringDisabled}
       rows={data.rows}
       stepIndex={stepIndex}
       stepData={stepFormData}
@@ -46,6 +56,13 @@ const Form = ({ data, defaultValues, stepIndex, stepFormData }) => {
         return (
           <Wrapper key={item.id} disabled={disabled}>
             <ButtonsWrapper>
+              {disabled && (
+                <Alert
+                  content="This is a default item and can't be removed/changed."
+                  mr={2}
+                />
+              )}
+
               <OutlineButton
                 color="danger"
                 disabled={disabled}
@@ -56,7 +73,7 @@ const Form = ({ data, defaultValues, stepIndex, stepFormData }) => {
               </OutlineButton>
             </ButtonsWrapper>
 
-            {renderRows(idx, disabled)}
+            {renderRows(idx)}
           </Wrapper>
         );
       })}

@@ -23,7 +23,41 @@ export const main = () => {
   return (
     <Wrapper>
       <MegaFlow
-        defaultValues={{}}
+        defaultValues={{
+          initialSalesFees: [
+            {
+              disabled: true,
+              feeName: "ROBA MUSIC",
+              feeUser: {
+                label: "ROBA Music Verlag GmbH (nft@roba.com)",
+                value: 7,
+              },
+              feeCategory: {
+                label: "Creator Rights",
+                value: "creator",
+              },
+              feeAmountType: "PERCENTAGE",
+              feeRecipientType: "USER",
+              feeAmountPercentage: 15,
+            },
+          ],
+          secondarySalesFees: [
+            {
+              disabled: true,
+              feeName: "PMR Music",
+              feeUser: {
+                label: "PMR MUSIC (nft@pmr-music.com)",
+                value: 8,
+              },
+              feeCategory: {
+                label: "Recording Rights",
+                value: "recording",
+              },
+              feeRecipientType: "USER",
+              feeAmountPercentage: 7,
+            },
+          ],
+        }}
         onFinish={(output) => {
           console.log("output: ", output);
         }}
