@@ -204,7 +204,90 @@ Submitting is executed by a function `onSubmit`, this function firstly, declares
 
 ## How to create a correct schema? 🙋‍♂️
 
-As it can be saw in `How it works` part, schema should be divided into `steps` and then `rows`. It is the way how it is rendered and displayed, depending on the content of each row. MegaFlow using `Wizard` component shows each row content.
+As it can be seen in `How it works` part, schema should be divided into `steps` and then `rows`. It is the way how it is rendered and displayed, depending on the content of each row. MegaFlow using `Wizard` component shows each row content.
+
+Let's look deeper on example json schema.
+
+```json
+{
+  "steps": [
+    {
+      "rows": [
+        {
+          "hint": "Supported file types: image/* (jpg, png, jpeg) - Max size: 2MB",
+          "label": "Cover",
+          "fields": [
+            {
+              "name": "cover",
+              "type": "fileUpload",
+              "accept": "image/*",
+              "multiple": false,
+              "required": "You must upload image cover"
+            }
+          ],
+          "labelAlign": "start",
+          "labelGutter": true
+        }
+      ],
+      "title": "Media Assets"
+    },
+    {
+      "rows": [
+        {
+          "label": "Title",
+          "fields": [
+            {
+              "name": "title",
+              "required": "Name is required",
+              "placeholder": "Name of your listed image"
+            }
+          ]
+        }
+      ],
+      "title": "License Metrics"
+    }
+  ]
+}
+```
+
+To understand how `rows` are rendered into exact form, it is neccessary to dive into `Wizard` component, which is imported from Rockskit package 👉 https://github.com/LicenseRocks/rockskit and `/Form` folder in `MegaFlow`
+
+Displayed content in `Wizard` is declared as a component `WizardStepContent`, it is shown below 👇
+
+```jsx
+const content = (
+  <WizardStepContent
+    content={steps[currentStepIndex]?.content || currentStepContent}
+    //other props
+  />
+);
+```
+
+Like it is coded, content is declared as an array of `steps` content attribute or `currentStepContent` passed before as a function `renderForm()`
+
+Declared above `content` as `WizardStepContent`is executed in the place which depends on `orientation` prop, passed to `Wizard` as `wizardProps`. By defaultit has a value `horizontal`
+
+If the place of rendered form is known (how it depends of orientation prop), let's jump into `Form` component 👇
+
+```jsx
+const Form = ({ data, defaultValues, stepIndex, stepFormData }) => {
+
+
+  const renderRows = (index) => (
+    <FormRows
+      data={data}
+      index={index}
+      isRecurring={isRecurring}
+      rows={data.rows}
+      stepIndex={stepIndex}
+      stepData={stepFormData}
+    />
+  );
+
+//further part of a file
+```
+
+Data converted into a form is passed by props `stepFormData` and `data` into `renderRows` function, mainly into `FormRows` component.
 
 ## How to go through process of builiding and packaging MegaFlow? 🧑🏻‍💻
 
