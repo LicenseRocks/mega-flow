@@ -87,7 +87,11 @@ Part of schema example 👇
 📝 Good practce: Visit a storybook for this project, and check which props you can pass to imported component 👇
 https://licenserocks.github.io/mega-flow
 
-JSON.parse()
+## How MegaFlow works ✍️
+
+There is a sample schema file in `src` folder which is named `sample.json` and it is used in the Storybook for testing and developing purposes. You can also refer to it to see how the schema works in different situations.
+
+MegaFlow parses provided schema file and builds form basing on this data. Below is the most fundamental example of parsing JSON 👇
 
 ```js
 const json = '{"result":true, "count":42}';
@@ -99,6 +103,49 @@ console.log(obj.count);
 console.log(obj.result);
 // expected output: true
 ```
+
+Returning to MegaFlow parsing, this process is made by getting firstly, entire `schema` as `parsedchema`, then `steps` data is isolated from it, so that it is possible to render correctly complex forms with multiple steps.
+
+```jsx
+// Parse if schema was type of JSON string
+const parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
+const { steps } = parsedSchema;
+```
+
+To collect data from current step, MegaFlow uses `wizardData` which is passed to `Wizard` component. This component is imported from `rockskit`.
+
+```jsx
+const [currentStep, setCurrentStep] = useState(0);
+const isCurrentLastStep = currentStep === steps.length - 1;
+const [wizardData, setWizardData] = useState({});
+const stepFormData = wizardData[currentStep] || defaultValues;
+```
+
+`currentStep` is set to indicate first step, to start proceeding form at the beginning
+`stepFormata` is getting values from `wizardData` at concrete step or passed `defaultValues`
+
+```jsx
+const getOutputData = (output) =>
+  Object.values(output).reduce((obj, acc) => ({ ...obj, ...acc }), {});
+
+const onSubmit = (data) => {
+  const currentState = {
+    ...wizardData,
+    [currentStep]: data,
+  };
+
+  // Set step data in global wizard object
+  setWizardData(currentState);
+
+  if (!isCurrentLastStep) {
+    setCurrentStep((prev) => prev + 1);
+  } else {
+    onFinish(getOutputData(currentState));
+  }
+};
+```
+
+Submitting is executed by a function `onSubmit`, this function firstly, declares constant variable `currentState` which contains previously passed `wizardData` and `data` collected from current step. Then `wizardData` is updated end form displays next step or executes `onFinish` function.
 
 FormProvider Performance
 
