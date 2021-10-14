@@ -89,17 +89,17 @@ https://licenserocks.github.io/mega-flow
 
 ## Props 👨‍🔧
 
-defaultValues 👉 values rendered as default in provided schema
-icons 👉 additional icons which are included in form
-schema 👉 json file, the core of a form
-onFinish 👉 function executed at the end of a form
-onStepSubmit 👉
-renderActionButtons 👉 additional buttons passed to the end of a form
-theme 👉 theme variables used in styling part
-watcher 👉 function which is executed to show declared variables in `inspect mode`
-watchList 👉 array of string variables shown in `inspect mode`
-wizardProps 👉 props passed directly to `Wizard component`
-wrapperProps 👉 props passed directly to `Wrapper component`
+- defaultValues 👉 values rendered as default in provided schema
+- icons 👉 additional icons which are included in form
+- schema 👉 json file, the core of a form
+- onFinish 👉 function executed at the end of a form
+- onStepSubmit 👉
+- renderActionButtons 👉 additional buttons passed to the end of a form
+- theme 👉 theme variables used in styling part
+- watcher 👉 function which is executed to show declared variables in `inspect mode`
+- watchList 👉 array of string variables shown in `inspect mode`
+- wizardProps 👉 props passed directly to `Wizard component`
+- wrapperProps 👉 props passed directly to `Wrapper component`
 
 ## How MegaFlow works ✍️
 
