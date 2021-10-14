@@ -87,6 +87,20 @@ Part of schema example 👇
 📝 Good practce: Visit a storybook for this project, and check which props you can pass to imported component 👇
 https://licenserocks.github.io/mega-flow
 
+## Props
+
+defaultValues 👉 values rendered as default in provided schema
+icons 👉 additional icons which are included in form
+schema 👉 json file, the core of a form
+onFinish 👉 function executed at the end of a form
+onStepSubmit 👉
+renderActionButtons 👉 additional buttons passed to the end of a form
+theme 👉 theme variables used in styling part
+watcher 👉 function which is executed to show declared variables in `inspect mode`
+watchList 👉 array of string variables shown in `inspect mode`
+wizardProps 👉 props passed directly to `Wizard component`
+wrapperProps 👉 props passed directly to `Wrapper component`
+
 ## How MegaFlow works ✍️
 
 There is a sample schema file in `src` folder which is named `sample.json` and it is used in the Storybook for testing and developing purposes. You can also refer to it to see how the schema works in different situations.
@@ -112,7 +126,48 @@ const parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
 const { steps } = parsedSchema;
 ```
 
-To collect data from current step, MegaFlow uses `wizardData` which is passed to `Wizard` component. This component is imported from `rockskit`.
+How MegaFlow displays form based on parsed schema?
+
+Basing on `{steps}` generated from `parsedSchema`, imported `Form` component is included in function `renderForm`,
+
+```jsx
+import { Form } from "./components";
+
+const [wizardData, setWizardData] = useState({});
+const stepFormData = wizardData[currentStep] || defaultValues;
+
+const stepsArray = steps.map((st) => ({
+  title: st.title,
+}));
+
+const renderForm = () => (
+  <Form
+    data={steps[currentStep]}
+    key={currentStep}
+    stepIndex={currentStep}
+    stepFormData={stepFormData}
+    defaultValues={defaultValues}
+  />
+);
+```
+
+which is passed further to `Wizard` component as `currentStepContent`. There was also created an array which contains steps titles, so that it can be easily displayed in `Wizard`
+
+```jsx
+<Wizard
+  currentStepContent={renderForm()}
+  currentStepIndex={currentStep}
+  renderActionButtons={() => renderActionButtons(getOutputData(wizardData))}
+  setCurrentStepIndex={setCurrentStep}
+  steps={stepsArray}
+  {...wizardProps}
+  {...props}
+/>
+```
+
+Imported `Form` component is build mostly on Rockskit library, it seperates from passed `data` concrete `rows` and renders it in similar way as `renderForm` function.
+
+To collect data from current step, MegaFlow uses `wizardData` variable which is passed to `Wizard` component. This component is imported from `rockskit`.
 
 ```jsx
 const [currentStep, setCurrentStep] = useState(0);
@@ -146,18 +201,3 @@ const onSubmit = (data) => {
 ```
 
 Submitting is executed by a function `onSubmit`, this function firstly, declares constant variable `currentState` which contains previously passed `wizardData` and `data` collected from current step. Then `wizardData` is updated end form displays next step or executes `onFinish` function.
-
-FormProvider Performance
-
-React Hook Form's FormProvider is built upon React's Context API. It solves the problem where data is passed through the component tree without having to pass props down manually at every level. This also causes the component tree to trigger a re-render when React Hook Form triggers a state update, but we can still can optimise our App if required via the example below.
-CodeSandbox
-
-reset
-
-For controlled components like React-Select which do not expose a ref prop, you will have to reset the input value manually with setValue or connect your component via useController or Controller.
-
-You will need to pass defaultValues to useForm in order to reset the Controller components' value.
-
-When you are subscribed to formState, it's important to decouple reset with handleSubmit. Both will update formState and handleSubmit is async by default. You can check out a working example below:
-
-When invoking reset({ value }) without supplying defaultValues via useForm, the library will replace defaultValues with a shallow clone value object which you provide (not deepClone).
