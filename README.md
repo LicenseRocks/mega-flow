@@ -289,6 +289,47 @@ const Form = ({ data, defaultValues, stepIndex, stepFormData }) => {
 
 Data converted into a form is passed by props `stepFormData` and `data` into `renderRows` function, mainly into `FormRows` component.
 
+`FormRows` component renders the data, all rows are mapped and fields are passed to `FormField` component and other variables such as `hint`, `label` displayed to the user as custom component imported from `Rockskit`.
+
+To see how fields are generated, it is crucial to see which `fieldType` prop pass in schema. It is perfectly and understandable represented in `mapFieldTypeToComponent` variable.
+
+```jsx
+const mapFieldTypeToComponent = (fieldType) => {
+  switch (fieldType) {
+    case "datepicker":
+      return FormDatepicker;
+    case "select":
+      return Select;
+    case "borderedRadio":
+      return BorderedRadio;
+    case "checkbox":
+      return Checkbox;
+    case "radio":
+      return Radio;
+    case "toggleSwitch":
+      return ToggleSwitch;
+    case "fileUpload":
+      return FileUpload;
+    case "filePond":
+      return FilePond;
+    case "price":
+      return PriceField;
+    case "reactSelect":
+      return ReactSelect;
+    case "stepper":
+      return Stepper;
+    case "textArea":
+      return TextArea;
+    default:
+      return Input;
+  }
+};
+```
+
+Each represented `fieldType` generates proper component from `rockskit` and is displayed to the user 😍
+
+To sum up: If you are wondered how create json schema, divide it into steps, then rows and follow `Form` and `Field` files to pass proper values 😉
+
 ## How to go through process of builiding and packaging MegaFlow? 🧑🏻‍💻
 
 We use Rollup for this process. It is configured in a way to use Babel to transpile the code and export the package in two formats: ESModules and CommonJS.
