@@ -4,9 +4,9 @@
 
 ## What is MegaFlow? 🚀
 
-MegaFlow is a React component to build workflows based on JSON schemas, powered by React Hook Forms.
+MegaFlow is a React component dedicated to build workflows based on JSON schemas, powered by React Hook Forms.
 
-As there are multiple workflows to generate in the company, which all of them are custom, also can be mofied, we decided to have a component which will be used across all of our projects, so that it is possible to keep consistency along them.
+As there are multiple workflows to generate in the company, which all of them are custom, also can be modified, we decided to have a component which will be used across all of our projects, so that it is possible to keep consistency along them.
 
 ## Main libraries/technologies used in MegaFlow: 🦾
 
@@ -93,7 +93,7 @@ https://licenserocks.github.io/mega-flow
 - icons 👉 additional icons which are included in form
 - schema 👉 json file, the core of a form
 - onFinish 👉 function executed at the end of a form
-- onStepSubmit 👉
+- onStepSubmit 👉 function executed on concrete step
 - renderActionButtons 👉 additional buttons passed to the end of a form
 - theme 👉 theme variables used in styling part
 - watcher 👉 function which is executed to show declared variables in `inspect mode`
@@ -265,7 +265,7 @@ const content = (
 
 Like it is coded, content is declared as an array of `steps` content attribute or `currentStepContent` passed before as a function `renderForm()`
 
-Declared above `content` as `WizardStepContent`is executed in the place which depends on `orientation` prop, passed to `Wizard` as `wizardProps`. By defaultit has a value `horizontal`
+Declared above `content` as `WizardStepContent` is executed in the place which depends on `orientation` prop, passed to `Wizard` as `wizardProps`. By default it has a value `horizontal`
 
 If the place of rendered form is known (how it depends of orientation prop), let's jump into `Form` component 👇
 
@@ -289,9 +289,9 @@ const Form = ({ data, defaultValues, stepIndex, stepFormData }) => {
 
 Data converted into a form is passed by props `stepFormData` and `data` into `renderRows` function, mainly into `FormRows` component.
 
-`FormRows` component renders the data, all rows are mapped and fields are passed to `FormField` component and other variables such as `hint`, `label` displayed to the user as custom component imported from `Rockskit`.
+`FormRows` component renders the data, all rows are mapped and fields are passed to `FormField` component and other variables such as `hint`, `label` displayed to the user as a custom component imported from `Rockskit`.
 
-To see how fields are generated, it is crucial to see which `fieldType` prop pass in schema. It is perfectly and understandable represented in `mapFieldTypeToComponent` variable.
+To see how fields are generated, it is crucial to see which `fieldType` prop should be passed in schema. It is perfectly and understandable represented in `mapFieldTypeToComponent` variable.
 
 ```jsx
 const mapFieldTypeToComponent = (fieldType) => {
@@ -328,7 +328,7 @@ const mapFieldTypeToComponent = (fieldType) => {
 
 Each represented `fieldType` generates proper component from `rockskit` and is displayed to the user 😍
 
-To sum up: If you are wondered how create json schema, divide it into steps, then rows and follow `Form` and `Field` files to pass proper values 😉
+To sum up: If you are wondered how to create correct json schema, divide it into steps, then rows and follow `Form` and `Field` files to pass proper values 😉
 
 ## How to go through process of builiding and packaging MegaFlow? 🧑🏻‍💻
 
