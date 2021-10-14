@@ -1,6 +1,6 @@
 ## What is MegaFlow?
 
-MegaFlow is a React component to build workflows based on JSON schemas powered by React Hook Forms.
+MegaFlow is a React component to build workflows based on JSON schemas, powered by React Hook Forms.
 
 You pass a specific JSON to this component and it renders a multiple step form and delivers the form output at the end.
 
@@ -32,3 +32,45 @@ That's all!
 ## Schema File
 
 There is a sample schema file in `src` folder which is named `sample.json` and it is used in the Storybook for testing and developing purposes. You can also refer to it to see how the schema works in different situations.
+
+```json
+{
+  "steps": [
+    {
+      "rows": [
+        {
+          "hint": "Supported file types: image/* (jpg, png, jpeg) - Max size: 2MB",
+          "label": "Cover",
+          "fields": [
+            {
+              "name": "cover",
+              "type": "fileUpload",
+              "accept": "image/*",
+              "multiple": false,
+              "required": "You must upload image cover"
+            }
+          ],
+          "labelAlign": "start",
+          "labelGutter": true
+        }
+      ],
+      "title": "Media Assets"
+    },
+    {
+      "rows": [
+        {
+          "label": "Title",
+          "fields": [
+            {
+              "name": "title",
+              "required": "Name is required",
+              "placeholder": "Name of your listed image"
+            }
+          ]
+        }
+      ],
+      "title": "License Metrics"
+    }
+  ]
+}
+```

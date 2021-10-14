@@ -37,14 +37,55 @@ All other libraries are used by basing on design needs. Moreover, there is an ex
 
 - Storybook 👉 Shortly, it is a development playground. We use it as an environment for components development. Also we build and deploy it to Github Pages as a showcase for the components we have.
 - Styled-Components 👉 CSS-in-JS library which we use to make style neatly arranged through every component
-- Material-UI 👉 Most of the components are built on top of MUI, it lets us save significant amount of time, since we do not need to write everything from scratch
+- Rocskit 👉 Most of the components are built on top of Rockskit, it lets us save significant amount of time, since we do not need to write everything from scratch and also be consistent wth the design in our projects
 - React-Hook-Form 👉 Form elements are implemented in a way to be compatible with RHF, as it's one of the best form libraries for React.
 
-## How to use RocksKit? 🎮
+## How to use MegaFlow? 🎮
 
-React component to build workflows based on JSON schemas powered by React Hook Forms.
+1. Like you do for any other JS lib or package, just run `yarn add @licenserocks/mega-flow`
+2. Import the component `<MegaFlow />` in your app and use that like in example below 👇
 
-</div>
+⚠️ Remember: schema prop is required to be passed. This component working rule is based on parsing JSON file, so that schema has to be like in example `*.json`
+
+```jsx
+import React from "react";
+import schema from "./sample.json";
+
+export const App = () => {
+  return (
+    <>
+      <MegaFlow schema={schema} />
+    </>
+  );
+};
+```
+
+Part of schema example 👇
+
+```json
+{
+  "steps": [
+    {
+      "rows": [
+        {
+          "label": "Title",
+          "fields": [
+            {
+              "name": "title",
+              "required": "Name is required",
+              "placeholder": "Name of your listed image"
+            }
+          ]
+        }
+      ],
+      "title": "License Metrics"
+    }
+  ]
+}
+```
+
+📝 Good practce: Visit a storybook for this project, and check which props you can pass to imported component 👇
+https://licenserocks.github.io/mega-flow
 
 JSON.parse()
 

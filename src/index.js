@@ -54,7 +54,7 @@ const MegaFlow = ({
       ...wizardData,
       [currentStep]: data,
     };
-    console.log(wizardData);
+
     // Set step data in global wizard object
     setWizardData(currentState);
 
