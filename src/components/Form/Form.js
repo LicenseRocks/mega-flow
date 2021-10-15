@@ -15,8 +15,8 @@ const Wrapper = styled.div`
 
   && {
     ${({ disabled }) =>
-    disabled &&
-    css`
+      disabled &&
+      css`
         opacity: 0.5;
         cursor: not-allowed !important;
         pointer-events: none;
@@ -31,7 +31,13 @@ const ButtonsWrapper = styled.div`
   margin-bottom: 8px;
 `;
 
-const Form = ({ data, defaultValues, stepIndex, stepFormData }) => {
+const Form = ({
+  data,
+  defaultValues,
+  stepIndex,
+  stepFormData,
+  currenciesFromDB,
+}) => {
   const isRecurring = data.recurring;
 
   const { fields, append, remove } = useFieldArray({
@@ -46,6 +52,7 @@ const Form = ({ data, defaultValues, stepIndex, stepFormData }) => {
       rows={data.rows}
       stepIndex={stepIndex}
       stepData={stepFormData}
+      currenciesFromDB={currenciesFromDB}
     />
   );
 

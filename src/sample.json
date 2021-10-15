@@ -148,6 +148,7 @@
       "title": "Media Assets"
     },
     {
+      "name": "licenseMetrics",
       "rows": [
         {
           "label": "Title",
