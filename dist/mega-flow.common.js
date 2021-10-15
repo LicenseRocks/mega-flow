@@ -105,7 +105,8 @@ var FormField = function FormField(_ref) {
       stepIndex = _ref.stepIndex,
       fieldId = _ref.fieldId,
       rowId = _ref.rowId,
-      stepData = _ref.stepData;
+      stepData = _ref.stepData,
+      currenciesFromDB = _ref.currenciesFromDB;
 
   var _useFormContext = reactHookForm.useFormContext(),
       control = _useFormContext.control,
@@ -130,6 +131,7 @@ var FormField = function FormField(_ref) {
     isRequired: required,
     key: fieldKey,
     name: fieldName,
+    currenciesFromDB: currenciesFromDB,
     register: register({
       required: required
     }),
@@ -236,7 +238,8 @@ var FormRows = function FormRows(_ref) {
       isRecurring = _ref.isRecurring,
       rows = _ref.rows,
       stepIndex = _ref.stepIndex,
-      stepData = _ref.stepData;
+      stepData = _ref.stepData,
+      currenciesFromDB = _ref.currenciesFromDB;
 
   var _useFormContext = reactHookForm.useFormContext(),
       errors = _useFormContext.errors,
@@ -295,7 +298,8 @@ var FormRows = function FormRows(_ref) {
         recurringIndex: index,
         rowId: idx,
         stepIndex: stepIndex,
-        stepData: stepData
+        stepData: stepData,
+        currenciesFromDB: currenciesFromDB
       });
     })), (row == null ? void 0 : row.divider) && /*#__PURE__*/React__default.createElement(kit.Divider, {
       my: row == null ? void 0 : row.dividerSize
@@ -362,7 +366,8 @@ var Form = function Form(_ref5) {
   var data = _ref5.data,
       defaultValues = _ref5.defaultValues,
       stepIndex = _ref5.stepIndex,
-      stepFormData = _ref5.stepFormData;
+      stepFormData = _ref5.stepFormData,
+      currenciesFromDB = _ref5.currenciesFromDB;
   var isRecurring = data.recurring;
 
   var _useFieldArray = reactHookForm.useFieldArray({
@@ -379,7 +384,8 @@ var Form = function Form(_ref5) {
       isRecurring: isRecurring,
       rows: data.rows,
       stepIndex: stepIndex,
-      stepData: stepFormData
+      stepData: stepFormData,
+      currenciesFromDB: currenciesFromDB
     });
   };
 
@@ -483,7 +489,8 @@ var MegaFlow = function MegaFlow(_ref) {
       watcher = _ref.watcher,
       wizardProps = _ref.wizardProps,
       wrapperProps = _ref.wrapperProps,
-      props = _objectWithoutPropertiesLoose(_ref, ["defaultValues", "icons", "schema", "onFinish", "onStepSubmit", "renderActionButtons", "theme", "watcher", "wizardProps", "wrapperProps"]);
+      currenciesFromDB = _ref.currenciesFromDB,
+      props = _objectWithoutPropertiesLoose(_ref, ["defaultValues", "icons", "schema", "onFinish", "onStepSubmit", "renderActionButtons", "theme", "watcher", "wizardProps", "wrapperProps", "currenciesFromDB"]);
 
   // Parse if schema was type of JSON string
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
@@ -544,7 +551,8 @@ var MegaFlow = function MegaFlow(_ref) {
       key: currentStep,
       stepIndex: currentStep,
       stepFormData: stepFormData,
-      defaultValues: defaultValues
+      defaultValues: defaultValues,
+      currenciesFromDB: currenciesFromDB
     });
   };
 
