@@ -1,669 +1,635 @@
 {
-    "steps": [
+  "steps": [
+    {
+      "rows": [
         {
-            "rows": [
-                {
-                    "hint": "Supported file types: image/* (jpg, png, jpeg) - Max size: 2MB",
-                    "label": "Cover",
-                    "fields": [
-                        {
-                            "name": "cover",
-                            "type": "fileUpload",
-                            "accept": "image/*",
-                            "multiple": false,
-                            "required": "You must upload image cover"
-                        }
-                    ],
-                    "labelAlign": "start",
-                    "labelGutter": true
-                },
-                {
-                    "hint": "Select between the centralized managed encrypted cloud storage on AWS and permanent storage on Arweave (200 years solid storage)",
-                    "label": "Cover Storage Method",
-                    "fields": [
-                        {
-                            "name": "storageOption",
-                            "type": "radio",
-                            "options": [
-                                {
-                                    "label": "AWS S3 Centralized Encrypted Storage",
-                                    "value": "s3"
-                                },
-                                {
-                                    "label": "Arweave Permanent Storage",
-                                    "value": "arweave"
-                                }
-                            ],
-                            "stacked": false,
-                            "defaultValue": "s3"
-                        }
-                    ],
-                    "divider": "Divider"
-                },
-                {
-                    "hint": "",
-                    "label": "Image (High Resolution) Same as Cover?",
-                    "fields": [
-                        {
-                            "name": "assetSameAsCover",
-                            "type": "toggleSwitch"
-                        }
-                    ]
-                },
-                {
-                    "conditions": [
-                        "assetSameAsCover:true:not"
-                    ],
-                    "hint": "Supported file types: image/* (jpg, png, jpeg) - Max size: 20MB",
-                    "label": "Image (High Resolution)",
-                    "fields": [
-                        {
-                            "name": "image",
-                            "type": "fileUpload",
-                            "accept": "image/*",
-                            "multiple": false,
-                            "required": "You must upload image"
-                        }
-                    ],
-                    "labelAlign": "start",
-                    "labelGutter": true
-                },
-                {
-                    "conditions": [
-                        "assetSameAsCover:true:not"
-                    ],
-                    "message": "Do you want to store your media assets forever in a fully decentralized manner? Drop us a mail at hello@licenserocks.de"
-                },
-                {
-                    "hint": "Value of this field would be visible only to owners",
-                    "label": "Bonus Text",
-                    "fields": [
-                        {
-                            "name": "secretPhrase",
-                            "placeholder": "Unlockable bonus content"
-                        }
-                    ]
-                },
-                {
-                    "hint": "These media would be visible only to owners",
-                    "label": "Bonus Media",
-                    "fields": [
-                        {
-                            "name": "bonusMediaEnabled",
-                            "type": "toggleSwitch"
-                        }
-                    ]
-                },
-                {
-                    "conditions": [
-                        "bonusMediaEnabled:true"
-                    ],
-                    "label": " ",
-                    "fields": [
-                        {
-                            "fileNameEditable": true,
-                            "name": "downloadableAsset",
-                            "type": "fileUpload",
-                            "accept": "",
-                            "multiple": true,
-                            "required": "You must upload an asset file"
-                        }
-                    ],
-                    "labelAlign": "start",
-                    "labelGutter": true
-                },
-                {
-                    "hint": "The Sales Contract you can upload for buyers who will buy your NFT",
-                    "label": "Sales Contract",
-                    "fields": [
-                        {
-                            "name": "salesContractEnabled",
-                            "type": "toggleSwitch"
-                        }
-                    ]
-                },
-                {
-                    "conditions": [
-                        "salesContractEnabled:true"
-                    ],
-                    "label": " ",
-                    "fields": [
-                        {
-                            "name": "salesContract",
-                            "type": "fileUpload",
-                            "accept": "application/pdf, image/*",
-                            "multiple": true,
-                            "required": "You must upload an asset file"
-                        }
-                    ]
-                },
-                {
-                    "conditions": [
-                        "salesContractEnabled:true"
-                    ],
-                    "label": " ",
-                    "fields": [
-                        {
-                            "content": "Sales Contract Template",
-                            "href": "/docs/sales-contract-template.pdf",
-                            "size": "sm",
-                            "target": "_blank",
-                            "type": "link"
-                        }
-                    ]
-                }
-            ],
-            "title": "Media Assets"
+          "hint": "Supported file types: image/* (jpg, png, jpeg) - Max size: 2MB",
+          "label": "Cover",
+          "fields": [
+            {
+              "name": "cover",
+              "type": "fileUpload",
+              "accept": "image/*",
+              "multiple": false,
+              "required": "You must upload image cover"
+            }
+          ],
+          "labelAlign": "start",
+          "labelGutter": true
         },
         {
-            "rows": [
+          "hint": "Select between the centralized managed encrypted cloud storage on AWS and permanent storage on Arweave (200 years solid storage)",
+          "label": "Cover Storage Method",
+          "fields": [
+            {
+              "name": "storageOption",
+              "type": "radio",
+              "options": [
                 {
-                    "label": "Title",
-                    "fields": [
-                        {
-                            "name": "title",
-                            "required": "Name is required",
-                            "placeholder": "Name of your listed image"
-                        }
-                    ]
+                  "label": "AWS S3 Centralized Encrypted Storage",
+                  "value": "s3"
                 },
                 {
-                    "label": "Description - EN",
-                    "fields": [
-                        {
-                            "name": "description",
-                            "placeholder": "Image description (EN)",
-                            "type": "textArea"
-                        }
-                    ]
-                },
-                {
-                    "label": "Description - DE (if No, only EN description will be displayed)",
-                    "fields": [
-                        {
-                            "name": "hasDescriptionDe",
-                            "type": "toggleSwitch"
-                        },
-                        {
-                            "conditions": [
-                                "hasDescriptionDe"
-                            ],
-                            "name": "descriptionDe",
-                            "placeholder": "Image description (DE)",
-                            "type": "textArea"
-                        }
-                    ],
-                    "divider": true
-                },
-                {
-                    "hint": "Unique: 1, Limited: > 1",
-                    "label": "Amount",
-                    "fields": [
-                        {
-                            "name": "amountType",
-                            "type": "radio",
-                            "options": [
-                                {
-                                    "label": "Unique",
-                                    "value": "unique"
-                                },
-                                {
-                                    "label": "Limited",
-                                    "value": "limited"
-                                }
-                            ],
-                            "defaultValue": "unique"
-                        },
-                        {
-                            "min": 2,
-                            "name": "amount",
-                            "type": "number",
-                            "required": "Amount is required",
-                            "conditions": [
-                                "amountType:limited"
-                            ],
-                            "placeholder": "Amount ( > 1)"
-                        }
-                    ],
-                    "divider": true
-                },
-                {
-                    "label": "Enable bidding?",
-                    "fields": [
-                        {
-                            "name": "biddingEnabled",
-                            "type": "toggleSwitch"
-                        }
-                    ]
-                },
-                {
-                    "conditions": [
-                        "biddingEnabled:true:not"
-                    ],
-                    "label": "Price",
-                    "fields": [
-                        {
-                            "inputProps": {
-                                "placeholder": "Price"
-                            },
-                            "min": "0.01",
-                            "name": "price",
-                            "type": "price",
-                            "required": "Price is required",
-                            "currencies": [
-                                {
-                                    "sign": "€",
-                                    "label": "EUR (€)",
-                                    "value": "eur"
-                                }
-                            ]
-                        }
-                    ],
-                    "divider": true
-                },
-                {
-                    "conditions": [
-                        "biddingEnabled:true"
-                    ],
-                    "label": "Starting Price",
-                    "fields": [
-                        {
-                            "inputProps": {
-                                "placeholder": "Starting Price"
-                            },
-                            "min": "0.01",
-                            "name": "startingPrice",
-                            "type": "price",
-                            "currencies": [
-                                {
-                                    "sign": "€",
-                                    "label": "EUR (€)",
-                                    "value": "eur"
-                                }
-                            ]
-                        }
-                    ],
-                    "divider": true
-                },
-                {
-                    "label": "License Type",
-                    "hint": "Choose between Private and Commercial",
-                    "fields": [
-                        {
-                            "name": "licenseType",
-                            "options": [
-                                {
-                                    "label": "Private",
-                                    "value": "private"
-                                },
-                                {
-                                    "label": "Commercial",
-                                    "value": "commercial"
-                                }
-                            ],
-                            "required": "License type is required",
-                            "type": "borderedRadio"
-                        }
-                    ],
-                    "marginBottom": 4
-                },
-                {
-                    "conditions": [
-                        "licenseType:commercial"
-                    ],
-                    "label": " ",
-                    "fields": [
-                        {
-                            "name": "licenseTypeCommercial",
-                            "options": [
-                                {
-                                    "label": "Event",
-                                    "value": "event",
-                                    "icon": "calendar-day"
-                                },
-                                {
-                                    "label": "Radio",
-                                    "value": "radio",
-                                    "icon": "broadcast-tower"
-                                },
-                                {
-                                    "label": "TV",
-                                    "value": "tv",
-                                    "icon": "tv"
-                                },
-                                {
-                                    "label": "Videos",
-                                    "value": "video",
-                                    "icon": "video"
-                                },
-                                {
-                                    "label": "NFTs",
-                                    "value": "nft",
-                                    "icon": "gem"
-                                },
-                                {
-                                    "label": "Reuse",
-                                    "value": "reuse",
-                                    "icon": "recycle"
-                                }
-                            ],
-                            "required": "Commercial type is required",
-                            "stacked": false,
-                            "type": "radio"
-                        }
-                    ]
+                  "label": "Arweave Permanent Storage",
+                  "value": "arweave"
                 }
-            ],
-            "title": "License Metrics"
+              ],
+              "stacked": false,
+              "defaultValue": "s3"
+            }
+          ],
+          "divider": "Divider"
         },
         {
-            "recurring": true,
-            "name": "initialSalesFees",
-            "rows": [
-                {
-                    "label": "Name",
-                    "fields": [
-                        {
-                            "name": "feeName",
-                            "placeholder": "Copyright holder name",
-                            "required": "Fee name is required"
-                        }
-                    ]
-                },
-                {
-                    "label": "Category",
-                    "fields": [
-                        {
-                            "name": "feeCategory",
-                            "options": [
-                                {
-                                    "label": "Creator Rights",
-                                    "value": "creator"
-                                },
-                                {
-                                    "label": "Recording Rights",
-                                    "value": "recording"
-                                },
-                                {
-                                    "label": "Publishing Rights",
-                                    "value": "publishing"
-                                },
-                                {
-                                    "label": "Collection Society Rights",
-                                    "value": "collection"
-                                }
-                            ],
-                            "placeholder": "Copyright category",
-                            "type": "reactSelect",
-                            "required": "Category is required"
-                        },
-                        {
-                            "content": "GEMA Look Up",
-                            "href": "https://www.gema.de/musikurheber/online-services-fuer-gema-mitglieder/repertoiresuche-erweiterter-zugang/",
-                            "size": "sm",
-                            "target": "_blank",
-                            "type": "link"
-                        }
-                    ]
-                },
-                {
-                    "label": "Share amount",
-                    "fields": [
-                        {
-                            "name": "feeAmountType",
-                            "type": "radio",
-                            "options": [
-                                {
-                                    "label": "Fixed",
-                                    "value": "FIXED"
-                                },
-                                {
-                                    "label": "Percentage",
-                                    "value": "PERCENTAGE"
-                                }
-                            ],
-                            "stacked": false,
-                            "required": "Fee amount is required"
-                        }
-                    ]
-                },
-                {
-                    "conditions": [
-                        "feeAmountType"
-                    ],
-                    "label": " ",
-                    "fields": [
-                        {
-                            "conditions": [
-                                "feeAmountType:PERCENTAGE"
-                            ],
-                            "min": "1",
-                            "max": "99",
-                            "step": "0.01",
-                            "name": "feeAmountPercentage",
-                            "type": "number",
-                            "placeholder": "Fee percentage (1-99)",
-                            "required": "Fee percentage is required"
-                        },
-                        {
-                            "conditions": [
-                                "feeAmountType:FIXED"
-                            ],
-                            "inputProps": {
-                                "placeholder": "Fee fixed amount"
-                            },
-                            "min": "0.01",
-                            "name": "feeAmountFixed",
-                            "type": "price",
-                            "currencies": [
-                                {
-                                    "sign": "€",
-                                    "label": "EUR (€)",
-                                    "value": "eur"
-                                }
-                            ],
-                            "required": "Fee amount is required"
-                        }
-                    ]
-                },
-                {
-                    "label": "Share recipient",
-                    "fields": [
-                        {
-                            "name": "feeRecipientType",
-                            "type": "radio",
-                            "options": [
-                                {
-                                    "label": "Address",
-                                    "value": "ADDRESS"
-                                },
-                                {
-                                    "label": "Platform User",
-                                    "value": "USER"
-                                }
-                            ],
-                            "stacked": false,
-                            "required": "Fee recipient is required"
-                        }
-                    ]
-                },
-                {
-                    "label": " ",
-                    "fields": [
-                        {
-                            "conditions": [
-                                "feeRecipientType:ADDRESS"
-                            ],
-                            "name": "feeAddress",
-                            "placeholder": "Fee recipient address",
-                            "required": "Fee recipient address is required"
-                        },
-                        {
-                            "async": true,
-                            "conditions": [
-                                "feeRecipientType:USER"
-                            ],
-                            "defaultOptions": true,
-                            "endpoint": "http://localhost:3000/api/users",
-                            "name": "feeUser",
-                            "type": "reactSelect",
-                            "placeholder": "Fee recipient",
-                            "required": "Fee recipient user is required"
-                        }
-                    ],
-                    "divider": true
-                }
-            ],
-            "title": "Sales Fees"
+          "hint": "",
+          "label": "Image (High Resolution) Same as Cover?",
+          "fields": [
+            {
+              "name": "assetSameAsCover",
+              "type": "toggleSwitch"
+            }
+          ]
         },
         {
-            "recurring": true,
-            "name": "secondarySalesFees",
-            "rows": [
-                {
-                    "label": "Name",
-                    "fields": [
-                        {
-                            "name": "feeName",
-                            "placeholder": "Copyright holder name",
-                            "required": "Fee name is required"
-                        }
-                    ]
-                },
-                {
-                    "label": "Category",
-                    "fields": [
-                        {
-                            "name": "feeCategory",
-                            "options": [
-                                {
-                                    "label": "Creator Rights",
-                                    "value": "creator"
-                                },
-                                {
-                                    "label": "Recording Rights",
-                                    "value": "recording"
-                                },
-                                {
-                                    "label": "Publishing Rights",
-                                    "value": "publishing"
-                                },
-                                {
-                                    "label": "Collection Society Rights",
-                                    "value": "collection"
-                                }
-                            ],
-                            "placeholder": "Copyright category",
-                            "type": "reactSelect",
-                            "required": "Category is required"
-                        },
-                        {
-                            "content": "GEMA Look Up",
-                            "href": "https://www.gema.de/musikurheber/online-services-fuer-gema-mitglieder/repertoiresuche-erweiterter-zugang/",
-                            "size": "sm",
-                            "target": "_blank",
-                            "type": "link"
-                        }
-                    ]
-                },
-                {
-                    "label": "Fee Amount",
-                    "fields": [
-                        {
-                            "min": "1",
-                            "max": "99",
-                            "step": "0.01",
-                            "name": "feeAmountPercentage",
-                            "type": "number",
-                            "placeholder": "Fee percentage (1-99)",
-                            "required": "Fee percentage is required"
-                        }
-                    ]
-                },
-                {
-                    "label": "Share recipient",
-                    "fields": [
-                        {
-                            "name": "feeRecipientType",
-                            "type": "radio",
-                            "options": [
-                                {
-                                    "label": "Address",
-                                    "value": "ADDRESS"
-                                },
-                                {
-                                    "label": "Platform User",
-                                    "value": "USER"
-                                }
-                            ],
-                            "stacked": false,
-                            "required": "Fee recipient is required"
-                        }
-                    ]
-                },
-                {
-                    "label": " ",
-                    "fields": [
-                        {
-                            "conditions": [
-                                "feeRecipientType:ADDRESS"
-                            ],
-                            "name": "feeAddress",
-                            "placeholder": "Fee recipient address",
-                            "required": "Fee recipient address is required"
-                        },
-                        {
-                            "async": true,
-                            "conditions": [
-                                "feeRecipientType:USER"
-                            ],
-                            "defaultOptions": true,
-                            "endpoint": "http://localhost:3000/api/users",
-                            "name": "feeUser",
-                            "type": "reactSelect",
-                            "placeholder": "Fee recipient",
-                            "required": "Fee recipient user is required"
-                        }
-                    ],
-                    "divider": true
-                }
-            ],
-            "title": "Recurring Fee"
+          "conditions": ["assetSameAsCover:true:not"],
+          "hint": "Supported file types: image/* (jpg, png, jpeg) - Max size: 20MB",
+          "label": "Image (High Resolution)",
+          "fields": [
+            {
+              "name": "image",
+              "type": "fileUpload",
+              "accept": "image/*",
+              "multiple": false,
+              "required": "You must upload image"
+            }
+          ],
+          "labelAlign": "start",
+          "labelGutter": true
         },
         {
-            "rows": [
-                {
-                    "fields": [
-                        {
-                            "name": "terms",
-                            "type": "checkbox",
-                            "options": [
-                                {
-                                    "labelHtml": "I have read and accept the <a href=\"/terms\" target=\"_blank\">terms of usage.</a>",
-                                    "value": true
-                                }
-                            ],
-                            "required": "You must accept terms of usage"
-                        }
-                    ]
-                },
-                {
-                    "fields": [
-                        {
-                            "name": "owner",
-                            "type": "checkbox",
-                            "options": [
-                                {
-                                    "label": "I am the copyright holder of that Image that I upload and / or I am legal representative of that copyright holder.",
-                                    "value": true
-                                }
-                            ],
-                            "required": "You must be the copyright holder / legal representative"
-                        }
-                    ]
-                }
-            ],
-            "title": "Review & Publish"
+          "conditions": ["assetSameAsCover:true:not"],
+          "message": "Do you want to store your media assets forever in a fully decentralized manner? Drop us a mail at hello@licenserocks.de"
+        },
+        {
+          "hint": "Value of this field would be visible only to owners",
+          "label": "Bonus Text",
+          "fields": [
+            {
+              "name": "secretPhrase",
+              "placeholder": "Unlockable bonus content"
+            }
+          ]
+        },
+        {
+          "hint": "These media would be visible only to owners",
+          "label": "Bonus Media",
+          "fields": [
+            {
+              "name": "bonusMediaEnabled",
+              "type": "toggleSwitch"
+            }
+          ]
+        },
+        {
+          "conditions": ["bonusMediaEnabled:true"],
+          "label": " ",
+          "fields": [
+            {
+              "fileNameEditable": true,
+              "name": "downloadableAsset",
+              "type": "fileUpload",
+              "accept": "",
+              "multiple": true,
+              "required": "You must upload an asset file"
+            }
+          ],
+          "labelAlign": "start",
+          "labelGutter": true
+        },
+        {
+          "hint": "The Sales Contract you can upload for buyers who will buy your NFT",
+          "label": "Sales Contract",
+          "fields": [
+            {
+              "name": "salesContractEnabled",
+              "type": "toggleSwitch"
+            }
+          ]
+        },
+        {
+          "conditions": ["salesContractEnabled:true"],
+          "label": " ",
+          "fields": [
+            {
+              "name": "salesContract",
+              "type": "fileUpload",
+              "accept": "application/pdf, image/*",
+              "multiple": true,
+              "required": "You must upload an asset file"
+            }
+          ]
+        },
+        {
+          "conditions": ["salesContractEnabled:true"],
+          "label": " ",
+          "fields": [
+            {
+              "content": "Sales Contract Template",
+              "href": "/docs/sales-contract-template.pdf",
+              "size": "sm",
+              "target": "_blank",
+              "type": "link"
+            }
+          ]
         }
-    ]
+      ],
+      "title": "Media Assets"
+    },
+    {
+      "rows": [
+        {
+          "label": "Title",
+          "fields": [
+            {
+              "name": "title",
+              "required": "Name is required",
+              "placeholder": "Name of your listed image"
+            }
+          ]
+        },
+        {
+          "label": "Description - EN",
+          "fields": [
+            {
+              "name": "description",
+              "placeholder": "Image description (EN)",
+              "type": "textArea"
+            }
+          ]
+        },
+        {
+          "label": "Description - DE (if No, only EN description will be displayed)",
+          "fields": [
+            {
+              "name": "hasDescriptionDe",
+              "type": "toggleSwitch"
+            },
+            {
+              "conditions": ["hasDescriptionDe"],
+              "name": "descriptionDe",
+              "placeholder": "Image description (DE)",
+              "type": "textArea"
+            }
+          ],
+          "divider": true
+        },
+        {
+          "hint": "Unique: 1, Limited: > 1",
+          "label": "Amount",
+          "fields": [
+            {
+              "name": "amountType",
+              "type": "radio",
+              "options": [
+                {
+                  "label": "Unique",
+                  "value": "unique"
+                },
+                {
+                  "label": "Limited",
+                  "value": "limited"
+                }
+              ],
+              "defaultValue": "unique"
+            },
+            {
+              "min": 2,
+              "name": "amount",
+              "type": "number",
+              "required": "Amount is required",
+              "conditions": ["amountType:limited"],
+              "placeholder": "Amount ( > 1)"
+            }
+          ],
+          "divider": true
+        },
+        {
+          "label": "Enable bidding?",
+          "fields": [
+            {
+              "name": "biddingEnabled",
+              "type": "toggleSwitch"
+            }
+          ]
+        },
+        {
+          "conditions": ["biddingEnabled:true:not"],
+          "label": "Price",
+          "fields": [
+            {
+              "inputProps": {
+                "placeholder": "Price"
+              },
+              "min": "0.01",
+              "name": "price",
+              "type": "price",
+              "required": "Price is required",
+              "currencies": [
+                {
+                  "sign": "€",
+                  "label": "EUR (€)",
+                  "value": "eur"
+                }
+              ]
+            }
+          ],
+          "divider": true
+        },
+        {
+          "conditions": ["biddingEnabled:true"],
+          "label": "Starting Price",
+          "fields": [
+            {
+              "inputProps": {
+                "placeholder": "Starting Price"
+              },
+              "min": "0.01",
+              "name": "startingPrice",
+              "type": "price",
+              "currencies": [
+                {
+                  "sign": "€",
+                  "label": "EUR (€)",
+                  "value": "eur"
+                }
+              ]
+            }
+          ],
+          "divider": true
+        },
+        {
+          "label": "License Type",
+          "hint": "Choose between Private and Commercial",
+          "fields": [
+            {
+              "name": "licenseType",
+              "options": [
+                {
+                  "label": "Private",
+                  "value": "private"
+                },
+                {
+                  "label": "Commercial",
+                  "value": "commercial"
+                }
+              ],
+              "required": "License type is required",
+              "type": "borderedRadio"
+            }
+          ],
+          "marginBottom": 4
+        },
+        {
+          "conditions": ["licenseType:commercial"],
+          "label": " ",
+          "fields": [
+            {
+              "name": "licenseTypeCommercial",
+              "options": [
+                {
+                  "label": "Event",
+                  "value": "event",
+                  "icon": "calendar-day"
+                },
+                {
+                  "label": "Radio",
+                  "value": "radio",
+                  "icon": "broadcast-tower"
+                },
+                {
+                  "label": "TV",
+                  "value": "tv",
+                  "icon": "tv"
+                },
+                {
+                  "label": "Videos",
+                  "value": "video",
+                  "icon": "video"
+                },
+                {
+                  "label": "NFTs",
+                  "value": "nft",
+                  "icon": "gem"
+                },
+                {
+                  "label": "Reuse",
+                  "value": "reuse",
+                  "icon": "recycle"
+                }
+              ],
+              "required": "Commercial type is required",
+              "stacked": false,
+              "type": "radio"
+            }
+          ]
+        }
+      ],
+      "title": "License Metrics"
+    },
+    {
+      "recurring": true,
+      "name": "initialSalesFees",
+      "rows": [
+        {
+          "label": "Name",
+          "fields": [
+            {
+              "name": "feeName",
+              "placeholder": "Copyright holder name",
+              "required": "Fee name is required"
+            }
+          ]
+        },
+        {
+          "label": "Category",
+          "fields": [
+            {
+              "name": "feeCategory",
+              "options": [
+                {
+                  "label": "Creator Rights",
+                  "value": "creator"
+                },
+                {
+                  "label": "Recording Rights",
+                  "value": "recording"
+                },
+                {
+                  "label": "Publishing Rights",
+                  "value": "publishing"
+                },
+                {
+                  "label": "Collection Society Rights",
+                  "value": "collection"
+                }
+              ],
+              "placeholder": "Copyright category",
+              "type": "reactSelect",
+              "required": "Category is required"
+            },
+            {
+              "content": "GEMA Look Up",
+              "href": "https://www.gema.de/musikurheber/online-services-fuer-gema-mitglieder/repertoiresuche-erweiterter-zugang/",
+              "size": "sm",
+              "target": "_blank",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "label": "Share amount",
+          "fields": [
+            {
+              "name": "feeAmountType",
+              "type": "radio",
+              "options": [
+                {
+                  "label": "Fixed",
+                  "value": "FIXED"
+                },
+                {
+                  "label": "Percentage",
+                  "value": "PERCENTAGE"
+                }
+              ],
+              "stacked": false,
+              "required": "Fee amount is required"
+            }
+          ]
+        },
+        {
+          "conditions": ["feeAmountType"],
+          "label": " ",
+          "fields": [
+            {
+              "conditions": ["feeAmountType:PERCENTAGE"],
+              "min": "1",
+              "max": "99",
+              "step": "0.01",
+              "name": "feeAmountPercentage",
+              "type": "number",
+              "placeholder": "Fee percentage (1-99)",
+              "required": "Fee percentage is required"
+            },
+            {
+              "conditions": ["feeAmountType:FIXED"],
+              "inputProps": {
+                "placeholder": "Fee fixed amount"
+              },
+              "min": "0.01",
+              "name": "feeAmountFixed",
+              "type": "price",
+              "currencies": [
+                {
+                  "sign": "€",
+                  "label": "EUR (€)",
+                  "value": "eur"
+                }
+              ],
+              "required": "Fee amount is required"
+            }
+          ]
+        },
+        {
+          "label": "Share recipient",
+          "fields": [
+            {
+              "name": "feeRecipientType",
+              "type": "radio",
+              "options": [
+                {
+                  "label": "Address",
+                  "value": "ADDRESS"
+                },
+                {
+                  "label": "Platform User",
+                  "value": "USER"
+                }
+              ],
+              "stacked": false,
+              "required": "Fee recipient is required"
+            }
+          ]
+        },
+        {
+          "label": " ",
+          "fields": [
+            {
+              "conditions": ["feeRecipientType:ADDRESS"],
+              "name": "feeAddress",
+              "placeholder": "Fee recipient address",
+              "required": "Fee recipient address is required"
+            },
+            {
+              "async": true,
+              "conditions": ["feeRecipientType:USER"],
+              "defaultOptions": true,
+              "endpoint": "http://localhost:3000/api/users",
+              "name": "feeUser",
+              "type": "reactSelect",
+              "placeholder": "Fee recipient",
+              "required": "Fee recipient user is required"
+            }
+          ],
+          "divider": true
+        }
+      ],
+      "title": "Sales Fees"
+    },
+    {
+      "recurring": true,
+      "name": "secondarySalesFees",
+      "rows": [
+        {
+          "label": "Name",
+          "fields": [
+            {
+              "name": "feeName",
+              "placeholder": "Copyright holder name",
+              "required": "Fee name is required"
+            }
+          ]
+        },
+        {
+          "label": "Category",
+          "fields": [
+            {
+              "name": "feeCategory",
+              "options": [
+                {
+                  "label": "Creator Rights",
+                  "value": "creator"
+                },
+                {
+                  "label": "Recording Rights",
+                  "value": "recording"
+                },
+                {
+                  "label": "Publishing Rights",
+                  "value": "publishing"
+                },
+                {
+                  "label": "Collection Society Rights",
+                  "value": "collection"
+                }
+              ],
+              "placeholder": "Copyright category",
+              "type": "reactSelect",
+              "required": "Category is required"
+            },
+            {
+              "content": "GEMA Look Up",
+              "href": "https://www.gema.de/musikurheber/online-services-fuer-gema-mitglieder/repertoiresuche-erweiterter-zugang/",
+              "size": "sm",
+              "target": "_blank",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "label": "Fee Amount",
+          "fields": [
+            {
+              "min": "1",
+              "max": "99",
+              "step": "0.01",
+              "name": "feeAmountPercentage",
+              "type": "number",
+              "placeholder": "Fee percentage (1-99)",
+              "required": "Fee percentage is required"
+            }
+          ]
+        },
+        {
+          "label": "Share recipient",
+          "fields": [
+            {
+              "name": "feeRecipientType",
+              "type": "radio",
+              "options": [
+                {
+                  "label": "Address",
+                  "value": "ADDRESS"
+                },
+                {
+                  "label": "Platform User",
+                  "value": "USER"
+                }
+              ],
+              "stacked": false,
+              "required": "Fee recipient is required"
+            }
+          ]
+        },
+        {
+          "label": " ",
+          "fields": [
+            {
+              "conditions": ["feeRecipientType:ADDRESS"],
+              "name": "feeAddress",
+              "placeholder": "Fee recipient address",
+              "required": "Fee recipient address is required"
+            },
+            {
+              "async": true,
+              "conditions": ["feeRecipientType:USER"],
+              "defaultOptions": true,
+              "endpoint": "http://localhost:3000/api/users",
+              "name": "feeUser",
+              "type": "reactSelect",
+              "placeholder": "Fee recipient",
+              "required": "Fee recipient user is required"
+            }
+          ],
+          "divider": true
+        }
+      ],
+      "title": "Recurring Fee"
+    },
+    {
+      "rows": [
+        {
+          "fields": [
+            {
+              "name": "terms",
+              "type": "checkbox",
+              "options": [
+                {
+                  "labelHtml": "I have read and accept the <a href=\"/terms\" target=\"_blank\">terms of usage.</a>",
+                  "value": true
+                }
+              ],
+              "required": "You must accept terms of usage"
+            }
+          ]
+        },
+        {
+          "fields": [
+            {
+              "name": "owner",
+              "type": "checkbox",
+              "options": [
+                {
+                  "label": "I am the copyright holder of that Image that I upload and / or I am legal representative of that copyright holder.",
+                  "value": true
+                }
+              ],
+              "required": "You must be the copyright holder / legal representative"
+            }
+          ]
+        }
+      ],
+      "title": "Review & Publish"
+    }
+  ]
 }
