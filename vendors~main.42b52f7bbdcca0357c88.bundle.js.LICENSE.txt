@@ -5,18 +5,18 @@ object-assign
 */
 
 /*!
- * FilePond 4.20.1
+ * FilePond 4.30.3
  * Licensed under MIT, https://opensource.org/licenses/MIT/
  * Please visit https://pqina.nl/filepond/ for details.
  */
 
 /*!
- * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.15.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 
 /*!
- * Font Awesome Free 5.15.2 by @fontawesome - https://fontawesome.com
+ * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 
@@ -177,6 +177,26 @@ and limitations under the License.
  */
 
 // CONCATENATED MODULE: ./node_modules/@licenserocks/kit/dist/rockskit.es.js
+
+// CONCATENATED MODULE: ./node_modules/@licenserocks/kit/node_modules/react-select/animated/dist/react-select.browser.esm.js
+
+// CONCATENATED MODULE: ./node_modules/@licenserocks/kit/node_modules/react-select/async/dist/react-select.browser.esm.js
+
+// CONCATENATED MODULE: ./node_modules/@licenserocks/kit/node_modules/react-select/dist/Select-e1cf49ae.browser.esm.js
+
+// CONCATENATED MODULE: ./node_modules/@licenserocks/kit/node_modules/react-select/dist/react-select.browser.esm.js
+
+// CONCATENATED MODULE: ./node_modules/@licenserocks/kit/node_modules/react-select/dist/stateManager-2f2b6f5b.browser.esm.js
+
+// CONCATENATED MODULE: ./node_modules/@licenserocks/kit/node_modules/react-select/node_modules/react-transition-group/esm/TransitionGroup.js
+
+// CONCATENATED MODULE: ./node_modules/@licenserocks/kit/node_modules/react-select/node_modules/react-transition-group/esm/utils/ChildMapping.js
+
+// CONCATENATED MODULE: ./node_modules/@licenserocks/kit/node_modules/react-transition-group/esm/TransitionGroupContext.js
+
+// CONCATENATED MODULE: ./node_modules/@licenserocks/kit/node_modules/react-transition-group/esm/config.js
+
+// EXTERNAL MODULE: ./node_modules/@licenserocks/kit/node_modules/react-input-autosize/lib/AutosizeInput.js
 
 //! stable.js 0.1.8, https://github.com/Two-Screen/stable
 
