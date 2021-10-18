@@ -99,8 +99,7 @@ var FormField = function FormField(_ref) {
       stepIndex = _ref.stepIndex,
       fieldId = _ref.fieldId,
       rowId = _ref.rowId,
-      stepData = _ref.stepData,
-      currenciesFromDB = _ref.currenciesFromDB;
+      stepData = _ref.stepData;
 
   var _useFormContext = useFormContext(),
       control = _useFormContext.control,
@@ -118,6 +117,11 @@ var FormField = function FormField(_ref) {
   var fieldKey = "step-" + stepIndex + "-row-" + rowId + "-field-" + fieldId;
   var fieldName = isRecurring ? data.name + "[" + recurringIndex + "]." + name : name;
   var prevValue = isRecurring && stepData[data.name] && stepData[data.name][recurringIndex] ? stepData[data.name][recurringIndex][name] : stepData[name];
+
+  if ((field == null ? void 0 : field.currencies) && (field == null ? void 0 : field.currencies) !== undefined) {
+    field.currencies = stepData == null ? void 0 : stepData.currencies;
+  }
+
   return /*#__PURE__*/React.createElement(Field, _extends({
     control: control,
     defaultValue: prevValue || defaultValue,
@@ -125,7 +129,6 @@ var FormField = function FormField(_ref) {
     isRequired: required,
     key: fieldKey,
     name: fieldName,
-    currenciesFromDB: currenciesFromDB,
     register: register({
       required: required
     }),
@@ -232,8 +235,7 @@ var FormRows = function FormRows(_ref) {
       isRecurring = _ref.isRecurring,
       rows = _ref.rows,
       stepIndex = _ref.stepIndex,
-      stepData = _ref.stepData,
-      currenciesFromDB = _ref.currenciesFromDB;
+      stepData = _ref.stepData;
 
   var _useFormContext = useFormContext(),
       errors = _useFormContext.errors,
@@ -292,8 +294,7 @@ var FormRows = function FormRows(_ref) {
         recurringIndex: index,
         rowId: idx,
         stepIndex: stepIndex,
-        stepData: stepData,
-        currenciesFromDB: currenciesFromDB
+        stepData: stepData
       });
     })), (row == null ? void 0 : row.divider) && /*#__PURE__*/React.createElement(Divider, {
       my: row == null ? void 0 : row.dividerSize
@@ -360,8 +361,7 @@ var Form = function Form(_ref5) {
   var data = _ref5.data,
       defaultValues = _ref5.defaultValues,
       stepIndex = _ref5.stepIndex,
-      stepFormData = _ref5.stepFormData,
-      currenciesFromDB = _ref5.currenciesFromDB;
+      stepFormData = _ref5.stepFormData;
   var isRecurring = data.recurring;
 
   var _useFieldArray = useFieldArray({
@@ -378,8 +378,7 @@ var Form = function Form(_ref5) {
       isRecurring: isRecurring,
       rows: data.rows,
       stepIndex: stepIndex,
-      stepData: stepFormData,
-      currenciesFromDB: currenciesFromDB
+      stepData: stepFormData
     });
   };
 
@@ -483,8 +482,7 @@ var MegaFlow = function MegaFlow(_ref) {
       watcher = _ref.watcher,
       wizardProps = _ref.wizardProps,
       wrapperProps = _ref.wrapperProps,
-      currenciesFromDB = _ref.currenciesFromDB,
-      props = _objectWithoutPropertiesLoose(_ref, ["defaultValues", "icons", "schema", "onFinish", "onStepSubmit", "renderActionButtons", "theme", "watcher", "wizardProps", "wrapperProps", "currenciesFromDB"]);
+      props = _objectWithoutPropertiesLoose(_ref, ["defaultValues", "icons", "schema", "onFinish", "onStepSubmit", "renderActionButtons", "theme", "watcher", "wizardProps", "wrapperProps"]);
 
   // Parse if schema was type of JSON string
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
@@ -544,9 +542,7 @@ var MegaFlow = function MegaFlow(_ref) {
       data: steps[currentStep],
       key: currentStep,
       stepIndex: currentStep,
-      stepFormData: stepFormData,
-      defaultValues: defaultValues,
-      currenciesFromDB: currenciesFromDB
+      stepFormData: stepFormData
     });
   };
 
