@@ -548,7 +548,8 @@ var MegaFlow = function MegaFlow(_ref) {
       data: steps[currentStep],
       key: currentStep,
       stepIndex: currentStep,
-      stepFormData: stepFormData
+      stepFormData: stepFormData,
+      defaultValues: defaultValues
     });
   };
 
