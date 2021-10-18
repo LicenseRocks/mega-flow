@@ -26,7 +26,7 @@ export const main = () => {
         defaultValues={{
           initialSalesFees: [
             {
-              disabled: false,
+              disabled: true,
               feeName: "ROBA MUSIC",
               feeUser: {
                 label: "ROBA Music Verlag GmbH (nft@roba.com)",
