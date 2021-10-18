@@ -48,7 +48,7 @@ export const FormRows = ({
   rows,
   stepIndex,
   stepData,
-  currenciesFromDB,
+  defaultValues,
 }) => {
   const { errors, watch } = useFormContext();
   const [expanded, setExpanded] = useState(false);
@@ -123,7 +123,6 @@ export const FormRows = ({
                     rowId={idx}
                     stepIndex={stepIndex}
                     stepData={stepData}
-                    currenciesFromDB={currenciesFromDB}
                   />
                 );
               })}

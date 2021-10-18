@@ -59,7 +59,6 @@ export const FormField = ({
   fieldId,
   rowId,
   stepData,
-  currenciesFromDB,
 }) => {
   const { control, register } = useFormContext();
   const { conditions, defaultValue, name, required, type, ...others } = field;
@@ -84,7 +83,6 @@ export const FormField = ({
       isRequired={required}
       key={fieldKey}
       name={fieldName}
-      currenciesFromDB={currenciesFromDB}
       register={register({
         required,
       })}

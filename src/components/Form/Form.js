@@ -31,13 +31,7 @@ const ButtonsWrapper = styled.div`
   margin-bottom: 8px;
 `;
 
-const Form = ({
-  data,
-  defaultValues,
-  stepIndex,
-  stepFormData,
-  currenciesFromDB,
-}) => {
+const Form = ({ data, defaultValues, stepIndex, stepFormData }) => {
   const isRecurring = data.recurring;
 
   const { fields, append, remove } = useFieldArray({
@@ -52,7 +46,7 @@ const Form = ({
       rows={data.rows}
       stepIndex={stepIndex}
       stepData={stepFormData}
-      currenciesFromDB={currenciesFromDB}
+      defaultValues={defaultValues}
     />
   );
 

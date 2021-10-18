@@ -20,17 +20,9 @@ export const main = () => {
     console.log("data: ", data);
   };
 
-  const currencies = [
-    { sign: "€", label: "EUR (€)", value: "eur" },
-    { sign: "zł", label: "PLN (zł)", value: "pln" },
-    { sign: "$", label: "USD ($)", value: "usd" },
-    { sign: "£", label: "GBP (£)", value: "gbp" },
-  ];
-
   return (
     <Wrapper>
       <MegaFlow
-        currenciesFromDB={currencies}
         defaultValues={{
           initialSalesFees: [
             {
@@ -64,6 +56,12 @@ export const main = () => {
               feeRecipientType: "USER",
               feeAmountPercentage: 7,
             },
+          ],
+          currencies: [
+            { sign: "€", label: "EUR (€)", value: "eur" },
+            { sign: "zł", label: "PLN (zł)", value: "pln" },
+            { sign: "$", label: "USD ($)", value: "usd" },
+            { sign: "£", label: "GBP (£)", value: "gbp" },
           ],
         }}
         onFinish={(output) => {

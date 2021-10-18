@@ -28,7 +28,6 @@ const MegaFlow = ({
   watcher,
   wizardProps,
   wrapperProps,
-  currenciesFromDB,
   ...props
 }) => {
   // Parse if schema was type of JSON string
@@ -79,7 +78,6 @@ const MegaFlow = ({
       stepIndex={currentStep}
       stepFormData={stepFormData}
       defaultValues={defaultValues}
-      currenciesFromDB={currenciesFromDB}
     />
   );
 
