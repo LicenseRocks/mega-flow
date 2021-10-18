@@ -77,7 +77,6 @@ const MegaFlow = ({
       key={currentStep}
       stepIndex={currentStep}
       stepFormData={stepFormData}
-      defaultValues={defaultValues}
     />
   );
 

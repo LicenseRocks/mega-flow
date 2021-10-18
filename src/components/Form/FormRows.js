@@ -48,7 +48,6 @@ export const FormRows = ({
   rows,
   stepIndex,
   stepData,
-  defaultValues,
 }) => {
   const { errors, watch } = useFormContext();
   const [expanded, setExpanded] = useState(false);

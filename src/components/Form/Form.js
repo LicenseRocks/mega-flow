@@ -46,7 +46,6 @@ const Form = ({ data, defaultValues, stepIndex, stepFormData }) => {
       rows={data.rows}
       stepIndex={stepIndex}
       stepData={stepFormData}
-      defaultValues={defaultValues}
     />
   );
 

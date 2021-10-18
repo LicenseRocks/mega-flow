@@ -75,6 +75,10 @@ export const FormField = ({
       ? stepData[data.name][recurringIndex][name]
       : stepData[name];
 
+  if (field?.currencies && field?.currencies !== undefined) {
+    field.currencies = stepData?.currencies;
+  }
+
   return (
     <Field
       control={control}
