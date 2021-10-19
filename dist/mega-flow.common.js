@@ -124,7 +124,7 @@ var FormField = function FormField(_ref) {
   var fieldName = isRecurring ? data.name + "[" + recurringIndex + "]." + name : name;
   var prevValue = isRecurring && stepData[data.name] && stepData[data.name][recurringIndex] ? stepData[data.name][recurringIndex][name] : stepData[name];
 
-  if ((field == null ? void 0 : field.currencies) && (field == null ? void 0 : field.currencies) !== undefined) {
+  if ((field == null ? void 0 : field.currencies) !== undefined) {
     field.currencies = stepData == null ? void 0 : stepData.currencies;
   }
 
