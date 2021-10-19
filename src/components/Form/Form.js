@@ -15,8 +15,8 @@ const Wrapper = styled.div`
 
   && {
     ${({ disabled }) =>
-    disabled &&
-    css`
+      disabled &&
+      css`
         opacity: 0.5;
         cursor: not-allowed !important;
         pointer-events: none;

@@ -117,6 +117,11 @@ var FormField = function FormField(_ref) {
   var fieldKey = "step-" + stepIndex + "-row-" + rowId + "-field-" + fieldId;
   var fieldName = isRecurring ? data.name + "[" + recurringIndex + "]." + name : name;
   var prevValue = isRecurring && stepData[data.name] && stepData[data.name][recurringIndex] ? stepData[data.name][recurringIndex][name] : stepData[name];
+
+  if ((field == null ? void 0 : field.currencies) !== undefined) {
+    field.currencies = stepData == null ? void 0 : stepData.currencies;
+  }
+
   return /*#__PURE__*/React.createElement(Field, _extends({
     control: control,
     defaultValue: prevValue || defaultValue,

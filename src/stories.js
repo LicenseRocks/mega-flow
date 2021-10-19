@@ -57,6 +57,12 @@ export const main = () => {
               feeAmountPercentage: 7,
             },
           ],
+          currencies: [
+            { sign: "€", label: "EUR (€)", value: "eur" },
+            { sign: "zł", label: "PLN (zł)", value: "pln" },
+            { sign: "$", label: "USD ($)", value: "usd" },
+            { sign: "£", label: "GBP (£)", value: "gbp" },
+          ],
         }}
         onFinish={(output) => {
           console.log("output: ", output);
