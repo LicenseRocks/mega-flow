@@ -2,6 +2,7 @@
   "steps": [
     {
       "rows": [
+        { "heading": "Public Media" },
         {
           "hint": "Supported file types: image/* (jpg, png, jpeg) - Max size: 2MB",
           "label": "Cover",
@@ -70,8 +71,10 @@
         },
         {
           "conditions": ["assetSameAsCover:true:not"],
-          "message": "Do you want to store your media assets forever in a fully decentralized manner? Drop us a mail at hello@licenserocks.de"
+          "message": "Do you want to store your media assets forever in a fully decentralized manner? Drop us a mail at hello@licenserocks.de",
+          "divider": true
         },
+        { "heading": "Private Media" },
         {
           "hint": "Value of this field would be visible only to owners",
           "label": "Bonus Text",

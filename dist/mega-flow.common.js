@@ -261,6 +261,10 @@ var FormRows = function FormRows(_ref) {
     var rowErrors = [];
     var rowConditions = checkCondition(row.conditions, watch, stepData, isRecurring, data.name, index);
     if (!rowConditions) return null;
+    if (row == null ? void 0 : row.heading) return /*#__PURE__*/React__default.createElement(kit.H4, {
+      content: row == null ? void 0 : row.heading,
+      mb: 2
+    });
     var showRow = row.expandable ? expanded : true;
     var label = [].concat(row.label || []);
     if (row.hint) label.push( /*#__PURE__*/React__default.createElement(kit.Tooltip, {

@@ -6,6 +6,7 @@ import {
   Alert,
   Divider,
   FormRow,
+  H4,
   Icon,
   OutlineButton,
   Tooltip,
@@ -67,6 +68,8 @@ export const FormRows = ({
           index
         );
         if (!rowConditions) return null;
+
+        if (row?.heading) return <H4 content={row?.heading} mb={2} />;
 
         const showRow = row.expandable ? expanded : true;
         const label = [...(row.label || [])];
