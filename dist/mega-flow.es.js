@@ -484,9 +484,10 @@ var MegaFlow = function MegaFlow(_ref) {
       _renderActionButtons = _ref.renderActionButtons,
       theme = _ref.theme,
       watcher = _ref.watcher,
+      livePreview = _ref.livePreview,
       wizardProps = _ref.wizardProps,
       wrapperProps = _ref.wrapperProps,
-      props = _objectWithoutPropertiesLoose(_ref, ["defaultValues", "icons", "schema", "onFinish", "onStepSubmit", "renderActionButtons", "theme", "watcher", "wizardProps", "wrapperProps"]);
+      props = _objectWithoutPropertiesLoose(_ref, ["defaultValues", "icons", "schema", "onFinish", "onStepSubmit", "renderActionButtons", "theme", "watcher", "livePreview", "wizardProps", "wrapperProps"]);
 
   // Parse if schema was type of JSON string
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
@@ -504,8 +505,14 @@ var MegaFlow = function MegaFlow(_ref) {
 
   var _useForm = useForm(),
       formState = _useForm.formState,
+      getValues = _useForm.getValues,
       handleSubmit = _useForm.handleSubmit,
-      methods = _objectWithoutPropertiesLoose(_useForm, ["formState", "handleSubmit"]);
+      methods = _objectWithoutPropertiesLoose(_useForm, ["formState", "getValues", "handleSubmit"]);
+
+  if (livePreview) {
+    var liveData = getValues();
+    livePreview(liveData);
+  }
 
   var stepFormData = wizardData[currentStep] || defaultValues;
   useEffect(function () {
