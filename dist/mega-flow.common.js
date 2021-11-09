@@ -515,11 +515,6 @@ var MegaFlow = function MegaFlow(_ref) {
       handleSubmit = _useForm.handleSubmit,
       methods = _objectWithoutPropertiesLoose(_useForm, ["formState", "getValues", "handleSubmit"]);
 
-  if (livePreview) {
-    var liveData = getValues();
-    livePreview(liveData);
-  }
-
   var stepFormData = wizardData[currentStep] || defaultValues;
   React.useEffect(function () {
     methods.reset(stepFormData);
@@ -568,6 +563,14 @@ var MegaFlow = function MegaFlow(_ref) {
     icons: _extends({}, kit.RocksKitIcons, MegaFlowIcons, icons),
     theme: theme || kit.RocksKitTheme()
   }, /*#__PURE__*/React__default.createElement(Wrapper$1, wrapperProps, /*#__PURE__*/React__default.createElement("form", {
+    onBlur: function onBlur(event) {
+      event.preventDefault();
+      var values = getValues();
+
+      if (livePreview) {
+        livePreview(values);
+      }
+    },
     onSubmit: handleSubmit(onSubmit)
   }, /*#__PURE__*/React__default.createElement(reactHookForm.FormProvider, methods, /*#__PURE__*/React__default.createElement(kit.Wizard, _extends({
     currentStepContent: renderForm(),
