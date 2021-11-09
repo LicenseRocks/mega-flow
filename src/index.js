@@ -40,15 +40,6 @@ const MegaFlow = ({
   const [wizardData, setWizardData] = useState({});
   const { formState, getValues, handleSubmit, ...methods } = useForm();
 
-  const handleBlur = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const values = getValues();
-
-    if (livePreview) {
-      livePreview(values);
-    }
-  };
-
   const stepFormData = wizardData[currentStep] || defaultValues;
 
   useEffect(() => {
@@ -97,7 +88,17 @@ const MegaFlow = ({
       theme={theme || RocksKitTheme()}
     >
       <Wrapper {...wrapperProps}>
-        <form onBlur={handleBlur} onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onBlur={(event) => {
+            event.preventDefault();
+            const values = getValues();
+
+            if (livePreview) {
+              livePreview(values);
+            }
+          }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <FormProvider {...methods}>
             <Wizard
               currentStepContent={renderForm()}
