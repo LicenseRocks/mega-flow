@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useFormContext } from "react-hook-form";
 import {
   Alert,
@@ -22,6 +22,24 @@ const StyledRow = styled(FormRow)`
         display: none;
       }
     }
+  }
+
+  && {
+    ${({ backgroundStyle }) =>
+      backgroundStyle === "primary" &&
+      css`
+        background-color: ${({ theme }) => theme.palette.common.white};
+      `}
+  }
+`;
+
+const StyledDivider = styled(Divider)`
+  && {
+    ${({ backgroundStyle }) =>
+      backgroundStyle === "primary" &&
+      css`
+        background-color: ${({ theme }) => theme.palette.common.white};
+      `}
   }
 `;
 
@@ -54,6 +72,8 @@ export const FormRows = ({
   const [expanded, setExpanded] = useState(false);
   const showExpandButton = rows?.some((row) => row.expandable);
 
+  console.log(data);
+
   return (
     <>
       {rows?.map((row, idx) => {
@@ -69,7 +89,8 @@ export const FormRows = ({
         );
         if (!rowConditions) return null;
 
-        if (row?.heading) return <H4 content={row?.heading} mb={2} />;
+        if (row?.heading)
+          return <H4 content={row?.heading} px={4} mt={4} mb={2} />;
 
         const showRow = row.expandable ? expanded : true;
         const label = [...(row.label || [])];
@@ -89,8 +110,12 @@ export const FormRows = ({
               label={label.length > 0 ? label : null}
               labelAlign={row.labelAlign}
               labelGutter={row.labelGutter}
-              mb={row?.marginBottom}
+              mb={0}
+              pb={row?.marginBottom ? row?.marginBottom : 4}
+              pt={4}
+              px={6}
               show={showRow}
+              backgroundStyle={row?.backgroundStyle}
             >
               {row.message && (
                 <Alert color={row.messageColor} content={row.message} mb={2} />
@@ -130,7 +155,15 @@ export const FormRows = ({
               })}
             </StyledRow>
 
-            {row?.divider && <Divider my={row?.dividerSize} />}
+            {row?.divider && (
+              <StyledDivider
+                backgroundStyle={row?.backgroundStyle}
+                py={row?.dividerSize}
+                px={5}
+                m={0}
+                pb={4}
+              />
+            )}
           </Fragment>
         );
       })}

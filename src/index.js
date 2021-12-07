@@ -97,6 +97,7 @@ const MegaFlow = ({
               }
               setCurrentStepIndex={setCurrentStep}
               steps={stepsArray}
+              backgroundStyle="primary"
               {...wizardProps}
               {...props}
             />
