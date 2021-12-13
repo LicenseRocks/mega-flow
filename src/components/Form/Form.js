@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.gray.light};
   border: 1px solid ${({ theme }) => theme.palette.gray.regular};
   border-radius: 16px;
-  margin-bottom: 16px;
+  margin: ${({ theme }) => theme.spacing(5)};
 
   && {
     ${({ disabled }) =>
