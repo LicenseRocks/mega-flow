@@ -110,7 +110,7 @@ export const FormRows = ({
               mb={0}
               pb={row?.marginBottom ?? 4}
               pt={4}
-              px={6}
+              px={16}
               show={showRow}
               backgroundStyle={row?.backgroundStyle}
             >
