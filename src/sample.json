@@ -2,7 +2,6 @@
   "steps": [
     {
       "rows": [
-        { "heading": "Public Media" },
         {
           "hint": "Supported file types: image/* (jpg, png, jpeg) - Max size: 2MB",
           "label": "Cover",
@@ -17,7 +16,8 @@
             }
           ],
           "labelAlign": "start",
-          "labelGutter": true
+          "labelGutter": true,
+          "backgroundStyle": "primary"
         },
         {
           "hint": "Select between the centralized managed encrypted cloud storage on AWS and permanent storage on Arweave (200 years solid storage)",
@@ -40,7 +40,8 @@
               "defaultValue": "s3"
             }
           ],
-          "divider": "Divider"
+          "divider": "Divider",
+          "backgroundStyle": "primary"
         },
         {
           "hint": "",
@@ -50,7 +51,8 @@
               "name": "assetSameAsCover",
               "type": "toggleSwitch"
             }
-          ]
+          ],
+          "backgroundStyle": "primary"
         },
         {
           "conditions": ["assetSameAsCover:true:not"],
@@ -67,12 +69,13 @@
             }
           ],
           "labelAlign": "start",
-          "labelGutter": true
+          "labelGutter": true,
+          "backgroundStyle": "primary"
         },
         {
           "conditions": ["assetSameAsCover:true:not"],
           "message": "Do you want to store your media assets forever in a fully decentralized manner? Drop us a mail at hello@licenserocks.de",
-          "divider": true
+          "backgroundStyle": "primary"
         },
         { "heading": "Private Media" },
         {
