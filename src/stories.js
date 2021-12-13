@@ -1,4 +1,4 @@
-import { Button, OutlineButton } from "@licenserocks/kit";
+import { Button, OutlineButton, TextButton } from "@licenserocks/kit";
 import React from "react";
 import styled from "styled-components";
 
@@ -69,15 +69,16 @@ export const main = () => {
         }}
         renderActionButtons={(wizardData) => (
           <>
-            <Button
+            <TextButton
               content="Save as Draft"
-              color="subtle"
+              color="secondary"
               dInline
               mr={4}
               onClick={() => console.log("wizardData: ", wizardData)}
             />
 
             <OutlineButton
+              color="secondary"
               content="Schedule"
               dInline
               mr={4}
