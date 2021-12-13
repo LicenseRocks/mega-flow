@@ -20,6 +20,10 @@ export const main = () => {
     console.log("data: ", data);
   };
 
+  const handlePreview = (data) => {
+    console.log("live data: ", data);
+  };
+
   return (
     <Wrapper>
       <MegaFlow
@@ -88,6 +92,7 @@ export const main = () => {
         )}
         schema={schema}
         watcher={handleWatch}
+        livePreview={handlePreview}
       />
     </Wrapper>
   );
