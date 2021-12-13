@@ -214,8 +214,18 @@ var checkCondition = function checkCondition(conditions, watch, wizardData, isRe
   return true;
 };
 
-function _templateObject2() {
+function _templateObject3() {
   var data = _taggedTemplateLiteralLoose(["\n  background: #f0f0f4;\n  border-radius: 100%;\n  width: 20px;\n  height: 20px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  margin-left: 8px;\n  vertical-align: middle;\n\n  svg {\n    color: #8685a6;\n    font-size: 10px;\n  }\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteralLoose(["\n  && {\n    ", "\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -225,7 +235,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteralLoose(["\n  && {\n    label {\n      :only-child {\n        display: none;\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteralLoose(["\n  && {\n    label {\n      :only-child {\n        display: none;\n      }\n    }\n  }\n  && {\n    ", "\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -233,15 +243,28 @@ function _templateObject() {
 
   return data;
 }
-var StyledRow = styled__default(kit.FormRow)(_templateObject());
-var Hint = styled__default.span(_templateObject2());
-var FormRows = function FormRows(_ref) {
-  var data = _ref.data,
-      index = _ref.index,
-      isRecurring = _ref.isRecurring,
-      rows = _ref.rows,
-      stepIndex = _ref.stepIndex,
-      stepData = _ref.stepData;
+var StyledRow = styled__default(kit.FormRow)(_templateObject(), function (_ref) {
+  var backgroundStyle = _ref.backgroundStyle;
+  return backgroundStyle === "primary" && styled.css(["background-color:", ";"], function (_ref2) {
+    var theme = _ref2.theme;
+    return theme.palette.common.white;
+  });
+});
+var StyledDivider = styled__default(kit.Divider)(_templateObject2(), function (_ref3) {
+  var backgroundStyle = _ref3.backgroundStyle;
+  return backgroundStyle === "primary" && styled.css(["background-color:", ";"], function (_ref4) {
+    var theme = _ref4.theme;
+    return theme.palette.common.white;
+  });
+});
+var Hint = styled__default.span(_templateObject3());
+var FormRows = function FormRows(_ref5) {
+  var data = _ref5.data,
+      index = _ref5.index,
+      isRecurring = _ref5.isRecurring,
+      rows = _ref5.rows,
+      stepIndex = _ref5.stepIndex,
+      stepData = _ref5.stepData;
 
   var _useFormContext = reactHookForm.useFormContext(),
       errors = _useFormContext.errors,
@@ -255,7 +278,7 @@ var FormRows = function FormRows(_ref) {
     return row.expandable;
   });
   return /*#__PURE__*/React__default.createElement(React__default.Fragment, null, rows == null ? void 0 : rows.map(function (row, idx) {
-    var _row$fields;
+    var _row$marginBottom, _row$fields;
 
     var rowKey = "step-" + stepIndex + "-row-" + idx;
     var rowErrors = [];
@@ -263,6 +286,8 @@ var FormRows = function FormRows(_ref) {
     if (!rowConditions) return null;
     if (row == null ? void 0 : row.heading) return /*#__PURE__*/React__default.createElement(kit.H4, {
       content: row == null ? void 0 : row.heading,
+      px: 4,
+      mt: 4,
       mb: 2
     });
     var showRow = row.expandable ? expanded : true;
@@ -282,8 +307,12 @@ var FormRows = function FormRows(_ref) {
       label: label.length > 0 ? label : null,
       labelAlign: row.labelAlign,
       labelGutter: row.labelGutter,
-      mb: row == null ? void 0 : row.marginBottom,
-      show: showRow
+      mb: 0,
+      pb: (_row$marginBottom = row == null ? void 0 : row.marginBottom) != null ? _row$marginBottom : 4,
+      pt: 4,
+      px: 6,
+      show: showRow,
+      backgroundStyle: row == null ? void 0 : row.backgroundStyle
     }, row.message && /*#__PURE__*/React__default.createElement(kit.Alert, {
       color: row.messageColor,
       content: row.message,
@@ -306,8 +335,12 @@ var FormRows = function FormRows(_ref) {
         stepIndex: stepIndex,
         stepData: stepData
       });
-    })), (row == null ? void 0 : row.divider) && /*#__PURE__*/React__default.createElement(kit.Divider, {
-      my: row == null ? void 0 : row.dividerSize
+    })), (row == null ? void 0 : row.divider) && /*#__PURE__*/React__default.createElement(StyledDivider, {
+      backgroundStyle: row == null ? void 0 : row.backgroundStyle,
+      py: row == null ? void 0 : row.dividerSize,
+      px: 5,
+      m: 0,
+      pb: 4
     }));
   }), showExpandButton && /*#__PURE__*/React__default.createElement(kit.OutlineButton, {
     color: "secondary",
@@ -569,7 +602,8 @@ var MegaFlow = function MegaFlow(_ref) {
       return _renderActionButtons(getOutputData(wizardData));
     },
     setCurrentStepIndex: setCurrentStep,
-    steps: stepsArray
+    steps: stepsArray,
+    backgroundStyle: "primary"
   }, wizardProps, props))))));
 };
 
