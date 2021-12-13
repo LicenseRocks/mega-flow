@@ -1,6 +1,6 @@
 {
   "name": "@licenserocks/mega-flow",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "description": "",
   "main": "dist/mega-flow.common.js",
   "module": "dist/mega-flow.es.js",

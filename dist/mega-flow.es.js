@@ -371,7 +371,7 @@ function _templateObject2$1() {
 }
 
 function _templateObject$1() {
-  var data = _taggedTemplateLiteralLoose(["\n  padding: ", ";\n  background-color: ", ";\n  border: 1px solid ", ";\n  border-radius: 16px;\n  margin-bottom: 16px;\n\n  && {\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteralLoose(["\n  padding: ", ";\n  background-color: ", ";\n  border: 1px solid ", ";\n  border-radius: 16px;\n  margin: ", ";\n\n  && {\n    ", "\n  }\n"]);
 
   _templateObject$1 = function _templateObject() {
     return data;
@@ -389,16 +389,19 @@ var Wrapper = styled.div(_templateObject$1(), function (_ref) {
   var theme = _ref3.theme;
   return theme.palette.gray.regular;
 }, function (_ref4) {
-  var disabled = _ref4.disabled;
+  var theme = _ref4.theme;
+  return theme.spacing(5);
+}, function (_ref5) {
+  var disabled = _ref5.disabled;
   return disabled && css(["opacity:0.5;cursor:not-allowed !important;pointer-events:none;"]);
 });
 var ButtonsWrapper = styled.div(_templateObject2$1());
 
-var Form = function Form(_ref5) {
-  var data = _ref5.data,
-      defaultValues = _ref5.defaultValues,
-      stepIndex = _ref5.stepIndex,
-      stepFormData = _ref5.stepFormData;
+var Form = function Form(_ref6) {
+  var data = _ref6.data,
+      defaultValues = _ref6.defaultValues,
+      stepIndex = _ref6.stepIndex,
+      stepFormData = _ref6.stepFormData;
   var isRecurring = data.recurring;
 
   var _useFieldArray = useFieldArray({
