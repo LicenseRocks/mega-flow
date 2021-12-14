@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { TextButton, Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, FormDatepicker, FormRow, H4, Tooltip, Icon, Alert, Divider, OutlineButton, AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from '@licenserocks/kit';
+import { TextButton, Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, FormDatepicker, FormRow, Divider, H4, Tooltip, Icon, Alert, OutlineButton, AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from '@licenserocks/kit';
 import { useFormContext, useFieldArray, useForm, FormProvider } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -208,8 +208,18 @@ var checkCondition = function checkCondition(conditions, watch, wizardData, isRe
   return true;
 };
 
-function _templateObject2() {
+function _templateObject3() {
   var data = _taggedTemplateLiteralLoose(["\n  background: #f0f0f4;\n  border-radius: 100%;\n  width: 20px;\n  height: 20px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  margin-left: 8px;\n  vertical-align: middle;\n\n  svg {\n    color: #8685a6;\n    font-size: 10px;\n  }\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteralLoose(["\n  && {\n    ", "\n  }\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -219,7 +229,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteralLoose(["\n  && {\n    label {\n      :only-child {\n        display: none;\n      }\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteralLoose(["\n  && {\n    label {\n      :only-child {\n        display: none;\n      }\n    }\n  }\n  && {\n    ", "\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -227,15 +237,28 @@ function _templateObject() {
 
   return data;
 }
-var StyledRow = styled(FormRow)(_templateObject());
-var Hint = styled.span(_templateObject2());
-var FormRows = function FormRows(_ref) {
-  var data = _ref.data,
-      index = _ref.index,
-      isRecurring = _ref.isRecurring,
-      rows = _ref.rows,
-      stepIndex = _ref.stepIndex,
-      stepData = _ref.stepData;
+var StyledRow = styled(FormRow)(_templateObject(), function (_ref) {
+  var backgroundStyle = _ref.backgroundStyle;
+  return backgroundStyle === "primary" && css(["background-color:", ";"], function (_ref2) {
+    var theme = _ref2.theme;
+    return theme.palette.common.white;
+  });
+});
+var StyledDivider = styled(Divider)(_templateObject2(), function (_ref3) {
+  var backgroundStyle = _ref3.backgroundStyle;
+  return backgroundStyle === "primary" && css(["background-color:", ";"], function (_ref4) {
+    var theme = _ref4.theme;
+    return theme.palette.common.white;
+  });
+});
+var Hint = styled.span(_templateObject3());
+var FormRows = function FormRows(_ref5) {
+  var data = _ref5.data,
+      index = _ref5.index,
+      isRecurring = _ref5.isRecurring,
+      rows = _ref5.rows,
+      stepIndex = _ref5.stepIndex,
+      stepData = _ref5.stepData;
 
   var _useFormContext = useFormContext(),
       errors = _useFormContext.errors,
@@ -249,7 +272,7 @@ var FormRows = function FormRows(_ref) {
     return row.expandable;
   });
   return /*#__PURE__*/React.createElement(React.Fragment, null, rows == null ? void 0 : rows.map(function (row, idx) {
-    var _row$fields;
+    var _row$marginBottom, _row$fields;
 
     var rowKey = "step-" + stepIndex + "-row-" + idx;
     var rowErrors = [];
@@ -257,6 +280,8 @@ var FormRows = function FormRows(_ref) {
     if (!rowConditions) return null;
     if (row == null ? void 0 : row.heading) return /*#__PURE__*/React.createElement(H4, {
       content: row == null ? void 0 : row.heading,
+      px: 4,
+      mt: 4,
       mb: 2
     });
     var showRow = row.expandable ? expanded : true;
@@ -276,8 +301,12 @@ var FormRows = function FormRows(_ref) {
       label: label.length > 0 ? label : null,
       labelAlign: row.labelAlign,
       labelGutter: row.labelGutter,
-      mb: row == null ? void 0 : row.marginBottom,
-      show: showRow
+      mb: 0,
+      pb: (_row$marginBottom = row == null ? void 0 : row.marginBottom) != null ? _row$marginBottom : 4,
+      pt: 4,
+      px: 6,
+      show: showRow,
+      backgroundStyle: row == null ? void 0 : row.backgroundStyle
     }, row.message && /*#__PURE__*/React.createElement(Alert, {
       color: row.messageColor,
       content: row.message,
@@ -300,8 +329,12 @@ var FormRows = function FormRows(_ref) {
         stepIndex: stepIndex,
         stepData: stepData
       });
-    })), (row == null ? void 0 : row.divider) && /*#__PURE__*/React.createElement(Divider, {
-      my: row == null ? void 0 : row.dividerSize
+    })), (row == null ? void 0 : row.divider) && /*#__PURE__*/React.createElement(StyledDivider, {
+      backgroundStyle: row == null ? void 0 : row.backgroundStyle,
+      py: row == null ? void 0 : row.dividerSize,
+      px: 5,
+      m: 0,
+      pb: 4
     }));
   }), showExpandButton && /*#__PURE__*/React.createElement(OutlineButton, {
     color: "secondary",
@@ -338,7 +371,7 @@ function _templateObject2$1() {
 }
 
 function _templateObject$1() {
-  var data = _taggedTemplateLiteralLoose(["\n  padding: ", ";\n  background-color: ", ";\n  border: 1px solid ", ";\n  border-radius: 16px;\n  margin-bottom: 16px;\n\n  && {\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteralLoose(["\n  padding: ", ";\n  background-color: ", ";\n  border: 1px solid ", ";\n  border-radius: 16px;\n  margin: ", ";\n\n  && {\n    ", "\n  }\n"]);
 
   _templateObject$1 = function _templateObject() {
     return data;
@@ -356,16 +389,19 @@ var Wrapper = styled.div(_templateObject$1(), function (_ref) {
   var theme = _ref3.theme;
   return theme.palette.gray.regular;
 }, function (_ref4) {
-  var disabled = _ref4.disabled;
+  var theme = _ref4.theme;
+  return theme.spacing(5);
+}, function (_ref5) {
+  var disabled = _ref5.disabled;
   return disabled && css(["opacity:0.5;cursor:not-allowed !important;pointer-events:none;"]);
 });
 var ButtonsWrapper = styled.div(_templateObject2$1());
 
-var Form = function Form(_ref5) {
-  var data = _ref5.data,
-      defaultValues = _ref5.defaultValues,
-      stepIndex = _ref5.stepIndex,
-      stepFormData = _ref5.stepFormData;
+var Form = function Form(_ref6) {
+  var data = _ref6.data,
+      defaultValues = _ref6.defaultValues,
+      stepIndex = _ref6.stepIndex,
+      stepFormData = _ref6.stepFormData;
   var isRecurring = data.recurring;
 
   var _useFieldArray = useFieldArray({
@@ -573,7 +609,8 @@ var MegaFlow = function MegaFlow(_ref) {
       return _renderActionButtons(getOutputData(wizardData));
     },
     setCurrentStepIndex: setCurrentStep,
-    steps: stepsArray
+    steps: stepsArray,
+    backgroundStyle: "primary"
   }, wizardProps, props))))));
 };
 
