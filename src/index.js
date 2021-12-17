@@ -26,6 +26,7 @@ const MegaFlow = ({
   renderActionButtons,
   theme,
   watcher,
+  livePreview,
   wizardProps,
   wrapperProps,
   ...props
@@ -37,7 +38,7 @@ const MegaFlow = ({
   const [currentStep, setCurrentStep] = useState(0);
   const isCurrentLastStep = currentStep === steps.length - 1;
   const [wizardData, setWizardData] = useState({});
-  const { formState, handleSubmit, ...methods } = useForm();
+  const { formState, getValues, handleSubmit, ...methods } = useForm();
 
   const stepFormData = wizardData[currentStep] || defaultValues;
 
@@ -87,7 +88,17 @@ const MegaFlow = ({
       theme={theme || RocksKitTheme()}
     >
       <Wrapper {...wrapperProps}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onBlur={(event) => {
+            event.preventDefault();
+            const values = getValues();
+
+            if (livePreview) {
+              livePreview(values);
+            }
+          }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <FormProvider {...methods}>
             <Wizard
               currentStepContent={renderForm()}

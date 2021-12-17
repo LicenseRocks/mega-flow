@@ -16,8 +16,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+ 
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
+
     "@licenserocks/kit": "^2.6.8",
+
     "react-hook-form": "^6.15.5",
     "styled-components": "^5.2.1"
   },
