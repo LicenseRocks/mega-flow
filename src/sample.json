@@ -149,6 +149,90 @@
               "type": "link"
             }
           ]
+        },
+        {
+          "hint": "Digital or physical asset/product, e.g. Sneaker, print, event ticket, ...",
+          "label": "Redeemable",
+          "fields": [
+            {
+              "name": "redeemableEnabled",
+              "type": "toggleSwitch"
+            }
+          ]
+        },
+        {
+          "conditions": ["redeemableEnabled:true"],
+          "label": "Type",
+          "fields": [
+            {
+              "name": "redeemType",
+              "options": [
+                {
+                  "label": "Physical Assets",
+                  "value": "physical"
+                },
+                {
+                  "label": "Digital Assets",
+                  "value": "digital"
+                }
+              ],
+              "placeholder": "Redeem type",
+              "type": "reactSelect",
+              "required": "type is required"
+            }
+          ]
+        },
+        {
+          "conditions": ["redeemableEnabled:true"],
+          "hint": "Value of this field would be visible only to owners",
+          "label": "Description",
+          "fields": [
+            {
+              "name": "redeemDescription",
+              "placeholder": "Redeemable item description"
+            }
+          ]
+        },
+        {
+          "conditions": ["redeemableEnabled:true"],
+          "label": "Validation Date",
+          "fields": [
+            {
+              "name": "redeemValidationDate",
+              "type": "datepicker"
+            }
+          ]
+        },
+        {
+          "conditions": ["redeemableEnabled:true"],
+          "hint": "The amount of the product, or e.g. the amount of times you can print a piece of art.",
+          "label": "Amount",
+          "fields": [
+            {
+              "min": 1,
+              "name": "redeemItemsAmount",
+              "type": "number",
+              "required": "Amount is required",
+
+              "placeholder": "Amount ( min. 1)"
+            }
+          ]
+        },
+        {
+          "conditions": ["redeemableEnabled:true"],
+          "label": "Redeemable Item",
+          "fields": [
+            {
+              "name": "redeemImage",
+              "type": "fileUpload",
+              "accept": "image/*",
+              "maxSize": 1000000,
+              "multiple": false,
+              "required": "You must upload redeem cover"
+            }
+          ],
+          "labelAlign": "start",
+          "labelGutter": true
         }
       ],
       "title": "Media Assets"
