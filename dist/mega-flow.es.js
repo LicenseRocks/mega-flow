@@ -304,7 +304,7 @@ var FormRows = function FormRows(_ref5) {
       mb: 0,
       pb: (_row$marginBottom = row == null ? void 0 : row.marginBottom) != null ? _row$marginBottom : 4,
       pt: 4,
-      px: 6,
+      px: 16,
       show: showRow,
       backgroundStyle: row == null ? void 0 : row.backgroundStyle
     }, row.message && /*#__PURE__*/React.createElement(Alert, {
