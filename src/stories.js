@@ -68,7 +68,6 @@ export const main = () => {
             { sign: "£", label: "GBP (£)", value: "gbp" },
           ],
         }}
-        onFinishDisabled
         onFinish={(output) => {
           console.log("output: ", output);
         }}
