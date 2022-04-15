@@ -184,6 +184,19 @@
         },
         {
           "conditions": ["redeemableEnabled:true"],
+          "label": "Merch Products",
+          "fields": [
+            {
+              "name": "selectMerchIds",
+              "options": [],
+              "placeholder": "Merch Products",
+              "type": "reactSelect",
+              "required": "Merch Id is required"
+            }
+          ]
+        },
+        {
+          "conditions": ["redeemableEnabled:true"],
           "hint": "Value of this field would be visible only to owners",
           "label": "Description",
           "fields": [

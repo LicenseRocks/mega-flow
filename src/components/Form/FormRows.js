@@ -66,6 +66,7 @@ export const FormRows = ({
   rows,
   stepIndex,
   stepData,
+  merchandise,
 }) => {
   const { errors, watch } = useFormContext();
   const [expanded, setExpanded] = useState(false);
@@ -147,6 +148,9 @@ export const FormRows = ({
                     rowId={idx}
                     stepIndex={stepIndex}
                     stepData={stepData}
+                    merchandise={
+                      field?.name === "selectMerchIds" ? merchandise : null
+                    }
                   />
                 );
               })}

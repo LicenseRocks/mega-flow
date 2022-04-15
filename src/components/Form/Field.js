@@ -59,9 +59,19 @@ export const FormField = ({
   fieldId,
   rowId,
   stepData,
+  merchandise,
 }) => {
   const { control, register } = useFormContext();
-  const { conditions, defaultValue, name, required, type, ...others } = field;
+  const {
+    conditions,
+    defaultValue,
+    name,
+    required,
+    type,
+    options,
+    ...others
+  } = field;
+
   if (type === "link") return <TextButton {...others} />;
 
   const Field = mapFieldTypeToComponent(type);
@@ -90,6 +100,7 @@ export const FormField = ({
       register={register({
         required,
       })}
+      options={field?.name !== "selectMerchIds" ? options : merchandise}
       type={type}
       {...others}
     />

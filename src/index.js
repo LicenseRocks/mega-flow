@@ -79,6 +79,7 @@ const MegaFlow = ({
       stepIndex={currentStep}
       stepFormData={stepFormData}
       defaultValues={defaultValues}
+      merchandise={props.merchandise}
     />
   );
 
