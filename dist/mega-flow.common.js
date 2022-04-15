@@ -105,7 +105,8 @@ var FormField = function FormField(_ref) {
       stepIndex = _ref.stepIndex,
       fieldId = _ref.fieldId,
       rowId = _ref.rowId,
-      stepData = _ref.stepData;
+      stepData = _ref.stepData,
+      merchandise = _ref.merchandise;
 
   var _useFormContext = reactHookForm.useFormContext(),
       control = _useFormContext.control,
@@ -116,7 +117,8 @@ var FormField = function FormField(_ref) {
       name = field.name,
       required = field.required,
       type = field.type,
-      others = _objectWithoutPropertiesLoose(field, ["conditions", "defaultValue", "name", "required", "type"]);
+      options = field.options,
+      others = _objectWithoutPropertiesLoose(field, ["conditions", "defaultValue", "name", "required", "type", "options"]);
 
   if (type === "link") return /*#__PURE__*/React__default.createElement(kit.TextButton, others);
   var Field = mapFieldTypeToComponent(type);
@@ -138,6 +140,7 @@ var FormField = function FormField(_ref) {
     register: register({
       required: required
     }),
+    options: (field == null ? void 0 : field.name) !== "selectMerchIds" ? options : merchandise,
     type: type
   }, others));
 };
@@ -264,7 +267,8 @@ var FormRows = function FormRows(_ref5) {
       isRecurring = _ref5.isRecurring,
       rows = _ref5.rows,
       stepIndex = _ref5.stepIndex,
-      stepData = _ref5.stepData;
+      stepData = _ref5.stepData,
+      merchandise = _ref5.merchandise;
 
   var _useFormContext = reactHookForm.useFormContext(),
       errors = _useFormContext.errors,
@@ -333,7 +337,8 @@ var FormRows = function FormRows(_ref5) {
         recurringIndex: index,
         rowId: idx,
         stepIndex: stepIndex,
-        stepData: stepData
+        stepData: stepData,
+        merchandise: (field == null ? void 0 : field.name) === "selectMerchIds" ? merchandise : null
       });
     })), (row == null ? void 0 : row.divider) && /*#__PURE__*/React__default.createElement(StyledDivider, {
       backgroundStyle: row == null ? void 0 : row.backgroundStyle,
@@ -407,7 +412,8 @@ var Form = function Form(_ref6) {
   var data = _ref6.data,
       defaultValues = _ref6.defaultValues,
       stepIndex = _ref6.stepIndex,
-      stepFormData = _ref6.stepFormData;
+      stepFormData = _ref6.stepFormData,
+      merchandise = _ref6.merchandise;
   var isRecurring = data.recurring;
 
   var _useFieldArray = reactHookForm.useFieldArray({
@@ -424,7 +430,8 @@ var Form = function Form(_ref6) {
       isRecurring: isRecurring,
       rows: data.rows,
       stepIndex: stepIndex,
-      stepData: stepFormData
+      stepData: stepFormData,
+      merchandise: merchandise
     });
   };
 
@@ -591,7 +598,8 @@ var MegaFlow = function MegaFlow(_ref) {
       key: currentStep,
       stepIndex: currentStep,
       stepFormData: stepFormData,
-      defaultValues: defaultValues
+      defaultValues: defaultValues,
+      merchandise: props.merchandise
     });
   };
 
