@@ -190,7 +190,7 @@
               "name": "selectMerchIds",
               "options": [],
               "placeholder": "Merch Products",
-              "type": "reactSelect",
+              "type": "itemSelect",
               "required": "Merch Id is required"
             }
           ]

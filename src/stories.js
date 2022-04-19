@@ -45,19 +45,6 @@ export const main = () => {
     console.log("live data: ", data);
   };
 
-  const getOption = (option) => ({
-    label: (
-      <SelectContent>
-        <Content>
-          <Image src={option?.coverSrc} height="30px" width="30px" />
-          {option?.title}
-        </Content>
-        <Text content={`#${option?.id}`} />
-      </SelectContent>
-    ),
-    value: option.id,
-  });
-
   const merchandiseItems = [
     {
       id: 12222342435,
@@ -145,7 +132,7 @@ export const main = () => {
             />
           </>
         )}
-        merchandise={merchandiseItems?.map((item) => getOption(item))}
+        merchandise={merchandiseItems}
         schema={schema}
         watcher={handleWatch}
         livePreview={handlePreview}
