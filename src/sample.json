@@ -182,19 +182,7 @@
             }
           ]
         },
-        {
-          "conditions": ["redeemableEnabled:true"],
-          "label": "Merch Products",
-          "fields": [
-            {
-              "name": "selectMerchIds",
-              "options": [],
-              "placeholder": "Merch Products",
-              "type": "itemSelect",
-              "required": "Merch Id is required"
-            }
-          ]
-        },
+
         {
           "conditions": ["redeemableEnabled:true"],
           "label": "Merch Products",
