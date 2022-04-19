@@ -197,6 +197,20 @@
         },
         {
           "conditions": ["redeemableEnabled:true"],
+          "label": "Merch Products",
+          "fields": [
+            {
+              "async": true,
+              "endpoint": "https://run.mocky.io/v3/5157d275-01b7-44b4-9d78-4eec6ebc2f64",
+              "name": "selectMerchIds",
+              "placeholder": "Merch Products",
+              "type": "itemSelect",
+              "required": "Merch Id is required"
+            }
+          ]
+        },
+        {
+          "conditions": ["redeemableEnabled:true"],
           "hint": "Value of this field would be visible only to owners",
           "label": "Description",
           "fields": [

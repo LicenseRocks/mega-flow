@@ -111,7 +111,7 @@ export const FormField = ({
         required,
       })}
       setValue={setValue}
-      options={field?.name !== "selectMerchIds" ? options : merchandise}
+      options={options}
       type={type}
       {...others}
     />
