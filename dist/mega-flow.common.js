@@ -146,7 +146,7 @@ var FormField = function FormField(_ref) {
       required: required
     }),
     setValue: setValue,
-    options: (field == null ? void 0 : field.name) !== "selectMerchIds" ? options : merchandise,
+    options: options,
     type: type
   }, others));
 };
