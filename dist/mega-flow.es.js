@@ -1,8 +1,9 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { TextButton, Input, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, FormDatepicker, FormRow, Divider, H4, Tooltip, Icon, Alert, OutlineButton, AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from '@licenserocks/kit';
+import { TextButton, Input, ItemSelect, TextArea, Stepper, ReactSelect, PriceField, FilePond, FileUpload, ToggleSwitch, Radio, Checkbox, BorderedRadio, Select, FormDatepicker, FormRow, Divider, H4, Tooltip, Icon, Alert, OutlineButton, AppContainer, RocksKitIcons, RocksKitTheme, Wizard } from '@licenserocks/kit';
 import { useFormContext, useFieldArray, useForm, FormProvider } from 'react-hook-form';
 import PropTypes from 'prop-types';
+import 'react-masonry-css';
 import { faDownload, faHashtag, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function _extends() {
@@ -85,6 +86,9 @@ var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
     case "textArea":
       return TextArea;
 
+    case "itemSelect":
+      return ItemSelect;
+
     default:
       return Input;
   }
@@ -104,6 +108,7 @@ var FormField = function FormField(_ref) {
 
   var _useFormContext = useFormContext(),
       control = _useFormContext.control,
+      setValue = _useFormContext.setValue,
       register = _useFormContext.register;
 
   var conditions = field.conditions,
@@ -134,6 +139,7 @@ var FormField = function FormField(_ref) {
     register: register({
       required: required
     }),
+    setValue: setValue,
     options: (field == null ? void 0 : field.name) !== "selectMerchIds" ? options : merchandise,
     type: type
   }, others));

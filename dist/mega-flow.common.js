@@ -9,6 +9,7 @@ var styled__default = _interopDefault(styled);
 var kit = require('@licenserocks/kit');
 var reactHookForm = require('react-hook-form');
 var PropTypes = _interopDefault(require('prop-types'));
+require('react-masonry-css');
 var freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
 
 function _extends() {
@@ -91,6 +92,9 @@ var mapFieldTypeToComponent = function mapFieldTypeToComponent(fieldType) {
     case "textArea":
       return kit.TextArea;
 
+    case "itemSelect":
+      return kit.ItemSelect;
+
     default:
       return kit.Input;
   }
@@ -110,6 +114,7 @@ var FormField = function FormField(_ref) {
 
   var _useFormContext = reactHookForm.useFormContext(),
       control = _useFormContext.control,
+      setValue = _useFormContext.setValue,
       register = _useFormContext.register;
 
   var conditions = field.conditions,
@@ -140,6 +145,7 @@ var FormField = function FormField(_ref) {
     register: register({
       required: required
     }),
+    setValue: setValue,
     options: (field == null ? void 0 : field.name) !== "selectMerchIds" ? options : merchandise,
     type: type
   }, others));
