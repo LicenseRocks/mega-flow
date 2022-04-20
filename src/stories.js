@@ -1,4 +1,10 @@
-import { Button, OutlineButton, TextButton } from "@licenserocks/kit";
+import {
+  Button,
+  OutlineButton,
+  TextButton,
+  Image,
+  Text,
+} from "@licenserocks/kit";
 import React from "react";
 import styled from "styled-components";
 
@@ -15,6 +21,21 @@ const Wrapper = styled.div`
   padding: 16px 0;
 `;
 
+const SelectContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Content = styled.div`
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: ${({ theme }) => theme.spacing(2)};
+  }
+`;
+
 export const main = () => {
   const handleWatch = (data) => {
     console.log("data: ", data);
@@ -23,6 +44,27 @@ export const main = () => {
   const handlePreview = (data) => {
     console.log("live data: ", data);
   };
+
+  const merchandiseItems = [
+    {
+      id: 12222342435,
+      coverSrc:
+        "https://creatorshub.s3.eu-central-1.amazonaws.com/0xbC80A63aA97633aEe78caB002E3fcCEeaF21b506/nftFiles/119/cover/7DCAFA29-0898-4B43-B085-046461C9A606.jpeg",
+      title: "Sneackers",
+    },
+    {
+      id: 1227898935,
+      coverSrc:
+        "https://creatorshub.s3.eu-central-1.amazonaws.com/0xbC80A63aA97633aEe78caB002E3fcCEeaF21b506/nftFiles/147/cover/images.jpeg",
+      title: "Jordans",
+    },
+    {
+      id: 9022372435,
+      coverSrc:
+        "https://creatorshub.s3.eu-central-1.amazonaws.com/0x3391fE5A9B72A737E0F7e0461b4Cf7F977c8C59A/nftFiles/170/cover/Metabear.png",
+      title: "Glasses",
+    },
+  ];
 
   return (
     <Wrapper>
@@ -90,6 +132,7 @@ export const main = () => {
             />
           </>
         )}
+        merchandise={merchandiseItems}
         schema={schema}
         watcher={handleWatch}
         livePreview={handlePreview}

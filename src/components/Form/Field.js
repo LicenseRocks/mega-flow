@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import {
   BorderedRadio,
   Checkbox,
@@ -16,7 +16,15 @@ import {
   TextArea,
   TextButton,
   ToggleSwitch,
+  H6,
+  Image,
+  Icon,
+  Text,
+  Modal,
+  ItemSelect,
 } from "@licenserocks/kit";
+import styled, { css } from "styled-components";
+import Masonry from "react-masonry-css";
 
 const mapFieldTypeToComponent = (fieldType) => {
   switch (fieldType) {
@@ -44,6 +52,8 @@ const mapFieldTypeToComponent = (fieldType) => {
       return Stepper;
     case "textArea":
       return TextArea;
+    case "itemSelect":
+      return ItemSelect;
     default:
       return Input;
   }
@@ -59,9 +69,19 @@ export const FormField = ({
   fieldId,
   rowId,
   stepData,
+  merchandise,
 }) => {
-  const { control, register } = useFormContext();
-  const { conditions, defaultValue, name, required, type, ...others } = field;
+  const { control, setValue, register } = useFormContext();
+  const {
+    conditions,
+    defaultValue,
+    name,
+    required,
+    type,
+    options,
+    ...others
+  } = field;
+
   if (type === "link") return <TextButton {...others} />;
 
   const Field = mapFieldTypeToComponent(type);
@@ -90,6 +110,8 @@ export const FormField = ({
       register={register({
         required,
       })}
+      setValue={setValue}
+      options={options}
       type={type}
       {...others}
     />
