@@ -1411,10 +1411,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@licenserocks/kit@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-3.0.1.tgz#f129b6c402b061fdc91ee359d09b843d3491fbae"
-  integrity sha512-KCav30tLSQ7DwHqdEAFoO/mvECnIV6SBVrnfxCKtr4HBbYrwKFhjw4bKcraUrwH6/Bo5qRonmbYXSpo989n6rA==
+"@licenserocks/kit@^3.0.5":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-3.0.5.tgz#cd5bad55d935927ed416057cf85b05d2c17589e7"
+  integrity sha512-MlYGe7Wk/rDiESc/qtOP/06+S8BBDDym/EtSsiTDq3ly3jvCq66DqtS//GXrNxclvrsM2HUL3PvGFDPLgwPy+w==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.32"
     "@fortawesome/free-brands-svg-icons" "^5.15.1"
@@ -4393,9 +4393,9 @@ copy-to-clipboard@^3.0.8, copy-to-clipboard@^3.3.1:
     toggle-selection "^1.0.6"
 
 core-js-compat@^3.21.0:
-  version "3.22.1"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.22.1.tgz#47b9c5e79efbf13935f637449fa1cdec8cd9515f"
-  integrity sha512-CWbNqTluLMvZg1cjsQUbGiCM91dobSHKfDIyCoxuqxthdjGuUlaMbCsSehP3CBiVvG0C7P6UIrC1v0hgFE75jw==
+  version "3.22.2"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.22.2.tgz#eec621eb276518efcf718d0a6d9d042c3d0cad48"
+  integrity sha512-Fns9lU06ZJ07pdfmPMu7OnkIKGPKDzXKIiuGlSvHHapwqMUF2QnnsWwtueFZtSyZEilP0o6iUeHQwpn7LxtLUw==
   dependencies:
     browserslist "^4.20.2"
     semver "7.0.0"
@@ -5108,9 +5108,9 @@ electron-to-chromium@^1.3.247, electron-to-chromium@^1.3.488:
   integrity sha512-IspiwXYDKZMxo+qc3Vof4WtwbG9BMDbJfati8PYj7uS4DJmJ67pwjCKZxlTBSAuCZSMcbRnj2Xz2H14uiKT7bQ==
 
 electron-to-chromium@^1.4.84:
-  version "1.4.114"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.114.tgz#d85ec0808dd50b0cf6e6b262480ffd385f71c873"
-  integrity sha512-gRwLpVYWHGbERPU6o8pKfR168V6enWEXzZc6zQNNXbgJ7UJna+9qzAIHY94+9KOv71D/CH+QebLA9pChD2q8zA==
+  version "1.4.117"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.117.tgz#829d747deb9faa653cab72764a891ef523ba7413"
+  integrity sha512-ypZHxY+Sf/PXu7LVN+xoeanyisnJeSOy8Ki439L/oLueZb4c72FI45zXcK3gPpmTwyufh9m6NnbMLXnJh/0Fxg==
 
 element-resize-detector@^1.2.1:
   version "1.2.1"
