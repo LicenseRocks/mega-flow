@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[55],{1038:function(module,exports,__webpack_require__){"use strict";function hsts(Prism){Prism.languages.hsts={directive:{pattern:/\b(?:max-age=|includeSubDomains|preload)/,alias:"keyword"},safe:{pattern:/\d{8,}/,alias:"selector"},unsafe:{pattern:/\d{1,7}/,alias:"function"}}}module.exports=hsts,hsts.displayName="hsts",hsts.aliases=[]}}]);
-//# sourceMappingURL=react-syntax-highlighter_languages_refractor_hsts.7fa74ebce3fb6e0adf11.bundle.js.map
