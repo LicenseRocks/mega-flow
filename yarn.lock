@@ -1311,6 +1311,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
+"@fortawesome/fontawesome-common-types@6.1.1":
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.1.1.tgz#7dc996042d21fc1ae850e3173b5c67b0549f9105"
+  integrity sha512-wVn5WJPirFTnzN6tR95abCx+ocH+3IFLXAgyavnf9hUmN0CfWoDjPT/BAWsUVwSlYYVBeCLJxaqi7ZGe4uSjBA==
+
 "@fortawesome/fontawesome-common-types@^0.2.34":
   version "0.2.34"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.34.tgz#0a8c348bb23b7b760030f5b1d912e582be4ec915"
@@ -1339,6 +1344,13 @@
   integrity sha512-f1witbwycL9cTENJegcmcZRYyawAFbm8+c6IirLmwbbpqz46wyjbQYLuxOc7weXFXfB7QR8/Vd2u5R3q6JYD9g==
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.36"
+
+"@fortawesome/free-regular-svg-icons@^6.1.1":
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-6.1.1.tgz#3f2f58262a839edf0643cbacee7a8a8230061c98"
+  integrity sha512-xXiW7hcpgwmWtndKPOzG+43fPH7ZjxOaoeyooptSztGmJxCAflHZxXNK0GcT0uEsR4jTGQAfGklDZE5NHoBhKg==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.1.1"
 
 "@fortawesome/free-solid-svg-icons@^5.15.1":
   version "5.15.4"
@@ -1429,13 +1441,14 @@
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.13.tgz#b6461fb0c2964356c469e115f504c95ad97ab88c"
   integrity sha512-GryiOJmNcWbovBxTfZSF71V/mXbgcV3MewDe3kIMCLyIh5e7SKAeUZs+rMnJ8jkMolZ/4/VsdBmMrw3l+VdZ3w==
 
-"@licenserocks/kit@^3.1.3":
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-3.1.3.tgz#2fe43b6e097989f707a12da75324e3e86dc66310"
-  integrity sha512-rc0sO4qQAkfACihgm+cPnb0GUULRROwynpCJGBxhNCaDyyHa3THM5WxP7+vbToHqbGiA1S/cWASHVHm5yaOR0A==
+"@licenserocks/kit@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-3.2.1.tgz#34cdf14bd0b91f0d8d632560a56fc22018937d02"
+  integrity sha512-cp+TOuu2c3eghIWPKGTqAM8cZto4g5UZnc6soR5qlGsFKQJXU5GYB5G+967akCS1DpDYsrEAKPA215m9BZXRmQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.32"
     "@fortawesome/free-brands-svg-icons" "^5.15.1"
+    "@fortawesome/free-regular-svg-icons" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^5.15.1"
     "@fortawesome/react-fontawesome" "^0.1.11"
     "@material-ui/core" "^4.11.3"
@@ -1459,6 +1472,7 @@
     react-quill "^1.3.5"
     react-select "^3.1.0"
     react-transition-group "^4.4.1"
+    react-video-thumbnail "^0.1.3"
     styled-components "^5.2.1"
 
 "@material-ui/core@^4.11.3":
@@ -10478,6 +10492,11 @@ react-use@^17.3.1:
     throttle-debounce "^3.0.1"
     ts-easing "^0.2.0"
     tslib "^2.1.0"
+
+react-video-thumbnail@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/react-video-thumbnail/-/react-video-thumbnail-0.1.3.tgz#698dc4f4e7bebcb598425929db231a78cbcdbdcd"
+  integrity sha512-ZakEVv9RNFcziAnHHtwod5tf0yMVv4aLZ8/QsCxt1HTnKRHrlylvolPKv1hr63GCwnPu6tgPjUTDKRqfl30lOQ==
 
 react@^16.8.3:
   version "16.13.1"
