@@ -1316,6 +1316,11 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.1.1.tgz#7dc996042d21fc1ae850e3173b5c67b0549f9105"
   integrity sha512-wVn5WJPirFTnzN6tR95abCx+ocH+3IFLXAgyavnf9hUmN0CfWoDjPT/BAWsUVwSlYYVBeCLJxaqi7ZGe4uSjBA==
 
+"@fortawesome/fontawesome-common-types@6.1.2":
+  version "6.1.2"
+  resolved "https://npm.fontawesome.com/@fortawesome/fontawesome-common-types/-/6.1.2/fontawesome-common-types-6.1.2.tgz#c1095b1bbabf19f37f9ff0719db38d92a410bcfe"
+  integrity sha512-wBaAPGz1Awxg05e0PBRkDRuTsy4B3dpBm+zreTTyd9TH4uUM27cAL4xWyWR0rLJCrRwzVsQ4hF3FvM6rqydKPA==
+
 "@fortawesome/fontawesome-common-types@^0.2.34":
   version "0.2.34"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.34.tgz#0a8c348bb23b7b760030f5b1d912e582be4ec915"
@@ -1365,6 +1370,34 @@
   integrity sha512-ZfCU+QjaFsdNZmOGmfqEWhzI3JOe37x5dF4kz9GeXvKn/sTxhqMtZ7mh3lBf76SvcYY5/GKFuyG7p1r4iWMQqw==
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.34"
+
+"@fortawesome/pro-light-svg-icons@^6.1.1":
+  version "6.1.2"
+  resolved "https://npm.fontawesome.com/@fortawesome/pro-light-svg-icons/-/6.1.2/pro-light-svg-icons-6.1.2.tgz#90bbe97de6c9d921469de185abdcb8330e8eaf95"
+  integrity sha512-RPtgsmdIxj8tbmWCt+ulncl6DxgtrRD/EkBa8J9QPB/9++/nrIWyvybce8K7hWYzIIeYu+TZhSwGxtrBD0D6BA==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.1.2"
+
+"@fortawesome/pro-regular-svg-icons@^6.1.1":
+  version "6.1.2"
+  resolved "https://npm.fontawesome.com/@fortawesome/pro-regular-svg-icons/-/6.1.2/pro-regular-svg-icons-6.1.2.tgz#f232ce529f59e8279536ce6fdd52f408e2ddf2b3"
+  integrity sha512-5BQ3Guv+FRDyXJ9qy5SQZc+tWsCstQscd4JILb8dFzFtZsDef9cDgxxFEj//QmyrVI45kKVhjfGY8voHHvMQTQ==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.1.2"
+
+"@fortawesome/pro-solid-svg-icons@^6.1.1":
+  version "6.1.2"
+  resolved "https://npm.fontawesome.com/@fortawesome/pro-solid-svg-icons/-/6.1.2/pro-solid-svg-icons-6.1.2.tgz#ecdab98c3e901c72e99c5a1a961070b3b80e05d6"
+  integrity sha512-E1TzmbuO0Klch/EqAjh4WPs93Oss8KwY5MUi2pcSyflN8sq5UqnMZFLWGlLQy24BXeMwgMDw4Aa9xH6lVNg1ig==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.1.2"
+
+"@fortawesome/pro-thin-svg-icons@^6.1.1":
+  version "6.1.2"
+  resolved "https://npm.fontawesome.com/@fortawesome/pro-thin-svg-icons/-/6.1.2/pro-thin-svg-icons-6.1.2.tgz#20dd695caffccc27bf983e6a89b5404588b2767d"
+  integrity sha512-X4zq1SPqs6wK3QcK/6maLUVfqKHdx5hh9IwBreDCZfCncJH09stmpVEU+BvjlhxXGgt2Fb8v+UJbz410z3XOtg==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.1.2"
 
 "@fortawesome/react-fontawesome@^0.1.11":
   version "0.1.18"
@@ -1441,15 +1474,19 @@
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.13.tgz#b6461fb0c2964356c469e115f504c95ad97ab88c"
   integrity sha512-GryiOJmNcWbovBxTfZSF71V/mXbgcV3MewDe3kIMCLyIh5e7SKAeUZs+rMnJ8jkMolZ/4/VsdBmMrw3l+VdZ3w==
 
-"@licenserocks/kit@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-3.2.1.tgz#34cdf14bd0b91f0d8d632560a56fc22018937d02"
-  integrity sha512-cp+TOuu2c3eghIWPKGTqAM8cZto4g5UZnc6soR5qlGsFKQJXU5GYB5G+967akCS1DpDYsrEAKPA215m9BZXRmQ==
+"@licenserocks/kit@3.2.9":
+  version "3.2.9"
+  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-3.2.9.tgz#a02207cc6232f295307a50339b2912b5fea64b91"
+  integrity sha512-5LA4DzdngMlndpJsU7q1A+ibOopNGUvr1YTbKwwFOb10NL30wcc+1UxOoUUy6K1fib3D75rMwxgKNPdcgOAisg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.32"
     "@fortawesome/free-brands-svg-icons" "^5.15.1"
     "@fortawesome/free-regular-svg-icons" "^6.1.1"
     "@fortawesome/free-solid-svg-icons" "^5.15.1"
+    "@fortawesome/pro-light-svg-icons" "^6.1.1"
+    "@fortawesome/pro-regular-svg-icons" "^6.1.1"
+    "@fortawesome/pro-solid-svg-icons" "^6.1.1"
+    "@fortawesome/pro-thin-svg-icons" "^6.1.1"
     "@fortawesome/react-fontawesome" "^0.1.11"
     "@material-ui/core" "^4.11.3"
     "@material-ui/lab" "^4.0.0-alpha.57"
@@ -1460,11 +1497,13 @@
     lodash "^4.17.20"
     notistack "^1.0.5"
     qrcode.react "^1.0.0"
+    react "^18.1.0"
     react-avatar-editor "^11.1.0"
     react-code-blocks "^0.0.9-0"
     react-collapse "^5.0.1"
     react-content-loader "^5.1.0"
     react-day-picker "^7.4.8"
+    react-dom "^18.1.0"
     react-dropzone "^11.0.2"
     react-filepond "^7.1.1"
     react-hook-form "^6.15.5"
@@ -10237,6 +10276,14 @@ react-dom@^16.8.3:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
+react-dom@^18.1.0:
+  version "18.2.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
+  integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
+  dependencies:
+    loose-envify "^1.1.0"
+    scheduler "^0.23.0"
+
 react-draggable@^4.0.3:
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-4.4.3.tgz#0727f2cae5813e36b0e4962bf11b2f9ef2b406f3"
@@ -10506,6 +10553,13 @@ react@^16.8.3:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
+
+react@^18.1.0:
+  version "18.2.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
+  integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
+  dependencies:
+    loose-envify "^1.1.0"
 
 reactcss@^1.2.0:
   version "1.2.3"
@@ -11089,6 +11143,13 @@ scheduler@^0.19.1:
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
+
+scheduler@^0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.23.0.tgz#ba8041afc3d30eb206a487b6b384002e4e61fdfe"
+  integrity sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==
+  dependencies:
+    loose-envify "^1.1.0"
 
 schema-utils@^1.0.0:
   version "1.0.0"
