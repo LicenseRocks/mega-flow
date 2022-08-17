@@ -238,7 +238,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteralLoose(["\n  && {\n    label {\n      :only-child {\n        display: none;\n      }\n    }\n  }\n  && {\n    ", "\n  }\n"]);
+  var data = _taggedTemplateLiteralLoose(["\n  && {\n    label {\n      :only-child {\n        display: none;\n      }\n    }\n  }\n\n  background-color: ", ";\n  && {\n    ", "\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -247,28 +247,31 @@ function _templateObject() {
   return data;
 }
 var StyledRow = styled(FormRow)(_templateObject(), function (_ref) {
-  var backgroundStyle = _ref.backgroundStyle;
-  return backgroundStyle === "primary" && css(["background-color:", ";"], function (_ref2) {
-    var theme = _ref2.theme;
+  var theme = _ref.theme;
+  return theme.palette.gray.light;
+}, function (_ref2) {
+  var backgroundStyle = _ref2.backgroundStyle;
+  return backgroundStyle === "primary" && css(["background-color:", ";"], function (_ref3) {
+    var theme = _ref3.theme;
     return theme.palette.common.white;
   });
 });
-var StyledDivider = styled(Divider)(_templateObject2(), function (_ref3) {
-  var backgroundStyle = _ref3.backgroundStyle;
-  return backgroundStyle === "primary" && css(["background-color:", ";"], function (_ref4) {
-    var theme = _ref4.theme;
+var StyledDivider = styled(Divider)(_templateObject2(), function (_ref4) {
+  var backgroundStyle = _ref4.backgroundStyle;
+  return backgroundStyle === "primary" && css(["background-color:", ";"], function (_ref5) {
+    var theme = _ref5.theme;
     return theme.palette.common.white;
   });
 });
 var Hint = styled.span(_templateObject3());
-var FormRows = function FormRows(_ref5) {
-  var data = _ref5.data,
-      index = _ref5.index,
-      isRecurring = _ref5.isRecurring,
-      rows = _ref5.rows,
-      stepIndex = _ref5.stepIndex,
-      stepData = _ref5.stepData,
-      merchandise = _ref5.merchandise;
+var FormRows = function FormRows(_ref6) {
+  var data = _ref6.data,
+      index = _ref6.index,
+      isRecurring = _ref6.isRecurring,
+      rows = _ref6.rows,
+      stepIndex = _ref6.stepIndex,
+      stepData = _ref6.stepData,
+      merchandise = _ref6.merchandise;
 
   var _useFormContext = useFormContext(),
       errors = _useFormContext.errors,
@@ -508,7 +511,7 @@ var MegaFlowDefaultProps = {
 };
 
 function _templateObject$2() {
-  var data = _taggedTemplateLiteralLoose([""]);
+  var data = _taggedTemplateLiteralLoose(["\n  background-color: ", ";\n"]);
 
   _templateObject$2 = function _templateObject() {
     return data;
@@ -516,7 +519,10 @@ function _templateObject$2() {
 
   return data;
 }
-var Wrapper$1 = styled.div(_templateObject$2());
+var Wrapper$1 = styled.div(_templateObject$2(), function (_ref) {
+  var theme = _ref.theme;
+  return theme.palette.gray.light;
+});
 
 var getOutputData = function getOutputData(output) {
   return Object.values(output).reduce(function (obj, acc) {
@@ -524,19 +530,19 @@ var getOutputData = function getOutputData(output) {
   }, {});
 };
 
-var MegaFlow = function MegaFlow(_ref) {
-  var defaultValues = _ref.defaultValues,
-      icons = _ref.icons,
-      schema = _ref.schema,
-      onFinish = _ref.onFinish,
-      onStepSubmit = _ref.onStepSubmit,
-      _renderActionButtons = _ref.renderActionButtons,
-      theme = _ref.theme,
-      watcher = _ref.watcher,
-      livePreview = _ref.livePreview,
-      wizardProps = _ref.wizardProps,
-      wrapperProps = _ref.wrapperProps,
-      props = _objectWithoutPropertiesLoose(_ref, ["defaultValues", "icons", "schema", "onFinish", "onStepSubmit", "renderActionButtons", "theme", "watcher", "livePreview", "wizardProps", "wrapperProps"]);
+var MegaFlow = function MegaFlow(_ref2) {
+  var defaultValues = _ref2.defaultValues,
+      icons = _ref2.icons,
+      schema = _ref2.schema,
+      onFinish = _ref2.onFinish,
+      onStepSubmit = _ref2.onStepSubmit,
+      _renderActionButtons = _ref2.renderActionButtons,
+      theme = _ref2.theme,
+      watcher = _ref2.watcher,
+      livePreview = _ref2.livePreview,
+      wizardProps = _ref2.wizardProps,
+      wrapperProps = _ref2.wrapperProps,
+      props = _objectWithoutPropertiesLoose(_ref2, ["defaultValues", "icons", "schema", "onFinish", "onStepSubmit", "renderActionButtons", "theme", "watcher", "livePreview", "wizardProps", "wrapperProps"]);
 
   // Parse if schema was type of JSON string
   var parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
