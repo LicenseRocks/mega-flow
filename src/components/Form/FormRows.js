@@ -23,6 +23,8 @@ const StyledRow = styled(FormRow)`
       }
     }
   }
+
+  background-color: ${({ theme }) => theme.palette.gray.light};
   && {
     ${({ backgroundStyle }) =>
       backgroundStyle === "primary" &&
