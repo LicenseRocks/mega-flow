@@ -12,7 +12,9 @@ import { Form } from "./components";
 import { MegaFlowIcons } from "./theme";
 import { MegaFlowPropTypes, MegaFlowDefaultProps } from "./props";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  background-color: ${({ theme }) => theme.palette.gray.light};
+`;
 
 const getOutputData = (output) =>
   Object.values(output).reduce((obj, acc) => ({ ...obj, ...acc }), {});
