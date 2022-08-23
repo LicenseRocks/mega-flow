@@ -35,11 +35,11 @@
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-image": "^2.0.5",
     "@rollup/plugin-node-resolve": "^8.1.0",
-    "@storybook/addon-actions": "^5.3.19",
-    "@storybook/addon-knobs": "^5.3.19",
-    "@storybook/cli": "^5.3.19",
-    "@storybook/react": "^5.3.19",
-    "@storybook/storybook-deployer": "^2.8.6",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-knobs": "^6.4.0",
+    "@storybook/cli": "^6.5.9",
+    "@storybook/react": "^6.5.9",
+    "@storybook/storybook-deployer": "^2.8.12",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-styled-components": "^1.10.7",
@@ -55,11 +55,11 @@
     "rollup": "^2.21.0",
     "rollup-plugin-peer-deps-external": "^2.2.3",
     "rollup-plugin-svg": "^2.0.0",
-    "storybook": "^5.3.19"
+    "storybook": "^6.5.9"
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
