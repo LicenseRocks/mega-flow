@@ -1,0 +1,33 @@
+name: Publish Mega-flow to NPM
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [16]
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+      # Setup .npmrc file to publish to npm
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install deps 
+        run: | 
+          yarn 
+      - name: Build mega-flow
+        run: |
+          yarn build
+      - name: Publish package to the registry
+        run: |
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
