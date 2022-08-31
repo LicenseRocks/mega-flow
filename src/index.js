@@ -19,6 +19,16 @@ const Wrapper = styled.div`
 const getOutputData = (output) =>
   Object.values(output).reduce((obj, acc) => ({ ...obj, ...acc }), {});
 
+const getHiddenValues = (array, key) => {
+  const initialValue = {};
+  return array.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item["name"]]: item?.value,
+    };
+  }, initialValue);
+};
+
 const MegaFlow = ({
   defaultValues,
   icons,
@@ -36,17 +46,20 @@ const MegaFlow = ({
   // Parse if schema was type of JSON string
   const parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
 
-  const { steps } = parsedSchema;
+  const { steps, hiddenValues } = parsedSchema;
   const [currentStep, setCurrentStep] = useState(0);
   const isCurrentLastStep = currentStep === steps.length - 1;
   const [wizardData, setWizardData] = useState({});
+  const [hiddenData, setHiddenData] = useState({});
   const { formState, getValues, handleSubmit, ...methods } = useForm();
 
   const stepFormData = wizardData[currentStep] || defaultValues;
-
   useEffect(() => {
     methods.reset(stepFormData);
-
+    // set hidden values to include in output, without displaying
+    if (hiddenValues && currentStep === 0) {
+      setHiddenData(getHiddenValues(hiddenValues));
+    }
     if (watcher) {
       watcher(getOutputData(wizardData));
     }
@@ -54,9 +67,11 @@ const MegaFlow = ({
 
   const onSubmit = (data) => {
     const currentState = {
+      hiddenData,
       ...wizardData,
       [currentStep]: data,
     };
+
     // Set step data in global wizard object
     setWizardData(currentState);
 
@@ -96,8 +111,9 @@ const MegaFlow = ({
             event.preventDefault();
             const values = getValues();
 
+            const data = Object.assign(values, hiddenData);
             if (livePreview) {
-              livePreview(values);
+              livePreview(data);
             }
           }}
           onSubmit={handleSubmit(onSubmit)}
