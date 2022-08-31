@@ -36,16 +36,32 @@ const MegaFlow = ({
   // Parse if schema was type of JSON string
   const parsedSchema = typeof schema === "string" ? JSON.parse(schema) : schema;
 
-  const { steps } = parsedSchema;
+  const { steps, hiddenValues } = parsedSchema;
   const [currentStep, setCurrentStep] = useState(0);
   const isCurrentLastStep = currentStep === steps.length - 1;
   const [wizardData, setWizardData] = useState({});
+  const [hiddenData, setHiddenData] = useState({});
   const { formState, getValues, handleSubmit, ...methods } = useForm();
 
   const stepFormData = wizardData[currentStep] || defaultValues;
 
+  const convertArrayToObject = (array, key) => {
+    const initialValue = {};
+    return array.reduce((obj, item) => {
+      return {
+        ...obj,
+        [item[key]]: item?.value,
+      };
+    }, initialValue);
+  };
+
   useEffect(() => {
     methods.reset(stepFormData);
+
+    // set hidden values to include in output, without displaying
+    if (hiddenValues && currentStep === 0) {
+      setHiddenData(convertArrayToObject(hiddenValues, "name"));
+    }
 
     if (watcher) {
       watcher(getOutputData(wizardData));
@@ -54,9 +70,11 @@ const MegaFlow = ({
 
   const onSubmit = (data) => {
     const currentState = {
+      hiddenData,
       ...wizardData,
       [currentStep]: data,
     };
+
     // Set step data in global wizard object
     setWizardData(currentState);
 
@@ -66,9 +84,12 @@ const MegaFlow = ({
     if (!isCurrentLastStep) {
       setCurrentStep((prev) => prev + 1);
     } else {
+      console.log(currentState);
       onFinish(getOutputData(currentState));
     }
   };
+
+  console.log(hiddenData);
 
   const stepsArray = steps.map((st) => ({
     title: st.title,
