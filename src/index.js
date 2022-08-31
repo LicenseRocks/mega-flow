@@ -19,6 +19,16 @@ const Wrapper = styled.div`
 const getOutputData = (output) =>
   Object.values(output).reduce((obj, acc) => ({ ...obj, ...acc }), {});
 
+const getHiddenValues = (array, key) => {
+  const initialValue = {};
+  return array.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item["name"]]: item?.value,
+    };
+  }, initialValue);
+};
+
 const MegaFlow = ({
   defaultValues,
   icons,
@@ -44,25 +54,12 @@ const MegaFlow = ({
   const { formState, getValues, handleSubmit, ...methods } = useForm();
 
   const stepFormData = wizardData[currentStep] || defaultValues;
-
-  const convertArrayToObject = (array, key) => {
-    const initialValue = {};
-    return array.reduce((obj, item) => {
-      return {
-        ...obj,
-        [item[key]]: item?.value,
-      };
-    }, initialValue);
-  };
-
   useEffect(() => {
     methods.reset(stepFormData);
-
     // set hidden values to include in output, without displaying
     if (hiddenValues && currentStep === 0) {
-      setHiddenData(convertArrayToObject(hiddenValues, "name"));
+      setHiddenData(getHiddenValues(hiddenValues));
     }
-
     if (watcher) {
       watcher(getOutputData(wizardData));
     }
@@ -84,12 +81,9 @@ const MegaFlow = ({
     if (!isCurrentLastStep) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      console.log(currentState);
       onFinish(getOutputData(currentState));
     }
   };
-
-  console.log(hiddenData);
 
   const stepsArray = steps.map((st) => ({
     title: st.title,
@@ -117,8 +111,9 @@ const MegaFlow = ({
             event.preventDefault();
             const values = getValues();
 
+            const data = Object.assign(values, hiddenData);
             if (livePreview) {
-              livePreview(values);
+              livePreview(data);
             }
           }}
           onSubmit={handleSubmit(onSubmit)}
