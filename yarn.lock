@@ -1406,10 +1406,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@licenserocks/kit@3.5.51":
-  version "3.5.51"
-  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-3.5.51.tgz#984dbec51b637456070f6893aa0d2ec99380e908"
-  integrity sha512-a6bIHJHHkCstOtT9qm3c2EXgbT8Awxbn2JSM4vGrXxPq/ZOmWpxoY4Srw4hJZmRcLmsRlc+HtG6DcXwZkZ7f9w==
+"@licenserocks/kit@3.5.52":
+  version "3.5.52"
+  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-3.5.52.tgz#341617ef9a34611d2d44a4f3bd339b962e479aa5"
+  integrity sha512-CRk+DhEjDqd35uS8rz5Uwu++NqiLJTgzQZkn3kWVGl1cRSOWfbPiDTtGBGAbtN8VKknwe1H4pb2Z/x66yYFGIg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.32"
     "@fortawesome/free-brands-svg-icons" "^5.15.1"
