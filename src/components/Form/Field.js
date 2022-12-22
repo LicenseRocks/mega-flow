@@ -71,16 +71,9 @@ export const FormField = ({
   stepData,
   merchandise,
 }) => {
-  const { control, setValue, register } = useFormContext();
-  const {
-    conditions,
-    defaultValue,
-    name,
-    required,
-    type,
-    options,
-    ...others
-  } = field;
+  const { control, setValue, register, watch } = useFormContext();
+  const { conditions, defaultValue, name, required, type, options, ...others } =
+    field;
 
   if (type === "link") return <TextButton {...others} />;
 
@@ -113,6 +106,7 @@ export const FormField = ({
       setValue={setValue}
       options={options}
       type={type}
+      value={watch(fieldName)}
       {...others}
     />
   );
