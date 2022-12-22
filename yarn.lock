@@ -1111,9 +1111,9 @@
     regenerator-runtime "^0.13.4"
 
 "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.4", "@babel/runtime@^7.16.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.8.3":
-  version "7.20.6"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.6.tgz#facf4879bfed9b5326326273a64220f099b0fce3"
-  integrity sha512-Q+8MqP7TiHMWzSfwiJwXCjyf4GYA4Dgw3emg/7xmwsdLJOZUp+nMqcOwOzzYheuM1rhDu8FSj2l0aoMygEuXuA==
+  version "7.20.7"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.7.tgz#fcb41a5a70550e04a7b708037c7c32f7f356d8fd"
+  integrity sha512-UF0tvkUtxwAgZ5W/KrkHf0Rn0fdnLDU9ScxBrEVNUprE/MzirjK4MJUX1/BVDv00Sv8cljtukVK1aky++X1SjQ==
   dependencies:
     regenerator-runtime "^0.13.11"
 
@@ -1430,10 +1430,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@licenserocks/kit@^3.6.3":
-  version "3.6.3"
-  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-3.6.3.tgz#9e0687da231daa7cb2bf7d65e5cc8225b89af363"
-  integrity sha512-elVJ5l/CEUd8A4FmmZvaUx8EB+4RZT3rQT9ospFwOgnXegvyyu3Lgt4Ojw+3KD98oZ0ueB/6JlxjZDUjixcj2Q==
+"@licenserocks/kit@^3.6.4":
+  version "3.6.4"
+  resolved "https://registry.yarnpkg.com/@licenserocks/kit/-/kit-3.6.4.tgz#22d7df37ea08ab82dd38698ace9530600ca46e4e"
+  integrity sha512-0FZOxLVlfyC/lS5rsjmwjxxD0FyKb8iFYyziPjvUFfzFjPWDBNI7krkci/pklkbv+21zlu57QVhUSDCt0v6m0w==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.32"
     "@fortawesome/free-brands-svg-icons" "^5.15.1"
@@ -3981,9 +3981,9 @@ caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001370:
   integrity sha512-N/od11RX+Gsk+1qY/jbPa0R6zJupEa0lxeBG598EbrtblxVCTJsQwbRBm6+V+rxpc5lHKdsXb9RY83cZIPLseA==
 
 caniuse-lite@^1.0.30001400:
-  version "1.0.30001439"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001439.tgz#ab7371faeb4adff4b74dad1718a6fd122e45d9cb"
-  integrity sha512-1MgUzEkoMO6gKfXflStpYgZDlFM7M/ck/bgfVCACO5vnAf0fXoNVHdWtqGU+MYca+4bL9Z5bpOVmR33cWW9G2A==
+  version "1.0.30001441"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001441.tgz#987437b266260b640a23cd18fbddb509d7f69f3e"
+  integrity sha512-OyxRR4Vof59I3yGWXws6i908EtGbMzVUi3ganaZQHmydk1iwDhRnvaPG2WaR0KcqrDFKrxVZHULT396LEPhXfg==
 
 case-sensitive-paths-webpack-plugin@^2.3.0:
   version "2.4.0"
